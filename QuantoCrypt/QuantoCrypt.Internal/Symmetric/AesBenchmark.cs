@@ -1,5 +1,6 @@
 ﻿using BenchmarkDotNet.Attributes;
 using FluentAssertions;
+using System.Text;
 
 namespace QuantoCrypt.Internal.Symmetric
 {
@@ -8,7 +9,7 @@ namespace QuantoCrypt.Internal.Symmetric
     {
         public static string FileContent = File.ReadAllText("C:\\Users\\Danylo\\Desktop\\deeckLoooom\\QuantoCrypt\\QuantoCrypt\\input.txt");
 
-        public static string Key = "b14ca5898a4e4133bbce2ea2315a1916";
+        public static byte[] Key = Encoding.UTF8.GetBytes("b14ca5898a4e4133bbce2ea2315a1916");
 
         [Benchmark(Baseline = true)]
         [Arguments(32)]
@@ -32,14 +33,15 @@ namespace QuantoCrypt.Internal.Symmetric
         public void AesGcmAlgorithmExecutor(int symbolsToProceed)
         {
             string textToProceed = FileContent.Length > symbolsToProceed ? FileContent.Substring(0, symbolsToProceed) : FileContent;
+            byte[] textToProceedArray = Encoding.UTF8.GetBytes(textToProceed);
 
             AesGcmAlgorithm service = new AesGcmAlgorithm(Key);
 
-            var res1 = service.Encrypt(textToProceed);
+            var res1 = service.Encrypt(textToProceedArray);
 
             var res2 = service.Decrypt(res1);
 
-            textToProceed.Should().Be(res2);
+            textToProceedArray.Should().BeEquivalentTo(res2);
         }
 
         [Benchmark]
@@ -64,14 +66,15 @@ namespace QuantoCrypt.Internal.Symmetric
         public void AesAlgorithmExecutor(int symbolsToProceed)
         {
             string textToProceed = FileContent.Length > symbolsToProceed ? FileContent.Substring(0, symbolsToProceed) : FileContent;
+            byte[] textToProceedArray = Encoding.UTF8.GetBytes(textToProceed);
 
             AesAlgorithm service = new AesAlgorithm(Key);
 
-            var res1 = service.Encrypt(textToProceed);
+            var res1 = service.Encrypt(textToProceedArray);
 
             var res2 = service.Decrypt(res1);
 
-            textToProceed.Should().Be(res2);
+            textToProceedArray.Should().BeEquivalentTo(res2);
         }
     }
 }

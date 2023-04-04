@@ -6,60 +6,53 @@ namespace QuantoCrypt.Internal.Symmetric
 {
     public class AesAlgorithm : ISymmetricAlgorithm
     {
-        private string _rKey;
+        private byte[] _rKey;
 
-        public AesAlgorithm(string key) 
+        public AesAlgorithm(byte[] key) 
         {
             _rKey = key;
         }
 
-        public string Encrypt(string plainText)
+        public byte[] Encrypt(byte[] plainText)
         {
             byte[] iv = new byte[16];
-            byte[] array;
+            byte[] result;
 
             using (Aes aes = Aes.Create())
             {
-                aes.Key = Encoding.UTF8.GetBytes(_rKey);
+                aes.Key = _rKey;
                 aes.IV = iv;
-
                 ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, aes.IV);
-
-                using (MemoryStream memoryStream = new MemoryStream())
+                using MemoryStream memoryStream = new MemoryStream();
+                using CryptoStream cryptoStream = new CryptoStream(memoryStream, encryptor, CryptoStreamMode.Write);
+                using (StreamWriter streamWriter = new StreamWriter(cryptoStream))
                 {
-                    using (CryptoStream cryptoStream = new CryptoStream(memoryStream, encryptor, CryptoStreamMode.Write))
-                    {
-                        using (StreamWriter streamWriter = new StreamWriter(cryptoStream))
-                        {
-                            streamWriter.Write(plainText);
-                        }
-
-                        array = memoryStream.ToArray();
-                    }
+                    streamWriter.Write(Encoding.UTF8.GetString(plainText));
                 }
+                result = memoryStream.ToArray();
             }
 
-            return Convert.ToBase64String(array);
+            return result;
         }
 
-        public string Decrypt(string cipherText)
+        public byte[] Decrypt(byte[] cipherText)
         {
             byte[] iv = new byte[16];
-            byte[] buffer = Convert.FromBase64String(cipherText);
 
             using (Aes aes = Aes.Create())
             {
-                aes.Key = Encoding.UTF8.GetBytes(_rKey);
+                aes.Key = _rKey;
                 aes.IV = iv;
                 ICryptoTransform decryptor = aes.CreateDecryptor(aes.Key, aes.IV);
-
-                using (MemoryStream memoryStream = new MemoryStream(buffer))
+                using (MemoryStream encryptedStream = new MemoryStream(cipherText))
                 {
-                    using (CryptoStream cryptoStream = new CryptoStream(memoryStream, decryptor, CryptoStreamMode.Read))
+                    using (CryptoStream cryptoStream = new CryptoStream(encryptedStream, decryptor, CryptoStreamMode.Read))
                     {
-                        using (StreamReader streamReader = new StreamReader(cryptoStream))
+                        using (var decryptedStream = new MemoryStream())
                         {
-                            return streamReader.ReadToEnd();
+                            cryptoStream.CopyTo(decryptedStream);
+
+                            return decryptedStream.ToArray();
                         }
                     }
                 }
@@ -68,7 +61,7 @@ namespace QuantoCrypt.Internal.Symmetric
 
         public void Dispose()
         {
-            _rKey = string.Empty;
+            _rKey = null;
 
             GC.SuppressFinalize(this);
         }

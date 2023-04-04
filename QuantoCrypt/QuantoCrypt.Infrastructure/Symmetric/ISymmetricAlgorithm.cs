@@ -12,7 +12,7 @@
         /// <returns>
         ///     Encrypted text.
         /// </returns>
-        string Encrypt(string plainText);
+        byte[] Encrypt(byte[] plainText);
 
         /// <summary>
         /// Decrypts target <paramref name="cipherText"/> using symmetric encryption.
@@ -21,6 +21,6 @@
         /// <returns>
         ///     Decrypted text.
         /// </returns>
-        string Decrypt(string cipherText);
+        byte[] Decrypt(byte[] cipherText);
     }
 }

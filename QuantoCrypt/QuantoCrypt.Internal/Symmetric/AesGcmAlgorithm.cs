@@ -5,27 +5,18 @@ using System.Text;
 
 namespace QuantoCrypt.Internal.Symmetric
 {
-    public class AesGcmAlgorithm : ISymmetricAlgorithm
+    public sealed class AesGcmAlgorithm : ISymmetricAlgorithm
     {
-        private readonly AesGcm _aes;
+        private readonly AesGcm _rAesGcm;
 
-        public AesGcmAlgorithm(string plainKey)
+        public AesGcmAlgorithm(byte[] key)
         {
-            // Derive key
-            // AES key size is 16 bytes
-            // We use a fixed salt and small iteration count here; the latter should be increased for weaker passwords
-            // byte[] key = new Rfc2898DeriveBytes(password, new byte[8], 1000).GetBytes(16);
-            byte[] key = Encoding.UTF8.GetBytes(plainKey);
-
             // Initialize AES implementation
-            _aes = new AesGcm(key);
+            _rAesGcm = new AesGcm(key);
         }
 
-        public string Encrypt(string plain)
+        public byte[] Encrypt(byte[] plainBytes)
         {
-            // Get bytes of plaintext string
-            byte[] plainBytes = Encoding.UTF8.GetBytes(plain);
-
             // Get parameter sizes
             int nonceSize = AesGcm.NonceByteSizes.MaxSize;
             int tagSize = AesGcm.TagByteSizes.MaxSize;
@@ -46,16 +37,15 @@ namespace QuantoCrypt.Internal.Symmetric
             RandomNumberGenerator.Fill(nonce);
 
             // Encrypt
-            _aes.Encrypt(nonce, plainBytes.AsSpan(), cipherBytes, tag);
+            _rAesGcm.Encrypt(nonce, plainBytes.AsSpan(), cipherBytes, tag);
 
-            // Encode for transmission
-            return Convert.ToBase64String(encryptedData);
+            return encryptedData.ToArray();
         }
 
-        public string Decrypt(string cipher)
+        public byte[] Decrypt(byte[] cipher)
         {
             // Decode
-            Span<byte> encryptedData = Convert.FromBase64String(cipher).AsSpan();
+            Span<byte> encryptedData = cipher.AsSpan();
 
             // Extract parameter sizes
             int nonceSize = BinaryPrimitives.ReadInt32LittleEndian(encryptedData.Slice(0, 4));
@@ -69,15 +59,11 @@ namespace QuantoCrypt.Internal.Symmetric
 
             // Decrypt
             Span<byte> plainBytes = cipherSize < 1024 ? stackalloc byte[cipherSize] : new byte[cipherSize];
-            _aes.Decrypt(nonce, cipherBytes, tag, plainBytes);
+            _rAesGcm.Decrypt(nonce, cipherBytes, tag, plainBytes);
 
-            // Convert plain bytes back into string
-            return Encoding.UTF8.GetString(plainBytes);
+            return plainBytes.ToArray();
         }
 
-        public void Dispose()
-        {
-            _aes.Dispose();
-        }
+        public void Dispose() => _rAesGcm.Dispose();
     }
 }

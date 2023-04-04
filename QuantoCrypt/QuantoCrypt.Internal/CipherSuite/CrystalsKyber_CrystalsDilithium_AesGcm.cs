@@ -16,8 +16,8 @@ namespace QuantoCrypt.Internal.CipherSuite
 
         public ISymmetricAlgorithm SymmetricAlgorithm => _rSymmetricAlgorithmCreator.Invoke(SessionKey);
 
-        public string? SessionKey { get; set; }
+        public byte[] SessionKey { get; set; }
 
-        private readonly Func<string, ISymmetricAlgorithm> _rSymmetricAlgorithmCreator = (string key) => new AesGcmAlgorithm(key);
+        private readonly Func<byte[], ISymmetricAlgorithm> _rSymmetricAlgorithmCreator = (byte[] key) => new AesGcmAlgorithm(key);
     }
 }

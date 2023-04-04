@@ -7,9 +7,10 @@ namespace QuantoCrypt
     {
         static void Main(string[] args)
         {
-            //new AesBenchmark().AesGcmServiceExecutor(10);
+            new AesBenchmark().AesGcmAlgorithmExecutor(256);
+            new AesBenchmark().AesAlgorithmExecutor(256);
 
-            BenchmarkRunner.Run<AesBenchmark>();
+            //BenchmarkRunner.Run<AesBenchmark>();
         }
     }
 }
