@@ -1,6 +1,7 @@
 ﻿using QuantoCrypt.Infrastructure.CipherSuite;
 using QuantoCrypt.Infrastructure.Connection;
 using QuantoCrypt.Infrastructure.Symmetric;
+using QuantoCrypt.Internal.Message;
 
 namespace QuantoCrypt.Internal.Connection
 {
@@ -15,6 +16,16 @@ namespace QuantoCrypt.Internal.Connection
         private ISymmetricAlgorithm _rSymmetricAlgorithm;
 
         /// <summary>
+        /// Default ctor.
+        /// </summary>
+        /// <param name="connection">Target <see cref="ITransportConnection"/> to wrap.</param>
+        /// <exception cref="ArgumentNullException">If <paramref name="connection"/> is null.</exception>
+        public QuantoCryptConnection(ITransportConnection connection)
+        {
+            _rWrappedUnsecureConnection = connection ?? throw new ArgumentNullException(nameof(connection));
+        }
+
+        /// <summary>
         /// Create a secure client using <paramref name="baseConnection"/>.
         /// </summary>
         /// <param name="cipherSuiteProvider">Target <see cref="ICipherSuiteProvider"/> to be supported.</param>
@@ -24,8 +35,14 @@ namespace QuantoCrypt.Internal.Connection
         /// </returns>
         public static ISecureTransportConnection InitializeSecureClient(ICipherSuiteProvider cipherSuiteProvider, ITransportConnection baseConnection)
         {
-            // add creation logic here.
-            return null;
+            try
+            {
+                var connection = new QuantoCryptConnection(baseConnection);
+
+                // add creation logic here.
+                return connection;
+            }
+            catch(Exception ex) { throw; }
         }
 
         /// <summary>
@@ -38,22 +55,42 @@ namespace QuantoCrypt.Internal.Connection
         /// </returns>
         public static ISecureTransportConnection InitializeSecureServer(ICipherSuiteProvider cipherSuiteProvider, ITransportConnection baseConnection)
         {
-            // add creation logic here.
-            return null;
+            try
+            {
+                var connection = new QuantoCryptConnection(baseConnection);
+
+                // add creation logic here.
+                return connection;
+            }
+            catch (Exception ex) { throw; }
         }
 
         public byte[] Recieve()
         {
-            // add recieve logic.
-            throw new NotImplementedException();
+            try
+            {
+                var message = new ProtocolMessage(_rWrappedUnsecureConnection.Recieve());
+
+                if (message.GetMessageType() != ProtocolMessage.DATA_TRANSFER)
+                    throw new ArgumentException($"Invalid message code recieved! Expected to be a [DATA_TRANSFER] got [{message.GetMessageType()}]");
+
+                var body = message.GetBody();
+
+                return _rSymmetricAlgorithm.Decrypt(body);
+            }
+            catch
+            {
+                throw;
+            }
         }
 
         public void Send(byte[] data)
         {
-            // TODO: rework ISymmetricAlgorithm to use byte[]
-            string encryptedText = _rSymmetricAlgorithm.Encrypt(Convert.ToBase64String(data));
+            var encryptedText = _rSymmetricAlgorithm.Encrypt(data);
 
-            // add send logic here.
+            var protocolMessage = ProtocolMessage.CreateMessage(1, ProtocolMessage.DATA_TRANSFER, encryptedText);
+
+            _rWrappedUnsecureConnection.Send(protocolMessage);
         }
     }
 }
