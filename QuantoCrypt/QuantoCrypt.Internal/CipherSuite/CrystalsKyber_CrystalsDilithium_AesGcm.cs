@@ -10,14 +10,10 @@ namespace QuantoCrypt.Internal.CipherSuite
     {
         public string Name => nameof(CrystalsKyber_CrystalsDilithium_AesGcm);
 
-        public IKEMAlgorithm KEMAlgorithm => throw new NotImplementedException();
+        public IKEMAlgorithm GetKEMAlgorithm() => throw new NotImplementedException();
 
-        public ISignatureAlgorithm SignatureAlgorithm => throw new NotImplementedException();
+        public ISignatureAlgorithm GetSignatureAlgorithm() => throw new NotImplementedException();
 
-        public ISymmetricAlgorithm SymmetricAlgorithm => _rSymmetricAlgorithmCreator.Invoke(SessionKey);
-
-        public byte[] SessionKey { get; set; }
-
-        private readonly Func<byte[], ISymmetricAlgorithm> _rSymmetricAlgorithmCreator = (byte[] key) => new AesGcmAlgorithm(key);
+        public ISymmetricAlgorithm GetSymmetricAlgorithm(byte[] sessionKey) => new AesGcmAlgorithm(sessionKey);
     }
 }

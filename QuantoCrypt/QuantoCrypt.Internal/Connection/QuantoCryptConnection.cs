@@ -6,14 +6,14 @@ using QuantoCrypt.Internal.Message;
 namespace QuantoCrypt.Internal.Connection
 {
     /// <summary>
-    /// 
+    /// Main provider of the <see cref="ISecureTransportConnection"/>, allows create server/client + transfer data securelly.
     /// </summary>
     public sealed class QuantoCryptConnection : ISecureTransportConnection
     {
         public Guid Id => _rWrappedUnsecureConnection.Id;
 
         private ITransportConnection _rWrappedUnsecureConnection;
-        private ISymmetricAlgorithm _rSymmetricAlgorithm;
+        private ISymmetricAlgorithm _rSymmetricAlgorithm = null;
 
         /// <summary>
         /// Default ctor.
@@ -42,7 +42,7 @@ namespace QuantoCrypt.Internal.Connection
                 // add creation logic here.
                 return connection;
             }
-            catch(Exception ex) { throw; }
+            catch { throw; }
         }
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace QuantoCrypt.Internal.Connection
                 // add creation logic here.
                 return connection;
             }
-            catch (Exception ex) { throw; }
+            catch { throw; }
         }
 
         public byte[] Recieve()
@@ -78,10 +78,7 @@ namespace QuantoCrypt.Internal.Connection
 
                 return _rSymmetricAlgorithm.Decrypt(body);
             }
-            catch
-            {
-                throw;
-            }
+            catch { throw; }
         }
 
         public void Send(byte[] data)

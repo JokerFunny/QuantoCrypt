@@ -15,18 +15,18 @@ namespace QuantoCrypt.Infrastructure.CipherSuite
         string Name { get; }
 
         /// <summary>
-        /// Target <see cref="IKEMAlgorithm"/>.
+        /// Method to get target <see cref="IKEMAlgorithm"/>.
         /// </summary>
-        IKEMAlgorithm KEMAlgorithm { get; }
+        IKEMAlgorithm GetKEMAlgorithm();
 
         /// <summary>
-        /// Target <see cref="ISignatureAlgorithm"/>.
+        /// Method to get target <see cref="ISignatureAlgorithm"/>.
         /// </summary>
-        ISignatureAlgorithm SignatureAlgorithm { get; }
+        ISignatureAlgorithm GetSignatureAlgorithm();
 
         /// <summary>
-        /// Target <see cref="ISymmetricAlgorithm"/>.
+        /// Method to get target <see cref="ISymmetricAlgorithm"/>.
         /// </summary>
-        ISymmetricAlgorithm SymmetricAlgorithm { get; }
+        ISymmetricAlgorithm GetSymmetricAlgorithm(byte[] sessionKey);
     }
 }

@@ -50,10 +50,7 @@
 
                 return message;
             }
-            catch (Exception ex)
-            {
-                throw;
-            }
+            catch { throw; }
         }
 
         private static byte[] _GetHash(byte[] body)
