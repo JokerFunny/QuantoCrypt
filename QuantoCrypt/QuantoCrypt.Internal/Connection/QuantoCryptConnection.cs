@@ -13,7 +13,7 @@ namespace QuantoCrypt.Internal.Connection
         public Guid Id => _rWrappedUnsecureConnection.Id;
 
         private ITransportConnection _rWrappedUnsecureConnection;
-        private ISymmetricAlgorithm _rSymmetricAlgorithm = null;
+        private ISymmetricAlgorithm _rSymmetricAlgorithm;
 
         /// <summary>
         /// Default ctor.

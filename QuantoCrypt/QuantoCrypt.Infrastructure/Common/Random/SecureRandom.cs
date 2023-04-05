@@ -21,7 +21,7 @@ namespace QuantoCrypt.Infrastructure.Common
         ///     Use SHA256.
         /// </remarks>
         public SecureRandom()
-            : this(_CreatePrng("SHA256", true))
+            : this(_CreatePrng("SHA-256", true))
         { }
 
         /// <summary>
