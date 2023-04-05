@@ -1,4 +1,6 @@
-﻿namespace QuantoCrypt.Infrastructure.KEM
+﻿using QuantoCrypt.Infrastructure.Common;
+
+namespace QuantoCrypt.Infrastructure.KEM
 {
     /// <summary>
     /// Interface for all Key encapsulation mechanism algorithms that would be used to establish a single secret session key.
@@ -6,12 +8,12 @@
     public interface IKEMAlgorithm : IAlgorithm
     {
         /// <summary>
-        /// Generate the public + private key.
+        /// Generate the public + private key <see cref="AsymmetricKeyPair"/>.
         /// </summary>
         /// <returns>
-        ///     Public + private keys.
+        ///     Public + private keys <see cref="AsymmetricKeyPair"/>.
         /// </returns>
-        (byte[], byte[]) KeyGen();
+        AsymmetricKeyPair KeyGen();
 
         /// <summary>
         /// Generate the <see cref="ISecretWithEncapsulation"/> using clients' PK.
