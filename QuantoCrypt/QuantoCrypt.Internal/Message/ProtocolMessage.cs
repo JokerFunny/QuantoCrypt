@@ -1,4 +1,6 @@
-﻿namespace QuantoCrypt.Internal.Message
+﻿using System.Buffers.Binary;
+
+namespace QuantoCrypt.Internal.Message
 {
     /// <summary>
     /// Handle the message, that is transfered through protocol with the proper headers and all other necesarry stuff.
@@ -12,7 +14,19 @@
         public static readonly byte DATA_TRANSFER = 5;
 
         private readonly byte[] _rMessage;
-        private const int _rHeaderOffset = 10;
+
+        /// <remarks>
+        ///     Part used by protocol version (0), message type (1) and total message length (2-5).
+        /// </remarks>
+        private const int _rHeaderOffset = 6;
+        /// <remarks>
+        ///     Part used by message integrity (6-9).
+        /// </remarks>
+        private const int _rMessageIntegrityOffset = 4;
+        /// <remarks>
+        ///     Part used by header part and message integrity information.
+        /// </remarks>
+        private const int _rProtocolHeaderOffset = _rHeaderOffset + _rMessageIntegrityOffset;
 
         /// <summary>
         /// Default ctor.
@@ -37,16 +51,21 @@
         {
             try
             {
-                var headerPart = new byte[6];
+                int encryptedDataLength = _rProtocolHeaderOffset + body.Length;
+                Span<byte> headerPart = stackalloc byte[_rHeaderOffset];
+
+                // fill headers
                 headerPart[0] = version;
                 headerPart[1] = type;
-                _CopyToByteArray(body.Length + _rHeaderOffset, headerPart, 2);
+                BinaryPrimitives.WriteInt32LittleEndian(headerPart.Slice(2, 6), encryptedDataLength);
+
                 byte[] messageIntegrity = _GetHash(body);
 
-                var message = new byte[_rHeaderOffset + body.Length];
-                headerPart.CopyTo(message, 0);
-                messageIntegrity.CopyTo(message, headerPart.Length);
-                body.CopyTo(message, _rHeaderOffset);
+                var message = new byte[encryptedDataLength];
+
+                headerPart.CopyTo(message);
+                messageIntegrity.CopyTo(message, _rHeaderOffset);
+                body.CopyTo(message, _rProtocolHeaderOffset);
 
                 return message;
             }
@@ -87,21 +106,6 @@
             Array.Copy(_rMessage, _rHeaderOffset, messageBody, 0, targetLength);
 
             return messageBody;
-        }
-
-        private static void _CopyToByteArray(int source, byte[] destination, int offset)
-        {
-            if (destination == null)
-                throw new ArgumentException("Destination array cannot be null");
-
-            // check if there is enough space for all the 4 bytes we will copy
-            if (destination.Length < offset + 4)
-                throw new ArgumentException("Not enough room in the destination array");
-
-            destination[offset] = (byte)(source >> 24); // fourth byte
-            destination[offset + 1] = (byte)(source >> 16); // third byte
-            destination[offset + 2] = (byte)(source >> 8); // second byte
-            destination[offset + 3] = (byte)source; // last byte is already in proper position
         }
     }
 }
