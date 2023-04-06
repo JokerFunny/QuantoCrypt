@@ -1,5 +1,6 @@
 ﻿using QuantoCrypt.Infrastructure.Connection;
 using System.Net.Sockets;
+using System.Text;
 
 namespace QuantoCrypt.Internal.Connection
 {
@@ -8,7 +9,7 @@ namespace QuantoCrypt.Internal.Connection
     /// </summary>
     public class SocketTransportConnection : ITransportConnection
     {
-        public Guid Id => throw new NotImplementedException();
+        public Guid Id => Guid.NewGuid();
 
         private readonly Socket _rSocket;
 
@@ -26,7 +27,7 @@ namespace QuantoCrypt.Internal.Connection
             _rSocket = socket;
         }
 
-        public byte[] Recieve()
+        public byte[] Receive()
         {
             try
             {
@@ -35,24 +36,47 @@ namespace QuantoCrypt.Internal.Connection
                 byte[] result = new byte[read];
                 Array.Copy(buffer, result, read);
 
-                return buffer.AsSpan().ToArray();
+                Console.WriteLine($"Id {Id} - receive data: {Encoding.ASCII.GetString(result)}");
+
+                return result;
             }
-            catch
+            catch(SocketException se)
             {
+                Console.WriteLine("SocketException : {0}", se.ToString());
+                throw;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Unexpected exception : {0}", e.ToString());
                 throw;
             }
         }
 
-        public void Send(byte[] data)
+        public int Send(byte[] data)
         {
             try
             {
-                _rSocket.Send(data);
+                Console.WriteLine($"Id {Id} - send data: {Encoding.ASCII.GetString(data)}");
+
+                return _rSocket.Send(data);
             }
-            catch
+            catch (SocketException se)
             {
+                Console.WriteLine("SocketException : {0}", se.ToString());
                 throw;
             }
+            catch (Exception e)
+            {
+                Console.WriteLine("Unexpected exception : {0}", e.ToString());
+                throw;
+            }
+        }
+
+        public void Dispose()
+        {
+            _rSocket?.Shutdown(SocketShutdown.Both);
+
+            _rSocket?.Close();
         }
     }
 }

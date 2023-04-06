@@ -8,18 +8,12 @@ namespace QuantoCrypt.CipherSuites
     /// </summary>
     public sealed class QuantoCryptCipherSuiteProvider : ICipherSuiteProvider
     {
-        public IReadOnlyList<ICipherSuite> SupportedCipherSuites { get; private set; }
-
-        /// <summary>
-        /// Dafault ctor, defines all supported <see cref="ICipherSuite"/>.
-        /// </summary>
-        public QuantoCryptCipherSuiteProvider()
-        {
-            SupportedCipherSuites = new List<ICipherSuite>()
+        private static readonly List<ICipherSuite> _srSupportedCipherSuites = new List<ICipherSuite>()
             {
                 new CrystalsKyber_CrystalsDilithium_Aes(),
                 new CrystalsKyber_CrystalsDilithium_AesGcm()
             };
-        }
+
+        public IReadOnlyList<ICipherSuite> SupportedCipherSuites => _srSupportedCipherSuites;
     }
 }

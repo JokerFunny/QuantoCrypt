@@ -16,6 +16,9 @@ namespace QuantoCrypt.Internal.Symmetric
         }
 
         public byte[] Encrypt(byte[] plainBytes)
+            => Encrypt(plainBytes.AsSpan());
+
+        public byte[] Encrypt(Span<byte> plainBytes)
         {
             // Get parameter sizes
             int nonceSize = AesGcm.NonceByteSizes.MaxSize;
@@ -37,7 +40,7 @@ namespace QuantoCrypt.Internal.Symmetric
             RandomNumberGenerator.Fill(nonce);
 
             // Encrypt
-            _rAesGcm.Encrypt(nonce, plainBytes.AsSpan(), cipherBytes, tag);
+            _rAesGcm.Encrypt(nonce, plainBytes, cipherBytes, tag);
 
             return encryptedData.ToArray();
         }
