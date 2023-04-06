@@ -18,27 +18,27 @@ namespace QuantoCrypt.Benchmarks.KEM
             {
                 SecureRandom random = new SecureRandom();
 
-                Internal.KEM.CRYSTALS.Kyber.KyberKeyGenerationParameters genParam = new Internal.KEM.CRYSTALS.Kyber.KyberKeyGenerationParameters(random, kyberParameters);
-                Internal.KEM.CRYSTALS.Kyber.KyberKeyPairGenerator kpGen = new Internal.KEM.CRYSTALS.Kyber.KyberKeyPairGenerator(genParam);
+                Internal.KEM.CRYSTALS.Kyber.KyberKeyGenerationParameters keyGenerationParameters = new Internal.KEM.CRYSTALS.Kyber.KyberKeyGenerationParameters(random, kyberParameters);
+                Internal.KEM.CRYSTALS.Kyber.KyberKeyPairGenerator keyPairGenerator = new Internal.KEM.CRYSTALS.Kyber.KyberKeyPairGenerator(keyGenerationParameters);
 
                 // Generate keys and test.
-                AsymmetricKeyPair ackp = kpGen.GenerateKeyPair();
+                AsymmetricKeyPair generatedKeyPair = keyPairGenerator.GenerateKeyPair();
 
-                KyberPublicKey pubKey = (KyberPublicKey)ackp.Public;
-                KyberPrivateKey privKey = (KyberPrivateKey)ackp.Private;
+                KyberPublicKey pubKey = (KyberPublicKey)generatedKeyPair.Public;
+                KyberPrivateKey privKey = (KyberPrivateKey)generatedKeyPair.Private;
 
                 // KEM Enc
-                Internal.KEM.CRYSTALS.Kyber.KyberKemGenerator KyberEncCipher = new Internal.KEM.CRYSTALS.Kyber.KyberKemGenerator(random);
-                Infrastructure.KEM.ISecretWithEncapsulation secWenc = KyberEncCipher.GenerateEncapsulated(pubKey);
+                Internal.KEM.CRYSTALS.Kyber.KyberKemGenerator kemGenerator = new Internal.KEM.CRYSTALS.Kyber.KyberKemGenerator(random);
+                Infrastructure.KEM.ISecretWithEncapsulation secretWithIncapsulation = kemGenerator.GenerateEncapsulated(pubKey);
 
-                byte[] generated_cipher_text = secWenc.GetEncapsulation();
-                byte[] secret = secWenc.GetSecret();
+                byte[] generatedCipherText = secretWithIncapsulation.GetEncapsulation();
+                byte[] secret = secretWithIncapsulation.GetSecret();
 
                 // KEM Dec
-                Internal.KEM.CRYSTALS.Kyber.KyberKemExtractor KyberDecCipher = new Internal.KEM.CRYSTALS.Kyber.KyberKemExtractor(privKey);
-                byte[] dec_key = KyberDecCipher.ExtractSecret(generated_cipher_text);
+                Internal.KEM.CRYSTALS.Kyber.KyberKemExtractor kemExtractor = new Internal.KEM.CRYSTALS.Kyber.KyberKemExtractor(privKey);
+                byte[] decriptedSecret = kemExtractor.ExtractSecret(generatedCipherText);
 
-                secret.Should().BeEquivalentTo(dec_key);
+                secret.Should().BeEquivalentTo(decriptedSecret);
             }
         }
 

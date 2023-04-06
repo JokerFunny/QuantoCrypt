@@ -75,32 +75,32 @@ namespace QuantoCrypt.Internal.Tests.KEM
 
             NistSecureRandom random = new NistSecureRandom(seed, null);
 
-            KyberKeyGenerationParameters genParam = new KyberKeyGenerationParameters(random, kyberParameters);
-            KyberKeyPairGenerator kpGen = new KyberKeyPairGenerator(genParam);
+            KyberKeyGenerationParameters keyGenerationParameters = new KyberKeyGenerationParameters(random, kyberParameters);
+            KyberKeyPairGenerator keyPairGenerator = new KyberKeyPairGenerator(keyGenerationParameters);
 
             // Generate keys and test.
-            AsymmetricKeyPair ackp = kpGen.GenerateKeyPair();
+            AsymmetricKeyPair generatedKeyPair = keyPairGenerator.GenerateKeyPair();
 
-            KyberPublicKey pubKey = (KyberPublicKey)ackp.Public;
-            KyberPrivateKey privKey = (KyberPrivateKey)ackp.Private;
+            KyberPublicKey pubKey = (KyberPublicKey)generatedKeyPair.Public;
+            KyberPrivateKey privKey = (KyberPrivateKey)generatedKeyPair.Private;
 
             publicKey.Should().BeEquivalentTo(pubKey.GetEncoded());
             privateKey.Should().BeEquivalentTo(privKey.GetEncoded());
 
             // KEM Enc
-            KyberKemGenerator KyberEncCipher = new KyberKemGenerator(random);
-            ISecretWithEncapsulation secWenc = KyberEncCipher.GenerateEncapsulated(pubKey);
+            KyberKemGenerator kemGenerator = new KyberKemGenerator(random);
+            ISecretWithEncapsulation secretWithIncapsulation = kemGenerator.GenerateEncapsulated(pubKey);
 
-            byte[] generated_cipher_text = secWenc.GetEncapsulation();
-            byte[] secret = secWenc.GetSecret();
-            ciphertext.Should().BeEquivalentTo(generated_cipher_text);
+            byte[] generatedCipherText = secretWithIncapsulation.GetEncapsulation();
+            byte[] secret = secretWithIncapsulation.GetSecret();
+            ciphertext.Should().BeEquivalentTo(generatedCipherText);
             sessionKey.Should().BeEquivalentTo(secret);
 
             // KEM Dec
-            KyberKemExtractor KyberDecCipher = new KyberKemExtractor(privKey);
-            byte[] dec_key = KyberDecCipher.ExtractSecret(generated_cipher_text);
+            KyberKemExtractor kemExtractor = new KyberKemExtractor(privKey);
+            byte[] decriptedSessionKey = kemExtractor.ExtractSecret(generatedCipherText);
 
-            sessionKey.Should().BeEquivalentTo(dec_key);
+            sessionKey.Should().BeEquivalentTo(decriptedSessionKey);
         }
         
         public static IEnumerable<object[]> KYBER512InputParams()
