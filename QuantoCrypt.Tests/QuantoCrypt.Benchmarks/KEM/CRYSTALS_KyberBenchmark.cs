@@ -4,28 +4,16 @@ using Org.BouncyCastle.Crypto;
 using Org.BouncyCastle.Pqc.Crypto.Crystals.Kyber;
 using QuantoCrypt.Infrastructure.Common;
 using QuantoCrypt.Internal.KEM.CRYSTALS.Kyber;
-using QuantoCrypt.Internal.Utilities;
 
 namespace QuantoCrypt.Benchmarks.KEM
 {
     [MemoryDiagnoser]
     public class CRYSTALS_KyberBenchmark
     {
-        private const int _testInputFileChuckSize = 6;
-
-        private static TestDataInputBytes _sDefaultTestData = new TestDataInputBytes()
-        {
-            Seed = ArrayUtilities.HexStringToByteArrayOptimized("061550234D158C5EC95595FE04EF7A25767F2E24CC2BC479D09D86DC9ABCFDE7056A8C266F9EF97ED08541DBD2E1FFA1")
-        };
-
         [Benchmark(Baseline = true)]
         [ArgumentsSource(nameof(KYBERInputParams))]
         public void KYBERExecutor(string name, Internal.KEM.CRYSTALS.Kyber.KyberParameters kyberParameters)
         {
-            //byte[] seed = _sDefaultTestData.Seed;
-
-            //NistSecureRandom random = new NistSecureRandom(seed, null);
-
             for (int i = 0; i < 10; i++)
             {
                 SecureRandom random = new SecureRandom();
@@ -105,104 +93,6 @@ namespace QuantoCrypt.Benchmarks.KEM
             yield return new object[] { Org.BouncyCastle.Pqc.Crypto.Crystals.Kyber.KyberParameters.kyber512_aes.Name, Org.BouncyCastle.Pqc.Crypto.Crystals.Kyber.KyberParameters.kyber512_aes };
             yield return new object[] { Org.BouncyCastle.Pqc.Crypto.Crystals.Kyber.KyberParameters.kyber768_aes.Name, Org.BouncyCastle.Pqc.Crypto.Crystals.Kyber.KyberParameters.kyber768_aes };
             yield return new object[] { Org.BouncyCastle.Pqc.Crypto.Crystals.Kyber.KyberParameters.kyber1024_aes.Name, Org.BouncyCastle.Pqc.Crypto.Crystals.Kyber.KyberParameters.kyber1024_aes };
-        }
-
-        /*[Benchmark]
-        [ArgumentsSource(nameof(KYBER512InputParams))]
-        public void KYBER512Executor(TestDataInput testData)
-        {
-            byte[] seed = ArrayUtilities.HexStringToByteArrayOptimized(testData.Seed);
-            byte[] publicKey = ArrayUtilities.HexStringToByteArrayOptimized(testData.PublicKey);
-            byte[] privateKey = ArrayUtilities.HexStringToByteArrayOptimized(testData.PrivateKey);
-            byte[] ciphertext = ArrayUtilities.HexStringToByteArrayOptimized(testData.Ciphertext);
-            byte[] sessionKey = ArrayUtilities.HexStringToByteArrayOptimized(testData.SessionKey);
-
-            NistSecureRandom random = new NistSecureRandom(seed, null);
-            KyberParameters kyberparameters = KyberParameters.KYBER512;
-
-            KyberKeyGenerationParameters genParam = new KyberKeyGenerationParameters(random, kyberparameters);
-            KyberKeyPairGenerator kpGen = new KyberKeyPairGenerator(genParam);
-
-            // Generate keys and test.
-            AsymmetricKeyPair ackp = kpGen.GenerateKeyPair();
-
-            KyberPublicKey pubKey = (KyberPublicKey)ackp.Public;
-            KyberPrivateKey privKey = (KyberPrivateKey)ackp.Private;
-
-            publicKey.Should().BeEquivalentTo(pubKey.GetEncoded());
-            privateKey.Should().BeEquivalentTo(privKey.GetEncoded());
-
-            // KEM Enc
-            KyberKemGenerator KyberEncCipher = new KyberKemGenerator(random);
-            ISecretWithEncapsulation secWenc = KyberEncCipher.GenerateEncapsulated(pubKey);
-
-            byte[] generated_cipher_text = secWenc.GetEncapsulation();
-            byte[] secret = secWenc.GetSecret();
-            ciphertext.Should().BeEquivalentTo(generated_cipher_text);
-            sessionKey.Should().BeEquivalentTo(secret);
-
-            // KEM Dec
-            KyberKemExtractor KyberDecCipher = new KyberKemExtractor(privKey);
-            byte[] dec_key = KyberDecCipher.ExtractSecret(generated_cipher_text);
-
-            sessionKey.Should().BeEquivalentTo(dec_key);
-        }*/
-
-        /*public IEnumerable<TestDataInput> KYBER512InputParams()
-        {
-            string[] fileContent = File.ReadAllLines("Benchmarks\\TestData\\KYBER512.txt");
-
-            var result = _GetTestData(fileContent);
-
-            foreach (var item in result)
-                yield return item;
-        }
-
-        private IEnumerable<TestDataInput> _GetTestData(string[] fileContent)
-        {
-            var result = new List<TestDataInput>();
-
-            if (fileContent.Length < 1 || (fileContent.Length + 1) % _testInputFileChuckSize != 0)
-                throw new ArgumentException("Input file has incorrect structure!");
-
-            TestDataInput testDataInput = new TestDataInput();
-            for (int i = 0; i < fileContent.Length; i += _testInputFileChuckSize)
-            {
-                for (int j = 0; j < _testInputFileChuckSize; j++)
-                {
-                    if (j == 0)
-                    {
-                        testDataInput = new TestDataInput();
-                        testDataInput.Seed = fileContent[i + j];
-                    }
-                    else if (j == 1)
-                        testDataInput.PublicKey = fileContent[i + j];
-                    else if (j == 2)
-                        testDataInput.PrivateKey = fileContent[i + j];
-                    else if (j == 3)
-                        testDataInput.Ciphertext = fileContent[i + j];
-                    else if (j == 4)
-                        testDataInput.SessionKey = fileContent[i + j];
-                    else
-                        result.Add(testDataInput);
-                }
-            }
-
-            return result;
-        }
-
-        public class TestDataInput
-        {
-            public string Seed { get; set; }
-            public string PublicKey { get; set; }
-            public string PrivateKey { get; set; }
-            public string Ciphertext { get; set; }
-            public string SessionKey { get; set; }
-        }*/
-
-        public class TestDataInputBytes
-        {
-            public byte[] Seed { get; set; }
         }
     }
 }
