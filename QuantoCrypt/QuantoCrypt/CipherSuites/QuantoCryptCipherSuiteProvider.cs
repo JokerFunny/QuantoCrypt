@@ -10,8 +10,10 @@ namespace QuantoCrypt.CipherSuites
     {
         private static readonly List<ICipherSuite> _srSupportedCipherSuites = new List<ICipherSuite>()
             {
-                new CrystalsKyber_CrystalsDilithium_Aes(),
-                new CrystalsKyber_CrystalsDilithium_AesGcm()
+                new CrystalsKyber1024_CrystalsDilithium_Aes(),
+                new CrystalsKyber1024_CrystalsDilithium_AesGcm(),
+                new CrystalsKyber1024Aes_CrystalsDilithium_Aes(),
+                new CrystalsKyber1024Aes_CrystalsDilithium_AesGcm()
             };
 
         public IReadOnlyList<ICipherSuite> SupportedCipherSuites => _srSupportedCipherSuites;

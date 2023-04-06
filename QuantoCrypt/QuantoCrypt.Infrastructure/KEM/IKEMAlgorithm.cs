@@ -28,10 +28,12 @@ namespace QuantoCrypt.Infrastructure.KEM
         /// Get the session key from the <paramref name="cipherText"/> using <paramref name="privateKey"/>.
         /// </summary>
         /// <param name="cipherText">Cipher text as a result of the <see cref="Encaps(byte[])"/> operation.</param>
-        /// <param name="privateKey">Targe tprivate key to decrypt the <paramref name="cipherText"/>.</param>
+        /// <remarks>
+        ///     Uses private key generated during <see cref="KeyGen()"/>.
+        /// </remarks>
         /// <returns>
         ///     Session key.
         /// </returns>
-        byte[] Decaps(byte[] cipherText, byte[] privateKey);
+        byte[] Decaps(byte[] cipherText);
     }
 }

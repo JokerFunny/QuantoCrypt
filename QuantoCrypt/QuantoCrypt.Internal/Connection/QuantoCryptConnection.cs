@@ -13,7 +13,7 @@ namespace QuantoCrypt.Internal.Connection
     {
         public Guid Id => prWrappedUnsecureConnection.Id;
 
-        protected internal readonly ITransportConnection prWrappedUnsecureConnection;
+        internal readonly ITransportConnection prWrappedUnsecureConnection;
         private ISymmetricAlgorithm _rSymmetricAlgorithm;
 
         /// <summary>

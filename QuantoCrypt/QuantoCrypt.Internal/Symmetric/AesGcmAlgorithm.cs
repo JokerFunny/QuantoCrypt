@@ -1,7 +1,6 @@
 ﻿using QuantoCrypt.Infrastructure.Symmetric;
 using System.Buffers.Binary;
 using System.Security.Cryptography;
-using System.Text;
 
 namespace QuantoCrypt.Internal.Symmetric
 {
