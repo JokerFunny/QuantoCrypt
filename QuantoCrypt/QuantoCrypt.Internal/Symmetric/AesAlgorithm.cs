@@ -4,7 +4,7 @@ using System.Text;
 
 namespace QuantoCrypt.Internal.Symmetric
 {
-    public class AesAlgorithm : ISymmetricAlgorithm
+    public sealed class AesAlgorithm : ISymmetricAlgorithm
     {
         private byte[] _rKey;
 

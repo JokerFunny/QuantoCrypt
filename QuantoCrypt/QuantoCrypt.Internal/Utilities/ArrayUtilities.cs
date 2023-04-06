@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System.Globalization;
+using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 
 namespace QuantoCrypt.Internal.Utilities
@@ -80,6 +81,35 @@ namespace QuantoCrypt.Internal.Utilities
             }
 
             return result;
+        }
+
+        /// <summary>
+        /// Get byte[] from hexdecimal input <paramref name="hex"/>.
+        /// </summary>
+        /// <param name="hex">String in the hexdecimal format.</param>
+        /// <returns>
+        ///     Target byte[].
+        /// </returns>
+        public static byte[] HexStringToByteArray(string hex)
+        {
+            return Enumerable.Range(0, hex.Length)
+                .Where(x => x % 2 == 0)
+                .Select(x => Convert.ToByte(hex.Substring(x, 2), 16))
+                .ToArray();
+        }
+
+        /// <summary>
+        /// Get byte[] from hexdecimal input <paramref name="hex"/>.
+        /// </summary>
+        /// <param name="hex">String in the hexdecimal format.</param>
+        /// <returns>
+        ///     Target byte[].
+        /// </returns>
+        public static byte[] HexStringToByteArrayOptimized(string hex)
+        {
+            return Enumerable.Range(0, hex.Length / 2)
+                .Select(x => byte.Parse(hex.Substring(2 * x, 2), NumberStyles.HexNumber))
+                .ToArray();
         }
 
         private static int _GetLength(int from, int to)

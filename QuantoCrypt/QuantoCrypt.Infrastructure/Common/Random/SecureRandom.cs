@@ -6,11 +6,11 @@ namespace QuantoCrypt.Infrastructure.Common
 {
     public class SecureRandom : System.Random
     {
-        internal static readonly SecureRandom srArbitraryRandom = new SecureRandom(new VmpcRandomGenerator(), 16);
-
         private static long _sCounter = DateTime.UtcNow.Ticks;
         private static readonly double _srDoubleScale = 1.0 / Convert.ToDouble(1L << 53);
         private static readonly SecureRandom _srMasterRandom = new SecureRandom(new CryptoApiRandomGenerator());
+
+        internal static readonly SecureRandom srArbitraryRandom = new SecureRandom(new VmpcRandomGenerator(), 16);
 
         protected readonly IRandomGenerator prRandomGenerator;
 

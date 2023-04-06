@@ -1,5 +1,4 @@
 ﻿using QuantoCrypt.Infrastructure.Common;
-using QuantoCrypt.Infrastructure.Common.Random;
 
 namespace QuantoCrypt.Internal.KEM.CRYSTALS.Kyber
 {
