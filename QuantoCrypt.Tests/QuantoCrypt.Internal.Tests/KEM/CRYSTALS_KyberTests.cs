@@ -65,6 +65,30 @@ namespace QuantoCrypt.Internal.Tests.KEM
             _ExecuteTest(testData, kyberparameters);
         }
 
+        [Theory]
+        [MemberData(nameof(KYBERInputParams))]
+        public void KyberAlgorithmxecutor(KyberParameters kyberParams)
+        {
+            KyberAlgorithm keyPairGenerator = new KyberAlgorithm(kyberParams);
+
+            // Generate keys and test.
+            AsymmetricKeyPair generatedKeyPair = keyPairGenerator.KeyGen();
+
+            KyberPublicKey pubKey = (KyberPublicKey)generatedKeyPair.Public;
+            KyberPrivateKey privKey = (KyberPrivateKey)generatedKeyPair.Private;
+
+            // KEM Enc
+            ISecretWithEncapsulation secretWithIncapsulation = keyPairGenerator.Encaps(pubKey.GetEncoded());
+
+            byte[] generatedCipherText = secretWithIncapsulation.GetEncapsulation();
+            byte[] secret = secretWithIncapsulation.GetSecret();
+
+            // KEM Dec
+            byte[] decriptedSecret = keyPairGenerator.Decaps(generatedCipherText);
+
+            secret.Should().BeEquivalentTo(decriptedSecret);
+        }
+
         private void _ExecuteTest(TestDataInput testData, KyberParameters kyberParameters)
         {
             byte[] seed = ArrayUtilities.HexStringToByteArrayOptimized(testData.Seed);
@@ -161,6 +185,16 @@ namespace QuantoCrypt.Internal.Tests.KEM
 
             foreach (var item in result)
                 yield return new object[] { item };
+        }
+
+        public static IEnumerable<object[]> KYBERInputParams()
+        {
+            yield return new object[] { KyberParameters.KYBER512 }; 
+            yield return new object[] { KyberParameters.KYBER768 }; 
+            yield return new object[] { KyberParameters.KYBER1024 }; 
+            yield return new object[] { KyberParameters.KYBER512_AES };
+            yield return new object[] { KyberParameters.KYBER768_AES };
+            yield return new object[] { KyberParameters.KYBER1024_AES };
         }
 
         private static IEnumerable<TestDataInput> _GetTestData(string[] fileContent)
