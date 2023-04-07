@@ -4,10 +4,25 @@ using System.Security.Cryptography;
 
 namespace QuantoCrypt.Internal.Symmetric
 {
+    /// <summary>
+    /// Implementation of the <see cref="ISymmetricAlgorithm"/> that work over <see cref="AesGcm"/>.
+    /// </summary>
+    /// <remarks>
+    ///     GCM is a very fast but arguably complex combination of CTR mode and GHASH, a MAC over the Galois 
+    ///     field with 2^128 elements. Its wide use in important network standards like TLS 1.2 is reflected 
+    ///     by a special instruction Intel has introduced to speed up the calculation of GHASH.
+    /// </remarks>
     public sealed class AesGcmAlgorithm : ISymmetricAlgorithm
     {
         private readonly AesGcm _rAesGcm;
 
+        /// <summary>
+        /// Default ctor.
+        /// </summary>
+        /// <param name="key">Target key.</param>
+        /// <remarks>
+        ///     <paramref name="key"/> should be 16, 24 or 32 bytes.
+        /// </remarks>
         public AesGcmAlgorithm(byte[] key)
         {
             // Initialize AES implementation

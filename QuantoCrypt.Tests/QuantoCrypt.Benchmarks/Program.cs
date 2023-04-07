@@ -15,7 +15,7 @@ class Program
 
         //new CRYSTALS_KyberBenchmark().BouncyCastleKYBERExecutor(Org.BouncyCastle.Pqc.Crypto.Crystals.Kyber.KyberParameters.kyber512.Name, Org.BouncyCastle.Pqc.Crypto.Crystals.Kyber.KyberParameters.kyber512);
 
-        //new AesBenchmark().AesTestAlgorithmExecutor(256);
+        //new AesBenchmark().AesAlgorithmExecutor(256);
         //new AesBenchmark().AesGcmAlgorithmExecutor(256);
     }
 }

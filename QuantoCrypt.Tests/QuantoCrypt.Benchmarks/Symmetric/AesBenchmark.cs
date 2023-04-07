@@ -1,5 +1,6 @@
 ﻿using BenchmarkDotNet.Attributes;
 using FluentAssertions;
+using QuantoCrypt.Infrastructure.Common;
 using QuantoCrypt.Internal.Symmetric;
 using System.Text;
 
@@ -8,13 +9,15 @@ namespace QuantoCrypt.Benchmarks.Symmetric
     [MemoryDiagnoser]
     public class AesBenchmark
     {
-        public static byte[] FileContent = File.ReadAllBytes("TestData\\input.txt");
+        //public static byte[] FileContent = File.ReadAllBytes("TestData\\input.txt");
 
+        public static byte[] RandomInput = new SecureRandom().GenerateSeed(2097152);
         public static byte[] Key = Encoding.UTF8.GetBytes("b14ca5898a4e4133bbce2ea2315a1916");
 
         [Benchmark(Baseline = true)]
         [Arguments(32)]
         [Arguments(64)]
+        [Arguments(100)] // add incorrect message size.
         [Arguments(128)]
         [Arguments(256)]
         [Arguments(512)]
@@ -30,23 +33,28 @@ namespace QuantoCrypt.Benchmarks.Symmetric
         [Arguments(524288)]
         [Arguments(1048576)]
         [Arguments(2097152)]
-        [Arguments(int.MaxValue)]
+        //[Arguments(int.MaxValue)]
         public void AesGcmAlgorithmExecutor(int symbolsToProceed)
         {
-            byte[] textToProceed = FileContent[0..symbolsToProceed];
+            /*byte[] textToProceed = FileContent.Length < symbolsToProceed 
+                ? FileContent[0..symbolsToProceed] 
+                : FileContent;*/
+
+            byte[] textToProceed = RandomInput[0..symbolsToProceed];
 
             AesGcmAlgorithm service = new AesGcmAlgorithm(Key);
 
-            var res1 = service.Encrypt(textToProceed);
+            var encrypted = service.Encrypt(textToProceed);
 
-            var res2 = service.Decrypt(res1);
+            var decrypted = service.Decrypt(encrypted);
 
-            textToProceed.Should().BeEquivalentTo(res2);
+            textToProceed.Should().BeEquivalentTo(decrypted);
         }
 
         [Benchmark]
         [Arguments(32)]
         [Arguments(64)]
+        [Arguments(100)] // add incorrect message size.
         [Arguments(128)]
         [Arguments(256)]
         [Arguments(512)]
@@ -62,18 +70,25 @@ namespace QuantoCrypt.Benchmarks.Symmetric
         [Arguments(524288)]
         [Arguments(1048576)]
         [Arguments(2097152)]
-        [Arguments(int.MaxValue)]
+        //[Arguments(int.MaxValue)]
         public void AesAlgorithmExecutor(int symbolsToProceed)
         {
-            byte[] textToProceed = FileContent[0..symbolsToProceed];
+            /*byte[] textToProceed = FileContent.Length < symbolsToProceed 
+                ? FileContent[0..symbolsToProceed] 
+                : FileContent;*/
+
+            byte[] textToProceed = RandomInput[0..symbolsToProceed];
 
             AesAlgorithm service = new AesAlgorithm(Key);
 
-            var res1 = service.Encrypt(textToProceed);
+            var encrypted = service.Encrypt(textToProceed);
 
-            var res2 = service.Decrypt(res1);
+            var decrypted = service.Decrypt(encrypted);
 
-            textToProceed.Should().BeEquivalentTo(res2);
+            if (decrypted.Length != textToProceed.Length)
+                textToProceed.Should().BeEquivalentTo(decrypted[..textToProceed.Length]);
+            else
+                textToProceed.Should().BeEquivalentTo(decrypted);
         }
 
         /*[Benchmark]

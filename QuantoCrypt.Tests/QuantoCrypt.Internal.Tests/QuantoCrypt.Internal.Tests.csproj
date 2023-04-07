@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Symmetric\" />
+    <Folder Include="CipherSuiteTests\" />
     <Folder Include="Signature\" />
   </ItemGroup>
 
