@@ -9,9 +9,10 @@ namespace QuantoCrypt.Internal.Connection
     /// </summary>
     public class SocketTransportConnection : ITransportConnection
     {
-        public Guid Id => Guid.NewGuid();
+        public Guid Id { get; } = Guid.NewGuid();
 
         private readonly Socket _rSocket;
+        private readonly Action<string> _rTraceAction;
 
         /// <remarks>
         ///     1 Mb buffer.
@@ -22,9 +23,11 @@ namespace QuantoCrypt.Internal.Connection
         /// Default ctor.
         /// </summary>
         /// <param name="socket">Target <see cref="Socket"/>, configured as a server or as a client.</param>
-        public SocketTransportConnection(Socket socket)
+        /// <param name="debugAction">Target trace action that could be used to trace data.</param>
+        public SocketTransportConnection(Socket socket, Action<string> debugAction = null)
         {
             _rSocket = socket;
+            _rTraceAction = debugAction;
         }
 
         public byte[] Receive()
@@ -36,18 +39,24 @@ namespace QuantoCrypt.Internal.Connection
                 byte[] result = new byte[read];
                 Array.Copy(buffer, result, read);
 
-                Console.WriteLine($"Id {Id} - receive data: {Encoding.ASCII.GetString(result)}");
+                if (_rTraceAction != null)
+                    _rTraceAction.Invoke($"Id [{Id}] - receive data:{Environment.NewLine}[version] - [{result[0]}]{Environment.NewLine}[message type] - [{result[1]}]" +
+                        $"{Environment.NewLine}[data length] - [{result.Length}]{Environment.NewLine}[message integrity] - [{result[6]} {result[7]} {result[8]} {result[9]}]");
 
                 return result;
             }
             catch(SocketException se)
             {
-                Console.WriteLine("SocketException : {0}", se.ToString());
+                if (_rTraceAction != null)
+                    _rTraceAction.Invoke($"SocketException: [{se}]");
+
                 throw;
             }
             catch (Exception e)
             {
-                Console.WriteLine("Unexpected exception : {0}", e.ToString());
+                if (_rTraceAction != null)
+                    _rTraceAction.Invoke($"Exception: [{e.Message}], stacktrace: [{e.StackTrace}].");
+
                 throw;
             }
         }
@@ -56,18 +65,24 @@ namespace QuantoCrypt.Internal.Connection
         {
             try
             {
-                Console.WriteLine($"Id {Id} - send data: {Encoding.ASCII.GetString(data)}");
+                if (_rTraceAction != null)
+                    _rTraceAction.Invoke($"Id [{Id}] - send data:{Environment.NewLine}[version] - [{data[0]}]{Environment.NewLine}[message type] - [{data[1]}]" +
+                        $"{Environment.NewLine}[data length] - [{data.Length}]{Environment.NewLine}[message integrity] - [{data[6]} {data[7]} {data[8]} {data[9]}]");
 
                 return _rSocket.Send(data);
             }
             catch (SocketException se)
             {
-                Console.WriteLine("SocketException : {0}", se.ToString());
+                if (_rTraceAction != null)
+                    _rTraceAction.Invoke($"SocketException: [{se}]");
+
                 throw;
             }
             catch (Exception e)
             {
-                Console.WriteLine("Unexpected exception : {0}", e.ToString());
+                if (_rTraceAction != null)
+                    _rTraceAction.Invoke($"Exception: [{e.Message}], stacktrace: [{e.StackTrace}].");
+
                 throw;
             }
         }
@@ -77,6 +92,23 @@ namespace QuantoCrypt.Internal.Connection
             _rSocket?.Shutdown(SocketShutdown.Both);
 
             _rSocket?.Close();
+        }
+
+        public bool Close()
+        {
+            try
+            {
+                Dispose();
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                if (_rTraceAction != null)
+                    _rTraceAction.Invoke($"Exception: [{e.Message}], stacktrace: [{e.StackTrace}].");
+            }
+
+            return false;
         }
     }
 }

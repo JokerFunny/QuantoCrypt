@@ -26,5 +26,13 @@
         ///     Target data.
         /// </returns>
         byte[] Receive();
+
+        /// <summary>
+        /// Close target connection.
+        /// </summary>
+        /// <returns>
+        ///     True if sucesfully, otherwise - false.
+        /// </returns>
+        bool Close();
     }
 }

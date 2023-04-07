@@ -15,6 +15,7 @@ namespace QuantoCrypt
         {
             Console.WriteLine("test");
 
+
             // Get Host IP Address that is used to establish a connection
             // In this case, we get one IP address of localhost that is IP : 127.0.0.1
             // If a host has multiple addresses, you will get a list of addresses
@@ -32,21 +33,30 @@ namespace QuantoCrypt
             Socket client = new Socket(ipAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
             client.Connect(localEndPoint);
 
-            SocketTransportConnection serverCon = new SocketTransportConnection(server.Accept());
-            SocketTransportConnection clientCon = new SocketTransportConnection(client);
+            Action<string> traceAction = Console.WriteLine;
 
+            // get SocketTransportConnection for client and server.
+            SocketTransportConnection serverCon = new SocketTransportConnection(server.Accept(), traceAction);
+            SocketTransportConnection clientCon = new SocketTransportConnection(client, traceAction);
+
+
+            // init QuantoCryptConnectionFactory, create ISecureTransportConnection for client + server.
             ICipherSuiteProvider cipherSuiteProvider = new QuantoCryptCipherSuiteProvider();
 
             QuantoCryptConnectionFactory factory = new QuantoCryptConnectionFactory(cipherSuiteProvider);
 
-            ISecureTransportConnection secureServer;
-            Task.Run(() => secureServer = factory.CreateSecureServerConnection(serverCon));
+            var serverStartTask = Task.Run(() => factory.CreateSecureServerConnection(serverCon));
 
-            var secureClient = factory.CreateSecureClientConnection(clientCon);
+            ISecureTransportConnection secureClient = factory.CreateSecureClientConnection(clientCon);
 
-            secureClient.Send(Encoding.ASCII.GetBytes("test message"));
+            ISecureTransportConnection secureServer = serverStartTask.Result;
 
-            //StartServer();
+
+            // send and recieve data.
+            secureClient.Send(Encoding.UTF8.GetBytes("test message"));
+
+            var recievedMessage = secureServer.Receive();
+
 
             Console.ReadLine();
         }
