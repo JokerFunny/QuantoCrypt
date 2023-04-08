@@ -143,8 +143,8 @@ namespace QuantoCrypt.Internal.Connection
 
             byte[] __GetServerInitMessage(QuantoCryptConnection connection, byte[] clientInitMessage, ICipherSuite cipherSuiteToUse)
             {
-                int supportedCipherSuitesOffset = clientInitMessage[11];
-                int publicKeyOffset = 11 + supportedCipherSuitesOffset + 1;
+                // header = 10 + prefferedCS = 1 + supportedCS = 8.
+                int publicKeyOffset = 19;
 
                 // get public key from client.
                 byte[] publicKey = clientInitMessage[publicKeyOffset..];

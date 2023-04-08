@@ -3,18 +3,22 @@ using QuantoCrypt.Infrastructure.KEM;
 using QuantoCrypt.Infrastructure.Signature;
 using QuantoCrypt.Infrastructure.Symmetric;
 using QuantoCrypt.Internal.KEM.CRYSTALS.Kyber;
+using QuantoCrypt.Internal.Signature.CRYSTALS.Dilithium;
 using QuantoCrypt.Internal.Symmetric;
 
 namespace QuantoCrypt.Internal.CipherSuite
 {
     /// <summary>
-    /// <see cref="KyberAlgorithm"/> with <see cref="KyberParameters.KYBER1024"/> + [] + <see cref="AesAlgorithm"/>.
+    /// <see cref="KyberAlgorithm"/> with <see cref="KyberParameters.KYBER1024"/> + 
+    /// <see cref="DilithiumAlgorithm"/> with <see cref="DilithiumParameters.DILITHIUM5_AES"/> + 
+    /// <see cref="AesAlgorithm"/>.
     /// </summary>
-    public sealed class CrystalsKyber1024_CrystalsDilithium_Aes : ICipherSuite
+    public sealed class CrystalsKyber1024_CrystalsDilithium5Aes_Aes : ICipherSuite
     {
-        public string Name => nameof(CrystalsKyber1024_CrystalsDilithium_Aes);
+        public string Name => nameof(CrystalsKyber1024_CrystalsDilithium5Aes_Aes);
 
         private KyberAlgorithm _kemAlgorithm;
+        private DilithiumAlgorithm _dilithiumAlgorithm;
         private AesAlgorithm _symmetricAlgorithm;
 
         public IKEMAlgorithm GetKEMAlgorithm()
@@ -25,7 +29,13 @@ namespace QuantoCrypt.Internal.CipherSuite
             return _kemAlgorithm;
         }
 
-        public ISignatureAlgorithm GetSignatureAlgorithm(bool isForSigning) => throw new NotImplementedException();
+        public ISignatureAlgorithm GetSignatureAlgorithm(bool isForSigning)
+        {
+            if (_dilithiumAlgorithm == null)
+                _dilithiumAlgorithm = new DilithiumAlgorithm(DilithiumParameters.DILITHIUM5_AES, isForSigning);
+
+            return _dilithiumAlgorithm;
+        }
 
         public ISymmetricAlgorithm GetSymmetricAlgorithm(byte[] sessionKey)
         {

@@ -1,6 +1,5 @@
 ﻿using QuantoCrypt.Infrastructure.CipherSuite;
 using QuantoCrypt.Infrastructure.KEM;
-using QuantoCrypt.Infrastructure.Signature;
 using System.Buffers.Binary;
 
 namespace QuantoCrypt.Internal.Message
@@ -91,39 +90,36 @@ namespace QuantoCrypt.Internal.Message
         /// 2 - 5 - [dataLength]
         /// 6 - 9 - [messageIntegrity]
         /// 10 - [prefferedCipherSuite]
-        /// 11 - [supportedCipherSuites.Length]
-        /// 12 - supportedCipherSuites.Count - [supportedCipherSuites]
-        /// 13+supportedCipherSuites.Count - end - [publicKey]
+        /// 11 - 18 - [supportedCipherSuites]
+        /// 19 - end - [publicKey]
         /// </remarks>
         /// <returns>
         ///     CLIENT_INIT message with properly generated header.
         /// </returns>
         public static byte[] CreateClientInitMessage(ICipherSuiteProvider supportedCipherSuites, ICipherSuite preferedCipherSuite, byte[] publicKey)
         {
-            List<byte> supportedCS = new()
-            {
-                // add preffered CipherSuites.
-                (byte)Enum.Parse(typeof(CipherSuite.CipherSuite), preferedCipherSuite.Name),
-
-                // add the lenght of the supportedCipherSuites.SupportedCipherSuites to distinct them from the message.
-                (byte)supportedCipherSuites.SupportedCipherSuites.Count
-            };
+            // add preffered CipherSuites.
+            byte prefferedCS = (byte)Enum.Parse(typeof(CipherSuite.CipherSuite), preferedCipherSuite.Name);
 
             // go through all supported CipherSuites.
+            ulong allCiphers = 0;
             foreach (var item in supportedCipherSuites.SupportedCipherSuites)
             {
                 byte targetCipherSuiteCode = (byte)Enum.Parse(typeof(CipherSuite.CipherSuite), item.Name);
-                supportedCS.Add(targetCipherSuiteCode);
+
+                allCiphers += targetCipherSuiteCode;
             }
 
-            var message = new byte[supportedCS.Count + publicKey.Length];
+            var message = new byte[9 + publicKey.Length];
 
-            // set prefferedCipherSuite, supportedCipherSuites.Length and supportedCipherSuites.
-            supportedCS.CopyTo(message);
+            // set prefferedCipherSuite.
+            message[0] = prefferedCS;
+
+            // set supportedCipherSuites.
+            _CopyToByteArrayUlong(allCiphers, message, 1);
 
             // set publicKey.
-            int offset = supportedCS.Count;
-            publicKey.CopyTo(message, offset);
+            publicKey.CopyTo(message, 9);
 
             return CreateMessage(1, CLIENT_INIT, message);
         }
@@ -283,10 +279,41 @@ namespace QuantoCrypt.Internal.Message
             return messageBody;
         }
 
+        public static ulong GetUlongValue(byte[] target, int start, int length)
+        {
+            var ulongPart = target.AsSpan().Slice(start, length);
+
+            ulong acc = 0;
+
+            foreach (var b in ulongPart)
+                acc = (acc * 0x100) + b;
+
+            return acc;
+        }
+
         private static byte[] _GetHash(byte[] body)
         {
             // No body integrity for version 0.1 :(
             return new byte[] { 127, 63, 31, 15 };
+        }
+
+        private static void _CopyToByteArrayUlong(ulong source, byte[] destination, int offset)
+        {
+            if (destination == null)
+                throw new ArgumentException("Destination array cannot be null");
+
+            // check if there is enough space for all the 4 bytes we will copy
+            if (destination.Length < offset + 4)
+                throw new ArgumentException("Not enough room in the destination array");
+
+            destination[offset] = (byte)(source >> 56); // 8th byte
+            destination[offset + 1] = (byte)(source >> 48); // 7th byte
+            destination[offset + 2] = (byte)(source >> 40); // 6th byte
+            destination[offset + 3] = (byte)(source >> 32); // 5th byte
+            destination[offset + 4] = (byte)(source >> 24); // four byte
+            destination[offset + 5] = (byte)(source >> 16); // third byte
+            destination[offset + 6] = (byte)(source >> 8); // second byte
+            destination[offset + 7] = (byte)source; // last byte is already in proper position
         }
 
         private static void _CopyToByteArray(int source, byte[] destination, int offset)
