@@ -22,7 +22,6 @@
 
   <ItemGroup>
     <Folder Include="CipherSuiteTests\" />
-    <Folder Include="Signature\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -30,6 +29,24 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="TestData\DILITHIUM\DILITHIUM5_AES.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="TestData\DILITHIUM\DILITHIUM3_AES.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="TestData\DILITHIUM\DILITHIUM2_AES.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="TestData\DILITHIUM\DILITHIUM2.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="TestData\DILITHIUM\DILITHIUM5.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="TestData\DILITHIUM\DILITHIUM3.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="TestData\KYBER\KYBER1024.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
