@@ -1,8 +1,8 @@
 ﻿using FluentAssertions;
 using QuantoCrypt.Infrastructure.Common;
-using QuantoCrypt.Infrastructure.Common.Random;
 using QuantoCrypt.Infrastructure.KEM;
 using QuantoCrypt.Internal.KEM.CRYSTALS.Kyber;
+using QuantoCrypt.Internal.Tests.Common.Random;
 using QuantoCrypt.Internal.Utilities;
 
 namespace QuantoCrypt.Internal.Tests.KEM

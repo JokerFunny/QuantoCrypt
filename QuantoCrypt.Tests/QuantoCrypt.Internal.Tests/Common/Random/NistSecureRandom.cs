@@ -1,12 +1,15 @@
-﻿using QuantoCrypt.Infrastructure.Common.BlockCipher;
+﻿using QuantoCrypt.Infrastructure.Common;
+using QuantoCrypt.Infrastructure.Common.BlockCipher;
 using QuantoCrypt.Infrastructure.Common.Parameters;
 
-namespace QuantoCrypt.Infrastructure.Common.Random
+namespace QuantoCrypt.Internal.Tests.Common.Random
 {
     /// <summary>
-    /// Implementation of the <see cref="SecureRandom"/> to sutisfy NIST requirements 
-    /// and be able to work with postquantum algorithms.
+    /// Implementation of the <see cref="SecureRandom"/> to sutisfy NIST requirements and be able to work with postquantum algorithms.
     /// </summary>
+    /// <remarks>
+    ///     Needed for tests to get the same outpur by seed.
+    /// </remarks>
     public class NistSecureRandom : SecureRandom
     {
         private readonly byte[] _rSeed;
@@ -18,7 +21,7 @@ namespace QuantoCrypt.Infrastructure.Common.Random
         /// Default ctor.
         /// </summary>
         /// <param name="seed">Target seed to be used.</param>
-        /// <param name="personalization">Targe personalization.</param>
+        /// <param name="personalization">Target personalization.</param>
         public NistSecureRandom(byte[] seed, byte[] personalization)
             : base(null)
         {

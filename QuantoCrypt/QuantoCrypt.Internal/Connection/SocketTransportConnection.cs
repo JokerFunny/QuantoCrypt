@@ -1,6 +1,5 @@
 ﻿using QuantoCrypt.Infrastructure.Connection;
 using System.Net.Sockets;
-using System.Text;
 
 namespace QuantoCrypt.Internal.Connection
 {
