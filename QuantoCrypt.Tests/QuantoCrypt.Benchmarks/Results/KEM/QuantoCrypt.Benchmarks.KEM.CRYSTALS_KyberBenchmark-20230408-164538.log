@@ -1,0 +1,1387 @@
+// Validating benchmarks:
+// ***** BenchmarkRunner: Start   *****
+// ***** Found 12 benchmark(s) in total *****
+// ***** Building 1 exe(s) in Parallel: Start   *****
+// start dotnet  restore /p:UseSharedCompilation=false /p:BuildInParallel=false /m:1 /p:Deterministic=true /p:Optimize=true in C:\Users\Danylo\Desktop\deeckLoooom\QuantoCrypt\QuantoCrypt.Tests\QuantoCrypt.Benchmarks\bin\Release\net7.0\f5c08e31-5fe7-4ac7-88c6-95db1eca9bc9
+// command took 1.1s and exited with 0
+// start dotnet  build -c Release --no-restore /p:UseSharedCompilation=false /p:BuildInParallel=false /m:1 /p:Deterministic=true /p:Optimize=true in C:\Users\Danylo\Desktop\deeckLoooom\QuantoCrypt\QuantoCrypt.Tests\QuantoCrypt.Benchmarks\bin\Release\net7.0\f5c08e31-5fe7-4ac7-88c6-95db1eca9bc9
+// command took 2.5s and exited with 0
+// ***** Done, took 00:00:03 (3.69 sec)   *****
+// Found 12 benchmarks:
+//   CRYSTALS_KyberBenchmark.BouncyCastleKYBERExecutor: DefaultJob [name=kyber1024, kyberParameters=Org.B(...)eters [58]]
+//   CRYSTALS_KyberBenchmark.KYBERExecutor: DefaultJob [name=kyber1024, kyberParameters=Quant(...)eters [55]]
+//   CRYSTALS_KyberBenchmark.BouncyCastleKYBERExecutor: DefaultJob [name=kyber1024-aes, kyberParameters=Org.B(...)eters [58]]
+//   CRYSTALS_KyberBenchmark.KYBERExecutor: DefaultJob [name=kyber1024-aes, kyberParameters=Quant(...)eters [55]]
+//   CRYSTALS_KyberBenchmark.BouncyCastleKYBERExecutor: DefaultJob [name=kyber512, kyberParameters=Org.B(...)eters [58]]
+//   CRYSTALS_KyberBenchmark.KYBERExecutor: DefaultJob [name=kyber512, kyberParameters=Quant(...)eters [55]]
+//   CRYSTALS_KyberBenchmark.BouncyCastleKYBERExecutor: DefaultJob [name=kyber512-aes, kyberParameters=Org.B(...)eters [58]]
+//   CRYSTALS_KyberBenchmark.KYBERExecutor: DefaultJob [name=kyber512-aes, kyberParameters=Quant(...)eters [55]]
+//   CRYSTALS_KyberBenchmark.BouncyCastleKYBERExecutor: DefaultJob [name=kyber768, kyberParameters=Org.B(...)eters [58]]
+//   CRYSTALS_KyberBenchmark.KYBERExecutor: DefaultJob [name=kyber768, kyberParameters=Quant(...)eters [55]]
+//   CRYSTALS_KyberBenchmark.BouncyCastleKYBERExecutor: DefaultJob [name=kyber768-aes, kyberParameters=Org.B(...)eters [58]]
+//   CRYSTALS_KyberBenchmark.KYBERExecutor: DefaultJob [name=kyber768-aes, kyberParameters=Quant(...)eters [55]]
+
+Setup power plan (GUID: 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c FriendlyName: High performance)
+// **************************
+// Benchmark: CRYSTALS_KyberBenchmark.BouncyCastleKYBERExecutor: DefaultJob [name=kyber1024, kyberParameters=Org.B(...)eters [58]]
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet f5c08e31-5fe7-4ac7-88c6-95db1eca9bc9.dll --anonymousPipes 1776 1332 --benchmarkName "QuantoCrypt.Benchmarks.KEM.CRYSTALS_KyberBenchmark.BouncyCastleKYBERExecutor(name: \"kyber1024\", kyberParameters: Org.BouncyCastle.Pqc.Crypto.Crystals.Kyber.KyberParameters)" --job Default --benchmarkId 0 in C:\Users\Danylo\Desktop\deeckLoooom\QuantoCrypt\QuantoCrypt.Tests\QuantoCrypt.Benchmarks\bin\Release\net7.0\f5c08e31-5fe7-4ac7-88c6-95db1eca9bc9\bin\Release\net7.0
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// Runtime=.NET 7.0.1 (7.0.122.56804), X64 RyuJIT AVX2
+// GC=Concurrent Workstation
+// HardwareIntrinsics=AVX2,AES,BMI1,BMI2,FMA,LZCNT,PCLMUL,POPCNT VectorSize=256
+// Job: DefaultJob
+
+OverheadJitting  1: 1 op, 174700.00 ns, 174.7000 us/op
+WorkloadJitting  1: 1 op, 64024700.00 ns, 64.0247 ms/op
+
+WorkloadPilot    1: 2 op, 33085100.00 ns, 16.5425 ms/op
+WorkloadPilot    2: 3 op, 48736400.00 ns, 16.2455 ms/op
+WorkloadPilot    3: 4 op, 61291500.00 ns, 15.3229 ms/op
+WorkloadPilot    4: 5 op, 55151900.00 ns, 11.0304 ms/op
+WorkloadPilot    5: 6 op, 59356700.00 ns, 9.8928 ms/op
+WorkloadPilot    6: 7 op, 49671200.00 ns, 7.0959 ms/op
+WorkloadPilot    7: 8 op, 52010600.00 ns, 6.5013 ms/op
+WorkloadPilot    8: 9 op, 54015800.00 ns, 6.0018 ms/op
+WorkloadPilot    9: 10 op, 63412400.00 ns, 6.3412 ms/op
+WorkloadPilot   10: 11 op, 48193100.00 ns, 4.3812 ms/op
+WorkloadPilot   11: 12 op, 44337600.00 ns, 3.6948 ms/op
+WorkloadPilot   12: 13 op, 46950600.00 ns, 3.6116 ms/op
+WorkloadPilot   13: 14 op, 52383300.00 ns, 3.7417 ms/op
+WorkloadPilot   14: 15 op, 54446600.00 ns, 3.6298 ms/op
+WorkloadPilot   15: 16 op, 59617700.00 ns, 3.7261 ms/op
+WorkloadPilot   16: 32 op, 114315800.00 ns, 3.5724 ms/op
+WorkloadPilot   17: 64 op, 229661000.00 ns, 3.5885 ms/op
+WorkloadPilot   18: 128 op, 460125800.00 ns, 3.5947 ms/op
+WorkloadPilot   19: 256 op, 908902000.00 ns, 3.5504 ms/op
+
+WorkloadWarmup   1: 256 op, 942360700.00 ns, 3.6811 ms/op
+WorkloadWarmup   2: 256 op, 922992500.00 ns, 3.6054 ms/op
+WorkloadWarmup   3: 256 op, 934635000.00 ns, 3.6509 ms/op
+WorkloadWarmup   4: 256 op, 928593300.00 ns, 3.6273 ms/op
+WorkloadWarmup   5: 256 op, 930769700.00 ns, 3.6358 ms/op
+WorkloadWarmup   6: 256 op, 928760600.00 ns, 3.6280 ms/op
+
+// BeforeActualRun
+WorkloadActual   1: 256 op, 927347900.00 ns, 3.6225 ms/op
+WorkloadActual   2: 256 op, 918726800.00 ns, 3.5888 ms/op
+WorkloadActual   3: 256 op, 899371500.00 ns, 3.5132 ms/op
+WorkloadActual   4: 256 op, 903034600.00 ns, 3.5275 ms/op
+WorkloadActual   5: 256 op, 900213600.00 ns, 3.5165 ms/op
+WorkloadActual   6: 256 op, 900642900.00 ns, 3.5181 ms/op
+WorkloadActual   7: 256 op, 930427500.00 ns, 3.6345 ms/op
+WorkloadActual   8: 256 op, 928147300.00 ns, 3.6256 ms/op
+WorkloadActual   9: 256 op, 900824800.00 ns, 3.5188 ms/op
+WorkloadActual  10: 256 op, 903302600.00 ns, 3.5285 ms/op
+WorkloadActual  11: 256 op, 926535800.00 ns, 3.6193 ms/op
+WorkloadActual  12: 256 op, 899286500.00 ns, 3.5128 ms/op
+WorkloadActual  13: 256 op, 918930300.00 ns, 3.5896 ms/op
+WorkloadActual  14: 256 op, 907447800.00 ns, 3.5447 ms/op
+WorkloadActual  15: 256 op, 922247200.00 ns, 3.6025 ms/op
+
+// AfterActualRun
+WorkloadResult   1: 256 op, 927347900.00 ns, 3.6225 ms/op
+WorkloadResult   2: 256 op, 918726800.00 ns, 3.5888 ms/op
+WorkloadResult   3: 256 op, 899371500.00 ns, 3.5132 ms/op
+WorkloadResult   4: 256 op, 903034600.00 ns, 3.5275 ms/op
+WorkloadResult   5: 256 op, 900213600.00 ns, 3.5165 ms/op
+WorkloadResult   6: 256 op, 900642900.00 ns, 3.5181 ms/op
+WorkloadResult   7: 256 op, 930427500.00 ns, 3.6345 ms/op
+WorkloadResult   8: 256 op, 928147300.00 ns, 3.6256 ms/op
+WorkloadResult   9: 256 op, 900824800.00 ns, 3.5188 ms/op
+WorkloadResult  10: 256 op, 903302600.00 ns, 3.5285 ms/op
+WorkloadResult  11: 256 op, 926535800.00 ns, 3.6193 ms/op
+WorkloadResult  12: 256 op, 899286500.00 ns, 3.5128 ms/op
+WorkloadResult  13: 256 op, 918930300.00 ns, 3.5896 ms/op
+WorkloadResult  14: 256 op, 907447800.00 ns, 3.5447 ms/op
+WorkloadResult  15: 256 op, 922247200.00 ns, 3.6025 ms/op
+// GC:  34 1 0 581400080 256
+// Threading:  0 0 256
+
+// AfterAll
+// Benchmark Process 38012 has exited with code 0.
+
+Mean = 3.564 ms, StdErr = 0.012 ms (0.35%), N = 15, StdDev = 0.048 ms
+Min = 3.513 ms, Q1 = 3.518 ms, Median = 3.545 ms, Q3 = 3.611 ms, Max = 3.634 ms
+IQR = 0.092 ms, LowerFence = 3.380 ms, UpperFence = 3.750 ms
+ConfidenceInterval = [3.513 ms; 3.616 ms] (CI 99.9%), Margin = 0.052 ms (1.45% of Mean)
+Skewness = 0.21, Kurtosis = 1.15, MValue = 2
+
+// ** Remained 11 (91.7%) benchmark(s) to run. Estimated finish 2023-04-08 16:50 (0h 4m from now) **
+Setup power plan (GUID: 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c FriendlyName: High performance)
+// **************************
+// Benchmark: CRYSTALS_KyberBenchmark.KYBERExecutor: DefaultJob [name=kyber1024, kyberParameters=Quant(...)eters [55]]
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet f5c08e31-5fe7-4ac7-88c6-95db1eca9bc9.dll --anonymousPipes 1412 1536 --benchmarkName "QuantoCrypt.Benchmarks.KEM.CRYSTALS_KyberBenchmark.KYBERExecutor(name: \"kyber1024\", kyberParameters: QuantoCrypt.Internal.KEM.CRYSTALS.Kyber.KyberParameters)" --job Default --benchmarkId 1 in C:\Users\Danylo\Desktop\deeckLoooom\QuantoCrypt\QuantoCrypt.Tests\QuantoCrypt.Benchmarks\bin\Release\net7.0\f5c08e31-5fe7-4ac7-88c6-95db1eca9bc9\bin\Release\net7.0
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// Runtime=.NET 7.0.1 (7.0.122.56804), X64 RyuJIT AVX2
+// GC=Concurrent Workstation
+// HardwareIntrinsics=AVX2,AES,BMI1,BMI2,FMA,LZCNT,PCLMUL,POPCNT VectorSize=256
+// Job: DefaultJob
+
+OverheadJitting  1: 1 op, 305000.00 ns, 305.0000 us/op
+WorkloadJitting  1: 1 op, 67396200.00 ns, 67.3962 ms/op
+
+WorkloadPilot    1: 2 op, 34572800.00 ns, 17.2864 ms/op
+WorkloadPilot    2: 3 op, 49587400.00 ns, 16.5291 ms/op
+WorkloadPilot    3: 4 op, 64775000.00 ns, 16.1938 ms/op
+WorkloadPilot    4: 5 op, 53690500.00 ns, 10.7381 ms/op
+WorkloadPilot    5: 6 op, 50186100.00 ns, 8.3643 ms/op
+WorkloadPilot    6: 7 op, 59090300.00 ns, 8.4415 ms/op
+WorkloadPilot    7: 8 op, 66635900.00 ns, 8.3295 ms/op
+WorkloadPilot    8: 9 op, 59889000.00 ns, 6.6543 ms/op
+WorkloadPilot    9: 10 op, 64721800.00 ns, 6.4722 ms/op
+WorkloadPilot   10: 11 op, 68694600.00 ns, 6.2450 ms/op
+WorkloadPilot   11: 12 op, 65206700.00 ns, 5.4339 ms/op
+WorkloadPilot   12: 13 op, 47942600.00 ns, 3.6879 ms/op
+WorkloadPilot   13: 14 op, 50088600.00 ns, 3.5778 ms/op
+WorkloadPilot   14: 15 op, 53526400.00 ns, 3.5684 ms/op
+WorkloadPilot   15: 16 op, 55582600.00 ns, 3.4739 ms/op
+WorkloadPilot   16: 32 op, 111663800.00 ns, 3.4895 ms/op
+WorkloadPilot   17: 64 op, 228406900.00 ns, 3.5689 ms/op
+WorkloadPilot   18: 128 op, 450831200.00 ns, 3.5221 ms/op
+WorkloadPilot   19: 256 op, 893433500.00 ns, 3.4900 ms/op
+
+WorkloadWarmup   1: 256 op, 905639600.00 ns, 3.5377 ms/op
+WorkloadWarmup   2: 256 op, 895675500.00 ns, 3.4987 ms/op
+WorkloadWarmup   3: 256 op, 893724000.00 ns, 3.4911 ms/op
+WorkloadWarmup   4: 256 op, 920322600.00 ns, 3.5950 ms/op
+WorkloadWarmup   5: 256 op, 924142600.00 ns, 3.6099 ms/op
+WorkloadWarmup   6: 256 op, 924120800.00 ns, 3.6098 ms/op
+WorkloadWarmup   7: 256 op, 920655200.00 ns, 3.5963 ms/op
+WorkloadWarmup   8: 256 op, 891690700.00 ns, 3.4832 ms/op
+WorkloadWarmup   9: 256 op, 906362000.00 ns, 3.5405 ms/op
+WorkloadWarmup  10: 256 op, 895165900.00 ns, 3.4967 ms/op
+
+// BeforeActualRun
+WorkloadActual   1: 256 op, 894454700.00 ns, 3.4940 ms/op
+WorkloadActual   2: 256 op, 917489100.00 ns, 3.5839 ms/op
+WorkloadActual   3: 256 op, 907879000.00 ns, 3.5464 ms/op
+WorkloadActual   4: 256 op, 925664100.00 ns, 3.6159 ms/op
+WorkloadActual   5: 256 op, 918980800.00 ns, 3.5898 ms/op
+WorkloadActual   6: 256 op, 894397500.00 ns, 3.4937 ms/op
+WorkloadActual   7: 256 op, 894514400.00 ns, 3.4942 ms/op
+WorkloadActual   8: 256 op, 894359900.00 ns, 3.4936 ms/op
+WorkloadActual   9: 256 op, 901942800.00 ns, 3.5232 ms/op
+WorkloadActual  10: 256 op, 912283000.00 ns, 3.5636 ms/op
+WorkloadActual  11: 256 op, 912279900.00 ns, 3.5636 ms/op
+WorkloadActual  12: 256 op, 918684300.00 ns, 3.5886 ms/op
+WorkloadActual  13: 256 op, 910322500.00 ns, 3.5559 ms/op
+WorkloadActual  14: 256 op, 926868400.00 ns, 3.6206 ms/op
+WorkloadActual  15: 256 op, 922514200.00 ns, 3.6036 ms/op
+
+// AfterActualRun
+WorkloadResult   1: 256 op, 894454700.00 ns, 3.4940 ms/op
+WorkloadResult   2: 256 op, 917489100.00 ns, 3.5839 ms/op
+WorkloadResult   3: 256 op, 907879000.00 ns, 3.5464 ms/op
+WorkloadResult   4: 256 op, 925664100.00 ns, 3.6159 ms/op
+WorkloadResult   5: 256 op, 918980800.00 ns, 3.5898 ms/op
+WorkloadResult   6: 256 op, 894397500.00 ns, 3.4937 ms/op
+WorkloadResult   7: 256 op, 894514400.00 ns, 3.4942 ms/op
+WorkloadResult   8: 256 op, 894359900.00 ns, 3.4936 ms/op
+WorkloadResult   9: 256 op, 901942800.00 ns, 3.5232 ms/op
+WorkloadResult  10: 256 op, 912283000.00 ns, 3.5636 ms/op
+WorkloadResult  11: 256 op, 912279900.00 ns, 3.5636 ms/op
+WorkloadResult  12: 256 op, 918684300.00 ns, 3.5886 ms/op
+WorkloadResult  13: 256 op, 910322500.00 ns, 3.5559 ms/op
+WorkloadResult  14: 256 op, 926868400.00 ns, 3.6206 ms/op
+WorkloadResult  15: 256 op, 922514200.00 ns, 3.6036 ms/op
+// GC:  34 1 0 580353000 256
+// Threading:  0 0 256
+
+// AfterAll
+// Benchmark Process 7600 has exited with code 0.
+
+Mean = 3.555 ms, StdErr = 0.012 ms (0.33%), N = 15, StdDev = 0.046 ms
+Min = 3.494 ms, Q1 = 3.509 ms, Median = 3.564 ms, Q3 = 3.589 ms, Max = 3.621 ms
+IQR = 0.080 ms, LowerFence = 3.388 ms, UpperFence = 3.710 ms
+ConfidenceInterval = [3.506 ms; 3.605 ms] (CI 99.9%), Margin = 0.049 ms (1.39% of Mean)
+Skewness = -0.17, Kurtosis = 1.46, MValue = 2
+
+// ** Remained 10 (83.3%) benchmark(s) to run. Estimated finish 2023-04-08 16:50 (0h 4m from now) **
+Setup power plan (GUID: 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c FriendlyName: High performance)
+// **************************
+// Benchmark: CRYSTALS_KyberBenchmark.BouncyCastleKYBERExecutor: DefaultJob [name=kyber1024-aes, kyberParameters=Org.B(...)eters [58]]
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet f5c08e31-5fe7-4ac7-88c6-95db1eca9bc9.dll --anonymousPipes 1836 1832 --benchmarkName "QuantoCrypt.Benchmarks.KEM.CRYSTALS_KyberBenchmark.BouncyCastleKYBERExecutor(name: \"kyber1024-aes\", kyberParameters: Org.BouncyCastle.Pqc.Crypto.Crystals.Kyber.KyberParameters)" --job Default --benchmarkId 2 in C:\Users\Danylo\Desktop\deeckLoooom\QuantoCrypt\QuantoCrypt.Tests\QuantoCrypt.Benchmarks\bin\Release\net7.0\f5c08e31-5fe7-4ac7-88c6-95db1eca9bc9\bin\Release\net7.0
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// Runtime=.NET 7.0.1 (7.0.122.56804), X64 RyuJIT AVX2
+// GC=Concurrent Workstation
+// HardwareIntrinsics=AVX2,AES,BMI1,BMI2,FMA,LZCNT,PCLMUL,POPCNT VectorSize=256
+// Job: DefaultJob
+
+OverheadJitting  1: 1 op, 172200.00 ns, 172.2000 us/op
+WorkloadJitting  1: 1 op, 70001100.00 ns, 70.0011 ms/op
+
+WorkloadPilot    1: 2 op, 43488600.00 ns, 21.7443 ms/op
+WorkloadPilot    2: 3 op, 65621400.00 ns, 21.8738 ms/op
+WorkloadPilot    3: 4 op, 70659200.00 ns, 17.6648 ms/op
+WorkloadPilot    4: 5 op, 53236200.00 ns, 10.6472 ms/op
+WorkloadPilot    5: 6 op, 60617900.00 ns, 10.1030 ms/op
+WorkloadPilot    6: 7 op, 57411900.00 ns, 8.2017 ms/op
+WorkloadPilot    7: 8 op, 66975500.00 ns, 8.3719 ms/op
+WorkloadPilot    8: 9 op, 69510100.00 ns, 7.7233 ms/op
+WorkloadPilot    9: 10 op, 72502400.00 ns, 7.2502 ms/op
+WorkloadPilot   10: 11 op, 58449100.00 ns, 5.3136 ms/op
+WorkloadPilot   11: 12 op, 62916500.00 ns, 5.2430 ms/op
+WorkloadPilot   12: 13 op, 68077300.00 ns, 5.2367 ms/op
+WorkloadPilot   13: 14 op, 73480700.00 ns, 5.2486 ms/op
+WorkloadPilot   14: 15 op, 77522600.00 ns, 5.1682 ms/op
+WorkloadPilot   15: 16 op, 82716200.00 ns, 5.1698 ms/op
+WorkloadPilot   16: 32 op, 163279400.00 ns, 5.1025 ms/op
+WorkloadPilot   17: 64 op, 331928800.00 ns, 5.1864 ms/op
+WorkloadPilot   18: 128 op, 659352400.00 ns, 5.1512 ms/op
+
+WorkloadWarmup   1: 128 op, 662755700.00 ns, 5.1778 ms/op
+WorkloadWarmup   2: 128 op, 662056900.00 ns, 5.1723 ms/op
+WorkloadWarmup   3: 128 op, 661127500.00 ns, 5.1651 ms/op
+WorkloadWarmup   4: 128 op, 660425400.00 ns, 5.1596 ms/op
+WorkloadWarmup   5: 128 op, 665625100.00 ns, 5.2002 ms/op
+WorkloadWarmup   6: 128 op, 652062300.00 ns, 5.0942 ms/op
+WorkloadWarmup   7: 128 op, 656865300.00 ns, 5.1318 ms/op
+WorkloadWarmup   8: 128 op, 685137200.00 ns, 5.3526 ms/op
+WorkloadWarmup   9: 128 op, 665581400.00 ns, 5.1999 ms/op
+
+// BeforeActualRun
+WorkloadActual   1: 128 op, 646811400.00 ns, 5.0532 ms/op
+WorkloadActual   2: 128 op, 646817300.00 ns, 5.0533 ms/op
+WorkloadActual   3: 128 op, 644666500.00 ns, 5.0365 ms/op
+WorkloadActual   4: 128 op, 646169900.00 ns, 5.0482 ms/op
+WorkloadActual   5: 128 op, 648045100.00 ns, 5.0629 ms/op
+WorkloadActual   6: 128 op, 654132500.00 ns, 5.1104 ms/op
+WorkloadActual   7: 128 op, 650640000.00 ns, 5.0831 ms/op
+WorkloadActual   8: 128 op, 659402000.00 ns, 5.1516 ms/op
+WorkloadActual   9: 128 op, 647434600.00 ns, 5.0581 ms/op
+WorkloadActual  10: 128 op, 659663600.00 ns, 5.1536 ms/op
+WorkloadActual  11: 128 op, 664423300.00 ns, 5.1908 ms/op
+WorkloadActual  12: 128 op, 663821400.00 ns, 5.1861 ms/op
+WorkloadActual  13: 128 op, 664859200.00 ns, 5.1942 ms/op
+WorkloadActual  14: 128 op, 650246000.00 ns, 5.0800 ms/op
+WorkloadActual  15: 128 op, 663469400.00 ns, 5.1834 ms/op
+
+// AfterActualRun
+WorkloadResult   1: 128 op, 646811400.00 ns, 5.0532 ms/op
+WorkloadResult   2: 128 op, 646817300.00 ns, 5.0533 ms/op
+WorkloadResult   3: 128 op, 644666500.00 ns, 5.0365 ms/op
+WorkloadResult   4: 128 op, 646169900.00 ns, 5.0482 ms/op
+WorkloadResult   5: 128 op, 648045100.00 ns, 5.0629 ms/op
+WorkloadResult   6: 128 op, 654132500.00 ns, 5.1104 ms/op
+WorkloadResult   7: 128 op, 650640000.00 ns, 5.0831 ms/op
+WorkloadResult   8: 128 op, 659402000.00 ns, 5.1516 ms/op
+WorkloadResult   9: 128 op, 647434600.00 ns, 5.0581 ms/op
+WorkloadResult  10: 128 op, 659663600.00 ns, 5.1536 ms/op
+WorkloadResult  11: 128 op, 664423300.00 ns, 5.1908 ms/op
+WorkloadResult  12: 128 op, 663821400.00 ns, 5.1861 ms/op
+WorkloadResult  13: 128 op, 664859200.00 ns, 5.1942 ms/op
+WorkloadResult  14: 128 op, 650246000.00 ns, 5.0800 ms/op
+WorkloadResult  15: 128 op, 663469400.00 ns, 5.1834 ms/op
+// GC:  27 1 0 454772632 128
+// Threading:  0 0 128
+
+// AfterAll
+// Benchmark Process 41248 has exited with code 0.
+
+Mean = 5.110 ms, StdErr = 0.016 ms (0.30%), N = 15, StdDev = 0.060 ms
+Min = 5.036 ms, Q1 = 5.056 ms, Median = 5.083 ms, Q3 = 5.168 ms, Max = 5.194 ms
+IQR = 0.113 ms, LowerFence = 4.886 ms, UpperFence = 5.338 ms
+ConfidenceInterval = [5.045 ms; 5.174 ms] (CI 99.9%), Margin = 0.064 ms (1.26% of Mean)
+Skewness = 0.27, Kurtosis = 1.23, MValue = 2
+
+// ** Remained 9 (75.0%) benchmark(s) to run. Estimated finish 2023-04-08 16:50 (0h 3m from now) **
+Setup power plan (GUID: 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c FriendlyName: High performance)
+// **************************
+// Benchmark: CRYSTALS_KyberBenchmark.KYBERExecutor: DefaultJob [name=kyber1024-aes, kyberParameters=Quant(...)eters [55]]
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet f5c08e31-5fe7-4ac7-88c6-95db1eca9bc9.dll --anonymousPipes 824 820 --benchmarkName "QuantoCrypt.Benchmarks.KEM.CRYSTALS_KyberBenchmark.KYBERExecutor(name: \"kyber1024-aes\", kyberParameters: QuantoCrypt.Internal.KEM.CRYSTALS.Kyber.KyberParameters)" --job Default --benchmarkId 3 in C:\Users\Danylo\Desktop\deeckLoooom\QuantoCrypt\QuantoCrypt.Tests\QuantoCrypt.Benchmarks\bin\Release\net7.0\f5c08e31-5fe7-4ac7-88c6-95db1eca9bc9\bin\Release\net7.0
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// Runtime=.NET 7.0.1 (7.0.122.56804), X64 RyuJIT AVX2
+// GC=Concurrent Workstation
+// HardwareIntrinsics=AVX2,AES,BMI1,BMI2,FMA,LZCNT,PCLMUL,POPCNT VectorSize=256
+// Job: DefaultJob
+
+OverheadJitting  1: 1 op, 223200.00 ns, 223.2000 us/op
+WorkloadJitting  1: 1 op, 62393300.00 ns, 62.3933 ms/op
+
+WorkloadPilot    1: 2 op, 31499100.00 ns, 15.7496 ms/op
+WorkloadPilot    2: 3 op, 47170500.00 ns, 15.7235 ms/op
+WorkloadPilot    3: 4 op, 60408800.00 ns, 15.1022 ms/op
+WorkloadPilot    4: 5 op, 80186500.00 ns, 16.0373 ms/op
+WorkloadPilot    5: 6 op, 91636500.00 ns, 15.2728 ms/op
+WorkloadPilot    6: 7 op, 98998700.00 ns, 14.1427 ms/op
+WorkloadPilot    7: 8 op, 67330600.00 ns, 8.4163 ms/op
+WorkloadPilot    8: 9 op, 63738600.00 ns, 7.0821 ms/op
+WorkloadPilot    9: 10 op, 38694700.00 ns, 3.8695 ms/op
+WorkloadPilot   10: 11 op, 40453900.00 ns, 3.6776 ms/op
+WorkloadPilot   11: 12 op, 42759000.00 ns, 3.5633 ms/op
+WorkloadPilot   12: 13 op, 45531400.00 ns, 3.5024 ms/op
+WorkloadPilot   13: 14 op, 48834800.00 ns, 3.4882 ms/op
+WorkloadPilot   14: 15 op, 51628400.00 ns, 3.4419 ms/op
+WorkloadPilot   15: 16 op, 54904100.00 ns, 3.4315 ms/op
+WorkloadPilot   16: 32 op, 109869600.00 ns, 3.4334 ms/op
+WorkloadPilot   17: 64 op, 223629900.00 ns, 3.4942 ms/op
+WorkloadPilot   18: 128 op, 442397700.00 ns, 3.4562 ms/op
+WorkloadPilot   19: 256 op, 882027200.00 ns, 3.4454 ms/op
+
+WorkloadWarmup   1: 256 op, 873729300.00 ns, 3.4130 ms/op
+WorkloadWarmup   2: 256 op, 876559000.00 ns, 3.4241 ms/op
+WorkloadWarmup   3: 256 op, 893371900.00 ns, 3.4897 ms/op
+WorkloadWarmup   4: 256 op, 881101300.00 ns, 3.4418 ms/op
+WorkloadWarmup   5: 256 op, 885697000.00 ns, 3.4598 ms/op
+WorkloadWarmup   6: 256 op, 902348600.00 ns, 3.5248 ms/op
+WorkloadWarmup   7: 256 op, 905562100.00 ns, 3.5374 ms/op
+WorkloadWarmup   8: 256 op, 903481300.00 ns, 3.5292 ms/op
+
+// BeforeActualRun
+WorkloadActual   1: 256 op, 875244300.00 ns, 3.4189 ms/op
+WorkloadActual   2: 256 op, 881186800.00 ns, 3.4421 ms/op
+WorkloadActual   3: 256 op, 877589700.00 ns, 3.4281 ms/op
+WorkloadActual   4: 256 op, 886852100.00 ns, 3.4643 ms/op
+WorkloadActual   5: 256 op, 881251400.00 ns, 3.4424 ms/op
+WorkloadActual   6: 256 op, 890258100.00 ns, 3.4776 ms/op
+WorkloadActual   7: 256 op, 887757500.00 ns, 3.4678 ms/op
+WorkloadActual   8: 256 op, 913071400.00 ns, 3.5667 ms/op
+WorkloadActual   9: 256 op, 906976900.00 ns, 3.5429 ms/op
+WorkloadActual  10: 256 op, 896958500.00 ns, 3.5037 ms/op
+WorkloadActual  11: 256 op, 900529100.00 ns, 3.5177 ms/op
+WorkloadActual  12: 256 op, 902166000.00 ns, 3.5241 ms/op
+WorkloadActual  13: 256 op, 882410700.00 ns, 3.4469 ms/op
+WorkloadActual  14: 256 op, 905125000.00 ns, 3.5356 ms/op
+WorkloadActual  15: 256 op, 886037700.00 ns, 3.4611 ms/op
+
+// AfterActualRun
+WorkloadResult   1: 256 op, 875244300.00 ns, 3.4189 ms/op
+WorkloadResult   2: 256 op, 881186800.00 ns, 3.4421 ms/op
+WorkloadResult   3: 256 op, 877589700.00 ns, 3.4281 ms/op
+WorkloadResult   4: 256 op, 886852100.00 ns, 3.4643 ms/op
+WorkloadResult   5: 256 op, 881251400.00 ns, 3.4424 ms/op
+WorkloadResult   6: 256 op, 890258100.00 ns, 3.4776 ms/op
+WorkloadResult   7: 256 op, 887757500.00 ns, 3.4678 ms/op
+WorkloadResult   8: 256 op, 913071400.00 ns, 3.5667 ms/op
+WorkloadResult   9: 256 op, 906976900.00 ns, 3.5429 ms/op
+WorkloadResult  10: 256 op, 896958500.00 ns, 3.5037 ms/op
+WorkloadResult  11: 256 op, 900529100.00 ns, 3.5177 ms/op
+WorkloadResult  12: 256 op, 902166000.00 ns, 3.5241 ms/op
+WorkloadResult  13: 256 op, 882410700.00 ns, 3.4469 ms/op
+WorkloadResult  14: 256 op, 905125000.00 ns, 3.5356 ms/op
+WorkloadResult  15: 256 op, 886037700.00 ns, 3.4611 ms/op
+// GC:  44 2 0 738694440 256
+// Threading:  0 0 256
+
+// AfterAll
+// Benchmark Process 28312 has exited with code 0.
+
+Mean = 3.483 ms, StdErr = 0.012 ms (0.34%), N = 15, StdDev = 0.046 ms
+Min = 3.419 ms, Q1 = 3.445 ms, Median = 3.468 ms, Q3 = 3.521 ms, Max = 3.567 ms
+IQR = 0.076 ms, LowerFence = 3.330 ms, UpperFence = 3.635 ms
+ConfidenceInterval = [3.434 ms; 3.532 ms] (CI 99.9%), Margin = 0.049 ms (1.41% of Mean)
+Skewness = 0.32, Kurtosis = 1.62, MValue = 2
+
+// ** Remained 8 (66.7%) benchmark(s) to run. Estimated finish 2023-04-08 16:50 (0h 3m from now) **
+Setup power plan (GUID: 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c FriendlyName: High performance)
+// **************************
+// Benchmark: CRYSTALS_KyberBenchmark.BouncyCastleKYBERExecutor: DefaultJob [name=kyber512, kyberParameters=Org.B(...)eters [58]]
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet f5c08e31-5fe7-4ac7-88c6-95db1eca9bc9.dll --anonymousPipes 1788 596 --benchmarkName "QuantoCrypt.Benchmarks.KEM.CRYSTALS_KyberBenchmark.BouncyCastleKYBERExecutor(name: \"kyber512\", kyberParameters: Org.BouncyCastle.Pqc.Crypto.Crystals.Kyber.KyberParameters)" --job Default --benchmarkId 4 in C:\Users\Danylo\Desktop\deeckLoooom\QuantoCrypt\QuantoCrypt.Tests\QuantoCrypt.Benchmarks\bin\Release\net7.0\f5c08e31-5fe7-4ac7-88c6-95db1eca9bc9\bin\Release\net7.0
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// Runtime=.NET 7.0.1 (7.0.122.56804), X64 RyuJIT AVX2
+// GC=Concurrent Workstation
+// HardwareIntrinsics=AVX2,AES,BMI1,BMI2,FMA,LZCNT,PCLMUL,POPCNT VectorSize=256
+// Job: DefaultJob
+
+OverheadJitting  1: 1 op, 176600.00 ns, 176.6000 us/op
+WorkloadJitting  1: 1 op, 53460300.00 ns, 53.4603 ms/op
+
+WorkloadPilot    1: 2 op, 15967100.00 ns, 7.9836 ms/op
+WorkloadPilot    2: 3 op, 23181000.00 ns, 7.7270 ms/op
+WorkloadPilot    3: 4 op, 30597100.00 ns, 7.6493 ms/op
+WorkloadPilot    4: 5 op, 36988400.00 ns, 7.3977 ms/op
+WorkloadPilot    5: 6 op, 46436600.00 ns, 7.7394 ms/op
+WorkloadPilot    6: 7 op, 46885000.00 ns, 6.6979 ms/op
+WorkloadPilot    7: 8 op, 42728200.00 ns, 5.3410 ms/op
+WorkloadPilot    8: 9 op, 47260000.00 ns, 5.2511 ms/op
+WorkloadPilot    9: 10 op, 49848200.00 ns, 4.9848 ms/op
+WorkloadPilot   10: 11 op, 55222800.00 ns, 5.0203 ms/op
+WorkloadPilot   11: 12 op, 52563300.00 ns, 4.3803 ms/op
+WorkloadPilot   12: 13 op, 50417700.00 ns, 3.8783 ms/op
+WorkloadPilot   13: 14 op, 42684000.00 ns, 3.0489 ms/op
+WorkloadPilot   14: 15 op, 31716300.00 ns, 2.1144 ms/op
+WorkloadPilot   15: 16 op, 33139500.00 ns, 2.0712 ms/op
+WorkloadPilot   16: 32 op, 62883400.00 ns, 1.9651 ms/op
+WorkloadPilot   17: 64 op, 121814800.00 ns, 1.9034 ms/op
+WorkloadPilot   18: 128 op, 245831100.00 ns, 1.9206 ms/op
+WorkloadPilot   19: 256 op, 494257100.00 ns, 1.9307 ms/op
+WorkloadPilot   20: 512 op, 982199600.00 ns, 1.9184 ms/op
+
+WorkloadWarmup   1: 512 op, 978224800.00 ns, 1.9106 ms/op
+WorkloadWarmup   2: 512 op, 983714900.00 ns, 1.9213 ms/op
+WorkloadWarmup   3: 512 op, 987392700.00 ns, 1.9285 ms/op
+WorkloadWarmup   4: 512 op, 998547900.00 ns, 1.9503 ms/op
+WorkloadWarmup   5: 512 op, 995837200.00 ns, 1.9450 ms/op
+WorkloadWarmup   6: 512 op, 971791200.00 ns, 1.8980 ms/op
+WorkloadWarmup   7: 512 op, 999916600.00 ns, 1.9530 ms/op
+WorkloadWarmup   8: 512 op, 974324800.00 ns, 1.9030 ms/op
+
+// BeforeActualRun
+WorkloadActual   1: 512 op, 966637800.00 ns, 1.8880 ms/op
+WorkloadActual   2: 512 op, 968028400.00 ns, 1.8907 ms/op
+WorkloadActual   3: 512 op, 975779500.00 ns, 1.9058 ms/op
+WorkloadActual   4: 512 op, 972025500.00 ns, 1.8985 ms/op
+WorkloadActual   5: 512 op, 974781300.00 ns, 1.9039 ms/op
+WorkloadActual   6: 512 op, 968413500.00 ns, 1.8914 ms/op
+WorkloadActual   7: 512 op, 975184700.00 ns, 1.9047 ms/op
+WorkloadActual   8: 512 op, 989996100.00 ns, 1.9336 ms/op
+WorkloadActual   9: 512 op, 983881700.00 ns, 1.9216 ms/op
+WorkloadActual  10: 512 op, 987791900.00 ns, 1.9293 ms/op
+WorkloadActual  11: 512 op, 982230100.00 ns, 1.9184 ms/op
+WorkloadActual  12: 512 op, 982880300.00 ns, 1.9197 ms/op
+WorkloadActual  13: 512 op, 981916900.00 ns, 1.9178 ms/op
+WorkloadActual  14: 512 op, 1003680400.00 ns, 1.9603 ms/op
+WorkloadActual  15: 512 op, 988195800.00 ns, 1.9301 ms/op
+
+// AfterActualRun
+WorkloadResult   1: 512 op, 966637800.00 ns, 1.8880 ms/op
+WorkloadResult   2: 512 op, 968028400.00 ns, 1.8907 ms/op
+WorkloadResult   3: 512 op, 975779500.00 ns, 1.9058 ms/op
+WorkloadResult   4: 512 op, 972025500.00 ns, 1.8985 ms/op
+WorkloadResult   5: 512 op, 974781300.00 ns, 1.9039 ms/op
+WorkloadResult   6: 512 op, 968413500.00 ns, 1.8914 ms/op
+WorkloadResult   7: 512 op, 975184700.00 ns, 1.9047 ms/op
+WorkloadResult   8: 512 op, 989996100.00 ns, 1.9336 ms/op
+WorkloadResult   9: 512 op, 983881700.00 ns, 1.9216 ms/op
+WorkloadResult  10: 512 op, 987791900.00 ns, 1.9293 ms/op
+WorkloadResult  11: 512 op, 982230100.00 ns, 1.9184 ms/op
+WorkloadResult  12: 512 op, 982880300.00 ns, 1.9197 ms/op
+WorkloadResult  13: 512 op, 981916900.00 ns, 1.9178 ms/op
+WorkloadResult  14: 512 op, 1003680400.00 ns, 1.9603 ms/op
+WorkloadResult  15: 512 op, 988195800.00 ns, 1.9301 ms/op
+// GC:  52 1 0 879423072 512
+// Threading:  0 0 512
+
+// AfterAll
+// Benchmark Process 16492 has exited with code 0.
+
+Mean = 1.914 ms, StdErr = 0.005 ms (0.26%), N = 15, StdDev = 0.020 ms
+Min = 1.888 ms, Q1 = 1.901 ms, Median = 1.918 ms, Q3 = 1.925 ms, Max = 1.960 ms
+IQR = 0.024 ms, LowerFence = 1.865 ms, UpperFence = 1.962 ms
+ConfidenceInterval = [1.893 ms; 1.935 ms] (CI 99.9%), Margin = 0.021 ms (1.09% of Mean)
+Skewness = 0.56, Kurtosis = 2.67, MValue = 2
+
+// ** Remained 7 (58.3%) benchmark(s) to run. Estimated finish 2023-04-08 16:50 (0h 2m from now) **
+Setup power plan (GUID: 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c FriendlyName: High performance)
+// **************************
+// Benchmark: CRYSTALS_KyberBenchmark.KYBERExecutor: DefaultJob [name=kyber512, kyberParameters=Quant(...)eters [55]]
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet f5c08e31-5fe7-4ac7-88c6-95db1eca9bc9.dll --anonymousPipes 1896 1892 --benchmarkName "QuantoCrypt.Benchmarks.KEM.CRYSTALS_KyberBenchmark.KYBERExecutor(name: \"kyber512\", kyberParameters: QuantoCrypt.Internal.KEM.CRYSTALS.Kyber.KyberParameters)" --job Default --benchmarkId 5 in C:\Users\Danylo\Desktop\deeckLoooom\QuantoCrypt\QuantoCrypt.Tests\QuantoCrypt.Benchmarks\bin\Release\net7.0\f5c08e31-5fe7-4ac7-88c6-95db1eca9bc9\bin\Release\net7.0
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// Runtime=.NET 7.0.1 (7.0.122.56804), X64 RyuJIT AVX2
+// GC=Concurrent Workstation
+// HardwareIntrinsics=AVX2,AES,BMI1,BMI2,FMA,LZCNT,PCLMUL,POPCNT VectorSize=256
+// Job: DefaultJob
+
+OverheadJitting  1: 1 op, 174600.00 ns, 174.6000 us/op
+WorkloadJitting  1: 1 op, 53303300.00 ns, 53.3033 ms/op
+
+WorkloadPilot    1: 2 op, 16772500.00 ns, 8.3863 ms/op
+WorkloadPilot    2: 3 op, 24322700.00 ns, 8.1076 ms/op
+WorkloadPilot    3: 4 op, 30944700.00 ns, 7.7362 ms/op
+WorkloadPilot    4: 5 op, 39505800.00 ns, 7.9012 ms/op
+WorkloadPilot    5: 6 op, 47638700.00 ns, 7.9398 ms/op
+WorkloadPilot    6: 7 op, 57347000.00 ns, 8.1924 ms/op
+WorkloadPilot    7: 8 op, 61141500.00 ns, 7.6427 ms/op
+WorkloadPilot    8: 9 op, 49218200.00 ns, 5.4687 ms/op
+WorkloadPilot    9: 10 op, 54214700.00 ns, 5.4215 ms/op
+WorkloadPilot   10: 11 op, 50975400.00 ns, 4.6341 ms/op
+WorkloadPilot   11: 12 op, 53967700.00 ns, 4.4973 ms/op
+WorkloadPilot   12: 13 op, 54858000.00 ns, 4.2198 ms/op
+WorkloadPilot   13: 14 op, 58512500.00 ns, 4.1795 ms/op
+WorkloadPilot   14: 15 op, 48079500.00 ns, 3.2053 ms/op
+WorkloadPilot   15: 16 op, 33141500.00 ns, 2.0713 ms/op
+WorkloadPilot   16: 32 op, 62372200.00 ns, 1.9491 ms/op
+WorkloadPilot   17: 64 op, 123997500.00 ns, 1.9375 ms/op
+WorkloadPilot   18: 128 op, 247730100.00 ns, 1.9354 ms/op
+WorkloadPilot   19: 256 op, 499005500.00 ns, 1.9492 ms/op
+WorkloadPilot   20: 512 op, 975916300.00 ns, 1.9061 ms/op
+
+WorkloadWarmup   1: 512 op, 972496100.00 ns, 1.8994 ms/op
+WorkloadWarmup   2: 512 op, 1001481200.00 ns, 1.9560 ms/op
+WorkloadWarmup   3: 512 op, 1013172000.00 ns, 1.9789 ms/op
+WorkloadWarmup   4: 512 op, 1005637500.00 ns, 1.9641 ms/op
+WorkloadWarmup   5: 512 op, 993992500.00 ns, 1.9414 ms/op
+WorkloadWarmup   6: 512 op, 1004872100.00 ns, 1.9626 ms/op
+WorkloadWarmup   7: 512 op, 1000112800.00 ns, 1.9533 ms/op
+
+// BeforeActualRun
+WorkloadActual   1: 512 op, 977042300.00 ns, 1.9083 ms/op
+WorkloadActual   2: 512 op, 972669500.00 ns, 1.8997 ms/op
+WorkloadActual   3: 512 op, 1000537000.00 ns, 1.9542 ms/op
+WorkloadActual   4: 512 op, 988163400.00 ns, 1.9300 ms/op
+WorkloadActual   5: 512 op, 969027200.00 ns, 1.8926 ms/op
+WorkloadActual   6: 512 op, 973426300.00 ns, 1.9012 ms/op
+WorkloadActual   7: 512 op, 1002687800.00 ns, 1.9584 ms/op
+WorkloadActual   8: 512 op, 995406700.00 ns, 1.9442 ms/op
+WorkloadActual   9: 512 op, 985235600.00 ns, 1.9243 ms/op
+WorkloadActual  10: 512 op, 988680800.00 ns, 1.9310 ms/op
+WorkloadActual  11: 512 op, 987900700.00 ns, 1.9295 ms/op
+WorkloadActual  12: 512 op, 987870900.00 ns, 1.9294 ms/op
+WorkloadActual  13: 512 op, 989040800.00 ns, 1.9317 ms/op
+WorkloadActual  14: 512 op, 1009886100.00 ns, 1.9724 ms/op
+WorkloadActual  15: 512 op, 1009214300.00 ns, 1.9711 ms/op
+
+// AfterActualRun
+WorkloadResult   1: 512 op, 977042300.00 ns, 1.9083 ms/op
+WorkloadResult   2: 512 op, 972669500.00 ns, 1.8997 ms/op
+WorkloadResult   3: 512 op, 1000537000.00 ns, 1.9542 ms/op
+WorkloadResult   4: 512 op, 988163400.00 ns, 1.9300 ms/op
+WorkloadResult   5: 512 op, 969027200.00 ns, 1.8926 ms/op
+WorkloadResult   6: 512 op, 973426300.00 ns, 1.9012 ms/op
+WorkloadResult   7: 512 op, 1002687800.00 ns, 1.9584 ms/op
+WorkloadResult   8: 512 op, 995406700.00 ns, 1.9442 ms/op
+WorkloadResult   9: 512 op, 985235600.00 ns, 1.9243 ms/op
+WorkloadResult  10: 512 op, 988680800.00 ns, 1.9310 ms/op
+WorkloadResult  11: 512 op, 987900700.00 ns, 1.9295 ms/op
+WorkloadResult  12: 512 op, 987870900.00 ns, 1.9294 ms/op
+WorkloadResult  13: 512 op, 989040800.00 ns, 1.9317 ms/op
+WorkloadResult  14: 512 op, 1009886100.00 ns, 1.9724 ms/op
+WorkloadResult  15: 512 op, 1009214300.00 ns, 1.9711 ms/op
+// GC:  52 1 0 877502792 512
+// Threading:  0 0 512
+
+// AfterAll
+// Benchmark Process 39300 has exited with code 0.
+
+Mean = 1.932 ms, StdErr = 0.006 ms (0.33%), N = 15, StdDev = 0.025 ms
+Min = 1.893 ms, Q1 = 1.916 ms, Median = 1.930 ms, Q3 = 1.949 ms, Max = 1.972 ms
+IQR = 0.033 ms, LowerFence = 1.867 ms, UpperFence = 1.998 ms
+ConfidenceInterval = [1.905 ms; 1.958 ms] (CI 99.9%), Margin = 0.027 ms (1.38% of Mean)
+Skewness = 0.1, Kurtosis = 1.82, MValue = 2
+
+// ** Remained 6 (50.0%) benchmark(s) to run. Estimated finish 2023-04-08 16:50 (0h 2m from now) **
+Setup power plan (GUID: 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c FriendlyName: High performance)
+// **************************
+// Benchmark: CRYSTALS_KyberBenchmark.BouncyCastleKYBERExecutor: DefaultJob [name=kyber512-aes, kyberParameters=Org.B(...)eters [58]]
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet f5c08e31-5fe7-4ac7-88c6-95db1eca9bc9.dll --anonymousPipes 1424 1808 --benchmarkName "QuantoCrypt.Benchmarks.KEM.CRYSTALS_KyberBenchmark.BouncyCastleKYBERExecutor(name: \"kyber512-aes\", kyberParameters: Org.BouncyCastle.Pqc.Crypto.Crystals.Kyber.KyberParameters)" --job Default --benchmarkId 6 in C:\Users\Danylo\Desktop\deeckLoooom\QuantoCrypt\QuantoCrypt.Tests\QuantoCrypt.Benchmarks\bin\Release\net7.0\f5c08e31-5fe7-4ac7-88c6-95db1eca9bc9\bin\Release\net7.0
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// Runtime=.NET 7.0.1 (7.0.122.56804), X64 RyuJIT AVX2
+// GC=Concurrent Workstation
+// HardwareIntrinsics=AVX2,AES,BMI1,BMI2,FMA,LZCNT,PCLMUL,POPCNT VectorSize=256
+// Job: DefaultJob
+
+OverheadJitting  1: 1 op, 186100.00 ns, 186.1000 us/op
+WorkloadJitting  1: 1 op, 58669000.00 ns, 58.6690 ms/op
+
+WorkloadPilot    1: 2 op, 21338700.00 ns, 10.6693 ms/op
+WorkloadPilot    2: 3 op, 27896000.00 ns, 9.2987 ms/op
+WorkloadPilot    3: 4 op, 37395100.00 ns, 9.3488 ms/op
+WorkloadPilot    4: 5 op, 46583200.00 ns, 9.3166 ms/op
+WorkloadPilot    5: 6 op, 54420300.00 ns, 9.0701 ms/op
+WorkloadPilot    6: 7 op, 41665500.00 ns, 5.9522 ms/op
+WorkloadPilot    7: 8 op, 43756100.00 ns, 5.4695 ms/op
+WorkloadPilot    8: 9 op, 46781600.00 ns, 5.1980 ms/op
+WorkloadPilot    9: 10 op, 49074300.00 ns, 4.9074 ms/op
+WorkloadPilot   10: 11 op, 54338900.00 ns, 4.9399 ms/op
+WorkloadPilot   11: 12 op, 55386500.00 ns, 4.6155 ms/op
+WorkloadPilot   12: 13 op, 61294700.00 ns, 4.7150 ms/op
+WorkloadPilot   13: 14 op, 41922800.00 ns, 2.9945 ms/op
+WorkloadPilot   14: 15 op, 39194000.00 ns, 2.6129 ms/op
+WorkloadPilot   15: 16 op, 41036100.00 ns, 2.5648 ms/op
+WorkloadPilot   16: 32 op, 79044200.00 ns, 2.4701 ms/op
+WorkloadPilot   17: 64 op, 159007900.00 ns, 2.4845 ms/op
+WorkloadPilot   18: 128 op, 313564700.00 ns, 2.4497 ms/op
+WorkloadPilot   19: 256 op, 629160400.00 ns, 2.4577 ms/op
+
+WorkloadWarmup   1: 256 op, 625076600.00 ns, 2.4417 ms/op
+WorkloadWarmup   2: 256 op, 631833800.00 ns, 2.4681 ms/op
+WorkloadWarmup   3: 256 op, 625079300.00 ns, 2.4417 ms/op
+WorkloadWarmup   4: 256 op, 623809500.00 ns, 2.4368 ms/op
+WorkloadWarmup   5: 256 op, 632034500.00 ns, 2.4689 ms/op
+WorkloadWarmup   6: 256 op, 617398100.00 ns, 2.4117 ms/op
+
+// BeforeActualRun
+WorkloadActual   1: 256 op, 623027400.00 ns, 2.4337 ms/op
+WorkloadActual   2: 256 op, 617130800.00 ns, 2.4107 ms/op
+WorkloadActual   3: 256 op, 625287500.00 ns, 2.4425 ms/op
+WorkloadActual   4: 256 op, 611412200.00 ns, 2.3883 ms/op
+WorkloadActual   5: 256 op, 610466800.00 ns, 2.3846 ms/op
+WorkloadActual   6: 256 op, 608206900.00 ns, 2.3758 ms/op
+WorkloadActual   7: 256 op, 607707900.00 ns, 2.3739 ms/op
+WorkloadActual   8: 256 op, 615224700.00 ns, 2.4032 ms/op
+WorkloadActual   9: 256 op, 618167200.00 ns, 2.4147 ms/op
+WorkloadActual  10: 256 op, 618450300.00 ns, 2.4158 ms/op
+WorkloadActual  11: 256 op, 617420800.00 ns, 2.4118 ms/op
+WorkloadActual  12: 256 op, 616435100.00 ns, 2.4079 ms/op
+WorkloadActual  13: 256 op, 623978200.00 ns, 2.4374 ms/op
+WorkloadActual  14: 256 op, 614279500.00 ns, 2.3995 ms/op
+WorkloadActual  15: 256 op, 627233800.00 ns, 2.4501 ms/op
+
+// AfterActualRun
+WorkloadResult   1: 256 op, 623027400.00 ns, 2.4337 ms/op
+WorkloadResult   2: 256 op, 617130800.00 ns, 2.4107 ms/op
+WorkloadResult   3: 256 op, 625287500.00 ns, 2.4425 ms/op
+WorkloadResult   4: 256 op, 611412200.00 ns, 2.3883 ms/op
+WorkloadResult   5: 256 op, 610466800.00 ns, 2.3846 ms/op
+WorkloadResult   6: 256 op, 608206900.00 ns, 2.3758 ms/op
+WorkloadResult   7: 256 op, 607707900.00 ns, 2.3739 ms/op
+WorkloadResult   8: 256 op, 615224700.00 ns, 2.4032 ms/op
+WorkloadResult   9: 256 op, 618167200.00 ns, 2.4147 ms/op
+WorkloadResult  10: 256 op, 618450300.00 ns, 2.4158 ms/op
+WorkloadResult  11: 256 op, 617420800.00 ns, 2.4118 ms/op
+WorkloadResult  12: 256 op, 616435100.00 ns, 2.4079 ms/op
+WorkloadResult  13: 256 op, 623978200.00 ns, 2.4374 ms/op
+WorkloadResult  14: 256 op, 614279500.00 ns, 2.3995 ms/op
+WorkloadResult  15: 256 op, 627233800.00 ns, 2.4501 ms/op
+// GC:  32 1 0 551829472 256
+// Threading:  0 0 256
+
+// AfterAll
+// Benchmark Process 13596 has exited with code 0.
+
+Mean = 2.410 ms, StdErr = 0.006 ms (0.25%), N = 15, StdDev = 0.024 ms
+Min = 2.374 ms, Q1 = 2.394 ms, Median = 2.411 ms, Q3 = 2.425 ms, Max = 2.450 ms
+IQR = 0.031 ms, LowerFence = 2.348 ms, UpperFence = 2.471 ms
+ConfidenceInterval = [2.385 ms; 2.435 ms] (CI 99.9%), Margin = 0.025 ms (1.05% of Mean)
+Skewness = 0.09, Kurtosis = 1.79, MValue = 2
+
+// ** Remained 5 (41.7%) benchmark(s) to run. Estimated finish 2023-04-08 16:50 (0h 1m from now) **
+Setup power plan (GUID: 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c FriendlyName: High performance)
+// **************************
+// Benchmark: CRYSTALS_KyberBenchmark.KYBERExecutor: DefaultJob [name=kyber512-aes, kyberParameters=Quant(...)eters [55]]
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet f5c08e31-5fe7-4ac7-88c6-95db1eca9bc9.dll --anonymousPipes 1524 1904 --benchmarkName "QuantoCrypt.Benchmarks.KEM.CRYSTALS_KyberBenchmark.KYBERExecutor(name: \"kyber512-aes\", kyberParameters: QuantoCrypt.Internal.KEM.CRYSTALS.Kyber.KyberParameters)" --job Default --benchmarkId 7 in C:\Users\Danylo\Desktop\deeckLoooom\QuantoCrypt\QuantoCrypt.Tests\QuantoCrypt.Benchmarks\bin\Release\net7.0\f5c08e31-5fe7-4ac7-88c6-95db1eca9bc9\bin\Release\net7.0
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// Runtime=.NET 7.0.1 (7.0.122.56804), X64 RyuJIT AVX2
+// GC=Concurrent Workstation
+// HardwareIntrinsics=AVX2,AES,BMI1,BMI2,FMA,LZCNT,PCLMUL,POPCNT VectorSize=256
+// Job: DefaultJob
+
+OverheadJitting  1: 1 op, 192700.00 ns, 192.7000 us/op
+WorkloadJitting  1: 1 op, 55390000.00 ns, 55.3900 ms/op
+
+WorkloadPilot    1: 2 op, 15595500.00 ns, 7.7977 ms/op
+WorkloadPilot    2: 3 op, 22550400.00 ns, 7.5168 ms/op
+WorkloadPilot    3: 4 op, 29606500.00 ns, 7.4016 ms/op
+WorkloadPilot    4: 5 op, 37548400.00 ns, 7.5097 ms/op
+WorkloadPilot    5: 6 op, 45207200.00 ns, 7.5345 ms/op
+WorkloadPilot    6: 7 op, 54425600.00 ns, 7.7751 ms/op
+WorkloadPilot    7: 8 op, 59189500.00 ns, 7.3987 ms/op
+WorkloadPilot    8: 9 op, 49245400.00 ns, 5.4717 ms/op
+WorkloadPilot    9: 10 op, 45469400.00 ns, 4.5469 ms/op
+WorkloadPilot   10: 11 op, 52217100.00 ns, 4.7470 ms/op
+WorkloadPilot   11: 12 op, 56314300.00 ns, 4.6929 ms/op
+WorkloadPilot   12: 13 op, 57921000.00 ns, 4.4555 ms/op
+WorkloadPilot   13: 14 op, 57993900.00 ns, 4.1424 ms/op
+WorkloadPilot   14: 15 op, 61830600.00 ns, 4.1220 ms/op
+WorkloadPilot   15: 16 op, 35553800.00 ns, 2.2221 ms/op
+WorkloadPilot   16: 32 op, 60544700.00 ns, 1.8920 ms/op
+WorkloadPilot   17: 64 op, 123364100.00 ns, 1.9276 ms/op
+WorkloadPilot   18: 128 op, 244924700.00 ns, 1.9135 ms/op
+WorkloadPilot   19: 256 op, 480862900.00 ns, 1.8784 ms/op
+WorkloadPilot   20: 512 op, 942203800.00 ns, 1.8402 ms/op
+
+WorkloadWarmup   1: 512 op, 937462400.00 ns, 1.8310 ms/op
+WorkloadWarmup   2: 512 op, 950837200.00 ns, 1.8571 ms/op
+WorkloadWarmup   3: 512 op, 976893200.00 ns, 1.9080 ms/op
+WorkloadWarmup   4: 512 op, 969058600.00 ns, 1.8927 ms/op
+WorkloadWarmup   5: 512 op, 960639500.00 ns, 1.8762 ms/op
+WorkloadWarmup   6: 512 op, 986162300.00 ns, 1.9261 ms/op
+WorkloadWarmup   7: 512 op, 964229400.00 ns, 1.8833 ms/op
+
+// BeforeActualRun
+WorkloadActual   1: 512 op, 960925900.00 ns, 1.8768 ms/op
+WorkloadActual   2: 512 op, 965618200.00 ns, 1.8860 ms/op
+WorkloadActual   3: 512 op, 964139500.00 ns, 1.8831 ms/op
+WorkloadActual   4: 512 op, 934375700.00 ns, 1.8250 ms/op
+WorkloadActual   5: 512 op, 934988000.00 ns, 1.8261 ms/op
+WorkloadActual   6: 512 op, 977813100.00 ns, 1.9098 ms/op
+WorkloadActual   7: 512 op, 965069700.00 ns, 1.8849 ms/op
+WorkloadActual   8: 512 op, 963442800.00 ns, 1.8817 ms/op
+WorkloadActual   9: 512 op, 938317100.00 ns, 1.8327 ms/op
+WorkloadActual  10: 512 op, 941093400.00 ns, 1.8381 ms/op
+WorkloadActual  11: 512 op, 952051600.00 ns, 1.8595 ms/op
+WorkloadActual  12: 512 op, 939185900.00 ns, 1.8343 ms/op
+WorkloadActual  13: 512 op, 956662400.00 ns, 1.8685 ms/op
+WorkloadActual  14: 512 op, 955668700.00 ns, 1.8665 ms/op
+WorkloadActual  15: 512 op, 948983300.00 ns, 1.8535 ms/op
+
+// AfterActualRun
+WorkloadResult   1: 512 op, 960925900.00 ns, 1.8768 ms/op
+WorkloadResult   2: 512 op, 965618200.00 ns, 1.8860 ms/op
+WorkloadResult   3: 512 op, 964139500.00 ns, 1.8831 ms/op
+WorkloadResult   4: 512 op, 934375700.00 ns, 1.8250 ms/op
+WorkloadResult   5: 512 op, 934988000.00 ns, 1.8261 ms/op
+WorkloadResult   6: 512 op, 977813100.00 ns, 1.9098 ms/op
+WorkloadResult   7: 512 op, 965069700.00 ns, 1.8849 ms/op
+WorkloadResult   8: 512 op, 963442800.00 ns, 1.8817 ms/op
+WorkloadResult   9: 512 op, 938317100.00 ns, 1.8327 ms/op
+WorkloadResult  10: 512 op, 941093400.00 ns, 1.8381 ms/op
+WorkloadResult  11: 512 op, 952051600.00 ns, 1.8595 ms/op
+WorkloadResult  12: 512 op, 939185900.00 ns, 1.8343 ms/op
+WorkloadResult  13: 512 op, 956662400.00 ns, 1.8685 ms/op
+WorkloadResult  14: 512 op, 955668700.00 ns, 1.8665 ms/op
+WorkloadResult  15: 512 op, 948983300.00 ns, 1.8535 ms/op
+// GC:  58 1 0 982432456 512
+// Threading:  0 0 512
+
+// AfterAll
+// Benchmark Process 28328 has exited with code 0.
+
+Mean = 1.862 ms, StdErr = 0.007 ms (0.36%), N = 15, StdDev = 0.026 ms
+Min = 1.825 ms, Q1 = 1.836 ms, Median = 1.867 ms, Q3 = 1.882 ms, Max = 1.910 ms
+IQR = 0.046 ms, LowerFence = 1.767 ms, UpperFence = 1.952 ms
+ConfidenceInterval = [1.834 ms; 1.890 ms] (CI 99.9%), Margin = 0.028 ms (1.49% of Mean)
+Skewness = 0.02, Kurtosis = 1.68, MValue = 2
+
+// ** Remained 4 (33.3%) benchmark(s) to run. Estimated finish 2023-04-08 16:50 (0h 1m from now) **
+Setup power plan (GUID: 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c FriendlyName: High performance)
+// **************************
+// Benchmark: CRYSTALS_KyberBenchmark.BouncyCastleKYBERExecutor: DefaultJob [name=kyber768, kyberParameters=Org.B(...)eters [58]]
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet f5c08e31-5fe7-4ac7-88c6-95db1eca9bc9.dll --anonymousPipes 1924 1912 --benchmarkName "QuantoCrypt.Benchmarks.KEM.CRYSTALS_KyberBenchmark.BouncyCastleKYBERExecutor(name: \"kyber768\", kyberParameters: Org.BouncyCastle.Pqc.Crypto.Crystals.Kyber.KyberParameters)" --job Default --benchmarkId 8 in C:\Users\Danylo\Desktop\deeckLoooom\QuantoCrypt\QuantoCrypt.Tests\QuantoCrypt.Benchmarks\bin\Release\net7.0\f5c08e31-5fe7-4ac7-88c6-95db1eca9bc9\bin\Release\net7.0
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// Runtime=.NET 7.0.1 (7.0.122.56804), X64 RyuJIT AVX2
+// GC=Concurrent Workstation
+// HardwareIntrinsics=AVX2,AES,BMI1,BMI2,FMA,LZCNT,PCLMUL,POPCNT VectorSize=256
+// Job: DefaultJob
+
+OverheadJitting  1: 1 op, 194500.00 ns, 194.5000 us/op
+WorkloadJitting  1: 1 op, 57745700.00 ns, 57.7457 ms/op
+
+WorkloadPilot    1: 2 op, 22535900.00 ns, 11.2680 ms/op
+WorkloadPilot    2: 3 op, 33311700.00 ns, 11.1039 ms/op
+WorkloadPilot    3: 4 op, 43936700.00 ns, 10.9842 ms/op
+WorkloadPilot    4: 5 op, 55710100.00 ns, 11.1420 ms/op
+WorkloadPilot    5: 6 op, 53270100.00 ns, 8.8783 ms/op
+WorkloadPilot    6: 7 op, 46391300.00 ns, 6.6273 ms/op
+WorkloadPilot    7: 8 op, 50068900.00 ns, 6.2586 ms/op
+WorkloadPilot    8: 9 op, 54219500.00 ns, 6.0244 ms/op
+WorkloadPilot    9: 10 op, 59755000.00 ns, 5.9755 ms/op
+WorkloadPilot   10: 11 op, 61146900.00 ns, 5.5588 ms/op
+WorkloadPilot   11: 12 op, 60246000.00 ns, 5.0205 ms/op
+WorkloadPilot   12: 13 op, 36655500.00 ns, 2.8197 ms/op
+WorkloadPilot   13: 14 op, 37299300.00 ns, 2.6642 ms/op
+WorkloadPilot   14: 15 op, 40553500.00 ns, 2.7036 ms/op
+WorkloadPilot   15: 16 op, 43198200.00 ns, 2.6999 ms/op
+WorkloadPilot   16: 32 op, 86257100.00 ns, 2.6955 ms/op
+WorkloadPilot   17: 64 op, 182165100.00 ns, 2.8463 ms/op
+WorkloadPilot   18: 128 op, 387689900.00 ns, 3.0288 ms/op
+WorkloadPilot   19: 256 op, 871517400.00 ns, 3.4044 ms/op
+
+WorkloadWarmup   1: 256 op, 721166500.00 ns, 2.8171 ms/op
+WorkloadWarmup   2: 256 op, 663021000.00 ns, 2.5899 ms/op
+WorkloadWarmup   3: 256 op, 679838900.00 ns, 2.6556 ms/op
+WorkloadWarmup   4: 256 op, 678459600.00 ns, 2.6502 ms/op
+WorkloadWarmup   5: 256 op, 704052200.00 ns, 2.7502 ms/op
+WorkloadWarmup   6: 256 op, 669163500.00 ns, 2.6139 ms/op
+
+// BeforeActualRun
+WorkloadActual   1: 256 op, 699899400.00 ns, 2.7340 ms/op
+WorkloadActual   2: 256 op, 699347100.00 ns, 2.7318 ms/op
+WorkloadActual   3: 256 op, 657489500.00 ns, 2.5683 ms/op
+WorkloadActual   4: 256 op, 660558900.00 ns, 2.5803 ms/op
+WorkloadActual   5: 256 op, 656450900.00 ns, 2.5643 ms/op
+WorkloadActual   6: 256 op, 670107600.00 ns, 2.6176 ms/op
+WorkloadActual   7: 256 op, 658620700.00 ns, 2.5727 ms/op
+WorkloadActual   8: 256 op, 669627900.00 ns, 2.6157 ms/op
+WorkloadActual   9: 256 op, 691289700.00 ns, 2.7004 ms/op
+WorkloadActual  10: 256 op, 819401100.00 ns, 3.2008 ms/op
+WorkloadActual  11: 256 op, 828432700.00 ns, 3.2361 ms/op
+WorkloadActual  12: 256 op, 696606800.00 ns, 2.7211 ms/op
+WorkloadActual  13: 256 op, 717046500.00 ns, 2.8010 ms/op
+WorkloadActual  14: 256 op, 729856900.00 ns, 2.8510 ms/op
+WorkloadActual  15: 256 op, 726511300.00 ns, 2.8379 ms/op
+WorkloadActual  16: 256 op, 694867300.00 ns, 2.7143 ms/op
+WorkloadActual  17: 256 op, 662151100.00 ns, 2.5865 ms/op
+WorkloadActual  18: 256 op, 656775600.00 ns, 2.5655 ms/op
+WorkloadActual  19: 256 op, 668244400.00 ns, 2.6103 ms/op
+WorkloadActual  20: 256 op, 656372200.00 ns, 2.5640 ms/op
+WorkloadActual  21: 256 op, 662375700.00 ns, 2.5874 ms/op
+WorkloadActual  22: 256 op, 662130000.00 ns, 2.5864 ms/op
+WorkloadActual  23: 256 op, 675639900.00 ns, 2.6392 ms/op
+WorkloadActual  24: 256 op, 676544200.00 ns, 2.6428 ms/op
+WorkloadActual  25: 256 op, 658217300.00 ns, 2.5712 ms/op
+WorkloadActual  26: 256 op, 676686600.00 ns, 2.6433 ms/op
+WorkloadActual  27: 256 op, 659858600.00 ns, 2.5776 ms/op
+WorkloadActual  28: 256 op, 654298000.00 ns, 2.5559 ms/op
+WorkloadActual  29: 256 op, 658154500.00 ns, 2.5709 ms/op
+WorkloadActual  30: 256 op, 686118200.00 ns, 2.6801 ms/op
+WorkloadActual  31: 256 op, 657464500.00 ns, 2.5682 ms/op
+WorkloadActual  32: 256 op, 655267200.00 ns, 2.5596 ms/op
+WorkloadActual  33: 256 op, 663627700.00 ns, 2.5923 ms/op
+WorkloadActual  34: 256 op, 664581900.00 ns, 2.5960 ms/op
+WorkloadActual  35: 256 op, 666526800.00 ns, 2.6036 ms/op
+
+// AfterActualRun
+WorkloadResult   1: 256 op, 699899400.00 ns, 2.7340 ms/op
+WorkloadResult   2: 256 op, 699347100.00 ns, 2.7318 ms/op
+WorkloadResult   3: 256 op, 657489500.00 ns, 2.5683 ms/op
+WorkloadResult   4: 256 op, 660558900.00 ns, 2.5803 ms/op
+WorkloadResult   5: 256 op, 656450900.00 ns, 2.5643 ms/op
+WorkloadResult   6: 256 op, 670107600.00 ns, 2.6176 ms/op
+WorkloadResult   7: 256 op, 658620700.00 ns, 2.5727 ms/op
+WorkloadResult   8: 256 op, 669627900.00 ns, 2.6157 ms/op
+WorkloadResult   9: 256 op, 691289700.00 ns, 2.7004 ms/op
+WorkloadResult  10: 256 op, 696606800.00 ns, 2.7211 ms/op
+WorkloadResult  11: 256 op, 717046500.00 ns, 2.8010 ms/op
+WorkloadResult  12: 256 op, 729856900.00 ns, 2.8510 ms/op
+WorkloadResult  13: 256 op, 726511300.00 ns, 2.8379 ms/op
+WorkloadResult  14: 256 op, 694867300.00 ns, 2.7143 ms/op
+WorkloadResult  15: 256 op, 662151100.00 ns, 2.5865 ms/op
+WorkloadResult  16: 256 op, 656775600.00 ns, 2.5655 ms/op
+WorkloadResult  17: 256 op, 668244400.00 ns, 2.6103 ms/op
+WorkloadResult  18: 256 op, 656372200.00 ns, 2.5640 ms/op
+WorkloadResult  19: 256 op, 662375700.00 ns, 2.5874 ms/op
+WorkloadResult  20: 256 op, 662130000.00 ns, 2.5864 ms/op
+WorkloadResult  21: 256 op, 675639900.00 ns, 2.6392 ms/op
+WorkloadResult  22: 256 op, 676544200.00 ns, 2.6428 ms/op
+WorkloadResult  23: 256 op, 658217300.00 ns, 2.5712 ms/op
+WorkloadResult  24: 256 op, 676686600.00 ns, 2.6433 ms/op
+WorkloadResult  25: 256 op, 659858600.00 ns, 2.5776 ms/op
+WorkloadResult  26: 256 op, 654298000.00 ns, 2.5559 ms/op
+WorkloadResult  27: 256 op, 658154500.00 ns, 2.5709 ms/op
+WorkloadResult  28: 256 op, 686118200.00 ns, 2.6801 ms/op
+WorkloadResult  29: 256 op, 657464500.00 ns, 2.5682 ms/op
+WorkloadResult  30: 256 op, 655267200.00 ns, 2.5596 ms/op
+WorkloadResult  31: 256 op, 663627700.00 ns, 2.5923 ms/op
+WorkloadResult  32: 256 op, 664581900.00 ns, 2.5960 ms/op
+WorkloadResult  33: 256 op, 666526800.00 ns, 2.6036 ms/op
+// GC:  30 1 0 504238704 256
+// Threading:  0 0 256
+
+// AfterAll
+// Benchmark Process 28592 has exited with code 0.
+
+Mean = 2.634 ms, StdErr = 0.014 ms (0.55%), N = 33, StdDev = 0.083 ms
+Min = 2.556 ms, Q1 = 2.571 ms, Median = 2.596 ms, Q3 = 2.680 ms, Max = 2.851 ms
+IQR = 0.109 ms, LowerFence = 2.408 ms, UpperFence = 2.844 ms
+ConfidenceInterval = [2.581 ms; 2.686 ms] (CI 99.9%), Margin = 0.052 ms (1.99% of Mean)
+Skewness = 1.21, Kurtosis = 3.38, MValue = 2.29
+
+// ** Remained 3 (25.0%) benchmark(s) to run. Estimated finish 2023-04-08 16:50 (0h 1m from now) **
+Setup power plan (GUID: 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c FriendlyName: High performance)
+// **************************
+// Benchmark: CRYSTALS_KyberBenchmark.KYBERExecutor: DefaultJob [name=kyber768, kyberParameters=Quant(...)eters [55]]
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet f5c08e31-5fe7-4ac7-88c6-95db1eca9bc9.dll --anonymousPipes 1948 1944 --benchmarkName "QuantoCrypt.Benchmarks.KEM.CRYSTALS_KyberBenchmark.KYBERExecutor(name: \"kyber768\", kyberParameters: QuantoCrypt.Internal.KEM.CRYSTALS.Kyber.KyberParameters)" --job Default --benchmarkId 9 in C:\Users\Danylo\Desktop\deeckLoooom\QuantoCrypt\QuantoCrypt.Tests\QuantoCrypt.Benchmarks\bin\Release\net7.0\f5c08e31-5fe7-4ac7-88c6-95db1eca9bc9\bin\Release\net7.0
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// Runtime=.NET 7.0.1 (7.0.122.56804), X64 RyuJIT AVX2
+// GC=Concurrent Workstation
+// HardwareIntrinsics=AVX2,AES,BMI1,BMI2,FMA,LZCNT,PCLMUL,POPCNT VectorSize=256
+// Job: DefaultJob
+
+OverheadJitting  1: 1 op, 174800.00 ns, 174.8000 us/op
+WorkloadJitting  1: 1 op, 59679600.00 ns, 59.6796 ms/op
+
+WorkloadPilot    1: 2 op, 24385200.00 ns, 12.1926 ms/op
+WorkloadPilot    2: 3 op, 36352400.00 ns, 12.1175 ms/op
+WorkloadPilot    3: 4 op, 48246600.00 ns, 12.0617 ms/op
+WorkloadPilot    4: 5 op, 60234000.00 ns, 12.0468 ms/op
+WorkloadPilot    5: 6 op, 48227800.00 ns, 8.0380 ms/op
+WorkloadPilot    6: 7 op, 47348000.00 ns, 6.7640 ms/op
+WorkloadPilot    7: 8 op, 51108700.00 ns, 6.3886 ms/op
+WorkloadPilot    8: 9 op, 55688600.00 ns, 6.1876 ms/op
+WorkloadPilot    9: 10 op, 61409100.00 ns, 6.1409 ms/op
+WorkloadPilot   10: 11 op, 62647200.00 ns, 5.6952 ms/op
+WorkloadPilot   11: 12 op, 54238200.00 ns, 4.5198 ms/op
+WorkloadPilot   12: 13 op, 37178300.00 ns, 2.8599 ms/op
+WorkloadPilot   13: 14 op, 38107100.00 ns, 2.7219 ms/op
+WorkloadPilot   14: 15 op, 39468400.00 ns, 2.6312 ms/op
+WorkloadPilot   15: 16 op, 42240300.00 ns, 2.6400 ms/op
+WorkloadPilot   16: 32 op, 86241000.00 ns, 2.6950 ms/op
+WorkloadPilot   17: 64 op, 167964000.00 ns, 2.6244 ms/op
+WorkloadPilot   18: 128 op, 343943500.00 ns, 2.6871 ms/op
+WorkloadPilot   19: 256 op, 684916600.00 ns, 2.6755 ms/op
+
+WorkloadWarmup   1: 256 op, 667327400.00 ns, 2.6067 ms/op
+WorkloadWarmup   2: 256 op, 681554900.00 ns, 2.6623 ms/op
+WorkloadWarmup   3: 256 op, 659297300.00 ns, 2.5754 ms/op
+WorkloadWarmup   4: 256 op, 658307000.00 ns, 2.5715 ms/op
+WorkloadWarmup   5: 256 op, 681206100.00 ns, 2.6610 ms/op
+WorkloadWarmup   6: 256 op, 658439200.00 ns, 2.5720 ms/op
+
+// BeforeActualRun
+WorkloadActual   1: 256 op, 678877000.00 ns, 2.6519 ms/op
+WorkloadActual   2: 256 op, 676005900.00 ns, 2.6406 ms/op
+WorkloadActual   3: 256 op, 673241400.00 ns, 2.6298 ms/op
+WorkloadActual   4: 256 op, 653526800.00 ns, 2.5528 ms/op
+WorkloadActual   5: 256 op, 722769400.00 ns, 2.8233 ms/op
+WorkloadActual   6: 256 op, 836130100.00 ns, 3.2661 ms/op
+WorkloadActual   7: 256 op, 780358500.00 ns, 3.0483 ms/op
+WorkloadActual   8: 256 op, 697944300.00 ns, 2.7263 ms/op
+WorkloadActual   9: 256 op, 695755400.00 ns, 2.7178 ms/op
+WorkloadActual  10: 256 op, 711575700.00 ns, 2.7796 ms/op
+WorkloadActual  11: 256 op, 683900800.00 ns, 2.6715 ms/op
+WorkloadActual  12: 256 op, 664509700.00 ns, 2.5957 ms/op
+WorkloadActual  13: 256 op, 687065000.00 ns, 2.6838 ms/op
+WorkloadActual  14: 256 op, 683131500.00 ns, 2.6685 ms/op
+WorkloadActual  15: 256 op, 657686900.00 ns, 2.5691 ms/op
+WorkloadActual  16: 256 op, 673170700.00 ns, 2.6296 ms/op
+WorkloadActual  17: 256 op, 684266500.00 ns, 2.6729 ms/op
+WorkloadActual  18: 256 op, 663391300.00 ns, 2.5914 ms/op
+WorkloadActual  19: 256 op, 676922500.00 ns, 2.6442 ms/op
+WorkloadActual  20: 256 op, 670844800.00 ns, 2.6205 ms/op
+WorkloadActual  21: 256 op, 669123300.00 ns, 2.6138 ms/op
+WorkloadActual  22: 256 op, 670701000.00 ns, 2.6199 ms/op
+WorkloadActual  23: 256 op, 669171900.00 ns, 2.6140 ms/op
+WorkloadActual  24: 256 op, 672897700.00 ns, 2.6285 ms/op
+
+// AfterActualRun
+WorkloadResult   1: 256 op, 678877000.00 ns, 2.6519 ms/op
+WorkloadResult   2: 256 op, 676005900.00 ns, 2.6406 ms/op
+WorkloadResult   3: 256 op, 673241400.00 ns, 2.6298 ms/op
+WorkloadResult   4: 256 op, 653526800.00 ns, 2.5528 ms/op
+WorkloadResult   5: 256 op, 697944300.00 ns, 2.7263 ms/op
+WorkloadResult   6: 256 op, 695755400.00 ns, 2.7178 ms/op
+WorkloadResult   7: 256 op, 711575700.00 ns, 2.7796 ms/op
+WorkloadResult   8: 256 op, 683900800.00 ns, 2.6715 ms/op
+WorkloadResult   9: 256 op, 664509700.00 ns, 2.5957 ms/op
+WorkloadResult  10: 256 op, 687065000.00 ns, 2.6838 ms/op
+WorkloadResult  11: 256 op, 683131500.00 ns, 2.6685 ms/op
+WorkloadResult  12: 256 op, 657686900.00 ns, 2.5691 ms/op
+WorkloadResult  13: 256 op, 673170700.00 ns, 2.6296 ms/op
+WorkloadResult  14: 256 op, 684266500.00 ns, 2.6729 ms/op
+WorkloadResult  15: 256 op, 663391300.00 ns, 2.5914 ms/op
+WorkloadResult  16: 256 op, 676922500.00 ns, 2.6442 ms/op
+WorkloadResult  17: 256 op, 670844800.00 ns, 2.6205 ms/op
+WorkloadResult  18: 256 op, 669123300.00 ns, 2.6138 ms/op
+WorkloadResult  19: 256 op, 670701000.00 ns, 2.6199 ms/op
+WorkloadResult  20: 256 op, 669171900.00 ns, 2.6140 ms/op
+WorkloadResult  21: 256 op, 672897700.00 ns, 2.6285 ms/op
+// GC:  30 1 0 503265064 256
+// Threading:  0 0 256
+
+// AfterAll
+// Benchmark Process 5096 has exited with code 0.
+
+Mean = 2.644 ms, StdErr = 0.012 ms (0.44%), N = 21, StdDev = 0.053 ms
+Min = 2.553 ms, Q1 = 2.614 ms, Median = 2.630 ms, Q3 = 2.671 ms, Max = 2.780 ms
+IQR = 0.058 ms, LowerFence = 2.528 ms, UpperFence = 2.758 ms
+ConfidenceInterval = [2.599 ms; 2.689 ms] (CI 99.9%), Margin = 0.045 ms (1.70% of Mean)
+Skewness = 0.64, Kurtosis = 3.12, MValue = 2
+
+// ** Remained 2 (16.7%) benchmark(s) to run. Estimated finish 2023-04-08 16:50 (0h 0m from now) **
+Setup power plan (GUID: 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c FriendlyName: High performance)
+// **************************
+// Benchmark: CRYSTALS_KyberBenchmark.BouncyCastleKYBERExecutor: DefaultJob [name=kyber768-aes, kyberParameters=Org.B(...)eters [58]]
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet f5c08e31-5fe7-4ac7-88c6-95db1eca9bc9.dll --anonymousPipes 1976 588 --benchmarkName "QuantoCrypt.Benchmarks.KEM.CRYSTALS_KyberBenchmark.BouncyCastleKYBERExecutor(name: \"kyber768-aes\", kyberParameters: Org.BouncyCastle.Pqc.Crypto.Crystals.Kyber.KyberParameters)" --job Default --benchmarkId 10 in C:\Users\Danylo\Desktop\deeckLoooom\QuantoCrypt\QuantoCrypt.Tests\QuantoCrypt.Benchmarks\bin\Release\net7.0\f5c08e31-5fe7-4ac7-88c6-95db1eca9bc9\bin\Release\net7.0
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// Runtime=.NET 7.0.1 (7.0.122.56804), X64 RyuJIT AVX2
+// GC=Concurrent Workstation
+// HardwareIntrinsics=AVX2,AES,BMI1,BMI2,FMA,LZCNT,PCLMUL,POPCNT VectorSize=256
+// Job: DefaultJob
+
+OverheadJitting  1: 1 op, 178300.00 ns, 178.3000 us/op
+WorkloadJitting  1: 1 op, 69075500.00 ns, 69.0755 ms/op
+
+WorkloadPilot    1: 2 op, 31624400.00 ns, 15.8122 ms/op
+WorkloadPilot    2: 3 op, 44793300.00 ns, 14.9311 ms/op
+WorkloadPilot    3: 4 op, 57978600.00 ns, 14.4947 ms/op
+WorkloadPilot    4: 5 op, 72797700.00 ns, 14.5595 ms/op
+WorkloadPilot    5: 6 op, 80191200.00 ns, 13.3652 ms/op
+WorkloadPilot    6: 7 op, 54346100.00 ns, 7.7637 ms/op
+WorkloadPilot    7: 8 op, 60053900.00 ns, 7.5067 ms/op
+WorkloadPilot    8: 9 op, 64796800.00 ns, 7.1996 ms/op
+WorkloadPilot    9: 10 op, 71634700.00 ns, 7.1635 ms/op
+WorkloadPilot   10: 11 op, 75276200.00 ns, 6.8433 ms/op
+WorkloadPilot   11: 12 op, 59301600.00 ns, 4.9418 ms/op
+WorkloadPilot   12: 13 op, 47212800.00 ns, 3.6318 ms/op
+WorkloadPilot   13: 14 op, 52256300.00 ns, 3.7326 ms/op
+WorkloadPilot   14: 15 op, 54138700.00 ns, 3.6092 ms/op
+WorkloadPilot   15: 16 op, 65041900.00 ns, 4.0651 ms/op
+WorkloadPilot   16: 32 op, 136449400.00 ns, 4.2640 ms/op
+WorkloadPilot   17: 64 op, 230651700.00 ns, 3.6039 ms/op
+WorkloadPilot   18: 128 op, 460964300.00 ns, 3.6013 ms/op
+WorkloadPilot   19: 256 op, 909126200.00 ns, 3.5513 ms/op
+
+WorkloadWarmup   1: 256 op, 917183900.00 ns, 3.5827 ms/op
+WorkloadWarmup   2: 256 op, 916741400.00 ns, 3.5810 ms/op
+WorkloadWarmup   3: 256 op, 922647200.00 ns, 3.6041 ms/op
+WorkloadWarmup   4: 256 op, 893760500.00 ns, 3.4913 ms/op
+WorkloadWarmup   5: 256 op, 923664400.00 ns, 3.6081 ms/op
+WorkloadWarmup   6: 256 op, 928065300.00 ns, 3.6253 ms/op
+WorkloadWarmup   7: 256 op, 920769700.00 ns, 3.5968 ms/op
+
+// BeforeActualRun
+WorkloadActual   1: 256 op, 896357000.00 ns, 3.5014 ms/op
+WorkloadActual   2: 256 op, 926594700.00 ns, 3.6195 ms/op
+WorkloadActual   3: 256 op, 913947900.00 ns, 3.5701 ms/op
+WorkloadActual   4: 256 op, 918692200.00 ns, 3.5886 ms/op
+WorkloadActual   5: 256 op, 914835300.00 ns, 3.5736 ms/op
+WorkloadActual   6: 256 op, 892180000.00 ns, 3.4851 ms/op
+WorkloadActual   7: 256 op, 893306800.00 ns, 3.4895 ms/op
+WorkloadActual   8: 256 op, 893073100.00 ns, 3.4886 ms/op
+WorkloadActual   9: 256 op, 940604200.00 ns, 3.6742 ms/op
+WorkloadActual  10: 256 op, 912997600.00 ns, 3.5664 ms/op
+WorkloadActual  11: 256 op, 890907700.00 ns, 3.4801 ms/op
+WorkloadActual  12: 256 op, 894751100.00 ns, 3.4951 ms/op
+WorkloadActual  13: 256 op, 913002000.00 ns, 3.5664 ms/op
+WorkloadActual  14: 256 op, 894743800.00 ns, 3.4951 ms/op
+WorkloadActual  15: 256 op, 920157200.00 ns, 3.5944 ms/op
+
+// AfterActualRun
+WorkloadResult   1: 256 op, 896357000.00 ns, 3.5014 ms/op
+WorkloadResult   2: 256 op, 926594700.00 ns, 3.6195 ms/op
+WorkloadResult   3: 256 op, 913947900.00 ns, 3.5701 ms/op
+WorkloadResult   4: 256 op, 918692200.00 ns, 3.5886 ms/op
+WorkloadResult   5: 256 op, 914835300.00 ns, 3.5736 ms/op
+WorkloadResult   6: 256 op, 892180000.00 ns, 3.4851 ms/op
+WorkloadResult   7: 256 op, 893306800.00 ns, 3.4895 ms/op
+WorkloadResult   8: 256 op, 893073100.00 ns, 3.4886 ms/op
+WorkloadResult   9: 256 op, 940604200.00 ns, 3.6742 ms/op
+WorkloadResult  10: 256 op, 912997600.00 ns, 3.5664 ms/op
+WorkloadResult  11: 256 op, 890907700.00 ns, 3.4801 ms/op
+WorkloadResult  12: 256 op, 894751100.00 ns, 3.4951 ms/op
+WorkloadResult  13: 256 op, 913002000.00 ns, 3.5664 ms/op
+WorkloadResult  14: 256 op, 894743800.00 ns, 3.4951 ms/op
+WorkloadResult  15: 256 op, 920157200.00 ns, 3.5944 ms/op
+// GC:  42 2 0 709391472 256
+// Threading:  0 0 256
+
+// AfterAll
+// Benchmark Process 29012 has exited with code 0.
+
+Mean = 3.546 ms, StdErr = 0.015 ms (0.43%), N = 15, StdDev = 0.060 ms
+Min = 3.480 ms, Q1 = 3.492 ms, Median = 3.566 ms, Q3 = 3.581 ms, Max = 3.674 ms
+IQR = 0.089 ms, LowerFence = 3.359 ms, UpperFence = 3.714 ms
+ConfidenceInterval = [3.482 ms; 3.610 ms] (CI 99.9%), Margin = 0.064 ms (1.80% of Mean)
+Skewness = 0.48, Kurtosis = 2, MValue = 2
+
+// ** Remained 1 (8.3%) benchmark(s) to run. Estimated finish 2023-04-08 16:50 (0h 0m from now) **
+Setup power plan (GUID: 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c FriendlyName: High performance)
+// **************************
+// Benchmark: CRYSTALS_KyberBenchmark.KYBERExecutor: DefaultJob [name=kyber768-aes, kyberParameters=Quant(...)eters [55]]
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet f5c08e31-5fe7-4ac7-88c6-95db1eca9bc9.dll --anonymousPipes 1736 1668 --benchmarkName "QuantoCrypt.Benchmarks.KEM.CRYSTALS_KyberBenchmark.KYBERExecutor(name: \"kyber768-aes\", kyberParameters: QuantoCrypt.Internal.KEM.CRYSTALS.Kyber.KyberParameters)" --job Default --benchmarkId 11 in C:\Users\Danylo\Desktop\deeckLoooom\QuantoCrypt\QuantoCrypt.Tests\QuantoCrypt.Benchmarks\bin\Release\net7.0\f5c08e31-5fe7-4ac7-88c6-95db1eca9bc9\bin\Release\net7.0
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// Runtime=.NET 7.0.1 (7.0.122.56804), X64 RyuJIT AVX2
+// GC=Concurrent Workstation
+// HardwareIntrinsics=AVX2,AES,BMI1,BMI2,FMA,LZCNT,PCLMUL,POPCNT VectorSize=256
+// Job: DefaultJob
+
+OverheadJitting  1: 1 op, 173400.00 ns, 173.4000 us/op
+WorkloadJitting  1: 1 op, 59446000.00 ns, 59.4460 ms/op
+
+WorkloadPilot    1: 2 op, 22706200.00 ns, 11.3531 ms/op
+WorkloadPilot    2: 3 op, 33770500.00 ns, 11.2568 ms/op
+WorkloadPilot    3: 4 op, 44038600.00 ns, 11.0097 ms/op
+WorkloadPilot    4: 5 op, 55622000.00 ns, 11.1244 ms/op
+WorkloadPilot    5: 6 op, 53937200.00 ns, 8.9895 ms/op
+WorkloadPilot    6: 7 op, 45064800.00 ns, 6.4378 ms/op
+WorkloadPilot    7: 8 op, 48895900.00 ns, 6.1120 ms/op
+WorkloadPilot    8: 9 op, 54210200.00 ns, 6.0234 ms/op
+WorkloadPilot    9: 10 op, 60267400.00 ns, 6.0267 ms/op
+WorkloadPilot   10: 11 op, 64550900.00 ns, 5.8683 ms/op
+WorkloadPilot   11: 12 op, 63624400.00 ns, 5.3020 ms/op
+WorkloadPilot   12: 13 op, 36081800.00 ns, 2.7755 ms/op
+WorkloadPilot   13: 14 op, 36873800.00 ns, 2.6338 ms/op
+WorkloadPilot   14: 15 op, 39165200.00 ns, 2.6110 ms/op
+WorkloadPilot   15: 16 op, 41212100.00 ns, 2.5758 ms/op
+WorkloadPilot   16: 32 op, 83721600.00 ns, 2.6163 ms/op
+WorkloadPilot   17: 64 op, 166769900.00 ns, 2.6058 ms/op
+WorkloadPilot   18: 128 op, 332633700.00 ns, 2.5987 ms/op
+WorkloadPilot   19: 256 op, 673209400.00 ns, 2.6297 ms/op
+
+WorkloadWarmup   1: 256 op, 664746900.00 ns, 2.5967 ms/op
+WorkloadWarmup   2: 256 op, 665437400.00 ns, 2.5994 ms/op
+WorkloadWarmup   3: 256 op, 666890900.00 ns, 2.6050 ms/op
+WorkloadWarmup   4: 256 op, 665359300.00 ns, 2.5991 ms/op
+WorkloadWarmup   5: 256 op, 673654400.00 ns, 2.6315 ms/op
+WorkloadWarmup   6: 256 op, 653246200.00 ns, 2.5517 ms/op
+
+// BeforeActualRun
+WorkloadActual   1: 256 op, 673066000.00 ns, 2.6292 ms/op
+WorkloadActual   2: 256 op, 677698600.00 ns, 2.6473 ms/op
+WorkloadActual   3: 256 op, 670512700.00 ns, 2.6192 ms/op
+WorkloadActual   4: 256 op, 672783600.00 ns, 2.6281 ms/op
+WorkloadActual   5: 256 op, 675609000.00 ns, 2.6391 ms/op
+WorkloadActual   6: 256 op, 654215400.00 ns, 2.5555 ms/op
+WorkloadActual   7: 256 op, 668785700.00 ns, 2.6124 ms/op
+WorkloadActual   8: 256 op, 667584000.00 ns, 2.6077 ms/op
+WorkloadActual   9: 256 op, 660125800.00 ns, 2.5786 ms/op
+WorkloadActual  10: 256 op, 655169600.00 ns, 2.5593 ms/op
+WorkloadActual  11: 256 op, 668924900.00 ns, 2.6130 ms/op
+WorkloadActual  12: 256 op, 654853900.00 ns, 2.5580 ms/op
+WorkloadActual  13: 256 op, 652565100.00 ns, 2.5491 ms/op
+WorkloadActual  14: 256 op, 655410800.00 ns, 2.5602 ms/op
+WorkloadActual  15: 256 op, 659011800.00 ns, 2.5743 ms/op
+
+// AfterActualRun
+WorkloadResult   1: 256 op, 673066000.00 ns, 2.6292 ms/op
+WorkloadResult   2: 256 op, 677698600.00 ns, 2.6473 ms/op
+WorkloadResult   3: 256 op, 670512700.00 ns, 2.6192 ms/op
+WorkloadResult   4: 256 op, 672783600.00 ns, 2.6281 ms/op
+WorkloadResult   5: 256 op, 675609000.00 ns, 2.6391 ms/op
+WorkloadResult   6: 256 op, 654215400.00 ns, 2.5555 ms/op
+WorkloadResult   7: 256 op, 668785700.00 ns, 2.6124 ms/op
+WorkloadResult   8: 256 op, 667584000.00 ns, 2.6077 ms/op
+WorkloadResult   9: 256 op, 660125800.00 ns, 2.5786 ms/op
+WorkloadResult  10: 256 op, 655169600.00 ns, 2.5593 ms/op
+WorkloadResult  11: 256 op, 668924900.00 ns, 2.6130 ms/op
+WorkloadResult  12: 256 op, 654853900.00 ns, 2.5580 ms/op
+WorkloadResult  13: 256 op, 652565100.00 ns, 2.5491 ms/op
+WorkloadResult  14: 256 op, 655410800.00 ns, 2.5602 ms/op
+WorkloadResult  15: 256 op, 659011800.00 ns, 2.5743 ms/op
+// GC:  35 1 0 600573944 256
+// Threading:  0 0 256
+
+// AfterAll
+// Benchmark Process 31948 has exited with code 0.
+
+Mean = 2.595 ms, StdErr = 0.009 ms (0.34%), N = 15, StdDev = 0.034 ms
+Min = 2.549 ms, Q1 = 2.560 ms, Median = 2.608 ms, Q3 = 2.624 ms, Max = 2.647 ms
+IQR = 0.064 ms, LowerFence = 2.464 ms, UpperFence = 2.719 ms
+ConfidenceInterval = [2.559 ms; 2.632 ms] (CI 99.9%), Margin = 0.037 ms (1.42% of Mean)
+Skewness = 0, Kurtosis = 1.26, MValue = 2
+
+// ** Remained 0 (0.0%) benchmark(s) to run. Estimated finish 2023-04-08 16:50 (0h 0m from now) **
+Successfully reverted power plan (GUID: 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c FriendlyName: High performance)
+// ***** BenchmarkRunner: Finish  *****
+
+// * Export *
+  BenchmarkDotNet.Artifacts\results\QuantoCrypt.Benchmarks.KEM.CRYSTALS_KyberBenchmark-report.csv
+  BenchmarkDotNet.Artifacts\results\QuantoCrypt.Benchmarks.KEM.CRYSTALS_KyberBenchmark-report-github.md
+  BenchmarkDotNet.Artifacts\results\QuantoCrypt.Benchmarks.KEM.CRYSTALS_KyberBenchmark-report.html
+
+// * Detailed results *
+CRYSTALS_KyberBenchmark.BouncyCastleKYBERExecutor: DefaultJob [name=kyber1024, kyberParameters=Org.B(...)eters [58]]
+Runtime = .NET 7.0.1 (7.0.122.56804), X64 RyuJIT AVX2; GC = Concurrent Workstation
+Mean = 3.564 ms, StdErr = 0.012 ms (0.35%), N = 15, StdDev = 0.048 ms
+Min = 3.513 ms, Q1 = 3.518 ms, Median = 3.545 ms, Q3 = 3.611 ms, Max = 3.634 ms
+IQR = 0.092 ms, LowerFence = 3.380 ms, UpperFence = 3.750 ms
+ConfidenceInterval = [3.513 ms; 3.616 ms] (CI 99.9%), Margin = 0.052 ms (1.45% of Mean)
+Skewness = 0.21, Kurtosis = 1.15, MValue = 2
+-------------------- Histogram --------------------
+[3.493 ms ; 3.648 ms) | @@@@@@@@@@@@@@@
+---------------------------------------------------
+
+CRYSTALS_KyberBenchmark.KYBERExecutor: DefaultJob [name=kyber1024, kyberParameters=Quant(...)eters [55]]
+Runtime = .NET 7.0.1 (7.0.122.56804), X64 RyuJIT AVX2; GC = Concurrent Workstation
+Mean = 3.555 ms, StdErr = 0.012 ms (0.33%), N = 15, StdDev = 0.046 ms
+Min = 3.494 ms, Q1 = 3.509 ms, Median = 3.564 ms, Q3 = 3.589 ms, Max = 3.621 ms
+IQR = 0.080 ms, LowerFence = 3.388 ms, UpperFence = 3.710 ms
+ConfidenceInterval = [3.506 ms; 3.605 ms] (CI 99.9%), Margin = 0.049 ms (1.39% of Mean)
+Skewness = -0.17, Kurtosis = 1.46, MValue = 2
+-------------------- Histogram --------------------
+[3.469 ms ; 3.645 ms) | @@@@@@@@@@@@@@@
+---------------------------------------------------
+
+CRYSTALS_KyberBenchmark.BouncyCastleKYBERExecutor: DefaultJob [name=kyber1024-aes, kyberParameters=Org.B(...)eters [58]]
+Runtime = .NET 7.0.1 (7.0.122.56804), X64 RyuJIT AVX2; GC = Concurrent Workstation
+Mean = 5.110 ms, StdErr = 0.016 ms (0.30%), N = 15, StdDev = 0.060 ms
+Min = 5.036 ms, Q1 = 5.056 ms, Median = 5.083 ms, Q3 = 5.168 ms, Max = 5.194 ms
+IQR = 0.113 ms, LowerFence = 4.886 ms, UpperFence = 5.338 ms
+ConfidenceInterval = [5.045 ms; 5.174 ms] (CI 99.9%), Margin = 0.064 ms (1.26% of Mean)
+Skewness = 0.27, Kurtosis = 1.23, MValue = 2
+-------------------- Histogram --------------------
+[5.004 ms ; 5.110 ms) | @@@@@@@@
+[5.110 ms ; 5.226 ms) | @@@@@@@
+---------------------------------------------------
+
+CRYSTALS_KyberBenchmark.KYBERExecutor: DefaultJob [name=kyber1024-aes, kyberParameters=Quant(...)eters [55]]
+Runtime = .NET 7.0.1 (7.0.122.56804), X64 RyuJIT AVX2; GC = Concurrent Workstation
+Mean = 3.483 ms, StdErr = 0.012 ms (0.34%), N = 15, StdDev = 0.046 ms
+Min = 3.419 ms, Q1 = 3.445 ms, Median = 3.468 ms, Q3 = 3.521 ms, Max = 3.567 ms
+IQR = 0.076 ms, LowerFence = 3.330 ms, UpperFence = 3.635 ms
+ConfidenceInterval = [3.434 ms; 3.532 ms] (CI 99.9%), Margin = 0.049 ms (1.41% of Mean)
+Skewness = 0.32, Kurtosis = 1.62, MValue = 2
+-------------------- Histogram --------------------
+[3.394 ms ; 3.494 ms) | @@@@@@@@@
+[3.494 ms ; 3.591 ms) | @@@@@@
+---------------------------------------------------
+
+CRYSTALS_KyberBenchmark.BouncyCastleKYBERExecutor: DefaultJob [name=kyber512, kyberParameters=Org.B(...)eters [58]]
+Runtime = .NET 7.0.1 (7.0.122.56804), X64 RyuJIT AVX2; GC = Concurrent Workstation
+Mean = 1.914 ms, StdErr = 0.005 ms (0.26%), N = 15, StdDev = 0.020 ms
+Min = 1.888 ms, Q1 = 1.901 ms, Median = 1.918 ms, Q3 = 1.925 ms, Max = 1.960 ms
+IQR = 0.024 ms, LowerFence = 1.865 ms, UpperFence = 1.962 ms
+ConfidenceInterval = [1.893 ms; 1.935 ms] (CI 99.9%), Margin = 0.021 ms (1.09% of Mean)
+Skewness = 0.56, Kurtosis = 2.67, MValue = 2
+-------------------- Histogram --------------------
+[1.878 ms ; 1.971 ms) | @@@@@@@@@@@@@@@
+---------------------------------------------------
+
+CRYSTALS_KyberBenchmark.KYBERExecutor: DefaultJob [name=kyber512, kyberParameters=Quant(...)eters [55]]
+Runtime = .NET 7.0.1 (7.0.122.56804), X64 RyuJIT AVX2; GC = Concurrent Workstation
+Mean = 1.932 ms, StdErr = 0.006 ms (0.33%), N = 15, StdDev = 0.025 ms
+Min = 1.893 ms, Q1 = 1.916 ms, Median = 1.930 ms, Q3 = 1.949 ms, Max = 1.972 ms
+IQR = 0.033 ms, LowerFence = 1.867 ms, UpperFence = 1.998 ms
+ConfidenceInterval = [1.905 ms; 1.958 ms] (CI 99.9%), Margin = 0.027 ms (1.38% of Mean)
+Skewness = 0.1, Kurtosis = 1.82, MValue = 2
+-------------------- Histogram --------------------
+[1.879 ms ; 1.986 ms) | @@@@@@@@@@@@@@@
+---------------------------------------------------
+
+CRYSTALS_KyberBenchmark.BouncyCastleKYBERExecutor: DefaultJob [name=kyber512-aes, kyberParameters=Org.B(...)eters [58]]
+Runtime = .NET 7.0.1 (7.0.122.56804), X64 RyuJIT AVX2; GC = Concurrent Workstation
+Mean = 2.410 ms, StdErr = 0.006 ms (0.25%), N = 15, StdDev = 0.024 ms
+Min = 2.374 ms, Q1 = 2.394 ms, Median = 2.411 ms, Q3 = 2.425 ms, Max = 2.450 ms
+IQR = 0.031 ms, LowerFence = 2.348 ms, UpperFence = 2.471 ms
+ConfidenceInterval = [2.385 ms; 2.435 ms] (CI 99.9%), Margin = 0.025 ms (1.05% of Mean)
+Skewness = 0.09, Kurtosis = 1.79, MValue = 2
+-------------------- Histogram --------------------
+[2.361 ms ; 2.463 ms) | @@@@@@@@@@@@@@@
+---------------------------------------------------
+
+CRYSTALS_KyberBenchmark.KYBERExecutor: DefaultJob [name=kyber512-aes, kyberParameters=Quant(...)eters [55]]
+Runtime = .NET 7.0.1 (7.0.122.56804), X64 RyuJIT AVX2; GC = Concurrent Workstation
+Mean = 1.862 ms, StdErr = 0.007 ms (0.36%), N = 15, StdDev = 0.026 ms
+Min = 1.825 ms, Q1 = 1.836 ms, Median = 1.867 ms, Q3 = 1.882 ms, Max = 1.910 ms
+IQR = 0.046 ms, LowerFence = 1.767 ms, UpperFence = 1.952 ms
+ConfidenceInterval = [1.834 ms; 1.890 ms] (CI 99.9%), Margin = 0.028 ms (1.49% of Mean)
+Skewness = 0.02, Kurtosis = 1.68, MValue = 2
+-------------------- Histogram --------------------
+[1.811 ms ; 1.850 ms) | @@@@@
+[1.850 ms ; 1.924 ms) | @@@@@@@@@@
+---------------------------------------------------
+
+CRYSTALS_KyberBenchmark.BouncyCastleKYBERExecutor: DefaultJob [name=kyber768, kyberParameters=Org.B(...)eters [58]]
+Runtime = .NET 7.0.1 (7.0.122.56804), X64 RyuJIT AVX2; GC = Concurrent Workstation
+Mean = 2.634 ms, StdErr = 0.014 ms (0.55%), N = 33, StdDev = 0.083 ms
+Min = 2.556 ms, Q1 = 2.571 ms, Median = 2.596 ms, Q3 = 2.680 ms, Max = 2.851 ms
+IQR = 0.109 ms, LowerFence = 2.408 ms, UpperFence = 2.844 ms
+ConfidenceInterval = [2.581 ms; 2.686 ms] (CI 99.9%), Margin = 0.052 ms (1.99% of Mean)
+Skewness = 1.21, Kurtosis = 3.38, MValue = 2.29
+-------------------- Histogram --------------------
+[2.553 ms ; 2.621 ms) | @@@@@@@@@@@@@@@@@@@@@
+[2.621 ms ; 2.741 ms) | @@@@@@@@@
+[2.741 ms ; 2.860 ms) | @@@
+---------------------------------------------------
+
+CRYSTALS_KyberBenchmark.KYBERExecutor: DefaultJob [name=kyber768, kyberParameters=Quant(...)eters [55]]
+Runtime = .NET 7.0.1 (7.0.122.56804), X64 RyuJIT AVX2; GC = Concurrent Workstation
+Mean = 2.644 ms, StdErr = 0.012 ms (0.44%), N = 21, StdDev = 0.053 ms
+Min = 2.553 ms, Q1 = 2.614 ms, Median = 2.630 ms, Q3 = 2.671 ms, Max = 2.780 ms
+IQR = 0.058 ms, LowerFence = 2.528 ms, UpperFence = 2.758 ms
+ConfidenceInterval = [2.599 ms; 2.689 ms] (CI 99.9%), Margin = 0.045 ms (1.70% of Mean)
+Skewness = 0.64, Kurtosis = 3.12, MValue = 2
+-------------------- Histogram --------------------
+[2.549 ms ; 2.606 ms) | @@@@
+[2.606 ms ; 2.666 ms) | @@@@@@@@@@
+[2.666 ms ; 2.805 ms) | @@@@@@@
+---------------------------------------------------
+
+CRYSTALS_KyberBenchmark.BouncyCastleKYBERExecutor: DefaultJob [name=kyber768-aes, kyberParameters=Org.B(...)eters [58]]
+Runtime = .NET 7.0.1 (7.0.122.56804), X64 RyuJIT AVX2; GC = Concurrent Workstation
+Mean = 3.546 ms, StdErr = 0.015 ms (0.43%), N = 15, StdDev = 0.060 ms
+Min = 3.480 ms, Q1 = 3.492 ms, Median = 3.566 ms, Q3 = 3.581 ms, Max = 3.674 ms
+IQR = 0.089 ms, LowerFence = 3.359 ms, UpperFence = 3.714 ms
+ConfidenceInterval = [3.482 ms; 3.610 ms] (CI 99.9%), Margin = 0.064 ms (1.80% of Mean)
+Skewness = 0.48, Kurtosis = 2, MValue = 2
+-------------------- Histogram --------------------
+[3.456 ms ; 3.557 ms) | @@@@@@@
+[3.557 ms ; 3.706 ms) | @@@@@@@@
+---------------------------------------------------
+
+CRYSTALS_KyberBenchmark.KYBERExecutor: DefaultJob [name=kyber768-aes, kyberParameters=Quant(...)eters [55]]
+Runtime = .NET 7.0.1 (7.0.122.56804), X64 RyuJIT AVX2; GC = Concurrent Workstation
+Mean = 2.595 ms, StdErr = 0.009 ms (0.34%), N = 15, StdDev = 0.034 ms
+Min = 2.549 ms, Q1 = 2.560 ms, Median = 2.608 ms, Q3 = 2.624 ms, Max = 2.647 ms
+IQR = 0.064 ms, LowerFence = 2.464 ms, UpperFence = 2.719 ms
+ConfidenceInterval = [2.559 ms; 2.632 ms] (CI 99.9%), Margin = 0.037 ms (1.42% of Mean)
+Skewness = 0, Kurtosis = 1.26, MValue = 2
+-------------------- Histogram --------------------
+[2.538 ms ; 2.650 ms) | @@@@@@@@@@@@@@@
+---------------------------------------------------
+
+// * Summary *
+
+BenchmarkDotNet=v0.13.5, OS=Windows 11 (10.0.22621.1413/22H2/2022Update/SunValley2)
+AMD Ryzen 7 5800X, 1 CPU, 16 logical and 8 physical cores
+.NET SDK=7.0.101
+  [Host]     : .NET 7.0.1 (7.0.122.56804), X64 RyuJIT AVX2
+  DefaultJob : .NET 7.0.1 (7.0.122.56804), X64 RyuJIT AVX2
+
+
+|                    Method |          name |      kyberParameters |     Mean |     Error |    StdDev | Ratio | RatioSD |     Gen0 |   Gen1 | Allocated | Alloc Ratio |
+|-------------------------- |-------------- |--------------------- |---------:|----------:|----------:|------:|--------:|---------:|-------:|----------:|------------:|
+| BouncyCastleKYBERExecutor |     kyber1024 | Org.B(...)eters [58] | 3.564 ms | 0.0515 ms | 0.0482 ms |     ? |       ? | 132.8125 | 3.9063 |   2.17 MB |           ? |
+|                           |               |                      |          |           |           |       |         |          |        |           |             |
+|             KYBERExecutor |     kyber1024 | Quant(...)eters [55] | 3.555 ms | 0.0493 ms | 0.0461 ms |  1.00 |    0.00 | 132.8125 | 3.9063 |   2.16 MB |        1.00 |
+|                           |               |                      |          |           |           |       |         |          |        |           |             |
+| BouncyCastleKYBERExecutor | kyber1024-aes | Org.B(...)eters [58] | 5.110 ms | 0.0643 ms | 0.0601 ms |     ? |       ? | 210.9375 | 7.8125 |   3.39 MB |           ? |
+|                           |               |                      |          |           |           |       |         |          |        |           |             |
+|             KYBERExecutor | kyber1024-aes | Quant(...)eters [55] | 3.483 ms | 0.0491 ms | 0.0459 ms |  1.00 |    0.00 | 171.8750 | 7.8125 |   2.75 MB |        1.00 |
+|                           |               |                      |          |           |           |       |         |          |        |           |             |
+| BouncyCastleKYBERExecutor |      kyber512 | Org.B(...)eters [58] | 1.914 ms | 0.0209 ms | 0.0196 ms |     ? |       ? | 101.5625 | 1.9531 |   1.64 MB |           ? |
+|                           |               |                      |          |           |           |       |         |          |        |           |             |
+|             KYBERExecutor |      kyber512 | Quant(...)eters [55] | 1.932 ms | 0.0266 ms | 0.0249 ms |  1.00 |    0.00 | 101.5625 | 1.9531 |   1.63 MB |        1.00 |
+|                           |               |                      |          |           |           |       |         |          |        |           |             |
+| BouncyCastleKYBERExecutor |  kyber512-aes | Org.B(...)eters [58] | 2.410 ms | 0.0252 ms | 0.0236 ms |     ? |       ? | 125.0000 | 3.9063 |   2.06 MB |           ? |
+|                           |               |                      |          |           |           |       |         |          |        |           |             |
+|             KYBERExecutor |  kyber512-aes | Quant(...)eters [55] | 1.862 ms | 0.0278 ms | 0.0260 ms |  1.00 |    0.00 | 113.2813 | 1.9531 |   1.83 MB |        1.00 |
+|                           |               |                      |          |           |           |       |         |          |        |           |             |
+| BouncyCastleKYBERExecutor |      kyber768 | Org.B(...)eters [58] | 2.634 ms | 0.0524 ms | 0.0832 ms |     ? |       ? | 117.1875 | 3.9063 |   1.88 MB |           ? |
+|                           |               |                      |          |           |           |       |         |          |        |           |             |
+|             KYBERExecutor |      kyber768 | Quant(...)eters [55] | 2.644 ms | 0.0449 ms | 0.0534 ms |  1.00 |    0.00 | 117.1875 | 3.9063 |   1.87 MB |        1.00 |
+|                           |               |                      |          |           |           |       |         |          |        |           |             |
+| BouncyCastleKYBERExecutor |  kyber768-aes | Org.B(...)eters [58] | 3.546 ms | 0.0638 ms | 0.0597 ms |     ? |       ? | 164.0625 | 7.8125 |   2.64 MB |           ? |
+|                           |               |                      |          |           |           |       |         |          |        |           |             |
+|             KYBERExecutor |  kyber768-aes | Quant(...)eters [55] | 2.595 ms | 0.0367 ms | 0.0344 ms |  1.00 |    0.00 | 136.7188 | 3.9063 |   2.24 MB |        1.00 |
+
+// * Warnings *
+BaselineCustomAnalyzer
+  Summary -> A question mark '?' symbol indicates that it was not possible to compute the (Ratio, RatioSD, Alloc Ratio) column(s) because the baseline value is too close to zero.
+
+// * Hints *
+Outliers
+  CRYSTALS_KyberBenchmark.BouncyCastleKYBERExecutor: Default -> 2 outliers were removed (3.20 ms, 3.24 ms)
+  CRYSTALS_KyberBenchmark.KYBERExecutor: Default             -> 3 outliers were removed (2.82 ms..3.27 ms)
+
+// * Legends *
+  name            : Value of the 'name' parameter
+  kyberParameters : Value of the 'kyberParameters' parameter
+  Mean            : Arithmetic mean of all measurements
+  Error           : Half of 99.9% confidence interval
+  StdDev          : Standard deviation of all measurements
+  Ratio           : Mean of the ratio distribution ([Current]/[Baseline])
+  RatioSD         : Standard deviation of the ratio distribution ([Current]/[Baseline])
+  Gen0            : GC Generation 0 collects per 1000 operations
+  Gen1            : GC Generation 1 collects per 1000 operations
+  Allocated       : Allocated memory per single operation (managed only, inclusive, 1KB = 1024B)
+  Alloc Ratio     : Allocated memory ratio distribution ([Current]/[Baseline])
+  1 ms            : 1 Millisecond (0.001 sec)
+
+// * Diagnostic Output - MemoryDiagnoser *
+
+
+// ***** BenchmarkRunner: End *****
+Run time: 00:04:40 (280.63 sec), executed benchmarks: 12
+
+Global total time: 00:04:44 (284.72 sec), executed benchmarks: 12
+// * Artifacts cleanup *

@@ -396,3 +396,9 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+
+# Add bencmark logs
+!QuantoCrypt.Tests/QuantoCrypt.Benchmarks/Results/
+!QuantoCrypt.Tests/QuantoCrypt.Benchmarks/Results/KEM/*
+!QuantoCrypt.Tests/QuantoCrypt.Benchmarks/Results/Signature/*
+!QuantoCrypt.Tests/QuantoCrypt.Benchmarks/Results/Symmetric/*
