@@ -28,8 +28,8 @@ namespace QuantoCrypt.Internal.Signature.CRYSTALS.Dilithium
         /// </summary>
         public DilithiumParameters Parameters => _rDilithiumParameters;
 
-        public SecureRandom Random => throw new NotImplementedException();
+        public SecureRandom Random => _rSecureRandom;
 
-        public int KeyStrength => throw new NotImplementedException();
+        public int KeyStrength => _keyStrength;
     }
 }

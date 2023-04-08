@@ -1,19 +1,27 @@
 ﻿using BenchmarkDotNet.Configs;
 using BenchmarkDotNet.Running;
 using QuantoCrypt.Benchmarks.KEM;
+using QuantoCrypt.Benchmarks.Signature;
 using QuantoCrypt.Benchmarks.Symmetric;
+using QuantoCrypt.Internal.Signature.CRYSTALS.Dilithium;
 
 class Program
 {
     static void Main(string[] args)
     {
-        BenchmarkRunner.Run<AesBenchmark>();
+        //BenchmarkRunner.Run<CRYSTALS_KyberBenchmark>();
+        BenchmarkRunner.Run<CRYSTALS_DilithiumBenchmark>();
+        //BenchmarkRunner.Run<AesBenchmark>();
+
 
         //BenchmarkRunner.Run<CRYSTALS_KyberBenchmark>(ManualConfig.Create(DefaultConfig.Instance).WithOption(ConfigOptions.DisableOptimizationsValidator, true));
 
         //new CRYSTALS_KyberBenchmark().KYBERExecutor(KyberParameters.KYBER1024.Name, KyberParameters.KYBER1024);
 
         //new CRYSTALS_KyberBenchmark().BouncyCastleKYBERExecutor(Org.BouncyCastle.Pqc.Crypto.Crystals.Kyber.KyberParameters.kyber512.Name, Org.BouncyCastle.Pqc.Crypto.Crystals.Kyber.KyberParameters.kyber512);
+
+        //new CRYSTALS_DilithiumBenchmark().DilithiumExecutor(DilithiumParameters.DILITHIUM5_AES.Name, DilithiumParameters.DILITHIUM5_AES);
+        //new CRYSTALS_DilithiumBenchmark().BouncyCastleDilithiumExecutor(Org.BouncyCastle.Pqc.Crypto.Crystals.Dilithium.DilithiumParameters.Dilithium5Aes);
 
         //new AesBenchmark().AesAlgorithmExecutor(256);
         //new AesBenchmark().AesGcmAlgorithmExecutor(256);
