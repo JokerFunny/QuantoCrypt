@@ -162,17 +162,17 @@ namespace QuantoCrypt.Internal.Connection
                 ISignatureAlgorithm signatureAlgorithm = cipherSuiteToUse.GetSignatureAlgorithm();
 
                 // create keys and sign clinets' message.
-                var signatureKeys = signatureAlgorithm.KeyGen();
+                AsymmetricKeyPair signatureKeys = signatureAlgorithm.KeyGen();
 
                 // generate hash over clientInitMessage to be signed.
                 byte[] messageToBeSigned = SHA384.HashData(clientInitMessage);
-                byte[] signature = signatureAlgorithm.Sign(messageToBeSigned, signatureKeys.Item2);
+                byte[] signature = signatureAlgorithm.Sign(messageToBeSigned, signatureKeys.Private.GetEncoded());
 
                 // create a proper ISymmetricAlgorithm using genereted session secret.
                 connection.UsedSymmetricAlgorithm = cipherSuiteToUse.GetSymmetricAlgorithm(sessionSecret);
 
                 // prepare params for client. We need to sent cipher text + [signature public key + attachedSig] (encrypted).
-                byte[] encryptedSigWithKey = connection.UsedSymmetricAlgorithm.Encrypt(ArrayUtilities.Combine(signature, messageToBeSigned, signatureKeys.Item1));
+                byte[] encryptedSigWithKey = connection.UsedSymmetricAlgorithm.Encrypt(ArrayUtilities.Combine(signature, messageToBeSigned, signatureKeys.Public.GetEncoded()));
 
                 return ProtocolMessage.CreateServerInitMessage(generatedCipherText, encryptedSigWithKey, signature.Length + messageToBeSigned.Length);
             }

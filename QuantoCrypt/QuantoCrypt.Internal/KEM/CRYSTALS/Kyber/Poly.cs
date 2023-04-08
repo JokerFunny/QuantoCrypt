@@ -9,10 +9,14 @@
         private readonly KyberEngine _rKyberEngine;
         private readonly Symmetric _rSymmetric;
 
-        public Poly(KyberEngine mEngine)
+        /// <summary>
+        /// Default ctor.
+        /// </summary>
+        /// <param name="kyberEngine">Target <see cref="KyberEngine"/>.</param>
+        internal Poly(KyberEngine kyberEngine)
         {
-            _rKyberEngine = mEngine;
-            _rSymmetric = mEngine.Symmetric;
+            _rKyberEngine = kyberEngine;
+            _rSymmetric = kyberEngine.Symmetric;
         }
 
         internal short[] Coeffs => _rCoeffs;

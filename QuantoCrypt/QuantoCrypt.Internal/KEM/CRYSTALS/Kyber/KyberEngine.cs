@@ -84,13 +84,9 @@ namespace QuantoCrypt.Internal.KEM.CRYSTALS.Kyber
             CryptoCipherTextBytes = CipherTextBytes;
 
             if (usingAes)
-            {
                 Symmetric = new Symmetric.AesSymmetric();
-            }
             else
-            {
                 Symmetric = new Symmetric.ShakeSymmetric();
-            }
 
             _rIndCpa = new KyberIndCpa(this);
         }

@@ -12,6 +12,11 @@ namespace QuantoCrypt.Internal.KEM.CRYSTALS.Kyber
         private readonly KyberParameters _rKyberParameters;
         private readonly SecureRandom _rSecureRandom;
 
+        /// <summary>
+        /// Default ctor.
+        /// </summary>
+        /// <param name="random">Target <see cref="SecureRandom"/> to be used.</param>
+        /// <param name="kyberParameters">Target <see cref="KyberParameters"/>.</param>
         public KyberKeyGenerationParameters(SecureRandom random, KyberParameters kyberParameters)
         {
             _rSecureRandom = random;

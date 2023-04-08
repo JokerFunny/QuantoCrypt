@@ -1,5 +1,4 @@
 ﻿using QuantoCrypt.Infrastructure.Common;
-using QuantoCrypt.Infrastructure.Common.Random;
 
 namespace QuantoCrypt.Internal.KEM.CRYSTALS.Kyber
 {
@@ -12,9 +11,9 @@ namespace QuantoCrypt.Internal.KEM.CRYSTALS.Kyber
         private readonly SecureRandom _rSecureRandom;
 
         /// <summary>
-        /// Intialise the key pair generator
+        /// Intialise the key pair generator.
         /// </summary>
-        /// <param name="param"></param>
+        /// <param name="param">Target <see cref="KyberKeyGenerationParameters"/>.</param>
         internal KyberKeyPairGenerator(KyberKeyGenerationParameters param)
         {
             _rKyberParams = param.Parameters;
@@ -22,13 +21,12 @@ namespace QuantoCrypt.Internal.KEM.CRYSTALS.Kyber
         }
 
         /// <summary>
-        /// Creates an <see cref="AsymmetricCipherKeyPair"/> containing the generated keys.
+        /// Creates an <see cref="AsymmetricKeyPair"/> containing the generated keys.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>
+        ///     Target <see cref="AsymmetricKeyPair"/>.
+        /// </returns>
         public AsymmetricKeyPair GenerateKeyPair()
-            => _GenKeyPair();
-
-        private AsymmetricKeyPair _GenKeyPair()
         {
             KyberEngine engine = _rKyberParams.Engine;
             engine.Init(_rSecureRandom);

@@ -18,7 +18,7 @@
             478, 3221, 3021, 996, 991, 958, 1869, 1522, 1628
         };
 
-        internal static readonly short[] srZetasInv = {
+        private static readonly short[] _srZetasInv = {
             1701, 1807, 1460, 2371, 2338, 2333, 308, 108, 2851, 870, 854, 1510, 2535,
             1278, 1530, 1185, 1659, 1187, 3109, 874, 1335, 2111, 136, 1215, 2945, 1465,
             1285, 2007, 2719, 2726, 2232, 2512, 75, 156, 3000, 2911, 2980, 872, 2685,
@@ -56,7 +56,7 @@
             {
                 for (int start = 0; start < 256; start = j + len)
                 {
-                    short zeta = srZetasInv[k++];
+                    short zeta = _srZetasInv[k++];
                     for (j = start; j < start + len; ++j)
                     {
                         short t = r[j];
@@ -69,7 +69,7 @@
             }
 
             for (int i = 0; i < 256; ++i)
-                r[i] = _FactorQMulMont(r[i], srZetasInv[127]);
+                r[i] = _FactorQMulMont(r[i], _srZetasInv[127]);
         }
 
         internal static void BaseMult(short[] r, int off, short a0, short a1, short b0, short b1, short zeta)

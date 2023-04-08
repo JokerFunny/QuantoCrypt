@@ -1,4 +1,6 @@
-﻿namespace QuantoCrypt.Infrastructure.Signature
+﻿using QuantoCrypt.Infrastructure.Common;
+
+namespace QuantoCrypt.Infrastructure.Signature
 {
     /// <summary>
     /// Interface for all signature algorithms that would be used to authenticate users.
@@ -11,7 +13,7 @@
         /// <returns>
         ///     Public + private keys.
         /// </returns>
-        (byte[], byte[]) KeyGen();
+        AsymmetricKeyPair KeyGen();
 
         /// <summary>
         /// Generate the signature over <paramref name="message"/>.

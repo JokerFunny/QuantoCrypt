@@ -2,6 +2,9 @@
 
 namespace QuantoCrypt.Internal.KEM.CRYSTALS.Kyber
 {
+    /// <summary>
+    /// Handle work with CRYSTALS-Kyber public key.
+    /// </summary>
     internal sealed class KyberPublicKey : KyberKey
     {
         private readonly byte[] _rT;
@@ -11,12 +14,12 @@ namespace QuantoCrypt.Internal.KEM.CRYSTALS.Kyber
         /// Default ctor.
         /// </summary>
         /// <param name="parameters">Target <see cref="KyberParameters"/>.</param>
-        /// <param name="encoding">Target public key.</param>
-        public KyberPublicKey(KyberParameters parameters, byte[] encoding)
+        /// <param name="encoded">Target public key.</param>
+        public KyberPublicKey(KyberParameters parameters, byte[] encoded)
             : base(false, parameters)
         {
-            _rT = ArrayUtilities.CopyOfRange(encoding, 0, encoding.Length - KyberEngine.SymBytes);
-            _rRho = ArrayUtilities.CopyOfRange(encoding, encoding.Length - KyberEngine.SymBytes, encoding.Length);
+            _rT = ArrayUtilities.CopyOfRange(encoded, 0, encoded.Length - KyberEngine.SymBytes);
+            _rRho = ArrayUtilities.CopyOfRange(encoded, encoded.Length - KyberEngine.SymBytes, encoded.Length);
         }
 
         /// <summary>
