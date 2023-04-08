@@ -22,7 +22,8 @@ namespace QuantoCrypt.Infrastructure.CipherSuite
         /// <summary>
         /// Method to get target <see cref="ISignatureAlgorithm"/>.
         /// </summary>
-        ISignatureAlgorithm GetSignatureAlgorithm();
+        /// <param name="isForSigning">If <see cref="ISignatureAlgorithm"/> should sign or verify messages.</param>
+        ISignatureAlgorithm GetSignatureAlgorithm(bool isForSigning);
 
         /// <summary>
         /// Method to get target <see cref="ISymmetricAlgorithm"/>.

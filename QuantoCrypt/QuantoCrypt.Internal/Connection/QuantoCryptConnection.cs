@@ -159,14 +159,14 @@ namespace QuantoCrypt.Internal.Connection
                 byte[] generatedCipherText = secretWithEncapsulatedData.GetEncapsulation();
 
                 // get Signature algorithm.
-                ISignatureAlgorithm signatureAlgorithm = cipherSuiteToUse.GetSignatureAlgorithm();
+                ISignatureAlgorithm signatureAlgorithmForSigning = cipherSuiteToUse.GetSignatureAlgorithm(true);
 
                 // create keys and sign clinets' message.
-                AsymmetricKeyPair signatureKeys = signatureAlgorithm.KeyGen();
+                AsymmetricKeyPair signatureKeys = signatureAlgorithmForSigning.KeyGen();
 
                 // generate hash over clientInitMessage to be signed.
                 byte[] messageToBeSigned = SHA384.HashData(clientInitMessage);
-                byte[] signature = signatureAlgorithm.Sign(messageToBeSigned, signatureKeys.Private.GetEncoded());
+                byte[] signature = signatureAlgorithmForSigning.Sign(messageToBeSigned);
 
                 // create a proper ISymmetricAlgorithm using genereted session secret.
                 connection.UsedSymmetricAlgorithm = cipherSuiteToUse.GetSymmetricAlgorithm(sessionSecret);

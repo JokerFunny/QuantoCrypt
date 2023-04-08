@@ -25,7 +25,7 @@ namespace QuantoCrypt.Infrastructure.KEM
         ISecretWithEncapsulation Encaps(byte[] publicKey);
 
         /// <summary>
-        /// Get the session key from the <paramref name="cipherText"/> using <paramref name="privateKey"/>.
+        /// Get the session key from the <paramref name="cipherText"/> using privateKey.
         /// </summary>
         /// <param name="cipherText">Cipher text as a result of the <see cref="Encaps(byte[])"/> operation.</param>
         /// <remarks>

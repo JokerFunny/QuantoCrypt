@@ -69,22 +69,22 @@ namespace QuantoCrypt.Internal.Tests.KEM
         [MemberData(nameof(KYBERInputParams))]
         public void KyberAlgorithmxecutor(KyberParameters kyberParams)
         {
-            KyberAlgorithm keyPairGenerator = new KyberAlgorithm(kyberParams);
+            KyberAlgorithm kyberAlgorithm = new KyberAlgorithm(kyberParams);
 
             // Generate keys and test.
-            AsymmetricKeyPair generatedKeyPair = keyPairGenerator.KeyGen();
+            AsymmetricKeyPair generatedKeyPair = kyberAlgorithm.KeyGen();
 
             KyberPublicKey pubKey = (KyberPublicKey)generatedKeyPair.Public;
             KyberPrivateKey privKey = (KyberPrivateKey)generatedKeyPair.Private;
 
             // KEM Enc
-            ISecretWithEncapsulation secretWithIncapsulation = keyPairGenerator.Encaps(pubKey.GetEncoded());
+            ISecretWithEncapsulation secretWithIncapsulation = kyberAlgorithm.Encaps(pubKey.GetEncoded());
 
             byte[] generatedCipherText = secretWithIncapsulation.GetEncapsulation();
             byte[] secret = secretWithIncapsulation.GetSecret();
 
             // KEM Dec
-            byte[] decriptedSecret = keyPairGenerator.Decaps(generatedCipherText);
+            byte[] decriptedSecret = kyberAlgorithm.Decaps(generatedCipherText);
 
             secret.Should().BeEquivalentTo(decriptedSecret);
         }

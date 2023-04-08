@@ -25,7 +25,7 @@ namespace QuantoCrypt.Internal.CipherSuite
             return _kemAlgorithm;
         }
 
-        public ISignatureAlgorithm GetSignatureAlgorithm() => throw new NotImplementedException();
+        public ISignatureAlgorithm GetSignatureAlgorithm(bool isForSigning) => throw new NotImplementedException();
 
         public ISymmetricAlgorithm GetSymmetricAlgorithm(byte[] sessionKey)
         {

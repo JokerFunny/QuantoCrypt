@@ -16,14 +16,13 @@ namespace QuantoCrypt.Infrastructure.Signature
         AsymmetricKeyPair KeyGen();
 
         /// <summary>
-        /// Generate the signature over <paramref name="message"/>.
+        /// Generate the signature over <paramref name="message"/> using privateKey.
         /// </summary>
         /// <param name="message">Target message to be signed.</param>
-        /// <param name="privateKey">Target private key.</param>
         /// <returns>
         ///     Generated signature.
         /// </returns>
-        byte[] Sign(byte[] message, byte[] privateKey);
+        byte[] Sign(byte[] message);
 
         /// <summary>
         /// Verify that the provided signature is valid.

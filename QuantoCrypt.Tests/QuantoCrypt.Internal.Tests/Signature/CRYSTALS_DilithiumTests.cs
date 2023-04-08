@@ -68,24 +68,34 @@ namespace QuantoCrypt.Internal.Tests.KEM
         [MemberData(nameof(DILITHIUMInputParams))]
         public void DilithiumAlgorithmxecutor(DilithiumParameters dilithiumParameters)
         {
-            /*KyberAlgorithm keyPairGenerator = new KyberAlgorithm(kyberParams);
+            SecureRandom random = new SecureRandom();
+            byte[] message = random.GenerateSeed(512);
+
+            DilithiumAlgorithm dilithiumAlgorithmForSign = new DilithiumAlgorithm(dilithiumParameters, true);
 
             // Generate keys and test.
-            AsymmetricKeyPair generatedKeyPair = keyPairGenerator.KeyGen();
+            AsymmetricKeyPair generatedKeyPair = dilithiumAlgorithmForSign.KeyGen();
 
-            KyberPublicKey pubKey = (KyberPublicKey)generatedKeyPair.Public;
-            KyberPrivateKey privKey = (KyberPrivateKey)generatedKeyPair.Private;
+            DilithiumPublicKey pubKey = (DilithiumPublicKey)generatedKeyPair.Public;
+            DilithiumPrivateKey privKey = (DilithiumPrivateKey)generatedKeyPair.Private;
 
-            // KEM Enc
-            ISecretWithEncapsulation secretWithIncapsulation = keyPairGenerator.Encaps(pubKey.GetEncoded());
+            // Sign message.
+            byte[] attachedSignature = dilithiumAlgorithmForSign.Sign(message);
 
-            byte[] generatedCipherText = secretWithIncapsulation.GetEncapsulation();
-            byte[] secret = secretWithIncapsulation.GetSecret();
+            // Verify message.
+            DilithiumAlgorithm dilithiumAlgorithmForVerify = new DilithiumAlgorithm(dilithiumParameters, false);
 
-            // KEM Dec
-            byte[] decriptedSecret = keyPairGenerator.Decaps(generatedCipherText);
+            int signatureLength = attachedSignature.Length - 512;
+            byte[] publicKey = pubKey.GetEncoded();
+            byte[] signature = attachedSignature[..signatureLength];
+            bool successfullyVerified = dilithiumAlgorithmForVerify.Verify(publicKey, message, signature);
 
-            secret.Should().BeEquivalentTo(decriptedSecret);*/
+            // changing the signature by 1 byte should cause it to fail.
+            signature[3]++;
+            bool failedToVerify = dilithiumAlgorithmForVerify.Verify(publicKey, message, signature);
+
+            successfullyVerified.Should().BeTrue();
+            failedToVerify.Should().BeFalse();
         }
 
         private void _ExecuteTest(TestDataInput testData, DilithiumParameters dilithiumParameters)
