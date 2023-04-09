@@ -5,7 +5,9 @@ using QuantoCrypt.Infrastructure.KEM;
 using QuantoCrypt.Infrastructure.Signature;
 using QuantoCrypt.Infrastructure.Symmetric;
 using QuantoCrypt.Internal.Message;
+using QuantoCrypt.Internal.Signature.CRYSTALS.Dilithium;
 using QuantoCrypt.Internal.Utilities;
+using System;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -127,8 +129,10 @@ namespace QuantoCrypt.Internal.Connection
                     if (!verifier.Verify(signaturePublicKey, calculatedMessage, signature))
                         throw new Exception("Can't validate the server's signature!");
 
-                    // get session key here, init 
-                    clientFinishMessage = Array.Empty<byte>();
+                    // get hash of the SERVER_INIT message + encode it to sent to the server for verify.
+                    byte[] encodedServerInitMessageHash = connection.UsedSymmetricAlgorithm.Encrypt(SHA384.HashData(serverInitMessage));
+
+                    clientFinishMessage = ProtocolMessage.CreateClientFinishMessage(encodedServerInitMessageHash);
                 }
                 else if (serverInitMessage[1] == ProtocolMessage.UNSUPPORTED_CLIENT_PARAMS)
                 {
@@ -250,7 +254,7 @@ namespace QuantoCrypt.Internal.Connection
                 else
                     throw new ArgumentException($"Client sent invalid messageType. Expected [{ProtocolMessage.CLIENT_INIT}], found [{clientInitMessage[1]}].");
 
-                /*
+                
                 // fallback for unsopperted client cipher suite.
                 if (serverInitMessage[1] == ProtocolMessage.UNSUPPORTED_CLIENT_PARAMS)
                 {
@@ -269,14 +273,13 @@ namespace QuantoCrypt.Internal.Connection
                     {
                         string supportedCipherSuites = cipherSuiteProvider.SupportedCipherSuites
                             .Select(x => x.Name)
-                            .Aggregate("Supported CipherSuites:" (first, next) => $"{first}{Enviroment.NewLine}{next}");
+                            .Aggregate("Supported CipherSuites:", (first, next) => $"{first}{Environment.NewLine}{next}");
 
                         throw new ArgumentException($"Client sent unsupported CipherSuite in a second time. {supportedCipherSuites}.");
                     }
                     else
-                        clientInitMessage = __GetServerInitMessage(connection, clientInitMessage, cipherSuiteToUse);
+                        serverInitMessage = __GetServerInitMessage(connection, clientInitMessage, cipherSuiteToUse);
                 }
-                */
 
                 connection.prWrappedUnsecureConnection.Send(serverInitMessage);
 
@@ -289,9 +292,9 @@ namespace QuantoCrypt.Internal.Connection
                     throw new ArgumentException("Message integrity check fails.");
 
                 // check that the client sent a proper message (SHA384 over serverInit message, encoded via session key).
-                if (clientInitMessage[1] == ProtocolMessage.CLIENT_FINISH)
+                if (clientFinishMessage[1] == ProtocolMessage.CLIENT_FINISH)
                 {
-                    byte[] clientFinishCheck = clientInitMessage[10..];
+                    byte[] clientFinishCheck = clientFinishMessage[10..];
 
                     Span<byte> message = connection.UsedSymmetricAlgorithm.Decrypt(clientFinishCheck);
 
@@ -299,7 +302,7 @@ namespace QuantoCrypt.Internal.Connection
                         throw new ArgumentException("Client validation fails!");
                 }
                 else
-                    throw new ArgumentException($"Client sent invalid messageType. Expected [{ProtocolMessage.CLIENT_INIT}], found [{clientInitMessage[1]}].");
+                    throw new ArgumentException($"Client sent invalid messageType. Expected [{ProtocolMessage.CLIENT_FINISH}], found [{clientFinishMessage[1]}].");
 
 
 

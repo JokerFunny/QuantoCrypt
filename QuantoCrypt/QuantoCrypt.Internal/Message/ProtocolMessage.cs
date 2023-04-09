@@ -66,16 +66,20 @@ namespace QuantoCrypt.Internal.Message
         /// </returns>
         public static byte[] CreateUnsupportedParamsMessage(byte unsupportedParamsReciever, ICipherSuiteProvider supportedCipherSuites)
         {
-            List<byte> supportedCS = new();
-
             // go through all supported CipherSuites.
+            ulong allCiphers = 0;
             foreach (var item in supportedCipherSuites.SupportedCipherSuites)
             {
-                byte targetCipherSuiteCode = (byte)Enum.Parse(typeof(CipherSuite.CipherSuite), item.Name);
-                supportedCS.Add(targetCipherSuiteCode);
+                ulong targetCipherSuiteCode = (ulong)Enum.Parse(typeof(CipherSuite.CipherSuite), item.Name);
+
+                allCiphers += targetCipherSuiteCode;
             }
 
-            return CreateMessage(1, unsupportedParamsReciever, supportedCS.ToArray());
+            byte[] allCiphersSuites = new byte[8];
+
+            _CopyToByteArrayUlong(allCiphers, allCiphersSuites, 1);
+
+            return CreateMessage(1, unsupportedParamsReciever, allCiphersSuites);
         }
 
         /// <summary>
@@ -129,8 +133,9 @@ namespace QuantoCrypt.Internal.Message
         /// Generates the <see cref="SERVER_INIT"/> message with the proper format.
         /// </summary>
         /// <param name="cipherText">Target cipher text.</param>
-        /// <param name="encryptedSigWithKey">Target signature + signature public key, encrypted.</param>
+        /// <param name="encryptedSignatureWithKey">Target signature + signature public key, encrypted.</param>
         /// <param name="signaturePartLength">Length of the decrypted signature in the <paramref name="encryptedSigWithKey"/>.</param>
+        /// <param name="signaturePublicKeyLength">Length of the decrypted signature public key in the <paramref name="encryptedSigWithKey"/>.</param>
         /// <remarks>
         /// MESSAGE
         /// 0 - [version]
@@ -171,6 +176,24 @@ namespace QuantoCrypt.Internal.Message
 
             return CreateMessage(1, SERVER_INIT, message);
         }
+
+        /// <summary>
+        /// Generates the <see cref="CLIENT_FINISH"/> message with the proper format.
+        /// </summary>
+        /// <param name="encodedServerInitMessage">Hash of the <see cref="SERVER_INIT"/> message, encoded by symmetric algorithm.</param>
+        /// <remarks>
+        /// MESSAGE
+        /// 0 - [version]
+        /// 1 - [SERVER_INIT]
+        /// 2 - 5 - [dataLength]
+        /// 6 - 9 - [messageIntegrity]
+        /// 10 - end - [encodedServerInitMessage]
+        /// </remarks>
+        /// <returns>
+        ///     CLIENT_FINISH message with properly generated header.
+        /// </returns>
+        public static byte[] CreateClientFinishMessage(byte[] encodedServerInitMessage)
+            => CreateMessage(1, CLIENT_FINISH, encodedServerInitMessage);
 
         /// <summary>
         /// Creates a new message by provided params.
@@ -277,10 +300,10 @@ namespace QuantoCrypt.Internal.Message
         /// </returns>
         public byte[] GetBody()
         {
-            int targetLength = _rMessage.Length - _rHeaderOffset;
+            int targetLength = _rMessage.Length - _rProtocolHeaderOffset;
             byte[] messageBody = new byte[targetLength];
 
-            Array.Copy(_rMessage, _rHeaderOffset, messageBody, 0, targetLength);
+            Array.Copy(_rMessage, _rProtocolHeaderOffset, messageBody, 0, targetLength);
 
             return messageBody;
         }

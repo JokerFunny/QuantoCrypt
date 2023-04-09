@@ -30,7 +30,7 @@ namespace QuantoCrypt.Internal.Symmetric
             // fix message size.
             if (plainText.Length % 16 != 0) 
             {
-                int targetLength = plainText.Length + plainText.Length % 16;
+                int targetLength = plainText.Length + Math.Abs(plainText.Length % 16 - 16);
                 Span<byte> data = targetLength <= 128
                     ? stackalloc byte[targetLength]
                     : new byte[targetLength];
