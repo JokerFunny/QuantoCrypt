@@ -1,11 +1,20 @@
 ﻿using FluentAssertions;
 using QuantoCrypt.Infrastructure.Common;
 using QuantoCrypt.Internal.Symmetric;
+using System.Security.Cryptography;
 
 namespace QuantoCrypt.Internal.Tests.Symmetric
 {
     public class AesGcmAlgorithmTests
     {
+        [Theory]
+        [MemberData(nameof(InvalidKeysParams))]
+        public void AesGcmAlgorithm_Should_Throw_On_Incorrect_Key_Size(byte[] key)
+        {
+            Action incorrectKeySizeCreation = () => new AesGcmAlgorithm(key);
+            incorrectKeySizeCreation.Should().Throw<CryptographicException>().WithMessage("*Specified key is not a valid size for this algorithm.*");
+        }
+
         [Theory]
         [MemberData(nameof(AesGcmAlgorithmParams))]
         public void AesGcmAlgorithmExecutor(byte[] key, byte[] data)
@@ -17,6 +26,12 @@ namespace QuantoCrypt.Internal.Tests.Symmetric
             var decrypted = service.Decrypt(encrypted);
 
             data.Should().BeEquivalentTo(decrypted);
+        }
+
+        public static IEnumerable<object[]> InvalidKeysParams()
+        {
+            for (int i = 1; i < 100; i += 4)
+                yield return new object[] { new byte[i] };
         }
 
         public static IEnumerable<object[]> AesGcmAlgorithmParams()
