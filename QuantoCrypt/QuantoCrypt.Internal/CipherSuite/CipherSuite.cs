@@ -21,4 +21,17 @@ namespace QuantoCrypt.Internal.CipherSuite
         CrystalsKyber1024Aes_CrystalsDilithium5Aes_Aes              = 1 << 6,
         CrystalsKyber1024Aes_CrystalsDilithium5Aes_AesGcm           = 1 << 7
     }
+
+    /// <summary>
+    /// Helper to work with the <see cref="CipherSuite"/>.
+    /// </summary>
+    public static class CipherSuiteHelper
+    {
+        /// <summary>
+        /// Store the ordered collection of the names for the <see cref="CipherSuite"/>.
+        /// </summary>
+        public static string[] SupportedCS = Enum.GetValues<CipherSuite>()
+            .Select(x => x.ToString())
+            .ToArray();
+    }
 }

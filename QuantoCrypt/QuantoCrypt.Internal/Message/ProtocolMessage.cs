@@ -1,5 +1,6 @@
 ﻿using QuantoCrypt.Infrastructure.CipherSuite;
 using QuantoCrypt.Infrastructure.KEM;
+using QuantoCrypt.Internal.CipherSuite;
 using System.Buffers.Binary;
 using System.Runtime.CompilerServices;
 
@@ -59,7 +60,7 @@ namespace QuantoCrypt.Internal.Message
         /// 1 - [UNSUPPORTED_*_PARAMS]
         /// 2 - 5 - [dataLength]
         /// 6 - 9 - [messageIntegrity]
-        /// 10 - end - [supportedCipherSuites]
+        /// 10 - 17 - [supportedCipherSuites]
         /// </remarks>
         /// <returns>
         ///     UNSUPPORTED_*_PARAMS message with properly generated header.
@@ -104,7 +105,7 @@ namespace QuantoCrypt.Internal.Message
         public static byte[] CreateClientInitMessage(ICipherSuiteProvider supportedCipherSuites, ICipherSuite preferedCipherSuite, byte[] publicKey)
         {
             // add preffered CipherSuites.
-            byte prefferedCS = (byte)(ulong)Enum.Parse(typeof(CipherSuite.CipherSuite), preferedCipherSuite.Name);
+            byte prefferedCS = (byte)Array.IndexOf(CipherSuiteHelper.SupportedCS, preferedCipherSuite.Name);
 
             // go through all supported CipherSuites.
             ulong allCiphers = 0;

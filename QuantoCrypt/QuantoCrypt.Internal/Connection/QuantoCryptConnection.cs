@@ -4,10 +4,9 @@ using QuantoCrypt.Infrastructure.Connection;
 using QuantoCrypt.Infrastructure.KEM;
 using QuantoCrypt.Infrastructure.Signature;
 using QuantoCrypt.Infrastructure.Symmetric;
+using QuantoCrypt.Internal.CipherSuite;
 using QuantoCrypt.Internal.Message;
-using QuantoCrypt.Internal.Signature.CRYSTALS.Dilithium;
 using QuantoCrypt.Internal.Utilities;
-using System;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -72,6 +71,8 @@ namespace QuantoCrypt.Internal.Connection
             try
             {
                 var connection = new QuantoCryptConnection(baseConnection);
+
+                _sValidateCipherSuites(cipherSuiteProvider, preferredCipher);
 
                 // CLIENT_INIT - generate key pair + random message to be signed.
                 IKEMAlgorithm kemAlgorithm = preferredCipher.GetKEMAlgorithm();
@@ -165,24 +166,12 @@ namespace QuantoCrypt.Internal.Connection
         {
             ICipherSuite __GetCipherSuiteToUse(byte[] clientInitMessage)
             {
-                ICipherSuite cipherSuiteToUse = null;
-
-                // get preffered client CipherSuite.
+                // get preferred clients' CipherSuite.
                 byte prefferedCipherSuite = clientInitMessage[10];
 
-                // check if the server support preffered client CipherSuite.
-                foreach (var cipherSuite in cipherSuiteProvider.SupportedCipherSuites)
-                {
-                    byte supportedCipherSuite = (byte)(ulong)Enum.Parse(typeof(CipherSuite.CipherSuite), cipherSuite.Name);
-                    if (supportedCipherSuite == prefferedCipherSuite)
-                    {
-                        cipherSuiteToUse = cipherSuite;
+                string targetCSName = CipherSuiteHelper.SupportedCS[prefferedCipherSuite].ToString();
 
-                        break;
-                    }
-                }
-
-                return cipherSuiteToUse;
+                return cipherSuiteProvider.SupportedCipherSuites.FirstOrDefault(x => x.Name == targetCSName);
             }
 
             byte[] __GetServerInitMessage(QuantoCryptConnection connection, byte[] clientInitMessage, ICipherSuite cipherSuiteToUse)
@@ -226,7 +215,7 @@ namespace QuantoCrypt.Internal.Connection
             {
                 var connection = new QuantoCryptConnection(baseConnection);
 
-
+                _sValidateCipherSuites(cipherSuiteProvider);
 
                 // SERVER_INIT.
                 var clientInitMessage = connection.prWrappedUnsecureConnection.Receive();
@@ -415,6 +404,23 @@ namespace QuantoCrypt.Internal.Connection
             }
 
             return result;
+        }
+
+
+        private static void _sValidateCipherSuites(ICipherSuiteProvider cipherSuiteProvider)
+        {
+            if ((cipherSuiteProvider?.SupportedCipherSuites?.Count ?? 0) == 0)
+                throw new ArgumentException($"SupportedCipherSuites can't be null or empty! Please, recheck your code - the [{nameof(cipherSuiteProvider)}] param.");
+        }
+
+        private static void _sValidateCipherSuites(ICipherSuiteProvider cipherSuiteProvider, ICipherSuite preferredCipher)
+        {
+            _sValidateCipherSuites(cipherSuiteProvider);
+
+            // in case if try to use the CS that is not supported - throw.
+            if (cipherSuiteProvider.SupportedCipherSuites.FirstOrDefault(x => x.Name == preferredCipher.Name) == null)
+                throw new ArgumentException($"You're trying to use the cipher suite that is not listened in the [{nameof(cipherSuiteProvider)}]. " +
+                    $"Target preferredCipher - [{preferredCipher.Name}], supported cipher suites by provider: {cipherSuiteProvider.SupportedCipherSuites.Select(x => x.Name).Aggregate((first, next) => $"{first}{Environment.NewLine}{next}")}");
         }
     }
 }
