@@ -13,6 +13,9 @@ namespace QuantoCrypt.Internal.CipherSuite
     /// <see cref="DilithiumAlgorithm"/> with <see cref="DilithiumParameters.DILITHIUM5_AES"/> + 
     /// <see cref="AesGcmAlgorithm"/>.
     /// </summary>
+    /// <remarks>
+    ///     The key for the <see cref="ISymmetricAlgorithm"/> should be of 256-bit size!
+    /// </remarks>
     public sealed class CrystalsKyber1024_CrystalsDilithium5Aes_AesGcm : ICipherSuite
     {
         public string Name => nameof(CrystalsKyber1024_CrystalsDilithium5Aes_AesGcm);
@@ -39,6 +42,9 @@ namespace QuantoCrypt.Internal.CipherSuite
 
         public ISymmetricAlgorithm GetSymmetricAlgorithm(byte[] sessionKey)
         {
+            if (sessionKey == null || sessionKey.Length != 32)
+                throw new ArgumentOutOfRangeException(nameof(sessionKey), "The key should be of 256-bit size!");
+
             if (_symmetricAlgorithm == null)
                 _symmetricAlgorithm = new AesGcmAlgorithm(sessionKey);
 

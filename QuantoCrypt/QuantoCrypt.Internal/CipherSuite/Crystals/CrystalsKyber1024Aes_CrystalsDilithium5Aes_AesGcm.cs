@@ -9,25 +9,25 @@ using QuantoCrypt.Internal.Symmetric;
 namespace QuantoCrypt.Internal.CipherSuite
 {
     /// <summary>
-    /// <see cref="KyberAlgorithm"/> with <see cref="KyberParameters.KYBER1024"/> + 
+    /// <see cref="KyberAlgorithm"/> with <see cref="KyberParameters.KYBER1024_AES"/> + 
     /// <see cref="DilithiumAlgorithm"/> with <see cref="DilithiumParameters.DILITHIUM5_AES"/> + 
     /// <see cref="AesAlgorithm"/>.
     /// </summary>
     /// <remarks>
     ///     The key for the <see cref="ISymmetricAlgorithm"/> should be of 256-bit size!
     /// </remarks>
-    public sealed class CrystalsKyber1024_CrystalsDilithium5Aes_Aes : ICipherSuite
+    public sealed class CrystalsKyber1024Aes_CrystalsDilithium5Aes_AesGcm : ICipherSuite
     {
-        public string Name => nameof(CrystalsKyber1024_CrystalsDilithium5Aes_Aes);
+        public string Name => nameof(CrystalsKyber1024Aes_CrystalsDilithium5Aes_AesGcm);
 
         private KyberAlgorithm _kemAlgorithm;
         private DilithiumAlgorithm _dilithiumAlgorithm;
-        private AesAlgorithm _symmetricAlgorithm;
+        private AesGcmAlgorithm _symmetricAlgorithm;
 
         public IKEMAlgorithm GetKEMAlgorithm()
         {
             if (_kemAlgorithm == null)
-                _kemAlgorithm = new KyberAlgorithm(KyberParameters.KYBER1024);
+                _kemAlgorithm = new KyberAlgorithm(KyberParameters.KYBER1024_AES);
 
             return _kemAlgorithm;
         }
@@ -46,7 +46,7 @@ namespace QuantoCrypt.Internal.CipherSuite
                 throw new ArgumentOutOfRangeException(nameof(sessionKey), "The key should be of 256-bit size!");
 
             if (_symmetricAlgorithm == null)
-                _symmetricAlgorithm = new AesAlgorithm(sessionKey);
+                _symmetricAlgorithm = new AesGcmAlgorithm(sessionKey);
 
             return _symmetricAlgorithm;
         }

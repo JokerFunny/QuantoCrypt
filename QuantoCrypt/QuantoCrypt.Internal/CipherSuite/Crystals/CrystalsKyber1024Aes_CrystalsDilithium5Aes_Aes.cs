@@ -9,16 +9,16 @@ using QuantoCrypt.Internal.Symmetric;
 namespace QuantoCrypt.Internal.CipherSuite
 {
     /// <summary>
-    /// <see cref="KyberAlgorithm"/> with <see cref="KyberParameters.KYBER1024"/> + 
+    /// <see cref="KyberAlgorithm"/> with <see cref="KyberParameters.KYBER1024_AES"/> + 
     /// <see cref="DilithiumAlgorithm"/> with <see cref="DilithiumParameters.DILITHIUM5_AES"/> + 
     /// <see cref="AesAlgorithm"/>.
     /// </summary>
     /// <remarks>
     ///     The key for the <see cref="ISymmetricAlgorithm"/> should be of 256-bit size!
     /// </remarks>
-    public sealed class CrystalsKyber1024_CrystalsDilithium5Aes_Aes : ICipherSuite
+    public sealed class CrystalsKyber1024Aes_CrystalsDilithium5Aes_Aes : ICipherSuite
     {
-        public string Name => nameof(CrystalsKyber1024_CrystalsDilithium5Aes_Aes);
+        public string Name => nameof(CrystalsKyber1024Aes_CrystalsDilithium5Aes_Aes);
 
         private KyberAlgorithm _kemAlgorithm;
         private DilithiumAlgorithm _dilithiumAlgorithm;
@@ -27,7 +27,7 @@ namespace QuantoCrypt.Internal.CipherSuite
         public IKEMAlgorithm GetKEMAlgorithm()
         {
             if (_kemAlgorithm == null)
-                _kemAlgorithm = new KyberAlgorithm(KyberParameters.KYBER1024);
+                _kemAlgorithm = new KyberAlgorithm(KyberParameters.KYBER1024_AES);
 
             return _kemAlgorithm;
         }

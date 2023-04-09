@@ -21,10 +21,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="CipherSuiteTests\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\QuantoCrypt\QuantoCrypt.Internal\QuantoCrypt.Internal.csproj" />
   </ItemGroup>
 

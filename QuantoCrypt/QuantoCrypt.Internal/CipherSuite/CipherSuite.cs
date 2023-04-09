@@ -12,9 +12,13 @@ namespace QuantoCrypt.Internal.CipherSuite
     public enum CipherSuite : byte
     {
         None                                                        = 0,
-        CrystalsKyber1024_CrystalsDilithium_Aes                     = 1 << 0,
-        CrystalsKyber1024_CrystalsDilithium_AesGcm                  = 1 << 1,
-        CrystalsKyber1024Aes_CrystalsDilithium_Aes                  = 1 << 2,
-        CrystalsKyber1024Aes_CrystalsDilithium_AesGcm               = 1 << 3
+        CrystalsKyber1024_CrystalsDilithium5_Aes                    = 1 << 0,
+        CrystalsKyber1024_CrystalsDilithium5_AesGcm                 = 1 << 1,
+        CrystalsKyber1024_CrystalsDilithium5Aes_Aes                 = 1 << 2,
+        CrystalsKyber1024_CrystalsDilithium5Aes_AesGcm              = 1 << 3,
+        CrystalsKyber1024Aes_CrystalsDilithium5_Aes                 = 1 << 4,
+        CrystalsKyber1024Aes_CrystalsDilithium5_AesGcm              = 1 << 5,
+        CrystalsKyber1024Aes_CrystalsDilithium5Aes_Aes              = 1 << 6,
+        CrystalsKyber1024Aes_CrystalsDilithium5Aes_AesGcm           = 1 << 7
     }
 }
