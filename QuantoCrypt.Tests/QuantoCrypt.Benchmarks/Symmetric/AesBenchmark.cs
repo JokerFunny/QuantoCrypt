@@ -1,6 +1,8 @@
 ﻿using BenchmarkDotNet.Attributes;
 using FluentAssertions;
 using QuantoCrypt.Infrastructure.Common;
+using QuantoCrypt.Infrastructure.Common.BlockCipher;
+using QuantoCrypt.Infrastructure.Common.Parameters;
 using QuantoCrypt.Internal.Symmetric;
 using System.Text;
 
@@ -91,7 +93,7 @@ namespace QuantoCrypt.Benchmarks.Symmetric
                 textToProceed.Should().BeEquivalentTo(decrypted);
         }
 
-        /*[Benchmark]
+        [Benchmark]
         [Arguments(32)]
         [Arguments(64)]
         [Arguments(128)]
@@ -109,26 +111,31 @@ namespace QuantoCrypt.Benchmarks.Symmetric
         [Arguments(524288)]
         [Arguments(1048576)]
         [Arguments(2097152)]
-        [Arguments(int.MaxValue)]
-        public void AesTestAlgorithmExecutor(int symbolsToProceed)
+        public void Aes_X86AlgorithmExecutor(int symbolsToProceed)
         {
-            string textToProceed = FileContent.Length > symbolsToProceed ? FileContent.Substring(0, symbolsToProceed) : FileContent;
-
-            Span<byte> textToProceedSpan = Encoding.UTF8.GetBytes(textToProceed).AsSpan();
-
-            Span<byte> encodedOutput = stackalloc byte[textToProceedSpan.Length];
-            Span<byte> decodedOutput = stackalloc byte[textToProceedSpan.Length];
+            byte[] textToProceed = RandomInput[0..symbolsToProceed];
 
             var engine = new AesEngine_X86();
-            engine.Init(true, new KeyParameter(Key));
-            for (int i = 0; i < textToProceedSpan.Length; i += 16)
-                engine.ProcessBlock(textToProceedSpan[i..], encodedOutput[i..]);
+            ICipherParameter keyParams = new KeyParameter(Key);
 
-            engine.Init(false, new KeyParameter(Key));
-            for (int i = 0; i < textToProceedSpan.Length; i += 16)
-                engine.ProcessBlock(encodedOutput[i..], decodedOutput[i..]);
+            BufferedBlockCipher cipher = new BufferedBlockCipher(engine);
 
-            textToProceedSpan.ToArray().Should().BeEquivalentTo(decodedOutput.ToArray());
-        }*/
+            cipher.Init(true, keyParams);
+
+            byte[] encoded = new byte[symbolsToProceed];
+
+            int len1 = cipher.ProcessBytes(textToProceed, 0, symbolsToProceed, encoded, 0);
+
+            cipher.DoFinal(encoded, len1);
+
+            cipher.Init(false, keyParams);
+
+            byte[] decoded = new byte[symbolsToProceed];
+            int len2 = cipher.ProcessBytes(encoded, 0, encoded.Length, decoded, 0);
+
+            cipher.DoFinal(decoded, len2);
+
+            textToProceed.Should().BeEquivalentTo(decoded);
+        }
     }
 }
