@@ -9,7 +9,7 @@ namespace QuantoCrypt.Internal.CipherSuite
     ///     In case of adding new inheritor of the <see cref="ICipherSuite"/>, this should also be expanded.
     /// </remarks>
     [Flags]
-    public enum CipherSuite : byte
+    public enum CipherSuite : ulong
     {
         None                                                        = 0,
         CrystalsKyber1024_CrystalsDilithium5_Aes                    = 1 << 0,

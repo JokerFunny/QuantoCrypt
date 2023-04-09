@@ -29,8 +29,8 @@ namespace QuantoCrypt.Internal.Tests.CipherSuiteTests.Crystals
         public static Type KYBER_SYMMETRIC_AES_TYPE = typeof(Internal.KEM.CRYSTALS.Kyber.Symmetric.AesSymmetric);
 
         public static Type DILITHIUM_ALGORITHM_TYPE = typeof(DilithiumAlgorithm);
-        public static Type DILITHIUM_SYMMETRIC_SHAKE_TYPE = typeof(Signature.CRYSTALS.Dilithium.Symmetric.ShakeSymmetric);
-        public static Type DILITHIUM_SYMMETRIC_AES_TYPE = typeof(Signature.CRYSTALS.Dilithium.Symmetric.AesSymmetric);
+        public static Type DILITHIUM_SYMMETRIC_SHAKE_TYPE = typeof(Internal.Signature.CRYSTALS.Dilithium.Symmetric.ShakeSymmetric);
+        public static Type DILITHIUM_SYMMETRIC_AES_TYPE = typeof(Internal.Signature.CRYSTALS.Dilithium.Symmetric.AesSymmetric);
 
         public static Type AES_ALGORITHM_TYPE = typeof(AesAlgorithm);
         public static Type AES_GCM_ALGORITHM_TYPE = typeof(AesGcmAlgorithm);

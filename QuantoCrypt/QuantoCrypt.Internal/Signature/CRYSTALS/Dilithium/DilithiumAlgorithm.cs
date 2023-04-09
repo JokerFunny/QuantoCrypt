@@ -1,6 +1,5 @@
 ﻿using QuantoCrypt.Infrastructure.Common;
 using QuantoCrypt.Infrastructure.Signature;
-using QuantoCrypt.Internal.Utilities;
 
 namespace QuantoCrypt.Internal.Signature.CRYSTALS.Dilithium
 {
@@ -46,7 +45,7 @@ namespace QuantoCrypt.Internal.Signature.CRYSTALS.Dilithium
 
             byte[] generatedSignature = signer.GenerateSignature(message);
 
-            return ArrayUtilities.Combine(generatedSignature, message);
+            return generatedSignature;
         }
 
         public bool Verify(byte[] publicKey, byte[] message, byte[] signature)

@@ -1,6 +1,7 @@
 ﻿using QuantoCrypt.Infrastructure.CipherSuite;
 using QuantoCrypt.Infrastructure.KEM;
 using System.Buffers.Binary;
+using System.Runtime.CompilerServices;
 
 namespace QuantoCrypt.Internal.Message
 {
@@ -99,13 +100,13 @@ namespace QuantoCrypt.Internal.Message
         public static byte[] CreateClientInitMessage(ICipherSuiteProvider supportedCipherSuites, ICipherSuite preferedCipherSuite, byte[] publicKey)
         {
             // add preffered CipherSuites.
-            byte prefferedCS = (byte)Enum.Parse(typeof(CipherSuite.CipherSuite), preferedCipherSuite.Name);
+            byte prefferedCS = (byte)(ulong)Enum.Parse(typeof(CipherSuite.CipherSuite), preferedCipherSuite.Name);
 
             // go through all supported CipherSuites.
             ulong allCiphers = 0;
             foreach (var item in supportedCipherSuites.SupportedCipherSuites)
             {
-                byte targetCipherSuiteCode = (byte)Enum.Parse(typeof(CipherSuite.CipherSuite), item.Name);
+                ulong targetCipherSuiteCode = (ulong)Enum.Parse(typeof(CipherSuite.CipherSuite), item.Name);
 
                 allCiphers += targetCipherSuiteCode;
             }
@@ -128,8 +129,8 @@ namespace QuantoCrypt.Internal.Message
         /// Generates the <see cref="SERVER_INIT"/> message with the proper format.
         /// </summary>
         /// <param name="cipherText">Target cipher text.</param>
-        /// <param name="encryptedSigWithKey">Target attached signature + signature public key, encrypted.</param>
-        /// <param name="signaturePartLength">Length of the attached signature in the <paramref name="encryptedSigWithKey"/>.</param>
+        /// <param name="encryptedSigWithKey">Target signature + signature public key, encrypted.</param>
+        /// <param name="signaturePartLength">Length of the decrypted signature in the <paramref name="encryptedSigWithKey"/>.</param>
         /// <remarks>
         /// MESSAGE
         /// 0 - [version]
@@ -139,14 +140,15 @@ namespace QuantoCrypt.Internal.Message
         /// 10 - 13 - [cipherText.Length]
         /// 14 - 14+cipherText.Length - [cipherText]
         /// 15+cipherText.Length - 18+cipherText.Length - [signaturePartLength]
-        /// 19+cipherText.Length - end - [encryptedSigWithKey]
+        /// 19+cipherText.Length - 22+cipherText.Length - [signaturePublicKeyLength]
+        /// 23+cipherText.Length - end - [encryptedSignatureWithKey]
         /// </remarks>
         /// <returns>
         ///     CLIENT_INIT message with properly generated header.
         /// </returns>
-        public static byte[] CreateServerInitMessage(byte[] cipherText, byte[] encryptedSigWithKey, int signaturePartLength)
+        public static byte[] CreateServerInitMessage(byte[] cipherText, byte[] encryptedSignatureWithKey, int signaturePartLength, int signaturePublicKeyLength)
         {
-            var message = new byte[4 + cipherText.Length + 4 + encryptedSigWithKey.Length];
+            var message = new byte[4 + cipherText.Length + 4 + 4 + encryptedSignatureWithKey.Length];
 
             // attach length of the cipherText.
             _CopyToByteArray(cipherText.Length, message, 0);
@@ -159,9 +161,13 @@ namespace QuantoCrypt.Internal.Message
             offset += cipherText.Length;
             _CopyToByteArray(signaturePartLength, message, offset);
 
+            // attach signaturePublicKeyLength.
+            offset += 4;
+            _CopyToByteArray(signaturePublicKeyLength, message, offset);
+
             // set encryptedSigWithKey.
             offset += 4;
-            encryptedSigWithKey.CopyTo(message, offset);
+            encryptedSignatureWithKey.CopyTo(message, offset);
 
             return CreateMessage(1, SERVER_INIT, message);
         }
@@ -279,6 +285,7 @@ namespace QuantoCrypt.Internal.Message
             return messageBody;
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static ulong GetUlongValue(byte[] target, int start, int length)
         {
             var ulongPart = target.AsSpan().Slice(start, length);
@@ -291,12 +298,40 @@ namespace QuantoCrypt.Internal.Message
             return acc;
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static uint GetUintValue(byte[] target, int start, int length)
+        {
+            var uintPart = target.AsSpan().Slice(start, length);
+
+            uint acc = 0;
+
+            foreach (var b in uintPart)
+                acc = (acc * 0x100) + b;
+
+            return acc;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int GetIntValue(byte[] target, int start, int length)
+        {
+            var intPart = target.AsSpan().Slice(start, length);
+
+            int acc = 0;
+
+            foreach (var b in intPart)
+                acc = (acc * 0x100) + b;
+
+            return acc;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static byte[] _GetHash(byte[] body)
         {
             // No body integrity for version 0.1 :(
             return new byte[] { 127, 63, 31, 15 };
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static void _CopyToByteArrayUlong(ulong source, byte[] destination, int offset)
         {
             if (destination == null)
@@ -316,6 +351,23 @@ namespace QuantoCrypt.Internal.Message
             destination[offset + 7] = (byte)source; // last byte is already in proper position
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static void _CopyToByteArray(uint source, byte[] destination, int offset)
+        {
+            if (destination == null)
+                throw new ArgumentException("Destination array cannot be null");
+
+            // check if there is enough space for all the 4 bytes we will copy
+            if (destination.Length < offset + 4)
+                throw new ArgumentException("Not enough room in the destination array");
+
+            destination[offset] = (byte)(source >> 24); // fourth byte
+            destination[offset + 1] = (byte)(source >> 16); // third byte
+            destination[offset + 2] = (byte)(source >> 8); // second byte
+            destination[offset + 3] = (byte)source; // last byte is already in proper position
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static void _CopyToByteArray(int source, byte[] destination, int offset)
         {
             if (destination == null)
@@ -331,6 +383,7 @@ namespace QuantoCrypt.Internal.Message
             destination[offset + 3] = (byte)source; // last byte is already in proper position
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static void _CopyToByteArrayShort(int source, byte[] destination, int offset)
         {
             if (destination == null)

@@ -4,7 +4,7 @@ using QuantoCrypt.Internal.Signature.CRYSTALS.Dilithium;
 using QuantoCrypt.Internal.Tests.Common.Random;
 using QuantoCrypt.Internal.Utilities;
 
-namespace QuantoCrypt.Internal.Tests.KEM
+namespace QuantoCrypt.Internal.Tests.Signature
 {
     public class CRYSTALS_DilithiumTests
     {
@@ -80,14 +80,12 @@ namespace QuantoCrypt.Internal.Tests.KEM
             DilithiumPrivateKey privKey = (DilithiumPrivateKey)generatedKeyPair.Private;
 
             // Sign message.
-            byte[] attachedSignature = dilithiumAlgorithmForSign.Sign(message);
+            byte[] signature = dilithiumAlgorithmForSign.Sign(message);
 
             // Verify message.
             DilithiumAlgorithm dilithiumAlgorithmForVerify = new DilithiumAlgorithm(dilithiumParameters, false);
 
-            int signatureLength = attachedSignature.Length - 512;
             byte[] publicKey = pubKey.GetEncoded();
-            byte[] signature = attachedSignature[..signatureLength];
             bool successfullyVerified = dilithiumAlgorithmForVerify.Verify(publicKey, message, signature);
 
             // changing the signature by 1 byte should cause it to fail.

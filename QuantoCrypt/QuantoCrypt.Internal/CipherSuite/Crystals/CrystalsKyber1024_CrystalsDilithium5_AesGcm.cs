@@ -20,35 +20,18 @@ namespace QuantoCrypt.Internal.CipherSuite
     {
         public string Name => nameof(CrystalsKyber1024_CrystalsDilithium5_AesGcm);
 
-        private KyberAlgorithm _kemAlgorithm;
-        private DilithiumAlgorithm _dilithiumAlgorithm;
-        private AesGcmAlgorithm _symmetricAlgorithm;
-
         public IKEMAlgorithm GetKEMAlgorithm()
-        {
-            if (_kemAlgorithm == null)
-                _kemAlgorithm = new KyberAlgorithm(KyberParameters.KYBER1024);
-
-            return _kemAlgorithm;
-        }
+            => new KyberAlgorithm(KyberParameters.KYBER1024);
 
         public ISignatureAlgorithm GetSignatureAlgorithm(bool isForSigning)
-        {
-            if (_dilithiumAlgorithm == null)
-                _dilithiumAlgorithm = new DilithiumAlgorithm(DilithiumParameters.DILITHIUM5, isForSigning);
-
-            return _dilithiumAlgorithm;
-        }
+            => new DilithiumAlgorithm(DilithiumParameters.DILITHIUM5, isForSigning);
 
         public ISymmetricAlgorithm GetSymmetricAlgorithm(byte[] sessionKey)
         {
             if (sessionKey == null || sessionKey.Length != 32)
                 throw new ArgumentOutOfRangeException(nameof(sessionKey), "The key should be of 256-bit size!");
 
-            if (_symmetricAlgorithm == null)
-                _symmetricAlgorithm = new AesGcmAlgorithm(sessionKey);
-
-            return _symmetricAlgorithm;
+            return new AesGcmAlgorithm(sessionKey);
         }
     }
 }
