@@ -14,7 +14,7 @@ namespace QuantoCrypt
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("test");
+            //Console.WriteLine("test");
 
             // Get Host IP Address that is used to establish a connection
             // In this case, we get one IP address of localhost that is IP : 127.0.0.1
@@ -36,8 +36,8 @@ namespace QuantoCrypt
             Action<string> traceAction = Console.WriteLine;
 
             // get SocketTransportConnection for client and server.
-            SocketTransportConnection serverCon = new SocketTransportConnection(server.Accept(), traceAction);
-            SocketTransportConnection clientCon = new SocketTransportConnection(client, traceAction);
+            SocketTransportConnection serverCon = new SocketTransportConnection(server.Accept(), traceAction, true);
+            SocketTransportConnection clientCon = new SocketTransportConnection(client, traceAction, true);
 
             // init QuantoCryptConnectionFactory, create ISecureTransportConnection for client + server.
             ICipherSuiteProvider cipherSuiteProvider = new QuantoCryptCipherSuiteProvider();

@@ -125,13 +125,13 @@ namespace QuantoCrypt.Internal.Connection
                     // verify signature.
                     ISignatureAlgorithm verifier = preferredCipher.GetSignatureAlgorithm(false);
 
-                    byte[] calculatedMessage = SHA384.HashData(clientInitMessage);
+                    byte[] calculatedMessage = ProtocolMessage.GetMessageHash(clientInitMessage);
 
                     if (!verifier.Verify(signaturePublicKey, calculatedMessage, signature))
                         throw new Exception("Can't validate the server's signature!");
 
                     // get hash of the SERVER_INIT message + encode it to sent to the server for verify.
-                    byte[] encodedServerInitMessageHash = connection.UsedSymmetricAlgorithm.Encrypt(SHA384.HashData(serverInitMessage));
+                    byte[] encodedServerInitMessageHash = connection.UsedSymmetricAlgorithm.Encrypt(ProtocolMessage.GetMessageHash(serverInitMessage));
 
                     clientFinishMessage = ProtocolMessage.CreateClientFinishMessage(encodedServerInitMessageHash);
                 }
@@ -198,7 +198,7 @@ namespace QuantoCrypt.Internal.Connection
                 AsymmetricKeyPair signatureKeys = signatureAlgorithmForSigning.KeyGen();
 
                 // generate hash over clientInitMessage to be signed.
-                byte[] messageToBeSigned = SHA384.HashData(clientInitMessage);
+                byte[] messageToBeSigned = ProtocolMessage.GetMessageHash(clientInitMessage);
                 byte[] signature = signatureAlgorithmForSigning.Sign(messageToBeSigned);
 
                 // create a proper ISymmetricAlgorithm using genereted session secret.
@@ -287,7 +287,7 @@ namespace QuantoCrypt.Internal.Connection
 
                     Span<byte> message = connection.UsedSymmetricAlgorithm.Decrypt(clientFinishCheck);
 
-                    if (!message.SequenceEqual(SHA384.HashData(serverInitMessage)))
+                    if (!message.SequenceEqual(ProtocolMessage.GetMessageHash(serverInitMessage)))
                         throw new ArgumentException("Client validation fails!");
                 }
                 else

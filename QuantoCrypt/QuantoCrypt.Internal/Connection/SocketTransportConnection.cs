@@ -1,6 +1,7 @@
 ﻿using QuantoCrypt.Infrastructure.Connection;
 using System.Net;
 using System.Net.Sockets;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace QuantoCrypt.Internal.Connection
 {
@@ -20,8 +21,9 @@ namespace QuantoCrypt.Internal.Connection
         public const int BufferSize = 1048576;
 
         private readonly Socket _rSocket;
-        private readonly bool _isServer;
+        private readonly bool _rIsServer;
         private readonly Action<string> _rTraceAction;
+        private readonly bool _rExtendedLogs;
 
         /// <remarks>
         ///     1 Mb buffer.
@@ -33,10 +35,12 @@ namespace QuantoCrypt.Internal.Connection
         /// </summary>
         /// <param name="socket">Target <see cref="Socket"/>, configured as a server or as a client.</param>
         /// <param name="debugAction">Target trace action that could be used to trace data.</param>
-        public SocketTransportConnection(Socket socket, Action<string> debugAction = null)
+        /// <param name="extendedLogs">If extended logs with body message should be passed to <paramref name="debugAction"/>.</param>
+        public SocketTransportConnection(Socket socket, Action<string> debugAction = null, bool extendedLogs = false)
         {
             _rSocket = socket;
             _rTraceAction = debugAction;
+            _rExtendedLogs = extendedLogs;
         }
 
         /// <summary>
@@ -48,7 +52,7 @@ namespace QuantoCrypt.Internal.Connection
         SocketTransportConnection(Socket socket, bool isServer, Action<string> debugAction = null)
         {
             _rSocket = socket;
-            _isServer = isServer;
+            _rIsServer = isServer;
             _rTraceAction = debugAction;
         }
 
@@ -63,7 +67,7 @@ namespace QuantoCrypt.Internal.Connection
         /// </returns>
         public ITransportConnection Connect()
         {
-            if (_isServer)
+            if (_rIsServer)
                 return new SocketTransportConnection(_rSocket.Accept(), true, _rTraceAction);
 
             return this;
@@ -78,9 +82,7 @@ namespace QuantoCrypt.Internal.Connection
                 byte[] result = new byte[read];
                 Array.Copy(buffer, result, read);
 
-                if (_rTraceAction != null)
-                    _rTraceAction.Invoke($"Id [{Id}] - receive data:{Environment.NewLine}[version] - [{result[0]}]{Environment.NewLine}[message type] - [{result[1]}]" +
-                        $"{Environment.NewLine}[data length] - [{result.Length}]{Environment.NewLine}[message integrity] - [{result[6]} {result[7]} {result[8]} {result[9]}]");
+                ConnectionTraceHelper.sTraceMessageIfNeeded(Id, result, "receive", _rTraceAction, _rExtendedLogs);
 
                 return result;
             }
@@ -104,9 +106,7 @@ namespace QuantoCrypt.Internal.Connection
         {
             try
             {
-                if (_rTraceAction != null)
-                    _rTraceAction.Invoke($"Id [{Id}] - send data:{Environment.NewLine}[version] - [{data[0]}]{Environment.NewLine}[message type] - [{data[1]}]" +
-                        $"{Environment.NewLine}[data length] - [{data.Length}]{Environment.NewLine}[message integrity] - [{data[6]} {data[7]} {data[8]} {data[9]}]");
+                ConnectionTraceHelper.sTraceMessageIfNeeded(Id, data, "send", _rTraceAction, _rExtendedLogs);
 
                 return _rSocket.Send(data);
             }

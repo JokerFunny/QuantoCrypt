@@ -3,6 +3,8 @@ using QuantoCrypt.Infrastructure.KEM;
 using QuantoCrypt.Internal.CipherSuite;
 using System.Buffers.Binary;
 using System.Runtime.CompilerServices;
+using System.Security.Cryptography;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace QuantoCrypt.Internal.Message
 {
@@ -246,12 +248,15 @@ namespace QuantoCrypt.Internal.Message
         /// </returns>
         public static bool CheckMessageIntegrity(byte[] message)
         {
-            byte[] targetIntegrity = message[6..10];
+            var targetIntegrity = message[6..10];
 
             byte[] calculatedIntegrity = _GetHash(message[10..]);
 
             return calculatedIntegrity.SequenceEqual(targetIntegrity);
         }
+
+        public static byte[] GetMessageHash(byte[] message)
+            => SHA384.HashData(message);
 
         /// <summary>
         /// Check the message integrity.
@@ -260,25 +265,8 @@ namespace QuantoCrypt.Internal.Message
         ///     True if match, otherwise - false.
         /// </returns>
         public bool CheckMessageIntegrity()
-        {
-            byte[] targetIntegrity = _rMessage[6..10];
+            => CheckMessageIntegrity(_rMessage);
 
-            byte[] calculatedIntegrity = _GetHash(_rMessage[10..]);
-
-            return calculatedIntegrity.SequenceEqual(targetIntegrity);
-        }
-
-        /// <summary>
-        /// Checks if the message didn't changed.
-        /// </summary>
-        /// <returns>
-        ///     True if body integrity is valid, otherwise - false.
-        /// </returns>
-        public bool IsValid()
-        {
-            // MAC offset is 1 (version) + 1 (type) + 4 (lenght) = 6 bytes, so we can just check the integrity as it is.
-            return _rMessage[6] == 127 && _rMessage[7] == 63 && _rMessage[8] == 31 && _rMessage[9] == 15;
-        }
         /// <summary>
         /// Gets the message type.
         /// </summary>
@@ -300,14 +288,7 @@ namespace QuantoCrypt.Internal.Message
         ///     Message body, starting from the 10s' bit.
         /// </returns>
         public byte[] GetBody()
-        {
-            int targetLength = _rMessage.Length - _rProtocolHeaderOffset;
-            byte[] messageBody = new byte[targetLength];
-
-            Array.Copy(_rMessage, _rProtocolHeaderOffset, messageBody, 0, targetLength);
-
-            return messageBody;
-        }
+            => _rMessage[10..];
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static ulong GetUlongValue(byte[] target, int start, int length)
@@ -351,6 +332,8 @@ namespace QuantoCrypt.Internal.Message
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static byte[] _GetHash(byte[] body)
         {
+            return SHA384.HashData(body)[0..4];
+
             // No body integrity for version 0.1 :(
             return new byte[] { 127, 63, 31, 15 };
         }
