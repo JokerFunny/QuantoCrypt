@@ -7,7 +7,7 @@ using QuantoCrypt.Infrastructure.Symmetric;
 using QuantoCrypt.Internal.CipherSuite;
 using QuantoCrypt.Internal.Message;
 using QuantoCrypt.Internal.Utilities;
-using System.Security.Cryptography;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 
 namespace QuantoCrypt.Internal.Connection
@@ -50,7 +50,7 @@ namespace QuantoCrypt.Internal.Connection
         {
             try
             {
-                ISecureTransportConnection client = InitializeSecureClient(cipherSuiteProvider, cipherSuiteProvider.SupportedCipherSuites.First(), baseConnection);
+                ISecureTransportConnection client = InitializeSecureClient(cipherSuiteProvider, cipherSuiteProvider.SupportedCipherSuites.Keys.First(), baseConnection);
 
                 return client;
             }
@@ -169,9 +169,7 @@ namespace QuantoCrypt.Internal.Connection
                 // get preferred clients' CipherSuite.
                 byte prefferedCipherSuite = clientInitMessage[10];
 
-                string targetCSName = CipherSuiteHelper.SupportedCS[prefferedCipherSuite].ToString();
-
-                return cipherSuiteProvider.SupportedCipherSuites.FirstOrDefault(x => x.Name == targetCSName);
+                return cipherSuiteProvider.SupportedCipherSuites.Keys.ToList().ElementAt(prefferedCipherSuite);
             }
 
             byte[] __GetServerInitMessage(QuantoCryptConnection connection, byte[] clientInitMessage, ICipherSuite cipherSuiteToUse)
@@ -261,7 +259,7 @@ namespace QuantoCrypt.Internal.Connection
                     if (cipherSuiteToUse == null)
                     {
                         string supportedCipherSuites = cipherSuiteProvider.SupportedCipherSuites
-                            .Select(x => x.Name)
+                            .Select(x => x.Key.Name)
                             .Aggregate("Supported CipherSuites:", (first, next) => $"{first}{Environment.NewLine}{next}");
 
                         throw new ArgumentException($"Client sent unsupported CipherSuite in a second time. {supportedCipherSuites}.");
@@ -418,9 +416,9 @@ namespace QuantoCrypt.Internal.Connection
             _sValidateCipherSuites(cipherSuiteProvider);
 
             // in case if try to use the CS that is not supported - throw.
-            if (cipherSuiteProvider.SupportedCipherSuites.FirstOrDefault(x => x.Name == preferredCipher.Name) == null)
+            if (cipherSuiteProvider.SupportedCipherSuites.Keys.FirstOrDefault(x => x.Name == preferredCipher.Name) == null)
                 throw new ArgumentException($"You're trying to use the cipher suite that is not listened in the [{nameof(cipherSuiteProvider)}]. " +
-                    $"Target preferredCipher - [{preferredCipher.Name}], supported cipher suites by provider: {cipherSuiteProvider.SupportedCipherSuites.Select(x => x.Name).Aggregate((first, next) => $"{first}{Environment.NewLine}{next}")}");
+                    $"Target preferredCipher - [{preferredCipher.Name}], supported cipher suites by provider: {cipherSuiteProvider.SupportedCipherSuites.Select(x => x.Key.Name).Aggregate((first, next) => $"{first}{Environment.NewLine}{next}")}");
         }
     }
 }

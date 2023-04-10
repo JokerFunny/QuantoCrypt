@@ -6,8 +6,8 @@
     public interface ICipherSuiteProvider
     {
         /// <summary>
-        /// All supported <see cref="ICipherSuite"/>.
+        /// All supported <see cref="ICipherSuite"/> with bit-mask value.
         /// </summary>
-        public IReadOnlyList<ICipherSuite> SupportedCipherSuites { get; }
+        public IReadOnlyDictionary<ICipherSuite, ulong> SupportedCipherSuites { get; }
     }
 }

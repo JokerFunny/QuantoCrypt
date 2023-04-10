@@ -69,14 +69,10 @@ namespace QuantoCrypt.Internal.Message
         /// </returns>
         public static byte[] CreateUnsupportedParamsMessage(byte unsupportedParamsReciever, ICipherSuiteProvider supportedCipherSuites)
         {
-            // go through all supported CipherSuites.
+            // go through all supported CipherSuites to create a bit-mask of all supported CipherSuites.
             ulong allCiphers = 0;
-            foreach (var item in supportedCipherSuites.SupportedCipherSuites)
-            {
-                ulong targetCipherSuiteCode = (ulong)Enum.Parse(typeof(CipherSuite.CipherSuite), item.Name);
-
-                allCiphers += targetCipherSuiteCode;
-            }
+            foreach (var supportedCSBitValue in supportedCipherSuites.SupportedCipherSuites.Values)
+                allCiphers += supportedCSBitValue;
 
             byte[] allCiphersSuites = new byte[8];
 
@@ -107,16 +103,12 @@ namespace QuantoCrypt.Internal.Message
         public static byte[] CreateClientInitMessage(ICipherSuiteProvider supportedCipherSuites, ICipherSuite preferedCipherSuite, byte[] publicKey)
         {
             // add preffered CipherSuites.
-            byte prefferedCS = (byte)Array.IndexOf(CipherSuiteHelper.SupportedCS, preferedCipherSuite.Name);
+            byte prefferedCS = (byte)supportedCipherSuites.SupportedCipherSuites.Keys.ToList().IndexOf(x => x.Name == preferedCipherSuite.Name);
 
-            // go through all supported CipherSuites.
+            // go through all supported CipherSuites to create a bit-mask of all supported CipherSuites.
             ulong allCiphers = 0;
-            foreach (var item in supportedCipherSuites.SupportedCipherSuites)
-            {
-                ulong targetCipherSuiteCode = (ulong)Enum.Parse(typeof(CipherSuite.CipherSuite), item.Name);
-
-                allCiphers += targetCipherSuiteCode;
-            }
+            foreach (var item in supportedCipherSuites.SupportedCipherSuites.Values)
+                allCiphers += item;
 
             var message = new byte[9 + publicKey.Length];
 
@@ -331,12 +323,7 @@ namespace QuantoCrypt.Internal.Message
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static byte[] _GetHash(byte[] body)
-        {
-            return SHA384.HashData(body)[0..4];
-
-            // No body integrity for version 0.1 :(
-            return new byte[] { 127, 63, 31, 15 };
-        }
+            => SHA384.HashData(body)[0..4];
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static void _CopyToByteArrayUlong(ulong source, byte[] destination, int offset)
