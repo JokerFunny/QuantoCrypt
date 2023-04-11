@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
 using QuantoCrypt.Infrastructure.Common;
 using QuantoCrypt.Internal.Symmetric;
+using QuantoCrypt.Internal.Utilities;
 using System.Security.Cryptography;
 
 namespace QuantoCrypt.Internal.Tests.Symmetric
@@ -26,6 +27,93 @@ namespace QuantoCrypt.Internal.Tests.Symmetric
             var decrypted = service.Decrypt(encrypted);
 
             data.Should().BeEquivalentTo(decrypted);
+        }
+
+        [Fact]
+        public void AesGcmAlgorithm_Work_Over_500MB()
+        {
+            var random = new SecureRandom();
+
+            byte[] textToProceed = random.GenerateSeed(524288000);
+
+            for (int i = 0; i < 10; i++)
+            {
+                AesGcmAlgorithm service = new AesGcmAlgorithm(random.GenerateSeed(32));
+
+                var encrypted = service.Encrypt(textToProceed);
+
+                var decrypted = service.Decrypt(encrypted);
+            }
+        }
+
+        [Fact]
+        public async Task AesGcmAlgorithm_Work_Over_500MB_Parallel()
+        {
+            int threads = 128;
+            var random = new SecureRandom();
+
+            byte[] textToProceed = random.GenerateSeed(524288000);
+
+            for (int i = 0; i < 10; i++)
+            {
+                AesGcmAlgorithm service = new AesGcmAlgorithm(random.GenerateSeed(32));
+
+                ThreadPool.SetMinThreads(threads, threads);
+                ThreadPool.SetMaxThreads(threads, threads);
+
+                List<byte[]> resultsOfAes = new();
+
+                int chunkSize = textToProceed.Length / threads;
+
+                var chunksToProceed = Enumerable.Range(0, threads).Select(el =>
+                    _GetChunkToProceed(el, chunkSize, textToProceed, threads)).ToList();
+
+                Task<byte[]>[] tasksToProceed = new Task<byte[]>[threads];
+
+                for (int j = 0; j < chunksToProceed.Count; j++)
+                {
+                    var chuckTextToProceed = chunksToProceed[j];
+
+                    tasksToProceed[j] = new Task<byte[]>(() => service.Encrypt(chuckTextToProceed));
+                }
+                foreach (var task in tasksToProceed)
+                    task.Start();
+
+                var results = await Task.WhenAll(tasksToProceed);
+
+                for (int j = 0; j < results.Length; j++)
+                    resultsOfAes.Add(results[j]);
+
+                for (int j = 0; j < resultsOfAes.Count; j++)
+                {
+                    var chuckTextToProceed = resultsOfAes[j];
+
+                    tasksToProceed[j] = new Task<byte[]>(() => service.Decrypt(chuckTextToProceed));
+                }
+                foreach (var task in tasksToProceed)
+                    task.Start();
+
+                results = await Task.WhenAll(tasksToProceed);
+
+                resultsOfAes.Clear();
+                for (int j = 0; j < results.Length; j++)
+                    resultsOfAes.Add(results[j]);
+
+                byte[] decrypted = ArrayUtilities.Combine(resultsOfAes.ToArray());
+
+                /*for (int j = 0; j < decrypted.Length; j++)
+                {
+                    if (textToProceed[j] != decrypted[j])
+                        throw new Exception($"Difference on [{j}] index!");
+                }*/
+            }
+        }
+
+        static byte[] _GetChunkToProceed(int elementIndex, int chunkSize, byte[] textToProceed, int numberOfGrains)
+        {
+            IEnumerable<byte> chunk = textToProceed.Skip(chunkSize * elementIndex);
+
+            return (elementIndex++ != numberOfGrains ? chunk.Take(chunkSize) : chunk).ToArray();
         }
 
         public static IEnumerable<object[]> InvalidKeysParams()
