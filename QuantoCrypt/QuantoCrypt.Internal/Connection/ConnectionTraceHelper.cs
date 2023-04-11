@@ -28,7 +28,7 @@ namespace QuantoCrypt.Internal.Connection
                 _sResultBuilder.AppendLine("Header:");
                 _sResultBuilder.AppendLine($"0 - version - [{targetData[0]}];");
                 _sResultBuilder.AppendLine($"1 - message type - [{targetData[1]}];");
-                _sResultBuilder.AppendLine($"2 - 5 - message length [{targetData.Length}] - [{_sGetArrayAsString(targetData[2..6])}];");
+                _sResultBuilder.AppendLine($"2 - 5 - body length [{ProtocolMessage.GetIntValue(targetData, 2, 4)}] - [{_sGetArrayAsString(targetData[2..6])}];");
                 _sResultBuilder.AppendLine($"6 - 9 - message integrity - [{_sGetArrayAsString(targetData[6..10])}].");
 
                 if (extendedLogs)

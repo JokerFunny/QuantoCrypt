@@ -15,7 +15,7 @@ namespace QuantoCrypt.Internal.Connection
         /// Maximum size of the single message that could be proceeded.
         /// </summary>
         /// <remarks>
-        ///     In case if the message would be longer - it need to be splited.
+        ///     1 Mb. In case if the message would be longer - it need to be splited.
         /// </remarks>
         public const int BufferSize = 1048576;
 

@@ -78,7 +78,7 @@ namespace QuantoCrypt.Internal.Message
         /// MESSAGE
         /// 0 - [version]
         /// 1 - [UNSUPPORTED_CLIENT_PARAMS]
-        /// 2 - 5 - [dataLength]
+        /// 2 - 5 - [bodyLength]
         /// 6 - 9 - [messageIntegrity]
         /// 10 - 17 - [supportedCipherSuites]
         /// </remarks>
@@ -109,7 +109,7 @@ namespace QuantoCrypt.Internal.Message
         /// MESSAGE
         /// 0 - [version]
         /// 1 - [CLIENT_INIT]
-        /// 2 - 5 - [dataLength]
+        /// 2 - 5 - [bodyLength]
         /// 6 - 9 - [messageIntegrity]
         /// 10 - [prefferedCipherSuite]
         /// 11 - end - [publicKey]
@@ -144,7 +144,7 @@ namespace QuantoCrypt.Internal.Message
         /// MESSAGE
         /// 0 - [version]
         /// 1 - [SERVER_INIT]
-        /// 2 - 5 - [dataLength]
+        /// 2 - 5 - [bodyLength]
         /// 6 - 9 - [messageIntegrity]
         /// 10 - 13 - [cipherText.Length]
         /// 14 - 14+cipherText.Length - [cipherText]
@@ -189,7 +189,7 @@ namespace QuantoCrypt.Internal.Message
         /// MESSAGE
         /// 0 - [version]
         /// 1 - [SERVER_INIT]
-        /// 2 - 5 - [dataLength]
+        /// 2 - 5 - [bodyLength]
         /// 6 - 9 - [messageIntegrity]
         /// 10 - end - [encodedServerInitMessage]
         /// </remarks>
@@ -209,7 +209,7 @@ namespace QuantoCrypt.Internal.Message
         /// MESSAGE
         /// 0 - [version]
         /// 1 - [messageType]
-        /// 2 - 5 - [dataLength]
+        /// 2 - 5 - [bodyLength]
         /// 6 - 9 - [messageIntegrity]
         /// 10 - end - [body]
         /// </remarks>
@@ -220,17 +220,18 @@ namespace QuantoCrypt.Internal.Message
         {
             try
             {
-                int encryptedDataLength = _rProtocolHeaderOffset + body.Length;
+                int totalDataLength = _rProtocolHeaderOffset + body.Length;
                 Span<byte> headerPart = stackalloc byte[_rHeaderOffset];
 
                 // fill headers
                 headerPart[0] = version;
                 headerPart[1] = type;
-                BinaryPrimitives.WriteInt32LittleEndian(headerPart.Slice(2, 4), encryptedDataLength);
+                _CopyToByteArray(body.Length, headerPart, 2);
+                //BinaryPrimitives.WriteInt32LittleEndian(headerPart.Slice(2, 4), body.Length);
 
                 byte[] messageIntegrity = _GetHash(body);
 
-                var message = new byte[encryptedDataLength];
+                var message = new byte[totalDataLength];
 
                 headerPart.CopyTo(message);
                 messageIntegrity.CopyTo(message, _rHeaderOffset);
@@ -356,6 +357,22 @@ namespace QuantoCrypt.Internal.Message
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static void _CopyToByteArray(uint source, byte[] destination, int offset)
+        {
+            if (destination == null)
+                throw new ArgumentException("Destination array cannot be null");
+
+            // check if there is enough space for all the 4 bytes we will copy
+            if (destination.Length < offset + 4)
+                throw new ArgumentException("Not enough room in the destination array");
+
+            destination[offset] = (byte)(source >> 24); // fourth byte
+            destination[offset + 1] = (byte)(source >> 16); // third byte
+            destination[offset + 2] = (byte)(source >> 8); // second byte
+            destination[offset + 3] = (byte)source; // last byte is already in proper position
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static void _CopyToByteArray(int source, Span<byte> destination, int offset)
         {
             if (destination == null)
                 throw new ArgumentException("Destination array cannot be null");
