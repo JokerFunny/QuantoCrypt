@@ -68,6 +68,50 @@ namespace QuantoCrypt.Internal.Connection
         /// </returns>
         public static ISecureTransportConnection InitializeSecureClient(ICipherSuiteProvider cipherSuiteProvider, ICipherSuite preferredCipher, ITransportConnection baseConnection)
         {
+            byte[] __GetClientInitMessage(ICipherSuite preferredCipher, out IKEMAlgorithm kemAlgorithm)
+            {
+                // CLIENT_INIT - generate key pair + random message to be signed.
+                kemAlgorithm = preferredCipher.GetKEMAlgorithm();
+
+                AsymmetricKeyPair keys = kemAlgorithm.KeyGen();
+                byte[] publicKey = keys.Public.GetEncoded();
+
+                return ProtocolMessage.CreateClientInitMessage(cipherSuiteProvider, preferredCipher, publicKey);
+            };
+
+            bool __ValidateServerInitMessage(QuantoCryptConnection connection, IKEMAlgorithm kemAlgorithm, byte[] serverInitMessage, byte[] clientInitMessageHash)
+            {
+                int cipherTextLength = ProtocolMessage.GetIntValue(serverInitMessage, 10, 4);
+
+                // get session key via cipher text from server.
+                byte[] cipherText = new byte[cipherTextLength];
+                Array.Copy(serverInitMessage, 14, cipherText, 0, cipherTextLength);
+
+                byte[] sessionKey = kemAlgorithm.Decaps(cipherText);
+
+                // create a proper ISymmetricAlgorithm using genereted session secret.
+                connection.UsedSymmetricAlgorithm = preferredCipher.GetSymmetricAlgorithm(sessionKey);
+
+                // get target lengths of the signature + public key.
+                int offset = 14 + cipherTextLength;
+                int signaturePartLength = ProtocolMessage.GetIntValue(serverInitMessage, offset, 4);
+                offset += 4;
+                int signaturePublicKeyLength = ProtocolMessage.GetIntValue(serverInitMessage, offset, 4);
+
+                // get decrypted signature with public key.
+                offset += 4;
+                byte[] decryptedSignatureWithKey = connection.UsedSymmetricAlgorithm.Decrypt(serverInitMessage[offset..]);
+
+                byte[] signature = decryptedSignatureWithKey[0..signaturePartLength];
+                byte[] signaturePublicKey = new byte[signaturePublicKeyLength];
+                Array.Copy(decryptedSignatureWithKey, signaturePartLength, signaturePublicKey, 0, signaturePublicKeyLength);
+
+                // verify signature.
+                ISignatureAlgorithm verifier = preferredCipher.GetSignatureAlgorithm(false);
+
+                return verifier.Verify(signaturePublicKey, clientInitMessageHash, signature);
+            }
+
             try
             {
                 var connection = new QuantoCryptConnection(baseConnection);
@@ -75,76 +119,59 @@ namespace QuantoCrypt.Internal.Connection
                 _sValidateCipherSuites(cipherSuiteProvider, preferredCipher);
 
                 // CLIENT_INIT - generate key pair + random message to be signed.
-                IKEMAlgorithm kemAlgorithm = preferredCipher.GetKEMAlgorithm();
-
-                AsymmetricKeyPair keys = kemAlgorithm.KeyGen();
-                byte[] publicKey = keys.Public.GetEncoded();
-
-                byte[] clientInitMessage = ProtocolMessage.CreateClientInitMessage(cipherSuiteProvider, preferredCipher, publicKey);
+                byte[] clientInitMessage = __GetClientInitMessage(preferredCipher, out IKEMAlgorithm kemAlgorithm);
 
                 connection.prWrappedUnsecureConnection.Send(clientInitMessage);
 
 
 
-                // CLIENT_FINISH - get cipherText to generate sessionSecret + encryptedSigWithKey to validate server by clientInitMessage.
-                var serverInitMessage = connection.prWrappedUnsecureConnection.Receive();
+                var serverResponseMessage = connection.prWrappedUnsecureConnection.Receive();
 
                 // check message integrity.
-                if (!ProtocolMessage.CheckMessageIntegrity(serverInitMessage))
+                if (!ProtocolMessage.CheckMessageIntegrity(serverResponseMessage))
                     throw new ArgumentException("Message integrity check fails.");
 
-                // check that the server sent a proper message and prepare a CLIENT_FINISH message.
-                byte[] clientFinishMessage;
-                if (serverInitMessage[1] == ProtocolMessage.SERVER_INIT)
+                // check that the server sent a proper message.
+                if (serverResponseMessage[1] == ProtocolMessage.SERVER_INIT)
                 {
-                    int cipherTextLength = ProtocolMessage.GetIntValue(serverInitMessage, 10, 4);
-
-                    // get session key via cipher text from server.
-                    byte[] cipherText = new byte[cipherTextLength];
-                    Array.Copy(serverInitMessage, 14, cipherText, 0, cipherTextLength);
-
-                    byte[] sessionKey = kemAlgorithm.Decaps(cipherText);
-
-                    // create a proper ISymmetricAlgorithm using genereted session secret.
-                    connection.UsedSymmetricAlgorithm = preferredCipher.GetSymmetricAlgorithm(sessionKey);
-
-                    // get target lengths of the signature + public key.
-                    int offset = 14 + cipherTextLength;
-                    int signaturePartLength = ProtocolMessage.GetIntValue(serverInitMessage, offset, 4);
-                    offset += 4;
-                    int signaturePublicKeyLength = ProtocolMessage.GetIntValue(serverInitMessage, offset, 4);
-
-                    // get decrypted signature with public key.
-                    offset += 4;
-                    byte[] decryptedSignatureWithKey = connection.UsedSymmetricAlgorithm.Decrypt(serverInitMessage[offset..]);
-
-                    byte[] signature = decryptedSignatureWithKey[0..signaturePartLength];
-                    byte[] signaturePublicKey = new byte[signaturePublicKeyLength];
-                    Array.Copy(decryptedSignatureWithKey, signaturePartLength, signaturePublicKey, 0, signaturePublicKeyLength);
-
-                    // verify signature.
-                    ISignatureAlgorithm verifier = preferredCipher.GetSignatureAlgorithm(false);
-
+                    // SERVER_INIT - get cipherText to generate sessionSecret + encryptedSigWithKey to validate server by clientInitMessage.
                     byte[] calculatedMessage = ProtocolMessage.GetMessageHash(clientInitMessage);
 
-                    if (!verifier.Verify(signaturePublicKey, calculatedMessage, signature))
+                    if (!__ValidateServerInitMessage(connection, kemAlgorithm, serverResponseMessage, calculatedMessage))
                         throw new Exception("Can't validate the server's signature!");
 
-                    // get hash of the SERVER_INIT message + encode it to sent to the server for verify.
-                    byte[] encodedServerInitMessageHash = connection.UsedSymmetricAlgorithm.Encrypt(ProtocolMessage.GetMessageHash(serverInitMessage));
-
-                    clientFinishMessage = ProtocolMessage.CreateClientFinishMessage(encodedServerInitMessageHash);
+                    //_SendClientFinishMessage(connection, serverInitMessage);
                 }
-                else if (serverInitMessage[1] == ProtocolMessage.UNSUPPORTED_CLIENT_PARAMS)
+                else if (serverResponseMessage[1] == ProtocolMessage.UNSUPPORTED_CLIENT_PARAMS)
                 {
-                    // fallback for the client.
+                    // TODO: add fallback for the client.
 
-                    clientFinishMessage = Array.Empty<byte>();
+                    //preferredCipher = ...;
+
+                    // CLIENT_INIT - generate key pair + random message to be signed.
+                    clientInitMessage = __GetClientInitMessage(preferredCipher, out kemAlgorithm);
+
+                    connection.prWrappedUnsecureConnection.Send(clientInitMessage);
+
+                    serverResponseMessage = connection.prWrappedUnsecureConnection.Receive();
+
+                    // check message integrity.
+                    if (!ProtocolMessage.CheckMessageIntegrity(serverResponseMessage))
+                        throw new ArgumentException("Message integrity check fails.");
+
+                    if (serverResponseMessage[1] == ProtocolMessage.SERVER_INIT)
+                    {
+                        // SERVER_INIT - get cipherText to generate sessionSecret + encryptedSigWithKey to validate server by clientInitMessage.
+                        byte[] calculatedMessage = ProtocolMessage.GetMessageHash(clientInitMessage);
+
+                        if (!__ValidateServerInitMessage(connection, kemAlgorithm, serverResponseMessage, calculatedMessage))
+                            throw new Exception("Can't validate the server's signature!");
+                    }
+                    else
+                        throw new Exception($"Server sent unsupported message after fallback! Expected message [{ProtocolMessage.SERVER_INIT}], actual - [{serverResponseMessage[1]}].");
                 }
                 else
-                    throw new ArgumentException($"Server sent invalid messageType. Expected [{ProtocolMessage.SERVER_INIT}], found [{serverInitMessage[1]}].");
-
-                connection.prWrappedUnsecureConnection.Send(clientFinishMessage);
+                    throw new ArgumentException($"Server sent invalid messageType. Expected [{ProtocolMessage.SERVER_INIT}] or [{ProtocolMessage.UNSUPPORTED_CLIENT_PARAMS}], found [{serverResponseMessage[1]}].");
 
 
 
@@ -232,7 +259,7 @@ namespace QuantoCrypt.Internal.Connection
 
                     if (cipherSuiteToUse == null)
                     {
-                        // return failed message to client.
+                        // return failed message to client fi server doesn't support a preffered Cipher Suite.
                         serverInitMessage = ProtocolMessage.CreateUnsupportedParamsMessage(ProtocolMessage.UNSUPPORTED_CLIENT_PARAMS, cipherSuiteProvider);
                     }
                     else
@@ -270,27 +297,7 @@ namespace QuantoCrypt.Internal.Connection
 
                 connection.prWrappedUnsecureConnection.Send(serverInitMessage);
 
-
-
-                // CLIENT_FINISH.
-                var clientFinishMessage = connection.prWrappedUnsecureConnection.Receive();
-
-                if (!ProtocolMessage.CheckMessageIntegrity(clientInitMessage))
-                    throw new ArgumentException("Message integrity check fails.");
-
-                // check that the client sent a proper message (SHA384 over serverInit message, encoded via session key).
-                if (clientFinishMessage[1] == ProtocolMessage.CLIENT_FINISH)
-                {
-                    byte[] clientFinishCheck = clientFinishMessage[10..];
-
-                    Span<byte> message = connection.UsedSymmetricAlgorithm.Decrypt(clientFinishCheck);
-
-                    if (!message.SequenceEqual(ProtocolMessage.GetMessageHash(serverInitMessage)))
-                        throw new ArgumentException("Client validation fails!");
-                }
-                else
-                    throw new ArgumentException($"Client sent invalid messageType. Expected [{ProtocolMessage.CLIENT_FINISH}], found [{clientFinishMessage[1]}].");
-
+                //_ProceedClientFinishMessage(connection, serverInitMessage);
 
 
                 // Secure connection established.
@@ -419,6 +426,38 @@ namespace QuantoCrypt.Internal.Connection
             if (cipherSuiteProvider.SupportedCipherSuites.Keys.FirstOrDefault(x => x.Name == preferredCipher.Name) == null)
                 throw new ArgumentException($"You're trying to use the cipher suite that is not listened in the [{nameof(cipherSuiteProvider)}]. " +
                     $"Target preferredCipher - [{preferredCipher.Name}], supported cipher suites by provider: {cipherSuiteProvider.SupportedCipherSuites.Select(x => x.Key.Name).Aggregate((first, next) => $"{first}{Environment.NewLine}{next}")}");
+        }
+
+        private static void _SendClientFinishMessage(QuantoCryptConnection connection, byte[] serverInitMessage)
+        {
+            // get hash of the SERVER_INIT message + encode it to sent to the server for verify.
+            byte[] encodedServerInitMessageHash = connection.UsedSymmetricAlgorithm.Encrypt(ProtocolMessage.GetMessageHash(serverInitMessage));
+
+            byte[] clientFinishMessage = ProtocolMessage.CreateClientFinishMessage(encodedServerInitMessageHash);
+
+            connection.prWrappedUnsecureConnection.Send(clientFinishMessage);
+        }
+
+        private static void _ProceedClientFinishMessage(QuantoCryptConnection connection, byte[] serverInitMessage)
+        {
+            // CLIENT_FINISH.
+            var clientFinishMessage = connection.prWrappedUnsecureConnection.Receive();
+
+            if (!ProtocolMessage.CheckMessageIntegrity(clientFinishMessage))
+                throw new ArgumentException($"{ProtocolMessage.CLIENT_FINISH} messsage integrity check fails.");
+
+            // check that the client sent a proper message (SHA384 over serverInit message, encoded via session key).
+            if (clientFinishMessage[1] == ProtocolMessage.CLIENT_FINISH)
+            {
+                byte[] clientFinishCheck = clientFinishMessage[10..];
+
+                Span<byte> message = connection.UsedSymmetricAlgorithm.Decrypt(clientFinishCheck);
+
+                if (!message.SequenceEqual(ProtocolMessage.GetMessageHash(serverInitMessage)))
+                    throw new ArgumentException("Client validation fails!");
+            }
+            else
+                throw new ArgumentException($"Client sent invalid messageType. Expected [{ProtocolMessage.CLIENT_FINISH}], found [{clientFinishMessage[1]}].");
         }
     }
 }
