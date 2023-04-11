@@ -1,5 +1,6 @@
 ﻿using QuantoCrypt.Infrastructure.CipherSuite;
 using QuantoCrypt.Infrastructure.KEM;
+using QuantoCrypt.Internal.Utilities;
 using System.Buffers.Binary;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
@@ -229,13 +230,13 @@ namespace QuantoCrypt.Internal.Message
                 _CopyToByteArray(body.Length, headerPart, 2);
                 //BinaryPrimitives.WriteInt32LittleEndian(headerPart.Slice(2, 4), body.Length);
 
-                byte[] messageIntegrity = _GetHash(body);
-
                 var message = new byte[totalDataLength];
 
                 headerPart.CopyTo(message);
-                messageIntegrity.CopyTo(message, _rHeaderOffset);
                 body.CopyTo(message, _rProtocolHeaderOffset);
+
+                byte[] messageIntegrity = _GetHash(message);
+                messageIntegrity.CopyTo(message, _rHeaderOffset);
 
                 return message;
             }
@@ -252,11 +253,18 @@ namespace QuantoCrypt.Internal.Message
         {
             var targetIntegrity = message[6..10];
 
-            byte[] calculatedIntegrity = _GetHash(message[10..]);
+            byte[] calculatedIntegrity = _GetHash(ArrayUtilities.Combine(message[0..6], new byte[4], message[10..]));
 
             return calculatedIntegrity.SequenceEqual(targetIntegrity);
         }
 
+        /// <summary>
+        /// Calculate the hash of the <paramref name="message"/>.
+        /// </summary>
+        /// <param name="message">Taget input message.</param>
+        /// <returns>
+        ///     <see cref="SHA384.HashData(byte[])"/> over <paramref name="message"/>.
+        /// </returns>
         public static byte[] GetMessageHash(byte[] message)
             => SHA384.HashData(message);
 
