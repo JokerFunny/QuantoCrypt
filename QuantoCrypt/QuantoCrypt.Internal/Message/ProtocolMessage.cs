@@ -228,7 +228,6 @@ namespace QuantoCrypt.Internal.Message
                 headerPart[0] = version;
                 headerPart[1] = type;
                 _CopyToByteArray(body.Length, headerPart, 2);
-                //BinaryPrimitives.WriteInt32LittleEndian(headerPart.Slice(2, 4), body.Length);
 
                 var message = new byte[totalDataLength];
 
