@@ -201,8 +201,8 @@ namespace QuantoCrypt.Internal.Connection
 
             byte[] __GetServerInitMessage(QuantoCryptConnection connection, byte[] clientInitMessage, ICipherSuite cipherSuiteToUse)
             {
-                // header = 10 + prefferedCS = 1 + supportedCS = 8.
-                int publicKeyOffset = 19;
+                // header = 10 + prefferedCS = 1.
+                int publicKeyOffset = 11;
 
                 // get public key from client.
                 byte[] kemPublicKey = clientInitMessage[publicKeyOffset..];
@@ -260,7 +260,7 @@ namespace QuantoCrypt.Internal.Connection
                     if (cipherSuiteToUse == null)
                     {
                         // return failed message to client fi server doesn't support a preffered Cipher Suite.
-                        serverInitMessage = ProtocolMessage.CreateUnsupportedParamsMessage(ProtocolMessage.UNSUPPORTED_CLIENT_PARAMS, cipherSuiteProvider);
+                        serverInitMessage = ProtocolMessage.CreateUnsupportedClientParamsMessage(cipherSuiteProvider);
                     }
                     else
                         serverInitMessage = __GetServerInitMessage(connection, clientInitMessage, cipherSuiteToUse);

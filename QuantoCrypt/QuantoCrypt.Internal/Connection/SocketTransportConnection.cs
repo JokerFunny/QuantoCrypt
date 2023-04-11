@@ -1,7 +1,6 @@
 ﻿using QuantoCrypt.Infrastructure.Connection;
 using System.Net;
 using System.Net.Sockets;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace QuantoCrypt.Internal.Connection
 {

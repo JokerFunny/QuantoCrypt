@@ -20,10 +20,26 @@ namespace QuantoCrypt.Internal.Message
         /// The second stage of the connection. Server should generate and sent: cipher text, signature over the CLIENT_INIT's message hash + attach it to the hash.
         /// </summary>
         public static readonly byte SERVER_INIT = 2;
+
+        /// <summary>
+        /// In case if client send unsupported preferred CipherSuite - reply with the servers' supported CipherSuites.
+        /// </summary>
         public static readonly byte UNSUPPORTED_CLIENT_PARAMS = 3;
-        public static readonly byte UNSUPPORTED_SERVER_PARAMS = 4;
-        public static readonly byte CLIENT_FINISH = 5;
-        public static readonly byte DATA_TRANSFER = 6;
+
+        /// <summary>
+        /// Indicates the message that requires additional checks on server side.
+        /// </summary>
+        public static readonly byte CLIENT_FINISH = 4;
+
+        /// <summary>
+        /// Indicates the encrypthed by symmetric algorithm message used after handshake.
+        /// </summary>
+        public static readonly byte DATA_TRANSFER = 5;
+        
+        /// <summary>
+        /// Indicates or error or the end of the connection.
+        /// </summary>
+        public static readonly byte CLOSE = 6;
 
         private readonly byte[] _rMessage;
 
@@ -41,6 +57,11 @@ namespace QuantoCrypt.Internal.Message
         private const int _rProtocolHeaderOffset = _rHeaderOffset + _rMessageIntegrityOffset;
 
         /// <summary>
+        /// The amount of the bytes that is allocated for the supported cipher suites bit-mask.
+        /// </summary>
+        public const int SUPPORTED_CIPHER_SUITES_OFFSET = 8;
+
+        /// <summary>
         /// Default ctor.
         /// </summary>
         /// <param name="message">Target message to be properly handled.</param>
@@ -53,30 +74,29 @@ namespace QuantoCrypt.Internal.Message
         /// <summary>
         /// Get the message that indicates the error.
         /// </summary>
-        /// <param name="unsupportedParamsReciever">Target message type (<see cref="UNSUPPORTED_CLIENT_PARAMS"/> or <see cref="UNSUPPORTED_SERVER_PARAMS"/>).</param>
         /// <remarks>
         /// MESSAGE
         /// 0 - [version]
-        /// 1 - [UNSUPPORTED_*_PARAMS]
+        /// 1 - [UNSUPPORTED_CLIENT_PARAMS]
         /// 2 - 5 - [dataLength]
         /// 6 - 9 - [messageIntegrity]
         /// 10 - 17 - [supportedCipherSuites]
         /// </remarks>
         /// <returns>
-        ///     UNSUPPORTED_*_PARAMS message with properly generated header.
+        ///     UNSUPPORTED_CLIENT_PARAMS message with properly generated header.
         /// </returns>
-        public static byte[] CreateUnsupportedParamsMessage(byte unsupportedParamsReciever, ICipherSuiteProvider supportedCipherSuites)
+        public static byte[] CreateUnsupportedClientParamsMessage(ICipherSuiteProvider supportedCipherSuites)
         {
             // go through all supported CipherSuites to create a bit-mask of all supported CipherSuites.
             ulong allCiphers = 0;
             foreach (var supportedCSBitValue in supportedCipherSuites.SupportedCipherSuites.Values)
                 allCiphers += supportedCSBitValue;
 
-            byte[] allCiphersSuites = new byte[8];
+            byte[] allCiphersSuites = new byte[SUPPORTED_CIPHER_SUITES_OFFSET];
 
             _CopyToByteArrayUlong(allCiphers, allCiphersSuites, 1);
 
-            return CreateMessage(1, unsupportedParamsReciever, allCiphersSuites);
+            return CreateMessage(1, UNSUPPORTED_CLIENT_PARAMS, allCiphersSuites);
         }
 
         /// <summary>
@@ -92,8 +112,7 @@ namespace QuantoCrypt.Internal.Message
         /// 2 - 5 - [dataLength]
         /// 6 - 9 - [messageIntegrity]
         /// 10 - [prefferedCipherSuite]
-        /// 11 - 18 - [supportedCipherSuites]
-        /// 19 - end - [publicKey]
+        /// 11 - end - [publicKey]
         /// </remarks>
         /// <returns>
         ///     CLIENT_INIT message with properly generated header.
@@ -103,21 +122,13 @@ namespace QuantoCrypt.Internal.Message
             // add preffered CipherSuites.
             byte prefferedCS = (byte)supportedCipherSuites.SupportedCipherSuites.Keys.ToList().IndexOf(x => x.Name == preferedCipherSuite.Name);
 
-            // go through all supported CipherSuites to create a bit-mask of all supported CipherSuites.
-            ulong allCiphers = 0;
-            foreach (var item in supportedCipherSuites.SupportedCipherSuites.Values)
-                allCiphers += item;
-
-            var message = new byte[9 + publicKey.Length];
+            var message = new byte[1 + publicKey.Length];
 
             // set prefferedCipherSuite.
             message[0] = prefferedCS;
 
-            // set supportedCipherSuites.
-            _CopyToByteArrayUlong(allCiphers, message, 1);
-
             // set publicKey.
-            publicKey.CopyTo(message, 9);
+            publicKey.CopyTo(message, 1);
 
             return CreateMessage(1, CLIENT_INIT, message);
         }

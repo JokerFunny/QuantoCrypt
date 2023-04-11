@@ -41,12 +41,12 @@ namespace QuantoCrypt.Internal.Connection
                         sGetServerInitBodyTraceMessage(targetData, _sResultBuilder);
                     else if (targetData[1] == ProtocolMessage.UNSUPPORTED_CLIENT_PARAMS)
                         sGetUnsupportedClientParamsBodyTraceMessage(targetData, _sResultBuilder);
-                    else if (targetData[1] == ProtocolMessage.UNSUPPORTED_SERVER_PARAMS)
-                        _sResultBuilder.AppendLine();
                     else if (targetData[1] == ProtocolMessage.CLIENT_FINISH)
                         sGetClientFinishBodyTraceMessage(targetData, _sResultBuilder);
                     else if (targetData[1] == ProtocolMessage.DATA_TRANSFER)
                         sGetDataTransferBodyTraceMessage(targetData, _sResultBuilder);
+                    else if (targetData[1] == ProtocolMessage.CLOSE)
+                        _sResultBuilder.AppendLine("CONNECTION CLOSED.");
                 }
 
                 _sResultBuilder.AppendLine();
@@ -59,10 +59,7 @@ namespace QuantoCrypt.Internal.Connection
         {
             output.AppendLine($"10 - preferred Cipher Suite - [{targetData[10]}];");
 
-            int publicKeyOffset = 19;
-            output.AppendLine($"11 - 18 - supported Cipher Suite - [{_sGetArrayAsString(targetData[11..publicKeyOffset])}];");
-
-            output.AppendLine($"{publicKeyOffset} - {targetData.Length - 1} - KEM public key - [{_sGetArrayAsString(targetData[publicKeyOffset..])}].");
+            output.AppendLine($"11 - {targetData.Length - 1} - KEM public key - [{_sGetArrayAsString(targetData[11..])}].");
         }
 
         internal static void sGetServerInitBodyTraceMessage(byte[] targetData, StringBuilder output)
