@@ -3,7 +3,7 @@
     /// <summary>
     /// Extensions for the <see cref="System.Collections.Generic"/>.
     /// </summary>
-    public static class GenericCollectionsExtensions
+    internal static class GenericCollectionsExtensions
     {
         /// <summary>
         /// Get the index of the element that is matchs target <paramref name="predicate"/>.

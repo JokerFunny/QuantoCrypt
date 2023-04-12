@@ -5,7 +5,7 @@ namespace QuantoCrypt.Internal.KEM.CRYSTALS.Kyber
     /// <summary>
     /// Generator of the public/private key pair for the CRYSTALS-Kyber.
     /// </summary>
-    public class KyberKeyPairGenerator
+    internal class KyberKeyPairGenerator
     {
         private readonly KyberParameters _rKyberParams;
         private readonly SecureRandom _rSecureRandom;
@@ -26,7 +26,7 @@ namespace QuantoCrypt.Internal.KEM.CRYSTALS.Kyber
         /// <returns>
         ///     Target <see cref="AsymmetricKeyPair"/>.
         /// </returns>
-        public AsymmetricKeyPair GenerateKeyPair()
+        internal AsymmetricKeyPair GenerateKeyPair()
         {
             KyberEngine engine = _rKyberParams.Engine;
             engine.Init(_rSecureRandom);

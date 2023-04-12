@@ -22,7 +22,7 @@ namespace QuantoCrypt.Internal.KEM.CRYSTALS.Kyber
         /// <param name="nonce">Target nonce.</param>
         /// <param name="t">First part of the public key [0, IndCpaPublicKeyBytes - 32].</param>
         /// <param name="rho">Second part of the public key [IndCpaPublicKeyBytes - 32, IndCpaPublicKeyBytes].</param>
-        public KyberPrivateKey(KyberParameters parameters, byte[] s, byte[] hpk, byte[] nonce, byte[] t, byte[] rho)
+        internal KyberPrivateKey(KyberParameters parameters, byte[] s, byte[] hpk, byte[] nonce, byte[] t, byte[] rho)
             : base(true, parameters)
         {
             _rS = (byte[])s.Clone();

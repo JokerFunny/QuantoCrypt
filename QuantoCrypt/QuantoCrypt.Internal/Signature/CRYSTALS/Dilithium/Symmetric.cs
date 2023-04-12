@@ -28,7 +28,7 @@ namespace QuantoCrypt.Internal.Signature.CRYSTALS.Dilithium
             private readonly ShakeDigest _rShakeDigest128;
             private readonly ShakeDigest _rShakeDigest256;
 
-            public ShakeSymmetric() : base(168, 136)
+            internal ShakeSymmetric() : base(168, 136)
             {
                 _rShakeDigest128 = new ShakeDigest(128);
                 _rShakeDigest256 = new ShakeDigest(256);
@@ -62,7 +62,7 @@ namespace QuantoCrypt.Internal.Signature.CRYSTALS.Dilithium
         {
             private readonly SicBlockCipher _rCipher;
 
-            public AesSymmetric() : base(64, 64)
+            internal AesSymmetric() : base(64, 64)
             {
                 _rCipher = new SicBlockCipher(AesUtilities.CreateEngine());
             }

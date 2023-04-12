@@ -1,6 +1,6 @@
 ﻿using QuantoCrypt.Infrastructure.CipherSuite;
 
-namespace QuantoCrypt.CipherSuites
+namespace QuantoCrypt.Internal.CipherSuite
 {
     /// <summary>
     /// Implementation of the <see cref="ICipherSuiteProvider"/> for any cipher suites that needed.

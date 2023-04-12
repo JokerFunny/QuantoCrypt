@@ -1,9 +1,8 @@
-﻿using QuantoCrypt.CipherSuites;
+﻿using QuantoCrypt.Connection;
 using QuantoCrypt.Infrastructure.CipherSuite;
 using QuantoCrypt.Infrastructure.Connection;
 using QuantoCrypt.Internal.CipherSuite;
 using QuantoCrypt.Internal.Connection;
-using QuantoCrypt.Protocol;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;

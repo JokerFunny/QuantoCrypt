@@ -17,7 +17,7 @@ namespace QuantoCrypt.Internal.Signature.CRYSTALS.Dilithium
         /// <param name="forSigning">If used for signing, otherwise - for verify.</param>
         /// <param name="targetKey">Target <see cref="DilithiumKey"/>.</param>
         /// <param name="random">Target <see cref="SecureRandom"/>.</param>
-        public DilithiumSigner(bool forSigning, DilithiumKey targetKey, SecureRandom random = null)
+        internal DilithiumSigner(bool forSigning, DilithiumKey targetKey, SecureRandom random = null)
         {
             if (forSigning)
                 _rPrivateKey = (DilithiumPrivateKey)targetKey;
@@ -34,7 +34,7 @@ namespace QuantoCrypt.Internal.Signature.CRYSTALS.Dilithium
         /// <returns>
         ///     Generated signature over <paramref name="message"/>.
         /// </returns>
-        public byte[] GenerateSignature(byte[] message)
+        internal byte[] GenerateSignature(byte[] message)
         {
             if (_rPrivateKey == null)
                 throw new InvalidOperationException($"You can't create signature using [{nameof(DilithiumSigner)}] created for signature verify.");
@@ -55,7 +55,7 @@ namespace QuantoCrypt.Internal.Signature.CRYSTALS.Dilithium
         /// <returns>
         ///     True in case of successful, otherwise - false.
         /// </returns>
-        public bool VerifySignature(byte[] message, byte[] signature)
+        internal bool VerifySignature(byte[] message, byte[] signature)
         {
             if (_rPublicKey == null)
                 throw new InvalidOperationException($"You can't verify signature using [{nameof(DilithiumSigner)}] created for signing.");

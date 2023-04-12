@@ -5,7 +5,7 @@ namespace QuantoCrypt.Internal.Signature.CRYSTALS.Dilithium
     /// <summary>
     /// Handle work with CRYSTALS-Dilithium keys.
     /// </summary>
-    public abstract class DilithiumKey : AsymmetricKey
+    internal abstract class DilithiumKey : AsymmetricKey
     {
         private readonly DilithiumParameters _rDilithiumParameters;
 
@@ -23,6 +23,6 @@ namespace QuantoCrypt.Internal.Signature.CRYSTALS.Dilithium
         /// <summary>
         /// Target <see cref="DilithiumParameters"/> attached to this key.
         /// </summary>
-        public DilithiumParameters Parameters => _rDilithiumParameters;
+        internal DilithiumParameters Parameters => _rDilithiumParameters;
     }
 }

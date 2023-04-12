@@ -18,7 +18,8 @@ namespace QuantoCrypt.Internal.Utilities
         /// <returns>
         ///     New byte array containing the range given
         /// </returns>
-        public static byte[] CopyOfRange(byte[] data, int from, int to)
+        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
+        internal static byte[] CopyOfRange(byte[] data, int from, int to)
         {
             int newLength = _GetLength(from, to);
 
@@ -38,7 +39,7 @@ namespace QuantoCrypt.Internal.Utilities
         ///   and the same contents, otherwise - false.
         /// </returns>
         [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
-        public static bool FixedTimeEquals(byte[] a, byte[] b)
+        internal static bool FixedTimeEquals(byte[] a, byte[] b)
         {
             if (null == a || null == b)
                 return false;
@@ -54,7 +55,8 @@ namespace QuantoCrypt.Internal.Utilities
         /// <returns>
         ///     New copy of the <paramref name="data"/>.
         /// </returns>
-        public static byte[] CopyOf(byte[] data, int newLength)
+        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
+        internal static byte[] CopyOf(byte[] data, int newLength)
         {
             byte[] tmp = new byte[newLength];
             Array.Copy(data, 0, tmp, 0, Math.Min(newLength, data.Length));
@@ -69,7 +71,8 @@ namespace QuantoCrypt.Internal.Utilities
         /// <returns>
         ///     A single array as a combination of <paramref name="arrays"/>.
         /// </returns>
-        public static byte[] Combine(params byte[][] arrays)
+        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
+        internal static byte[] Combine(params byte[][] arrays)
         {
             byte[] result = new byte[arrays.Sum(a => a.Length)];
             int offset = 0;
@@ -90,7 +93,8 @@ namespace QuantoCrypt.Internal.Utilities
         /// <returns>
         ///     Target byte[].
         /// </returns>
-        public static byte[] HexStringToByteArray(string hex)
+        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
+        internal static byte[] HexStringToByteArray(string hex)
         {
             return Enumerable.Range(0, hex.Length)
                 .Where(x => x % 2 == 0)
@@ -105,7 +109,8 @@ namespace QuantoCrypt.Internal.Utilities
         /// <returns>
         ///     Target byte[].
         /// </returns>
-        public static byte[] HexStringToByteArrayOptimized(string hex)
+        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
+        internal static byte[] HexStringToByteArrayOptimized(string hex)
         {
             return Enumerable.Range(0, hex.Length / 2)
                 .Select(x => byte.Parse(hex.Substring(2 * x, 2), NumberStyles.HexNumber))

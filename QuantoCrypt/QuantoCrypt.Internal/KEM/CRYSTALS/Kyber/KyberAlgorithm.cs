@@ -6,7 +6,7 @@ namespace QuantoCrypt.Internal.KEM.CRYSTALS.Kyber
     /// <summary>
     /// Implementation of the <see cref="IKEMAlgorithm"/> for CRYSTALS-Kyber.
     /// </summary>
-    public class KyberAlgorithm : IKEMAlgorithm
+    public sealed class KyberAlgorithm : IKEMAlgorithm
     {
         private KyberParameters _kyberParameters;
         private SecureRandom _secureRandom;

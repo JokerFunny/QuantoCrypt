@@ -21,33 +21,33 @@ namespace QuantoCrypt.Internal.KEM.CRYSTALS.Kyber
 
         private const int SharedSecretBytes = 32;
 
-        public Symmetric Symmetric { get; private set; }
+        internal Symmetric Symmetric { get; private set; }
 
         // Parameters
-        public int K { get; private set; }
-        public int PolyVecBytes { get; private set; }
-        public int PolyCompressedBytes { get; private set; }
-        public int PolyVecCompressedBytes { get; private set; }
-        public int Eta1 { get; private set; }
-        public int IndCpaPublicKeyBytes { get; private set; }
-        public int IndCpaSecretKeyBytes { get; private set; }
-        public int IndCpaBytes { get; private set; }
-        public int PublicKeyBytes { get; private set; }
-        public int SecretKeyBytes { get; private set; }
-        public int CipherTextBytes { get; private set; }
+        internal int K { get; private set; }
+        internal int PolyVecBytes { get; private set; }
+        internal int PolyCompressedBytes { get; private set; }
+        internal int PolyVecCompressedBytes { get; private set; }
+        internal int Eta1 { get; private set; }
+        internal int IndCpaPublicKeyBytes { get; private set; }
+        internal int IndCpaSecretKeyBytes { get; private set; }
+        internal int IndCpaBytes { get; private set; }
+        internal int PublicKeyBytes { get; private set; }
+        internal int SecretKeyBytes { get; private set; }
+        internal int CipherTextBytes { get; private set; }
 
         // Crypto
-        public int CryptoBytes { get; private set; }
-        public int CryptoSecretKeyBytes { get; private set; }
-        public int CryptoPublicKeyBytes { get; private set; }
-        public int CryptoCipherTextBytes { get; private set; }
+        internal int CryptoBytes { get; private set; }
+        internal int CryptoSecretKeyBytes { get; private set; }
+        internal int CryptoPublicKeyBytes { get; private set; }
+        internal int CryptoCipherTextBytes { get; private set; }
 
         /// <summary>
         /// Default ctor.
         /// </summary>
         /// <param name="k">Use matrices and vectors of small dimension k × l over Zq[X]/(X^256 + 1) as a part of the SIS.</param>
         /// <param name="usingAes">If AES should be used.</param>
-        public KyberEngine(int k, bool usingAes)
+        internal KyberEngine(int k, bool usingAes)
         {
             K = k;
             switch (k)

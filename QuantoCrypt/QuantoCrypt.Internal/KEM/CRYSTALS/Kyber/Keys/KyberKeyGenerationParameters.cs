@@ -5,7 +5,7 @@ namespace QuantoCrypt.Internal.KEM.CRYSTALS.Kyber
     /// <summary>
     /// Handle all params for the CRYSTALS-Kyber key generator.
     /// </summary>
-    public sealed class KyberKeyGenerationParameters : IKeyGenerationParameters
+    internal sealed class KyberKeyGenerationParameters : IKeyGenerationParameters
     {
         private const int _keyStrength = 256;
 
@@ -17,7 +17,7 @@ namespace QuantoCrypt.Internal.KEM.CRYSTALS.Kyber
         /// </summary>
         /// <param name="random">Target <see cref="SecureRandom"/> to be used.</param>
         /// <param name="kyberParameters">Target <see cref="KyberParameters"/>.</param>
-        public KyberKeyGenerationParameters(SecureRandom random, KyberParameters kyberParameters)
+        internal KyberKeyGenerationParameters(SecureRandom random, KyberParameters kyberParameters)
         {
             _rSecureRandom = random;
             _rKyberParameters = kyberParameters;
@@ -26,7 +26,7 @@ namespace QuantoCrypt.Internal.KEM.CRYSTALS.Kyber
         /// <summary>
         /// Hadnle the params needed for Kyber algo.
         /// </summary>
-        public KyberParameters Parameters => _rKyberParameters;
+        internal KyberParameters Parameters => _rKyberParameters;
 
         public SecureRandom Random => _rSecureRandom;
 

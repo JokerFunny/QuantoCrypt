@@ -66,7 +66,7 @@ namespace QuantoCrypt.Internal.Message
         /// </summary>
         /// <param name="message">Target message to be properly handled.</param>
         /// <exception cref="ArgumentNullException">If <paramref name="message"/> is null.</exception>
-        public ProtocolMessage(byte[] message)
+        internal ProtocolMessage(byte[] message)
         {
             _rMessage = message ?? throw new ArgumentNullException(nameof(message));
         }
@@ -85,7 +85,7 @@ namespace QuantoCrypt.Internal.Message
         /// <returns>
         ///     UNSUPPORTED_CLIENT_PARAMS message with properly generated header.
         /// </returns>
-        public static byte[] CreateUnsupportedClientParamsMessage(ICipherSuiteProvider supportedCipherSuites)
+        internal static byte[] CreateUnsupportedClientParamsMessage(ICipherSuiteProvider supportedCipherSuites)
         {
             // go through all supported CipherSuites to create a bit-mask of all supported CipherSuites.
             ulong allCiphers = 0;
@@ -118,7 +118,7 @@ namespace QuantoCrypt.Internal.Message
         /// <returns>
         ///     CLIENT_INIT message with properly generated header.
         /// </returns>
-        public static byte[] CreateClientInitMessage(ICipherSuiteProvider supportedCipherSuites, ICipherSuite preferedCipherSuite, byte connectionMode, byte[] publicKey)
+        internal static byte[] CreateClientInitMessage(ICipherSuiteProvider supportedCipherSuites, ICipherSuite preferedCipherSuite, byte connectionMode, byte[] publicKey)
         {
             // add preffered CipherSuites.
             byte prefferedCS = (byte)supportedCipherSuites.SupportedCipherSuites.Keys.ToList().IndexOf(x => x.Name == preferedCipherSuite.Name);
@@ -159,7 +159,7 @@ namespace QuantoCrypt.Internal.Message
         /// <returns>
         ///     CLIENT_INIT message with properly generated header.
         /// </returns>
-        public static byte[] CreateServerInitMessage(byte[] cipherText, byte[] encryptedSignatureWithKey, int signaturePartLength, int signaturePublicKeyLength)
+        internal static byte[] CreateServerInitMessage(byte[] cipherText, byte[] encryptedSignatureWithKey, int signaturePartLength, int signaturePublicKeyLength)
         {
             var message = new byte[4 + cipherText.Length + 4 + 4 + encryptedSignatureWithKey.Length];
 
@@ -200,7 +200,7 @@ namespace QuantoCrypt.Internal.Message
         /// <returns>
         ///     CLIENT_FINISH message with properly generated header.
         /// </returns>
-        public static byte[] CreateClientFinishMessage(byte[] encodedServerInitMessage)
+        internal static byte[] CreateClientFinishMessage(byte[] encodedServerInitMessage)
             => CreateMessage(1, CLIENT_FINISH, encodedServerInitMessage);
 
         /// <summary>
@@ -220,7 +220,7 @@ namespace QuantoCrypt.Internal.Message
         /// <returns>
         ///     New message with properly generated header.
         /// </returns>
-        public static byte[] CreateMessage(byte version, byte type, byte[] body)
+        internal static byte[] CreateMessage(byte version, byte type, byte[] body)
         {
             try
             {
@@ -251,7 +251,7 @@ namespace QuantoCrypt.Internal.Message
         /// <returns>
         ///     True if match, otherwise - false.
         /// </returns>
-        public static bool CheckMessageIntegrity(byte[] message)
+        internal static bool CheckMessageIntegrity(byte[] message)
         {
             var targetIntegrity = message[6..10];
 
@@ -267,7 +267,7 @@ namespace QuantoCrypt.Internal.Message
         /// <returns>
         ///     <see cref="SHA384.HashData(byte[])"/> over <paramref name="message"/>.
         /// </returns>
-        public static byte[] GetMessageHash(byte[] message)
+        internal static byte[] GetMessageHash(byte[] message)
             => SHA384.HashData(message);
 
         /// <summary>
@@ -276,7 +276,7 @@ namespace QuantoCrypt.Internal.Message
         /// <returns>
         ///     True if match, otherwise - false.
         /// </returns>
-        public bool CheckMessageIntegrity()
+        internal bool CheckMessageIntegrity()
             => CheckMessageIntegrity(_rMessage);
 
         /// <summary>
@@ -285,7 +285,7 @@ namespace QuantoCrypt.Internal.Message
         /// <returns>
         ///     Return message type used to generate current message.
         /// </returns>
-        public int GetMessageType()
+        internal int GetMessageType()
             => _rMessage[1];
 
         /// <summary>
@@ -299,11 +299,11 @@ namespace QuantoCrypt.Internal.Message
         /// <returns>
         ///     Message body, starting from the 10s' bit.
         /// </returns>
-        public byte[] GetBody()
+        internal byte[] GetBody()
             => _rMessage[10..];
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static ulong GetUlongValue(byte[] target, int start, int length)
+        internal static ulong GetUlongValue(byte[] target, int start, int length)
         {
             var ulongPart = target.AsSpan().Slice(start, length);
 
@@ -316,7 +316,7 @@ namespace QuantoCrypt.Internal.Message
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static uint GetUintValue(byte[] target, int start, int length)
+        internal static uint GetUintValue(byte[] target, int start, int length)
         {
             var uintPart = target.AsSpan().Slice(start, length);
 
@@ -329,7 +329,7 @@ namespace QuantoCrypt.Internal.Message
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static int GetIntValue(byte[] target, int start, int length)
+        internal static int GetIntValue(byte[] target, int start, int length)
         {
             var intPart = target.AsSpan().Slice(start, length);
 

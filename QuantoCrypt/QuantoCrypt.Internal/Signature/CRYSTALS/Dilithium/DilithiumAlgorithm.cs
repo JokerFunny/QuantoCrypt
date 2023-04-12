@@ -6,7 +6,7 @@ namespace QuantoCrypt.Internal.Signature.CRYSTALS.Dilithium
     /// <summary>
     /// Implementation of the <see cref="ISignatureAlgorithm"/> for CRYSTALS-Dilithium.
     /// </summary>
-    public class DilithiumAlgorithm : ISignatureAlgorithm
+    public sealed class DilithiumAlgorithm : ISignatureAlgorithm
     {
         private DilithiumSigner _dilithiumSigner;
         private DilithiumKeyGenerationParameters _keyGenerationParameters;

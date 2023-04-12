@@ -22,28 +22,28 @@ namespace QuantoCrypt.Internal.Signature.CRYSTALS.Dilithium
         public const int PolyT1PackedBytes = 320;
         public const int PolyT0PackedBytes = 416;
 
-        public Symmetric Symmetric { get; private set; }
+        internal Symmetric Symmetric { get; private set; }
 
         // Parameters
-        public int Mode { get; private set; }
-        public int K { get; private set; }
-        public int L { get; private set; }
-        public int Eta { get; private set; }
-        public int Tau { get; private set; }
-        public int Beta { get; private set; }
-        public int Gamma1 { get; private set; }
-        public int Gamma2 { get; private set; }
-        public int Omega { get; private set; }
-        public int PolyVecHPackedBytes { get; private set; }
-        public int PolyZPackedBytes { get; private set; }
-        public int PolyW1PackedBytes { get; private set; }
-        public int PolyEtaPackedBytes { get; private set; }
+        internal int Mode { get; private set; }
+        internal int K { get; private set; }
+        internal int L { get; private set; }
+        internal int Eta { get; private set; }
+        internal int Tau { get; private set; }
+        internal int Beta { get; private set; }
+        internal int Gamma1 { get; private set; }
+        internal int Gamma2 { get; private set; }
+        internal int Omega { get; private set; }
+        internal int PolyVecHPackedBytes { get; private set; }
+        internal int PolyZPackedBytes { get; private set; }
+        internal int PolyW1PackedBytes { get; private set; }
+        internal int PolyEtaPackedBytes { get; private set; }
 
         // Crypto
-        public int CryptoPublicKeyBytes { get; private set; }
-        public int CryptoSecretKeyBytes { get; private set; }
-        public int CryptoBytes { get; private set; }
-        public int PolyUniformGamma1NBytes { get; private set; }
+        internal int CryptoPublicKeyBytes { get; private set; }
+        internal int CryptoSecretKeyBytes { get; private set; }
+        internal int CryptoBytes { get; private set; }
+        internal int PolyUniformGamma1NBytes { get; private set; }
 
         /// <summary>
         /// Default ctor.
@@ -51,7 +51,7 @@ namespace QuantoCrypt.Internal.Signature.CRYSTALS.Dilithium
         /// <param name="mode">Target NIST security level.</param>
         /// <param name="random">Target <see cref="SecureRandom"/>.</param>
         /// <param name="usingAes">If AES should be used.</param>
-        public DilithiumEngine(int mode, SecureRandom random, bool usingAes)
+        internal DilithiumEngine(int mode, SecureRandom random, bool usingAes)
         {
             Mode = mode;
             switch (Mode)
@@ -122,7 +122,7 @@ namespace QuantoCrypt.Internal.Signature.CRYSTALS.Dilithium
         /// <summary>
         /// Generate keypair.
         /// </summary>
-        public void GenerateKeyPair(out byte[] rho, out byte[] key, out byte[] tr, out byte[] s1_, out byte[] s2_, out byte[] t0_, out byte[] encT1)
+        internal void GenerateKeyPair(out byte[] rho, out byte[] key, out byte[] tr, out byte[] s1_, out byte[] s2_, out byte[] t0_, out byte[] encT1)
         {
             byte[] SeedBuf = new byte[SeedBytes];
             byte[] buf = new byte[2 * SeedBytes + CrhBytes];
@@ -177,7 +177,7 @@ namespace QuantoCrypt.Internal.Signature.CRYSTALS.Dilithium
             PackingUtility.PackSecretKey(t0_, s1_, s2_, t0, s1, s2, this);
         }
 
-        public void SignSignature(byte[] sig, int siglen, byte[] msg, int msglen, byte[] rho, byte[] key, byte[] tr, byte[] t0Enc, byte[] s1Enc, byte[] s2Enc)
+        internal void SignSignature(byte[] sig, int siglen, byte[] msg, int msglen, byte[] rho, byte[] key, byte[] tr, byte[] t0Enc, byte[] s1Enc, byte[] s2Enc)
         {
             int n;
             byte[] SeedBuf = new byte[3 * SeedBytes + 2 * CrhBytes];
@@ -281,7 +281,7 @@ namespace QuantoCrypt.Internal.Signature.CRYSTALS.Dilithium
             PackingUtility.PackSignature(sig, sig, z, h, this);
         }
 
-        public bool SignVerify(byte[] sig, int siglen, byte[] msg, int msglen, byte[] rho, byte[] encT1)
+        internal bool SignVerify(byte[] sig, int siglen, byte[] msg, int msglen, byte[] rho, byte[] encT1)
         {
             byte[] buf = new byte[K * PolyW1PackedBytes], mu = new byte[CrhBytes], c = new byte[SeedBytes], c2 = new byte[SeedBytes];
             Poly cp = new Poly(this);
@@ -356,7 +356,7 @@ namespace QuantoCrypt.Internal.Signature.CRYSTALS.Dilithium
         /// <param name="msg">Target message to be signed.</param>
         /// <param name="mlen">Length of the <paramref name="msg"/>.</param>
         /// <param name="privateKey">Target <see cref="DilithiumPrivateKey"/>.</param>
-        public void Sign(byte[] sig, int siglen, byte[] msg, int mlen, DilithiumPrivateKey privateKey)
+        internal void Sign(byte[] sig, int siglen, byte[] msg, int mlen, DilithiumPrivateKey privateKey)
             => SignSignature(sig, siglen, msg, mlen, privateKey.Rho, privateKey.K, privateKey.Tr,
                 privateKey.T0, privateKey.S1, privateKey.S2);
 
@@ -370,7 +370,7 @@ namespace QuantoCrypt.Internal.Signature.CRYSTALS.Dilithium
         /// <returns>
         ///     True in case of successful, otherwise - false.
         /// </returns>
-        public bool Verify(byte[] msg, byte[] sig, int siglen, DilithiumPublicKey publicKey)
+        internal bool Verify(byte[] msg, byte[] sig, int siglen, DilithiumPublicKey publicKey)
             => SignVerify(sig, siglen, msg, msg.Length, publicKey.Rho, publicKey.T);
     }
 }

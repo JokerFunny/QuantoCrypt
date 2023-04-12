@@ -15,7 +15,7 @@ namespace QuantoCrypt.Internal.Signature.CRYSTALS.Dilithium
         /// </summary>
         /// <param name="parameters">Target <see cref="DilithiumParameters"/>.</param>
         /// <param name="encoded">Target public key.</param>
-        public DilithiumPublicKey(DilithiumParameters parameters, byte[] encoded)
+        internal DilithiumPublicKey(DilithiumParameters parameters, byte[] encoded)
             : base(false, parameters)
         {
             _rRho = ArrayUtilities.CopyOfRange(encoded, 0, DilithiumEngine.SeedBytes);
@@ -28,7 +28,7 @@ namespace QuantoCrypt.Internal.Signature.CRYSTALS.Dilithium
         /// <param name="parameters">Target <see cref="DilithiumParameters"/>.</param>
         /// <param name="rho">Expanded matrix of the vectored polinomial matrix, absorbed by shake digest.</param>
         /// <param name="t1">Packed and updated by shake block publick key.</param>
-        public DilithiumPublicKey(DilithiumParameters parameters, byte[] rho, byte[] t1)
+        internal DilithiumPublicKey(DilithiumParameters parameters, byte[] rho, byte[] t1)
             : base(false, parameters)
         {
             _rRho = (byte[])rho.Clone();

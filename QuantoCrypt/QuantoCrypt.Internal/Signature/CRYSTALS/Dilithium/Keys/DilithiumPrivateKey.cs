@@ -5,7 +5,7 @@ namespace QuantoCrypt.Internal.Signature.CRYSTALS.Dilithium
     /// <summary>
     /// Handle work with CRYSTALS-Dilithium private key.
     /// </summary>
-    public sealed class DilithiumPrivateKey : DilithiumKey
+    internal sealed class DilithiumPrivateKey : DilithiumKey
     {
         private readonly byte[] _rRho;
         private readonly byte[] _rK;
@@ -26,7 +26,7 @@ namespace QuantoCrypt.Internal.Signature.CRYSTALS.Dilithium
         /// <param name="s2">Random vector, part of the private key, depends on security level (l-sized). Packed by polynomial rings operation.</param>
         /// <param name="t0">Target packed bytes.</param>
         /// <param name="t1">Packed and updated by shake block publick key.</param>
-        public DilithiumPrivateKey(DilithiumParameters parameters, byte[] rho, byte[] k, byte[] tr, byte[] s1, byte[] s2, byte[] t0, byte[] t1)
+        internal DilithiumPrivateKey(DilithiumParameters parameters, byte[] rho, byte[] k, byte[] tr, byte[] s1, byte[] s2, byte[] t0, byte[] t1)
             : base(true, parameters)
         {
             _rRho = (byte[])rho.Clone();
@@ -38,7 +38,7 @@ namespace QuantoCrypt.Internal.Signature.CRYSTALS.Dilithium
             _rT1 = (byte[])t1.Clone();
         }
 
-        public override byte[] GetEncoded()
+        internal override byte[] GetEncoded()
             => ArrayUtilities.Combine(_rRho, _rK, _rTr, _rS1, _rS2, _rT0);
 
         internal byte[] Rho => _rRho;

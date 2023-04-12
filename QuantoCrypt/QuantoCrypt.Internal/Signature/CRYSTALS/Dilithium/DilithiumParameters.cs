@@ -41,8 +41,6 @@ namespace QuantoCrypt.Internal.Signature.CRYSTALS.Dilithium
         ///     Target <see cref="DilithiumEngine"/>.
         /// </returns>
         internal DilithiumEngine GetEngine(SecureRandom random)
-        {
-            return new DilithiumEngine(_rSecurityLevel, random, _rUsingAes);
-        }
+            => new DilithiumEngine(_rSecurityLevel, random, _rUsingAes);
     }
 }

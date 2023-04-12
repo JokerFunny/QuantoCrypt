@@ -5,7 +5,7 @@ namespace QuantoCrypt.Internal.Signature.CRYSTALS.Dilithium
     /// <summary>
     /// Generator of the public/private key pair for the CRYSTALS-Dilithium.
     /// </summary>
-    public class DilithiumKeyPairGenerator
+    internal class DilithiumKeyPairGenerator
     {
         private readonly DilithiumParameters _rDilithiumParameters;
         private readonly SecureRandom _rSecureRandom;
@@ -26,7 +26,7 @@ namespace QuantoCrypt.Internal.Signature.CRYSTALS.Dilithium
         /// <returns>
         ///     Target <see cref="AsymmetricKeyPair"/>.
         /// </returns>
-        public AsymmetricKeyPair GenerateKeyPair()
+        internal AsymmetricKeyPair GenerateKeyPair()
         {
             DilithiumEngine engine = _rDilithiumParameters.GetEngine(_rSecureRandom);
 

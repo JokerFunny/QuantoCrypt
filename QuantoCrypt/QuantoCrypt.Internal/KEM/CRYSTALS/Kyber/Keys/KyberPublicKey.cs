@@ -15,7 +15,7 @@ namespace QuantoCrypt.Internal.KEM.CRYSTALS.Kyber
         /// </summary>
         /// <param name="parameters">Target <see cref="KyberParameters"/>.</param>
         /// <param name="encoded">Target public key.</param>
-        public KyberPublicKey(KyberParameters parameters, byte[] encoded)
+        internal KyberPublicKey(KyberParameters parameters, byte[] encoded)
             : base(false, parameters)
         {
             _rT = ArrayUtilities.CopyOfRange(encoded, 0, encoded.Length - KyberEngine.SymBytes);
@@ -28,7 +28,7 @@ namespace QuantoCrypt.Internal.KEM.CRYSTALS.Kyber
         /// <param name="parameters">Target <see cref="KyberParameters"/>.</param>
         /// <param name="t">First part of the public key [0, IndCpaPublicKeyBytes - 32].</param>
         /// <param name="rho">Second part of the public key [IndCpaPublicKeyBytes - 32, IndCpaPublicKeyBytes].</param>
-        public KyberPublicKey(KyberParameters parameters, byte[] t, byte[] rho)
+        internal KyberPublicKey(KyberParameters parameters, byte[] t, byte[] rho)
             : base(false, parameters)
         {
             _rT = (byte[])t.Clone();

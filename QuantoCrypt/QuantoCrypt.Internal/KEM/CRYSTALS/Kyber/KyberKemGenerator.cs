@@ -15,7 +15,7 @@ namespace QuantoCrypt.Internal.KEM.CRYSTALS.Kyber
         /// Default ctor.
         /// </summary>
         /// <param name="random">Target <see cref="SecureRandom"/>.</param>
-        public KyberKemGenerator(SecureRandom random)
+        internal KyberKemGenerator(SecureRandom random)
         {
             _rSecureRandom = random;
         }
@@ -27,7 +27,7 @@ namespace QuantoCrypt.Internal.KEM.CRYSTALS.Kyber
         /// <returns> 
         ///     An SecretWithEncapsulation derived from the recipient public key.
         /// </returns>
-        public ISecretWithEncapsulation GenerateEncapsulated(KyberPublicKey recipientKey)
+        internal ISecretWithEncapsulation GenerateEncapsulated(KyberPublicKey recipientKey)
         {
             KyberEngine engine = recipientKey.Parameters.Engine;
             engine.Init(_rSecureRandom);

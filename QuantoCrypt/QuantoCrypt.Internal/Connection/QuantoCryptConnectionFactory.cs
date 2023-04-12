@@ -1,9 +1,8 @@
 ﻿using QuantoCrypt.Infrastructure.CipherSuite;
 using QuantoCrypt.Infrastructure.Connection;
-using QuantoCrypt.Internal.Connection;
 using static QuantoCrypt.Internal.Connection.QuantoCryptConnection;
 
-namespace QuantoCrypt.Protocol
+namespace QuantoCrypt.Connection
 {
     /// <summary>
     /// Factory to create new connections (as new instances of the client + server) that use target <see cref="ICipherSuiteProvider"/>.
@@ -58,6 +57,6 @@ namespace QuantoCrypt.Protocol
         ///     Wrapped secure connection over <paramref name="baseConnection"/> with the support of <see cref="CipherSuiteProvider"/>.
         /// </returns>
         public ISecureTransportConnection CreateSecureServerConnection(ITransportConnection baseConnection)
-            => QuantoCryptConnection.InitializeSecureServer(CipherSuiteProvider, baseConnection);
+            => InitializeSecureServer(CipherSuiteProvider, baseConnection);
     }
 }

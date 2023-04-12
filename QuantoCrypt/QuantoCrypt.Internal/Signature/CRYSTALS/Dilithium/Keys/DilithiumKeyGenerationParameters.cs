@@ -5,7 +5,7 @@ namespace QuantoCrypt.Internal.Signature.CRYSTALS.Dilithium
     /// <summary>
     /// Handle all params for the CRYSTALS-Dilithium key generator.
     /// </summary>
-    public sealed class DilithiumKeyGenerationParameters : IKeyGenerationParameters
+    internal sealed class DilithiumKeyGenerationParameters : IKeyGenerationParameters
     {
         private const int _keyStrength = 256;
 
@@ -17,7 +17,7 @@ namespace QuantoCrypt.Internal.Signature.CRYSTALS.Dilithium
         /// </summary>
         /// <param name="random">Target <see cref="SecureRandom"/> to be used.</param>
         /// <param name="dilithiumParameters">Target <see cref="DilithiumParameters"/>.</param>
-        public DilithiumKeyGenerationParameters(SecureRandom random, DilithiumParameters dilithiumParameters)
+        internal DilithiumKeyGenerationParameters(SecureRandom random, DilithiumParameters dilithiumParameters)
         {
             _rSecureRandom = random;
             _rDilithiumParameters = dilithiumParameters;
@@ -26,7 +26,7 @@ namespace QuantoCrypt.Internal.Signature.CRYSTALS.Dilithium
         /// <summary>
         /// Hadnle the params needed for Dilithium algo.
         /// </summary>
-        public DilithiumParameters Parameters => _rDilithiumParameters;
+        internal DilithiumParameters Parameters => _rDilithiumParameters;
 
         public SecureRandom Random => _rSecureRandom;
 

@@ -5,7 +5,7 @@
     /// </summary>
     internal class Reduce
     {
-        public static int MontgomeryReduce(long a)
+        internal static int MontgomeryReduce(long a)
         {
             int t;
 
@@ -15,7 +15,7 @@
             return t;
         }
 
-        public static int Reduce32(int a)
+        internal static int Reduce32(int a)
         {
             int t;
 
@@ -25,7 +25,7 @@
             return t;
         }
 
-        public static int ConditionalAddQ(int a)
+        internal static int ConditionalAddQ(int a)
         {
             a += (a >> 31) & DilithiumEngine.Q;
 

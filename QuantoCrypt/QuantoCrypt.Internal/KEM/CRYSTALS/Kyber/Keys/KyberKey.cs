@@ -5,7 +5,7 @@ namespace QuantoCrypt.Internal.KEM.CRYSTALS.Kyber
     /// <summary>
     /// Handle work with CRYSTALS-Kyber keys.
     /// </summary>
-    public abstract class KyberKey : AsymmetricKey
+    internal abstract class KyberKey : AsymmetricKey
     {
         private readonly KyberParameters _rKyberParameters;
 
@@ -23,6 +23,6 @@ namespace QuantoCrypt.Internal.KEM.CRYSTALS.Kyber
         /// <summary>
         /// Target <see cref="KyberParameters"/> attached to this key.
         /// </summary>
-        public KyberParameters Parameters => _rKyberParameters;
+        internal KyberParameters Parameters => _rKyberParameters;
     }
 }
