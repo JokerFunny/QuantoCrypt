@@ -26,10 +26,10 @@ namespace QuantoCrypt.Benchmarks.Symmetric
         [ArgumentsSource(nameof(SymmetricAlgorithmClassicalParams))]
         public void Aes_X86_Optimized_Executor(byte[] key, byte[] data)
         {
-            var engine = new Infrastructure.Common.BlockCipher.AesEngine_X86();
-            var keyParams = new Infrastructure.Common.Parameters.KeyParameter(key);
+            var engine = new QuantoCrypt.Common.BlockCipher.AesEngine_X86();
+            var keyParams = new QuantoCrypt.Common.Parameters.KeyParameter(key);
 
-            var cipher = new Infrastructure.Common.BlockCipher.BufferedBlockCipher(engine);
+            var cipher = new QuantoCrypt.Common.BlockCipher.BufferedBlockCipher(engine);
 
             cipher.Init(true, keyParams);
 
@@ -156,7 +156,7 @@ namespace QuantoCrypt.Benchmarks.Symmetric
         /// </returns>
         public static IEnumerable<object[]> SymmetricAlgorithmClassicalParams()
         {
-            var secureRandom = new Infrastructure.Common.SecureRandom();
+            var secureRandom = new QuantoCrypt.Common.SecureRandom();
             int lengthMultiplicator = 16;
 
             List<Tuple<byte[], byte[]>> data = new();
@@ -188,7 +188,7 @@ namespace QuantoCrypt.Benchmarks.Symmetric
         /// </returns>
         public static IEnumerable<object[]> Dstu7624_128Params()
         {
-            var secureRandom = new Infrastructure.Common.SecureRandom();
+            var secureRandom = new QuantoCrypt.Common.SecureRandom();
             int lengthMultiplicator = 16;
 
             List<Tuple<byte[], byte[]>> data = new();
@@ -220,7 +220,7 @@ namespace QuantoCrypt.Benchmarks.Symmetric
         /// </returns>
         public static IEnumerable<object[]> Dstu7624_256Params()
         {
-            var secureRandom = new Infrastructure.Common.SecureRandom();
+            var secureRandom = new QuantoCrypt.Common.SecureRandom();
             int lengthMultiplicator = 32;
 
             List<Tuple<byte[], byte[]>> data = new();
@@ -252,7 +252,7 @@ namespace QuantoCrypt.Benchmarks.Symmetric
         /// </returns>
         public static IEnumerable<object[]> Dstu7624_512Params()
         {
-            var secureRandom = new Infrastructure.Common.SecureRandom();
+            var secureRandom = new QuantoCrypt.Common.SecureRandom();
             int lengthMultiplicator = 64;
 
             List<Tuple<byte[], byte[]>> data = new();
@@ -284,7 +284,7 @@ namespace QuantoCrypt.Benchmarks.Symmetric
         /// </returns>
         public static IEnumerable<object[]> SymmetricAlgorithmCustomParams()
         {
-            var secureRandom = new Infrastructure.Common.SecureRandom();
+            var secureRandom = new QuantoCrypt.Common.SecureRandom();
             int lengthMultiplicator = 8;
 
             List<Tuple<byte[], byte[]>> data = new();

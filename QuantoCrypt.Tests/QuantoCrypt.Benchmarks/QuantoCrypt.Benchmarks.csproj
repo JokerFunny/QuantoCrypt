@@ -12,7 +12,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\QuantoCrypt\QuantoCrypt.Internal\QuantoCrypt.Internal.csproj" />
+    <ProjectReference Include="..\..\QuantoCrypt\QuantoCrypt.Common\QuantoCrypt.Common.csproj" />
+    <ProjectReference Include="..\..\QuantoCrypt\QuantoCrypt\QuantoCrypt.csproj" />
     <ProjectReference Include="..\External\BouncyCastle\BouncyCastle.Crypto.csproj" />
   </ItemGroup>
 

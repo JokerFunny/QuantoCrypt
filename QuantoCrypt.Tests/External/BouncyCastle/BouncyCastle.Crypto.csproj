@@ -24,19 +24,10 @@
     <Title>BouncyCastle.NET Cryptography</Title>
   </PropertyGroup>
 
-  <!-- CI systems other than GitLab might need different conditions -->
-  <PropertyGroup Condition="'$(CI)' != ''">
-    <!-- Deterministic build. -->
-    <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
-  </PropertyGroup>
-
   <!--Source-Level Debugging-->
   <PropertyGroup>
 	<!-- Any custom target adding things to the Compile item group needs BeforeTargets="BeforeCompile".	-->
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
-
-    <!-- Tell SourceLink to use this remote to derive the published git repository URL and source links. -->
-    <GitRepositoryRemoteName>public</GitRepositoryRemoteName>
 
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
@@ -49,14 +40,6 @@
 
 	<!-- In case we disable signing for local builds, ignore identity mismatch with baseline version. -->
     <NoWarn Condition="'$(SignAssembly)' != 'true'">$(NoWarn);CP0003</NoWarn>
-
-	<!--
-	  We added Span-based variant methods to several APIs. Code that uses those methods or implements the
-	  affected interfaces (or abstract classes) will not be backward compatible. There are also several
-	  methods in DotNetUtilities dealing with ECDsa which is only available from net47.
-
-	  TODO: Use suppressions for each individual case of version-dependent methods.
-    -->
     <NoWarn>$(NoWarn);CP0002;CP0005;CP0006</NoWarn>
     <RunAnalyzersDuringBuild>False</RunAnalyzersDuringBuild>
   </PropertyGroup>
@@ -90,19 +73,5 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Nerdbank.GitVersioning" Version="3.5.119">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
   </ItemGroup>
-
-  <Target Name="FixAssemblyAttributes" AfterTargets="GetBuildVersion">
-    <PropertyGroup>
-		<!-- Here we can override/use any MSBuild properties set by Nerdbank.GitVersioning -->
-    </PropertyGroup>
-  </Target>
 </Project>

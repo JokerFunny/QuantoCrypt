@@ -1,8 +1,7 @@
 ﻿using BenchmarkDotNet.Attributes;
-using FluentAssertions;
 using Org.BouncyCastle.Security;
-using QuantoCrypt.Infrastructure.Common.BlockCipher;
-using QuantoCrypt.Infrastructure.Common.Parameters;
+using QuantoCrypt.Common.BlockCipher;
+using QuantoCrypt.Common.Parameters;
 using QuantoCrypt.Internal.Symmetric;
 
 namespace QuantoCrypt.Benchmarks.Symmetric

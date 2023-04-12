@@ -2,6 +2,7 @@
 using FluentAssertions;
 using Org.BouncyCastle.Crypto;
 using Org.BouncyCastle.Pqc.Crypto.Crystals.Kyber;
+using QuantoCrypt.Common;
 using QuantoCrypt.Infrastructure.Common;
 using QuantoCrypt.Internal.KEM.CRYSTALS.Kyber;
 

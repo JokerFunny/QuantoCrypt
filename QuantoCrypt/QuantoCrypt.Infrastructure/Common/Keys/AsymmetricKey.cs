@@ -37,7 +37,7 @@
 
         public override bool Equals(object obj)
         {
-            AsymmetricKey? other = obj as AsymmetricKey;
+            AsymmetricKey other = obj as AsymmetricKey;
 
             if (other == null)
                 return false;

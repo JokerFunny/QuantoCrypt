@@ -2,9 +2,10 @@
 using FluentAssertions;
 using Org.BouncyCastle.Crypto;
 using Org.BouncyCastle.Pqc.Crypto.Crystals.Dilithium;
+using QuantoCrypt.Common;
+using QuantoCrypt.Common.Utilities;
 using QuantoCrypt.Infrastructure.Common;
 using QuantoCrypt.Internal.Signature.CRYSTALS.Dilithium;
-using QuantoCrypt.Internal.Utilities;
 
 namespace QuantoCrypt.Benchmarks.Signature
 {
