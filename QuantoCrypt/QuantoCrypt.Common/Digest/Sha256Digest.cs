@@ -3,7 +3,7 @@
 namespace QuantoCrypt.Common.Digest
 {
     /// <summary>
-    /// Draft FIPS 180-2 implementation of SHA-256. <b>Note:</b> As this is based on a draft this implementation is subject to change.
+    /// Draft FIPS 180-2 implementation of SHA-256.
     /// 
     ///         block  word  digest
     /// SHA-1   512    32    160
@@ -11,8 +11,7 @@ namespace QuantoCrypt.Common.Digest
     /// SHA-384 1024   64    384
     /// SHA-512 1024   64    512
     /// </summary>
-    public class Sha256Digest
-        : GeneralDigest
+    public class Sha256Digest : GeneralDigest
     {
         private const int DigestLength = 32;
 

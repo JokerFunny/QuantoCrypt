@@ -29,7 +29,6 @@
         /// <param name="bytes">Array to be filled.</param>
         void NextBytes(byte[] bytes);
 
-
         /// <summary>
         /// Fill byte span with random values.
         /// </summary>

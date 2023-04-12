@@ -1,4 +1,4 @@
-﻿namespace QuantoCrypt.Common
+﻿namespace QuantoCrypt.Common.Parameters
 {
     /// <summary>
     /// Interface to handle parameters of the key generators.

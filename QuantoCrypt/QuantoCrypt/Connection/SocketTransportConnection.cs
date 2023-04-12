@@ -87,15 +87,13 @@ namespace QuantoCrypt.Internal.Connection
             }
             catch(SocketException se)
             {
-                if (_rTraceAction != null)
-                    _rTraceAction.Invoke($"SocketException: [{se}]");
+                _rTraceAction?.Invoke($"SocketException: [{se}]");
 
                 throw;
             }
             catch (Exception e)
             {
-                if (_rTraceAction != null)
-                    _rTraceAction.Invoke($"Exception: [{e.Message}], stacktrace: [{e.StackTrace}].");
+                _rTraceAction?.Invoke($"Exception: [{e.Message}], stacktrace: [{e.StackTrace}].");
 
                 throw;
             }
@@ -111,15 +109,62 @@ namespace QuantoCrypt.Internal.Connection
             }
             catch (SocketException se)
             {
-                if (_rTraceAction != null)
-                    _rTraceAction.Invoke($"SocketException: [{se}]");
+                _rTraceAction?.Invoke($"SocketException: [{se}]");
 
                 throw;
             }
             catch (Exception e)
             {
-                if (_rTraceAction != null)
-                    _rTraceAction.Invoke($"Exception: [{e.Message}], stacktrace: [{e.StackTrace}].");
+                _rTraceAction?.Invoke($"Exception: [{e.Message}], stacktrace: [{e.StackTrace}].");
+
+                throw;
+            }
+        }
+
+        public Task<int> SendAsync(byte[] data)
+        {
+            try
+            {
+                ConnectionTraceHelper.sTraceMessageIfNeeded(Id, data, "send", _rTraceAction, _rExtendedLogs);
+
+                return _rSocket.SendAsync(data);
+            }
+            catch (SocketException se)
+            {
+                _rTraceAction?.Invoke($"SocketException: [{se}]");
+
+                throw;
+            }
+            catch (Exception e)
+            {
+                _rTraceAction?.Invoke($"Exception: [{e.Message}], stacktrace: [{e.StackTrace}].");
+
+                throw;
+            }
+        }
+
+        public async Task<byte[]> ReceiveAsync()
+        {
+            try
+            {
+                var read = await _rSocket.ReceiveAsync(buffer);
+
+                byte[] result = new byte[read];
+                Array.Copy(buffer, result, read);
+
+                ConnectionTraceHelper.sTraceMessageIfNeeded(Id, result, "receive", _rTraceAction, _rExtendedLogs);
+
+                return result;
+            }
+            catch (SocketException se)
+            {
+                _rTraceAction?.Invoke($"SocketException: [{se}]");
+
+                throw;
+            }
+            catch (Exception e)
+            {
+                _rTraceAction?.Invoke($"Exception: [{e.Message}], stacktrace: [{e.StackTrace}].");
 
                 throw;
             }

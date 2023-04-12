@@ -18,7 +18,7 @@ namespace QuantoCrypt.Common.Digest
                 case 256:
                     return bitLength;
                 default:
-                    throw new ArgumentException(bitLength + " not supported for SHAKE", "bitLength");
+                    throw new ArgumentException($"Target bitlength [{bitLength}] is not supported for SHAKE", nameof(bitLength));
             }
         }
 

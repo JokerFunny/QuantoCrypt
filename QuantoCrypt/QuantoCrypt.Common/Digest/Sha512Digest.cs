@@ -3,8 +3,7 @@
 namespace QuantoCrypt.Common.Digest
 {
     /// <summary>
-    /// Draft FIPS 180-2 implementation of SHA-512. <b>Note:</b> As this is based on a draft this implementation is subject to change.
-    /// 
+    /// Draft FIPS 180-2 implementation of SHA-512.
     ///         block  word  digest
     /// SHA-1   512    32    160
     /// SHA-256 512    32    256
