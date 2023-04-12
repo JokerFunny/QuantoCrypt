@@ -6,7 +6,6 @@ using QuantoCrypt.Infrastructure.KEM;
 using QuantoCrypt.Infrastructure.Signature;
 using QuantoCrypt.Infrastructure.Symmetric;
 using QuantoCrypt.Internal.Message;
-using System.Text;
 
 namespace QuantoCrypt.Internal.Connection
 {
@@ -65,6 +64,8 @@ namespace QuantoCrypt.Internal.Connection
         {
             prWrappedUnsecureConnection = connection ?? throw new ArgumentNullException(nameof(connection));
         }
+
+        #region Factory methods.
 
         /// <summary>
         /// Create a secure client using <paramref name="baseConnection"/>.
@@ -144,10 +145,10 @@ namespace QuantoCrypt.Internal.Connection
                 connection.prWrappedUnsecureConnection.Send(clientFinishMessage);
             }
 
+            var connection = new QuantoCryptConnection(baseConnection);
+
             try
             {
-                var connection = new QuantoCryptConnection(baseConnection);
-
                 _sValidateCipherSuites(cipherSuiteProvider, preferredCipher);
 
                 // CLIENT_INIT - generate key pair + random message to be signed.
@@ -211,7 +212,12 @@ namespace QuantoCrypt.Internal.Connection
                 // Secure connection established.
                 return connection;
             }
-            catch { throw; }
+            catch 
+            {
+                connection.Close();
+
+                throw; 
+            }
         }
 
         /// <summary>
@@ -301,10 +307,10 @@ namespace QuantoCrypt.Internal.Connection
                     throw new ArgumentException($"Client sent invalid messageType. Expected [{ProtocolMessage.CLIENT_FINISH}], found [{clientFinishMessage[1]}].");
             }
 
+            var connection = new QuantoCryptConnection(baseConnection);
+
             try
             {
-                var connection = new QuantoCryptConnection(baseConnection);
-
                 _sValidateCipherSuites(cipherSuiteProvider);
 
                 // SERVER_INIT.
@@ -374,60 +380,17 @@ namespace QuantoCrypt.Internal.Connection
                 // Secure connection established.
                 return connection;
             }
-            catch { throw; }
-        }
-
-        public static ISecureTransportConnection InitializeSecureClientDemo(ICipherSuiteProvider cipherSuiteProvider, ICipherSuite preferredCipher, ITransportConnection baseConnection)
-        {
-            try
+            catch
             {
-                var connection = new QuantoCryptConnection(baseConnection);
+                connection.Close();
 
-                // Encode the data string into a byte array.
-                byte[] msg = Encoding.ASCII.GetBytes("This is a test<EOF>");
-
-                // Send the data through the socket.
-                int bytesSent = connection.prWrappedUnsecureConnection.Send(msg);
-
-                // Receive the response from the remote device.
-                var bytes = connection.prWrappedUnsecureConnection.Receive();
-                Console.WriteLine("Echoed test = {0}", Encoding.ASCII.GetString(bytes));
-
-                // add creation logic here.
-                return connection;
+                throw;
             }
-            catch { throw; }
         }
 
-        public static ISecureTransportConnection InitializeSecureServerDemo(ICipherSuiteProvider cipherSuiteProvider, ITransportConnection baseConnection)
-        {
-            try
-            {
-                var connection = new QuantoCryptConnection(baseConnection);
+        #endregion
 
-                // Incoming data from the client.
-                string data = string.Empty;
-
-                while (true)
-                {
-                    var bytes = connection.prWrappedUnsecureConnection.Receive();
-                    data += Encoding.ASCII.GetString(bytes);
-                    if (data.IndexOf("<EOF>") > -1)
-                    {
-                        break;
-                    }
-                }
-
-                Console.WriteLine("Text received : {0}", data);
-
-                byte[] msg = Encoding.ASCII.GetBytes(data);
-                connection.prWrappedUnsecureConnection.Send(msg);
-
-                // add creation logic here.
-                return connection;
-            }
-            catch { throw; }
-        }
+        #region ISecureTransportConnection members.
 
         public int Send(byte[] data)
         {
@@ -444,23 +407,29 @@ namespace QuantoCrypt.Internal.Connection
             {
                 var message = new ProtocolMessage(prWrappedUnsecureConnection.Receive());
 
-                if (!message.CheckMessageIntegrity())
-                    throw new ArgumentException("Message integrity check fails.");
+                return _ProceedReceivedMessage(message);
+            }
+            catch { throw; }
+        }
 
-                // if CLOSE message recieved - close connection.
-                if (message.GetMessageType() == ProtocolMessage.CLOSE)
-                {
-                    Close();
+        public async Task<int> SendAsync(byte[] data)
+        {
+            var encryptedText = UsedSymmetricAlgorithm.Encrypt(data);
 
-                    return null;
-                }
+            var protocolMessage = ProtocolMessage.CreateMessage(1, ProtocolMessage.DATA_TRANSFER, encryptedText);
 
-                if (message.GetMessageType() != ProtocolMessage.DATA_TRANSFER)
-                    throw new ArgumentException($"Invalid message code recieved! Expected to be a [DATA_TRANSFER], got [{message.GetMessageType()}].");
+            return await prWrappedUnsecureConnection.SendAsync(protocolMessage).ConfigureAwait(false);
+        }
 
-                var body = message.GetBody();
+        public async Task<byte[]> ReceiveAsync()
+        {
+            try
+            {
+                byte[] targetData = await prWrappedUnsecureConnection.ReceiveAsync().ConfigureAwait(false);
 
-                return UsedSymmetricAlgorithm.Decrypt(body);
+                var message = new ProtocolMessage(targetData);
+
+                return _ProceedReceivedMessage(message);
             }
             catch { throw; }
         }
@@ -490,6 +459,28 @@ namespace QuantoCrypt.Internal.Connection
             return result;
         }
 
+    #endregion
+
+        private byte[] _ProceedReceivedMessage(ProtocolMessage message)
+        {
+            if (!message.CheckMessageIntegrity())
+                throw new ArgumentException("Message integrity check fails.");
+
+            // if CLOSE message recieved - close connection.
+            if (message.GetMessageType() == ProtocolMessage.CLOSE)
+            {
+                Close();
+
+                return null;
+            }
+
+            if (message.GetMessageType() != ProtocolMessage.DATA_TRANSFER)
+                throw new ArgumentException($"Invalid message code recieved! Expected to be a [DATA_TRANSFER], got [{message.GetMessageType()}].");
+
+            var body = message.GetBody();
+
+            return UsedSymmetricAlgorithm.Decrypt(body);
+        }
 
         private static void _sValidateCipherSuites(ICipherSuiteProvider cipherSuiteProvider)
         {
