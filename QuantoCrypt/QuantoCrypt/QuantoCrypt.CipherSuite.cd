@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Comment CommentText="Interfaces to work with CipherSuites">
+    <Position X="14.271" Y="9.166" Height="0.333" Width="2.214" />
+  </Comment>
+  <Comment CommentText="Supported CipherSuites, named like XXX_YYY_ZZZ&#xD;&#xA;Where XXX - KEM-algorithm&#xD;&#xA;YYY - DS-algorithm&#xD;&#xA;ZZZ - symmetric algorithm">
+    <Position X="9.354" Y="2.875" Height="0.771" Width="3.026" />
+  </Comment>
+  <Comment CommentText="Implemented ICipherSuiteProviders">
+    <Position X="6.01" Y="8.823" Height="0.343" Width="2.234" />
+  </Comment>
+  <Class Name="QuantoCrypt.Internal.CipherSuite.CrystalsKyber1024Aes_CrystalsDilithium5Aes_Aes" BaseTypeListCollapsed="true">
+    <Position X="11" Y="6.5" Width="4.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAAAAAAABAAAARAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CipherSuite\Crystals\CrystalsKyber1024Aes_CrystalsDilithium5Aes_Aes.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="QuantoCrypt.Internal.CipherSuite.CrystalsKyber1024Aes_CrystalsDilithium5Aes_AesGcm" BaseTypeListCollapsed="true">
+    <Position X="15.5" Y="6.5" Width="4.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAAAAAAABAAAARAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CipherSuite\Crystals\CrystalsKyber1024Aes_CrystalsDilithium5Aes_AesGcm.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="QuantoCrypt.Internal.CipherSuite.CrystalsKyber1024Aes_CrystalsDilithium5_Aes" BaseTypeListCollapsed="true">
+    <Position X="2" Y="6.5" Width="4.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAAAAAAABAAAARAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CipherSuite\Crystals\CrystalsKyber1024Aes_CrystalsDilithium5_Aes.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="QuantoCrypt.Internal.CipherSuite.CrystalsKyber1024Aes_CrystalsDilithium5_AesGcm" BaseTypeListCollapsed="true">
+    <Position X="6.5" Y="6.5" Width="4.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAAAAAAABAAAARAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CipherSuite\Crystals\CrystalsKyber1024Aes_CrystalsDilithium5_AesGcm.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="QuantoCrypt.Internal.CipherSuite.CrystalsKyber1024_CrystalsDilithium5Aes_Aes" BaseTypeListCollapsed="true">
+    <Position X="11" Y="4" Width="4.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAAAAAAABAAAARAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CipherSuite\Crystals\CrystalsKyber1024_CrystalsDilithium5Aes_Aes.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="QuantoCrypt.Internal.CipherSuite.CrystalsKyber1024_CrystalsDilithium5Aes_AesGcm" BaseTypeListCollapsed="true">
+    <Position X="15.5" Y="4" Width="4.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAAAAAAABAAAARAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CipherSuite\Crystals\CrystalsKyber1024_CrystalsDilithium5Aes_AesGcm.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="QuantoCrypt.Internal.CipherSuite.CrystalsKyber1024_CrystalsDilithium5_Aes" BaseTypeListCollapsed="true">
+    <Position X="2" Y="4" Width="4.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAAAAAAABAAAARAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CipherSuite\Crystals\CrystalsKyber1024_CrystalsDilithium5_Aes.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="QuantoCrypt.Internal.CipherSuite.CrystalsKyber1024_CrystalsDilithium5_AesGcm" BaseTypeListCollapsed="true">
+    <Position X="6.5" Y="4" Width="4.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAAAAAAABAAAARAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CipherSuite\Crystals\CrystalsKyber1024_CrystalsDilithium5_AesGcm.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="QuantoCrypt.Internal.CipherSuite.CustomCipherSuiteProvider" BaseTypeListCollapsed="true">
+    <Position X="2" Y="9.5" Width="5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABA=</HashCode>
+      <FileName>CipherSuite\CustomCipherSuiteProvider.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="QuantoCrypt.Internal.CipherSuite.QuantoCryptCipherSuiteProvider" BaseTypeListCollapsed="true">
+    <Position X="7.25" Y="9.5" Width="4.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABA=</HashCode>
+      <FileName>CipherSuite\QuantoCryptCipherSuiteProvider.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="QuantoCrypt.Infrastructure.CipherSuite.ICipherSuite" Collapsed="true">
+    <Position X="13.5" Y="9.75" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="QuantoCrypt.Infrastructure.CipherSuite.ICipherSuiteProvider" Collapsed="true">
+    <Position X="15.5" Y="9.75" Width="1.75" />
+    <TypeIdentifier />
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

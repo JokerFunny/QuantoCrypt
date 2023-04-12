@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Comment CommentText="Interfaces to work with CipherSuites">
+    <Position X="4.927" Y="1.406" Height="0.333" Width="2.224" />
+  </Comment>
+  <Comment CommentText="Abstractions to work with keys">
+    <Position X="13.365" Y="1.406" Height="0.333" Width="1.901" />
+  </Comment>
+  <Comment CommentText="Interfaces to discribe Connections">
+    <Position X="5" Y="4.656" Height="0.333" Width="2.099" />
+  </Comment>
+  <Comment CommentText="Interfaces to work with algorithms">
+    <Position X="14.198" Y="4.958" Height="0.333" Width="2.13" />
+  </Comment>
+  <Class Name="QuantoCrypt.Infrastructure.Common.AsymmetricKey">
+    <Position X="11.75" Y="2" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQEAAAAAAgAAAAQAAAAAAAIAAAAAAAAAAAAA=</HashCode>
+      <FileName>Common\Keys\AsymmetricKey.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QuantoCrypt.Infrastructure.Common.AsymmetricKeyPair">
+    <Position X="14.5" Y="2" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAFAAAAAAAAAAIAAAAQAA=</HashCode>
+      <FileName>Common\Keys\AsymmetricKeyPair.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="QuantoCrypt.Infrastructure.CipherSuite.ICipherSuite">
+    <Position X="2.75" Y="2" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAAAAAAABAAAARAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CipherSuite\ICipherSuite.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="QuantoCrypt.Infrastructure.CipherSuite.ICipherSuiteProvider">
+    <Position X="6.25" Y="2" Width="4" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABA=</HashCode>
+      <FileName>CipherSuite\ICipherSuiteProvider.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="QuantoCrypt.Infrastructure.Connection.ISecureTransportConnection">
+    <Position X="3.5" Y="5.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAAAAAAAAEAAAAAAAAAAAAAQABAAAAAAAAA=</HashCode>
+      <FileName>Connection\ISecureTransportConnection.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="QuantoCrypt.Infrastructure.Connection.ITransportConnection">
+    <Position X="6.25" Y="5.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AABCAAAAAAAAAAAAAEAAAAAAAAAAAAAQABAAAACAAAA=</HashCode>
+      <FileName>Connection\ITransportConnection.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="QuantoCrypt.Infrastructure.KEM.IKEMAlgorithm">
+    <Position X="11" Y="7" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAABAAAAAAA=</HashCode>
+      <FileName>KEM\IKEMAlgorithm.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="QuantoCrypt.Infrastructure.KEM.ISecretWithEncapsulation">
+    <Position X="11" Y="9" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>KEM\ISecretWithEncapsulation.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="QuantoCrypt.Infrastructure.Signature.ISignatureAlgorithm">
+    <Position X="14.25" Y="7" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAAARAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Signature\ISignatureAlgorithm.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="QuantoCrypt.Infrastructure.Symmetric.ISymmetricAlgorithm">
+    <Position X="17" Y="7" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Symmetric\ISymmetricAlgorithm.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="QuantoCrypt.Infrastructure.IAlgorithm">
+    <Position X="14.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IAlgorithm.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
