@@ -1,7 +1,6 @@
 ﻿using QuantoCrypt.Infrastructure.CipherSuite;
 using QuantoCrypt.Infrastructure.KEM;
 using QuantoCrypt.Internal.Utilities;
-using System.Buffers.Binary;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 
@@ -113,23 +112,27 @@ namespace QuantoCrypt.Internal.Message
         /// 2 - 5 - [bodyLength]
         /// 6 - 9 - [messageIntegrity]
         /// 10 - [prefferedCipherSuite]
-        /// 11 - end - [publicKey]
+        /// 11 - [connectionMode]
+        /// 12 - end - [publicKey]
         /// </remarks>
         /// <returns>
         ///     CLIENT_INIT message with properly generated header.
         /// </returns>
-        public static byte[] CreateClientInitMessage(ICipherSuiteProvider supportedCipherSuites, ICipherSuite preferedCipherSuite, byte[] publicKey)
+        public static byte[] CreateClientInitMessage(ICipherSuiteProvider supportedCipherSuites, ICipherSuite preferedCipherSuite, byte connectionMode, byte[] publicKey)
         {
             // add preffered CipherSuites.
             byte prefferedCS = (byte)supportedCipherSuites.SupportedCipherSuites.Keys.ToList().IndexOf(x => x.Name == preferedCipherSuite.Name);
 
-            var message = new byte[1 + publicKey.Length];
+            var message = new byte[2 + publicKey.Length];
 
             // set prefferedCipherSuite.
             message[0] = prefferedCS;
 
+            // set connection mode.
+            message[1] = connectionMode;
+
             // set publicKey.
-            publicKey.CopyTo(message, 1);
+            publicKey.CopyTo(message, 2);
 
             return CreateMessage(1, CLIENT_INIT, message);
         }

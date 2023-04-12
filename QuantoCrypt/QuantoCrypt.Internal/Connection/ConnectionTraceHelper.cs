@@ -59,7 +59,9 @@ namespace QuantoCrypt.Internal.Connection
         {
             output.AppendLine($"10 - preferred Cipher Suite - [{targetData[10]}];");
 
-            output.AppendLine($"11 - {targetData.Length - 1} - KEM public key - [{_sGetArrayAsString(targetData[11..])}].");
+            output.AppendLine($"11 - connection mode - [{targetData[11]} ({(QuantoCryptConnection.ConnectionMode)targetData[11]})];");
+
+            output.AppendLine($"12 - {targetData.Length - 1} - KEM public key - [{_sGetArrayAsString(targetData[11..])}].");
         }
 
         internal static void sGetServerInitBodyTraceMessage(byte[] targetData, StringBuilder output)

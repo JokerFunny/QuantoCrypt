@@ -7,7 +7,6 @@ using QuantoCrypt.Infrastructure.Symmetric;
 using QuantoCrypt.Internal.Message;
 using QuantoCrypt.Internal.Utilities;
 using System.Text;
-using static QuantoCrypt.Internal.Connection.QuantoCryptConnection;
 
 namespace QuantoCrypt.Internal.Connection
 {
@@ -19,7 +18,7 @@ namespace QuantoCrypt.Internal.Connection
         /// <summary>
         /// Supported connection modes.
         /// </summary>
-        public enum SupportedConnectionMode
+        public enum ConnectionMode : byte
         {
             /// <summary>
             /// Default mode (use KEM + DSA). Requires 2 messages: ClientInit + ServerInit. Checks servers' signature.
@@ -72,13 +71,12 @@ namespace QuantoCrypt.Internal.Connection
         /// </summary>
         /// <param name="cipherSuiteProvider">Target <see cref="ICipherSuiteProvider"/> to be supported.</param>
         /// <param name="baseConnection">Target <see cref="ITransportConnection"/> to be wrapped.</param>
-        /// <param name="supportedConnectionMode">Target <see cref="SupportedConnectionMode"/>, default value - <see cref="SupportedConnectionMode.Default"/>.</param>
+        /// <param name="connectionMode">Target <see cref="ConnectionMode"/>.</param>
         /// <returns>
         ///     Wrapped secure connection over <paramref name="baseConnection"/> with the support of <see cref="CipherSuiteProvider"/>.
         /// </returns>
-        public static ISecureTransportConnection InitializeSecureClient(ICipherSuiteProvider cipherSuiteProvider, ITransportConnection baseConnection, 
-            SupportedConnectionMode supportedConnectionMode = SupportedConnectionMode.Default)
-            => InitializeSecureClient(cipherSuiteProvider, cipherSuiteProvider.SupportedCipherSuites.Keys.First(), baseConnection, supportedConnectionMode);
+        public static ISecureTransportConnection InitializeSecureClient(ICipherSuiteProvider cipherSuiteProvider, ITransportConnection baseConnection, ConnectionMode connectionMode)
+            => InitializeSecureClient(cipherSuiteProvider, cipherSuiteProvider.SupportedCipherSuites.Keys.First(), baseConnection, connectionMode);
 
         /// <summary>
         /// Create a secure client using <paramref name="baseConnection"/>.
@@ -86,14 +84,13 @@ namespace QuantoCrypt.Internal.Connection
         /// <param name="cipherSuiteProvider">Target <see cref="ICipherSuiteProvider"/> to be supported.</param>
         /// <param name="preferredCipher">Preffered <see cref="ICipherSuite"/> to be used.</param>
         /// <param name="baseConnection">Target <see cref="ITransportConnection"/> to be wrapped.</param>
-        /// <param name="supportedConnectionMode">Target <see cref="SupportedConnectionMode"/>, default value - <see cref="SupportedConnectionMode.Default"/>.</param>
+        /// <param name="connectionMode">Target <see cref="ConnectionMode"/>.</param>
         /// <returns>
         ///     Wrapped secure connection over <paramref name="baseConnection"/> with the support of <see cref="CipherSuiteProvider"/>.
         /// </returns>
-        public static ISecureTransportConnection InitializeSecureClient(ICipherSuiteProvider cipherSuiteProvider, ICipherSuite preferredCipher, ITransportConnection baseConnection, 
-            SupportedConnectionMode supportedConnectionMode = SupportedConnectionMode.Default)
+        public static ISecureTransportConnection InitializeSecureClient(ICipherSuiteProvider cipherSuiteProvider, ICipherSuite preferredCipher, ITransportConnection baseConnection, ConnectionMode connectionMode)
         {
-            byte[] __GetClientInitMessage(ICipherSuite preferredCipher, out IKEMAlgorithm kemAlgorithm)
+            byte[] __GetClientInitMessage(ICipherSuite preferredCipher, ConnectionMode connectionMode, out IKEMAlgorithm kemAlgorithm)
             {
                 // CLIENT_INIT - generate key pair + random message to be signed.
                 kemAlgorithm = preferredCipher.GetKEMAlgorithm();
@@ -101,7 +98,7 @@ namespace QuantoCrypt.Internal.Connection
                 AsymmetricKeyPair keys = kemAlgorithm.KeyGen();
                 byte[] publicKey = keys.Public.GetEncoded();
 
-                return ProtocolMessage.CreateClientInitMessage(cipherSuiteProvider, preferredCipher, publicKey);
+                return ProtocolMessage.CreateClientInitMessage(cipherSuiteProvider, preferredCipher, (byte)connectionMode, publicKey);
             };
 
             bool __ValidateServerInitMessage(QuantoCryptConnection connection, IKEMAlgorithm kemAlgorithm, byte[] serverInitMessage, byte[] clientInitMessageHash)
@@ -154,7 +151,7 @@ namespace QuantoCrypt.Internal.Connection
                 _sValidateCipherSuites(cipherSuiteProvider, preferredCipher);
 
                 // CLIENT_INIT - generate key pair + random message to be signed.
-                byte[] clientInitMessage = __GetClientInitMessage(preferredCipher, out IKEMAlgorithm kemAlgorithm);
+                byte[] clientInitMessage = __GetClientInitMessage(preferredCipher, connectionMode, out IKEMAlgorithm kemAlgorithm);
 
                 connection.prWrappedUnsecureConnection.Send(clientInitMessage);
 
@@ -175,7 +172,7 @@ namespace QuantoCrypt.Internal.Connection
                     if (!__ValidateServerInitMessage(connection, kemAlgorithm, serverResponseMessage, calculatedMessage))
                         throw new Exception("Can't validate the server's signature!");
 
-                    if (supportedConnectionMode == SupportedConnectionMode.Fast)
+                    if (connectionMode == ConnectionMode.Fast)
                         __SendClientFinishMessage(connection, serverResponseMessage);
                 }
                 else if (serverResponseMessage[1] == ProtocolMessage.UNSUPPORTED_CLIENT_PARAMS)
@@ -185,7 +182,7 @@ namespace QuantoCrypt.Internal.Connection
                     //preferredCipher = ...;
 
                     // CLIENT_INIT - generate key pair + random message to be signed.
-                    clientInitMessage = __GetClientInitMessage(preferredCipher, out kemAlgorithm);
+                    clientInitMessage = __GetClientInitMessage(preferredCipher, connectionMode, out kemAlgorithm);
 
                     connection.prWrappedUnsecureConnection.Send(clientInitMessage);
 
@@ -222,12 +219,10 @@ namespace QuantoCrypt.Internal.Connection
         /// </summary>
         /// <param name="cipherSuiteProvider">Target <see cref="ICipherSuiteProvider"/> to be supported.</param>
         /// <param name="baseConnection">Target <see cref="ITransportConnection"/> to be wrapped.</param>
-        /// <param name="supportedConnectionMode">Target <see cref="SupportedConnectionMode"/>, default value - <see cref="SupportedConnectionMode.Default"/>.</param>
         /// <returns>
         ///     Wrapped secure connection over <paramref name="baseConnection"/> with the support of <see cref="CipherSuiteProvider"/>.
         /// </returns>
-        public static ISecureTransportConnection InitializeSecureServer(ICipherSuiteProvider cipherSuiteProvider, ITransportConnection baseConnection,
-            SupportedConnectionMode supportedConnectionMode = SupportedConnectionMode.Default)
+        public static ISecureTransportConnection InitializeSecureServer(ICipherSuiteProvider cipherSuiteProvider, ITransportConnection baseConnection)
         {
             ICipherSuite __GetCipherSuiteToUse(byte[] clientInitMessage)
             {
@@ -235,6 +230,16 @@ namespace QuantoCrypt.Internal.Connection
                 byte prefferedCipherSuite = clientInitMessage[10];
 
                 return cipherSuiteProvider.SupportedCipherSuites.Keys.ToList().ElementAt(prefferedCipherSuite);
+            }
+
+            ConnectionMode __GetConnectionMode(byte[] clientInitMessage)
+            {
+                byte targetConnectionMode = clientInitMessage[11];
+
+                if (targetConnectionMode < 0 || targetConnectionMode > 2)
+                    throw new ArgumentOutOfRangeException($"Connection mode could be only 0, 1 or 2, but found [{targetConnectionMode}]!");
+
+                return (ConnectionMode)targetConnectionMode;
             }
 
             byte[] __GetServerInitMessage(QuantoCryptConnection connection, byte[] clientInitMessage, ICipherSuite cipherSuiteToUse)
@@ -310,12 +315,14 @@ namespace QuantoCrypt.Internal.Connection
                     throw new ArgumentException("Message integrity check fails.");
 
                 byte[] serverInitMessage;
+                ConnectionMode connectionMode;
 
                 // check that the ckient sent a proper message.
                 if (clientInitMessage[1] == ProtocolMessage.CLIENT_INIT)
                 {
                     // get preffered client CipherSuite.
                     ICipherSuite cipherSuiteToUse = __GetCipherSuiteToUse(clientInitMessage);
+                    connectionMode = __GetConnectionMode(clientInitMessage);
 
                     if (cipherSuiteToUse == null)
                     {
@@ -359,7 +366,7 @@ namespace QuantoCrypt.Internal.Connection
 
 
 
-                if (supportedConnectionMode == SupportedConnectionMode.Fast)
+                if (connectionMode == ConnectionMode.Fast)
                     __ProceedClientFinishMessage(connection, serverInitMessage);
 
 
