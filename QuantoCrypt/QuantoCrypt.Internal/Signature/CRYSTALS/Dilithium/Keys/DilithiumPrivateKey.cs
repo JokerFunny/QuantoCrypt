@@ -38,7 +38,7 @@ namespace QuantoCrypt.Internal.Signature.CRYSTALS.Dilithium
             _rT1 = (byte[])t1.Clone();
         }
 
-        internal override byte[] GetEncoded()
+        public override byte[] GetEncoded()
             => ArrayUtilities.Combine(_rRho, _rK, _rTr, _rS1, _rS2, _rT0);
 
         internal byte[] Rho => _rRho;
