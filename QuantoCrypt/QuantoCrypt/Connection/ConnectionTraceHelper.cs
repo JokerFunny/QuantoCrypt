@@ -73,17 +73,21 @@ namespace QuantoCrypt.Internal.Connection
             Array.Copy(targetData, 14, cipherText, 0, cipherTextLength);
 
             int offset = 14 + cipherTextLength;
-            output.AppendLine($"14 - {offset - 1} - Cipher Test - [{_sGetArrayAsString(cipherText)}];");
+            output.AppendLine($"14 - {offset - 1} - Cipher Text - [{_sGetArrayAsString(cipherText)}];");
 
-            int signaturePartLength = ProtocolMessage.GetIntValue(targetData, offset, 4);
-            output.AppendLine($"{offset} - {offset + 3} - Signature part length [{signaturePartLength}] - [{_sGetArrayAsString(targetData[offset..(offset+4)])}];");
+            // trace signature part if exist.
+            if (offset != targetData.Length)
+            {
+                int signaturePartLength = ProtocolMessage.GetIntValue(targetData, offset, 4);
+                output.AppendLine($"{offset} - {offset + 3} - Signature part length [{signaturePartLength}] - [{_sGetArrayAsString(targetData[offset..(offset + 4)])}];");
 
-            offset += 4;
-            int signaturePublicKeyLength = ProtocolMessage.GetIntValue(targetData, offset, 4);
-            output.AppendLine($"{offset} - {offset + 3} - Signature public key length [{signaturePublicKeyLength}] - [{_sGetArrayAsString(targetData[offset..(offset + 4)])}];");
-            
-            offset += 4;
-            output.AppendLine($"{offset} - {targetData.Length - 1} - Encrypted signature with public key - [{_sGetArrayAsString(targetData[offset..])}].");
+                offset += 4;
+                int signaturePublicKeyLength = ProtocolMessage.GetIntValue(targetData, offset, 4);
+                output.AppendLine($"{offset} - {offset + 3} - Signature public key length [{signaturePublicKeyLength}] - [{_sGetArrayAsString(targetData[offset..(offset + 4)])}];");
+
+                offset += 4;
+                output.AppendLine($"{offset} - {targetData.Length - 1} - Encrypted signature with public key - [{_sGetArrayAsString(targetData[offset..])}].");
+            }
         }
 
         internal static void sGetUnsupportedClientParamsBodyTraceMessage(byte[] targetData, StringBuilder output)
