@@ -68,5 +68,13 @@ namespace QuantoCrypt.Internal.Signature.CRYSTALS.Dilithium
 
             _isDisposed = true;
         }
+
+        private SecureRandom _GetRandom()
+        {
+            if (_secureRandom == null && !_isDisposed)
+                _secureRandom = new SecureRandom();
+
+            return _secureRandom;
+        }
     }
 }

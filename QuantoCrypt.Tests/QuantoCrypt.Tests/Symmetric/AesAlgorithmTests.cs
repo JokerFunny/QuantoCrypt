@@ -1,6 +1,5 @@
 ﻿using FluentAssertions;
 using QuantoCrypt.Common;
-using QuantoCrypt.Infrastructure.Common;
 using QuantoCrypt.Internal.Symmetric;
 using System.Security.Cryptography;
 

@@ -102,7 +102,7 @@ namespace QuantoCrypt.Internal.Connection
                 return ProtocolMessage.CreateClientInitMessage(cipherSuiteProvider, preferredCipher, (byte)connectionMode, publicKey);
             };
 
-            bool __ValidateServerInitMessage(QuantoCryptConnection connection, IKEMAlgorithm kemAlgorithm, byte[] serverInitMessage, byte[] clientInitMessageHash)
+            bool __ValidateServerInitMessage(QuantoCryptConnection connection, ConnectionMode connectionMode, IKEMAlgorithm kemAlgorithm, byte[] serverInitMessage, byte[] clientInitMessageHash)
             {
                 int cipherTextLength = ProtocolMessage.GetIntValue(serverInitMessage, 10, 4);
 
@@ -115,24 +115,30 @@ namespace QuantoCrypt.Internal.Connection
                 // create a proper ISymmetricAlgorithm using genereted session secret.
                 connection.UsedSymmetricAlgorithm = preferredCipher.GetSymmetricAlgorithm(sessionKey);
 
-                // get target lengths of the signature + public key.
-                int offset = 14 + cipherTextLength;
-                int signaturePartLength = ProtocolMessage.GetIntValue(serverInitMessage, offset, 4);
-                offset += 4;
-                int signaturePublicKeyLength = ProtocolMessage.GetIntValue(serverInitMessage, offset, 4);
+                // validate signature in case if Default connection mode used.
+                if (connectionMode == ConnectionMode.Default)
+                {
+                    // get target lengths of the signature + public key.
+                    int offset = 14 + cipherTextLength;
+                    int signaturePartLength = ProtocolMessage.GetIntValue(serverInitMessage, offset, 4);
+                    offset += 4;
+                    int signaturePublicKeyLength = ProtocolMessage.GetIntValue(serverInitMessage, offset, 4);
 
-                // get decrypted signature with public key.
-                offset += 4;
-                byte[] decryptedSignatureWithKey = connection.UsedSymmetricAlgorithm.Decrypt(serverInitMessage[offset..]);
+                    // get decrypted signature with public key.
+                    offset += 4;
+                    byte[] decryptedSignatureWithKey = connection.UsedSymmetricAlgorithm.Decrypt(serverInitMessage[offset..]);
 
-                byte[] signature = decryptedSignatureWithKey[0..signaturePartLength];
-                byte[] signaturePublicKey = new byte[signaturePublicKeyLength];
-                Array.Copy(decryptedSignatureWithKey, signaturePartLength, signaturePublicKey, 0, signaturePublicKeyLength);
+                    byte[] signature = decryptedSignatureWithKey[0..signaturePartLength];
+                    byte[] signaturePublicKey = new byte[signaturePublicKeyLength];
+                    Array.Copy(decryptedSignatureWithKey, signaturePartLength, signaturePublicKey, 0, signaturePublicKeyLength);
 
-                // verify signature.
-                ISignatureAlgorithm verifier = preferredCipher.GetSignatureAlgorithm(false);
+                    // verify signature.
+                    ISignatureAlgorithm verifier = preferredCipher.GetSignatureAlgorithm(false);
 
-                return verifier.Verify(signaturePublicKey, clientInitMessageHash, signature);
+                    return verifier.Verify(signaturePublicKey, clientInitMessageHash, signature);
+                }
+
+                return true;
             }
 
             void __SendClientFinishMessage(QuantoCryptConnection connection, byte[] serverInitMessage)
@@ -170,7 +176,7 @@ namespace QuantoCrypt.Internal.Connection
                     // SERVER_INIT - get cipherText to generate sessionSecret + encryptedSigWithKey to validate server by clientInitMessage.
                     byte[] calculatedMessage = ProtocolMessage.GetMessageHash(clientInitMessage);
 
-                    if (!__ValidateServerInitMessage(connection, kemAlgorithm, serverResponseMessage, calculatedMessage))
+                    if (!__ValidateServerInitMessage(connection, connectionMode, kemAlgorithm, serverResponseMessage, calculatedMessage))
                         throw new Exception("Can't validate the server's signature!");
 
                     if (connectionMode == ConnectionMode.Fast)
@@ -198,7 +204,7 @@ namespace QuantoCrypt.Internal.Connection
                         // SERVER_INIT - get cipherText to generate sessionSecret + encryptedSigWithKey to validate server by clientInitMessage.
                         byte[] calculatedMessage = ProtocolMessage.GetMessageHash(clientInitMessage);
 
-                        if (!__ValidateServerInitMessage(connection, kemAlgorithm, serverResponseMessage, calculatedMessage))
+                        if (!__ValidateServerInitMessage(connection, connectionMode, kemAlgorithm, serverResponseMessage, calculatedMessage))
                             throw new Exception("Can't validate the server's signature!");
                     }
                     else
@@ -248,7 +254,7 @@ namespace QuantoCrypt.Internal.Connection
                 return (ConnectionMode)targetConnectionMode;
             }
 
-            byte[] __GetServerInitMessage(QuantoCryptConnection connection, byte[] clientInitMessage, ICipherSuite cipherSuiteToUse)
+            byte[] __GetServerInitMessage(QuantoCryptConnection connection, byte[] clientInitMessage, ICipherSuite cipherSuiteToUse, ConnectionMode connectionMode)
             {
                 // header = 10 + prefferedCS = 1.
                 int publicKeyOffset = 11;
@@ -265,24 +271,30 @@ namespace QuantoCrypt.Internal.Connection
                 byte[] sessionSecret = secretWithEncapsulatedData.GetSecret();
                 byte[] generatedCipherText = secretWithEncapsulatedData.GetEncapsulation();
 
-                // get Signature algorithm.
-                ISignatureAlgorithm signatureAlgorithmForSigning = cipherSuiteToUse.GetSignatureAlgorithm(true);
+                // generate message with DS in case if Default connetion mode selected.
+                if (connectionMode == ConnectionMode.Default)
+                {
+                    // get Signature algorithm.
+                    ISignatureAlgorithm signatureAlgorithmForSigning = cipherSuiteToUse.GetSignatureAlgorithm(true);
 
-                // create keys and sign clinets' message.
-                AsymmetricKeyPair signatureKeys = signatureAlgorithmForSigning.KeyGen();
+                    // create keys and sign clinets' message.
+                    AsymmetricKeyPair signatureKeys = signatureAlgorithmForSigning.KeyGen();
 
-                // generate hash over clientInitMessage to be signed.
-                byte[] messageToBeSigned = ProtocolMessage.GetMessageHash(clientInitMessage);
-                byte[] signature = signatureAlgorithmForSigning.Sign(messageToBeSigned);
+                    // generate hash over clientInitMessage to be signed.
+                    byte[] messageToBeSigned = ProtocolMessage.GetMessageHash(clientInitMessage);
+                    byte[] signature = signatureAlgorithmForSigning.Sign(messageToBeSigned);
 
-                // create a proper ISymmetricAlgorithm using genereted session secret.
-                connection.UsedSymmetricAlgorithm = cipherSuiteToUse.GetSymmetricAlgorithm(sessionSecret);
+                    // create a proper ISymmetricAlgorithm using genereted session secret.
+                    connection.UsedSymmetricAlgorithm = cipherSuiteToUse.GetSymmetricAlgorithm(sessionSecret);
 
-                // prepare params for client. We need to sent cipher text + [signature + signature public key](encrypted).
-                byte[] signaturePublicKey = signatureKeys.Public.GetEncoded();
-                byte[] encryptedSignatureWithKey = connection.UsedSymmetricAlgorithm.Encrypt(ArrayUtilities.Combine(signature, signaturePublicKey));
+                    // prepare params for client. We need to sent cipher text + [signature + signature public key](encrypted).
+                    byte[] signaturePublicKey = signatureKeys.Public.GetEncoded();
+                    byte[] encryptedSignatureWithKey = connection.UsedSymmetricAlgorithm.Encrypt(ArrayUtilities.Combine(signature, signaturePublicKey));
 
-                return ProtocolMessage.CreateServerInitMessage(generatedCipherText, encryptedSignatureWithKey, signature.Length, signaturePublicKey.Length);
+                    return ProtocolMessage.CreateServerInitMessage(generatedCipherText, encryptedSignatureWithKey, signature.Length, signaturePublicKey.Length);
+                }
+
+                return ProtocolMessage.CreateServerInitMessage(generatedCipherText);
             }
 
             void __ProceedClientFinishMessage(QuantoCryptConnection connection, byte[] serverInitMessage)
@@ -336,13 +348,12 @@ namespace QuantoCrypt.Internal.Connection
                         serverInitMessage = ProtocolMessage.CreateUnsupportedClientParamsMessage(cipherSuiteProvider);
                     }
                     else
-                        serverInitMessage = __GetServerInitMessage(connection, clientInitMessage, cipherSuiteToUse);
+                        serverInitMessage = __GetServerInitMessage(connection, clientInitMessage, cipherSuiteToUse, connectionMode);
                 }
                 else
                     throw new ArgumentException($"Client sent invalid messageType. Expected [{ProtocolMessage.CLIENT_INIT}], found [{clientInitMessage[1]}].");
 
                 
-
                 // fallback for unsopperted client cipher suite.
                 if (serverInitMessage[1] == ProtocolMessage.UNSUPPORTED_CLIENT_PARAMS)
                 {
@@ -356,6 +367,7 @@ namespace QuantoCrypt.Internal.Connection
 
                     // get preffered client CipherSuite.
                     ICipherSuite cipherSuiteToUse = __GetCipherSuiteToUse(clientInitMessage);
+                    connectionMode = __GetConnectionMode(clientInitMessage);
 
                     if (cipherSuiteToUse == null)
                     {
@@ -366,12 +378,14 @@ namespace QuantoCrypt.Internal.Connection
                         throw new ArgumentException($"Client sent unsupported CipherSuite in a second time. {supportedCipherSuites}.");
                     }
                     else
-                        serverInitMessage = __GetServerInitMessage(connection, clientInitMessage, cipherSuiteToUse);
+                        serverInitMessage = __GetServerInitMessage(connection, clientInitMessage, cipherSuiteToUse, connectionMode);
                 }
+
+
                 connection.prWrappedUnsecureConnection.Send(serverInitMessage);
 
 
-
+                // proceed CLIENT_FINISH if needed.
                 if (connectionMode == ConnectionMode.Fast)
                     __ProceedClientFinishMessage(connection, serverInitMessage);
 
@@ -396,7 +410,7 @@ namespace QuantoCrypt.Internal.Connection
         {
             var encryptedText = UsedSymmetricAlgorithm.Encrypt(data);
 
-            var protocolMessage = ProtocolMessage.CreateMessage(1, ProtocolMessage.DATA_TRANSFER, encryptedText);
+            var protocolMessage = ProtocolMessage.CreateMessage(ProtocolMessage.PROTOCOL_VERSION, ProtocolMessage.DATA_TRANSFER, encryptedText);
 
             return prWrappedUnsecureConnection.Send(protocolMessage);
         }
@@ -416,9 +430,9 @@ namespace QuantoCrypt.Internal.Connection
         {
             var encryptedText = UsedSymmetricAlgorithm.Encrypt(data);
 
-            var protocolMessage = ProtocolMessage.CreateMessage(1, ProtocolMessage.DATA_TRANSFER, encryptedText);
+            var targetMessage = ProtocolMessage.CreateMessage(ProtocolMessage.PROTOCOL_VERSION, ProtocolMessage.DATA_TRANSFER, encryptedText);
 
-            return await prWrappedUnsecureConnection.SendAsync(protocolMessage).ConfigureAwait(false);
+            return await prWrappedUnsecureConnection.SendAsync(targetMessage).ConfigureAwait(false);
         }
 
         public async Task<byte[]> ReceiveAsync()

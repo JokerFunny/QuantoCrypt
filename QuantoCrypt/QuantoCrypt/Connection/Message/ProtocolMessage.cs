@@ -62,6 +62,11 @@ namespace QuantoCrypt.Internal.Message
         public const int SUPPORTED_CIPHER_SUITES_OFFSET = 8;
 
         /// <summary>
+        /// Current version of the protocol.
+        /// </summary>
+        public const int PROTOCOL_VERSION = 1;
+
+        /// <summary>
         /// Default ctor.
         /// </summary>
         /// <param name="message">Target message to be properly handled.</param>
@@ -157,7 +162,7 @@ namespace QuantoCrypt.Internal.Message
         /// 23+cipherText.Length - end - [encryptedSignatureWithKey]
         /// </remarks>
         /// <returns>
-        ///     CLIENT_INIT message with properly generated header.
+        ///     CLIENT_INIT message with properly generated header, body with signature part.
         /// </returns>
         internal static byte[] CreateServerInitMessage(byte[] cipherText, byte[] encryptedSignatureWithKey, int signaturePartLength, int signaturePublicKeyLength)
         {
@@ -186,6 +191,36 @@ namespace QuantoCrypt.Internal.Message
         }
 
         /// <summary>
+        /// Generates the <see cref="SERVER_INIT"/> message with the proper format.
+        /// </summary>
+        /// <param name="cipherText">Target cipher text.</param>
+        /// <remarks>
+        /// MESSAGE
+        /// 0 - [version]
+        /// 1 - [SERVER_INIT]
+        /// 2 - 5 - [bodyLength]
+        /// 6 - 9 - [messageIntegrity]
+        /// 10 - 13 - [cipherText.Length]
+        /// 14 - end - [cipherText]
+        /// </remarks>
+        /// <returns>
+        ///     CLIENT_INIT message with properly generated header, body without signature part.
+        /// </returns>
+        internal static byte[] CreateServerInitMessage(byte[] cipherText)
+        {
+            var message = new byte[4 + cipherText.Length];
+
+            // attach length of the cipherText.
+            _CopyToByteArray(cipherText.Length, message, 0);
+
+            // set cipherText.
+            int offset = 4;
+            cipherText.CopyTo(message, offset);
+
+            return CreateMessage(1, SERVER_INIT, message);
+        }
+
+        /// <summary>
         /// Generates the <see cref="CLIENT_FINISH"/> message with the proper format.
         /// </summary>
         /// <param name="encodedServerInitMessage">Hash of the <see cref="SERVER_INIT"/> message, encoded by symmetric algorithm.</param>
@@ -202,6 +237,29 @@ namespace QuantoCrypt.Internal.Message
         /// </returns>
         internal static byte[] CreateClientFinishMessage(byte[] encodedServerInitMessage)
             => CreateMessage(1, CLIENT_FINISH, encodedServerInitMessage);
+
+        /// <summary>
+        /// Generates the <see cref="CLOSE"/> message with the proper format.
+        /// </summary>
+        /// <remarks>
+        /// MESSAGE
+        /// 0 - [version]
+        /// 1 - [CLOSE]
+        /// 2 - 5 - [bodyLength] - [0 0 0 0]
+        /// 6 - 9 - [messageIntegrity] - [0 0 0 0]
+        /// </remarks>
+        /// <returns>
+        ///     CLOSE message.
+        /// </returns>
+        internal static byte[] CreateCloseMessage()
+        {
+            Span<byte> headerPart = stackalloc byte[_rHeaderOffset];
+
+            headerPart[0] = PROTOCOL_VERSION;
+            headerPart[1] = CLOSE;
+
+            return headerPart.ToArray();
+        }
 
         /// <summary>
         /// Creates a new message by provided params.
