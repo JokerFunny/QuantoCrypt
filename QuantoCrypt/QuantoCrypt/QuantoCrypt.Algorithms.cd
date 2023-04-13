@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
   <Comment CommentText="Interfaces to work with CipherSuites">
-    <Position X="16.031" Y="9.166" Height="0.333" Width="2.214" />
+    <Position X="14.271" Y="9.166" Height="0.333" Width="2.214" />
   </Comment>
   <Comment CommentText="Supported CipherSuites, named like XXX_YYY_ZZZ&#xD;&#xA;Where XXX - KEM-algorithm&#xD;&#xA;YYY - DS-algorithm&#xD;&#xA;ZZZ - symmetric algorithm">
     <Position X="9.354" Y="2.875" Height="0.771" Width="3.026" />
@@ -89,12 +89,12 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Interface Name="QuantoCrypt.Infrastructure.CipherSuite.ICipherSuite">
-    <Position X="12.75" Y="9.75" Width="4.25" />
+  <Interface Name="QuantoCrypt.Infrastructure.CipherSuite.ICipherSuite" Collapsed="true">
+    <Position X="13.5" Y="9.75" Width="1.5" />
     <TypeIdentifier />
   </Interface>
-  <Interface Name="QuantoCrypt.Infrastructure.CipherSuite.ICipherSuiteProvider">
-    <Position X="17.25" Y="9.75" Width="3.75" />
+  <Interface Name="QuantoCrypt.Infrastructure.CipherSuite.ICipherSuiteProvider" Collapsed="true">
+    <Position X="15.5" Y="9.75" Width="1.75" />
     <TypeIdentifier />
   </Interface>
   <Font Name="Segoe UI" Size="9" />
