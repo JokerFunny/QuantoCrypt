@@ -11,9 +11,6 @@ namespace QuantoCrypt.Internal.KEM.CRYSTALS.Kyber
     {
         private KyberParameters _kyberParameters;
         private SecureRandom _secureRandom;
-        private KyberKeyGenerationParameters _keyGenerationParameters;
-        private KyberKeyPairGenerator _keyPairGenerator;
-        private KyberKemGenerator _kemGenerator;
         private KyberPrivateKey _privateKey;
         private bool _isDisposed;
 
@@ -27,6 +24,19 @@ namespace QuantoCrypt.Internal.KEM.CRYSTALS.Kyber
             _kyberParameters = kyberParameters ?? throw new ArgumentNullException(nameof(kyberParameters));
         }
 
+        public AsymmetricKeyPair KeyGen()
+        {
+            KyberKeyGenerationParameters keyGenerationParameters = new KyberKeyGenerationParameters(_GetRandom(), _kyberParameters);
+
+            KyberKeyPairGenerator keyPairGenerator = new KyberKeyPairGenerator(keyGenerationParameters);
+
+            AsymmetricKeyPair keyPair = keyPairGenerator.GenerateKeyPair();
+
+            _privateKey = (KyberPrivateKey)keyPair.Private;
+
+            return keyPair;
+        }
+
         public byte[] Decaps(byte[] cipherText)
         {
             KyberKemExtractor kemExtractor = new KyberKemExtractor(_privateKey);
@@ -38,20 +48,9 @@ namespace QuantoCrypt.Internal.KEM.CRYSTALS.Kyber
         {
             KyberPublicKey kyberPublicKey = new KyberPublicKey(_kyberParameters, publicKey);
 
-            KyberKemGenerator kemGenerator = _GetKemGenerator();
+            KyberKemGenerator kemGenerator = new KyberKemGenerator(_GetRandom());
 
             return kemGenerator.GenerateEncapsulated(kyberPublicKey);
-        }
-
-        public AsymmetricKeyPair KeyGen()
-        {
-            KyberKeyPairGenerator keyPairGenerator = _GetKeyPairGenerator();
-
-            AsymmetricKeyPair keyPair = keyPairGenerator.GenerateKeyPair();
-
-            _privateKey = (KyberPrivateKey)keyPair.Private;
-
-            return keyPair;
         }
 
         public void Dispose()
@@ -60,9 +59,6 @@ namespace QuantoCrypt.Internal.KEM.CRYSTALS.Kyber
             {
                 _kyberParameters = null;
                 _secureRandom = null;
-                _keyGenerationParameters = null;
-                _keyPairGenerator = null;
-                _kemGenerator = null;
                 _privateKey = null;
             }
 
@@ -75,30 +71,6 @@ namespace QuantoCrypt.Internal.KEM.CRYSTALS.Kyber
                 _secureRandom = new SecureRandom();
 
             return _secureRandom;
-        }
-
-        private KyberKeyGenerationParameters _GetKeyGenerationParameters()
-        {
-            if (_keyGenerationParameters == null && !_isDisposed)
-                _keyGenerationParameters = new KyberKeyGenerationParameters(_GetRandom(), _kyberParameters);
-
-            return _keyGenerationParameters;
-        }
-
-        private KyberKeyPairGenerator _GetKeyPairGenerator()
-        {
-            if (_keyPairGenerator == null && !_isDisposed)
-                _keyPairGenerator = new KyberKeyPairGenerator(_GetKeyGenerationParameters());
-
-            return _keyPairGenerator;
-        }
-
-        private KyberKemGenerator _GetKemGenerator()
-        {
-            if (_kemGenerator == null && !_isDisposed)
-                _kemGenerator = new KyberKemGenerator(_GetRandom());
-
-            return _kemGenerator;
         }
     }
 }

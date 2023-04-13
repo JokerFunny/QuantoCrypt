@@ -446,6 +446,12 @@ namespace QuantoCrypt.Internal.Connection
             }
         }
 
+        /// <summary>
+        /// Close this connection (with inner one) + send cloes message to recipient.
+        /// </summary>
+        /// <returns>
+        ///     True - if sucesfully closed, otherwise - false.
+        /// </returns>
         public bool Close()
         {
             bool result = false;
@@ -453,13 +459,14 @@ namespace QuantoCrypt.Internal.Connection
             if (!_isDisposed)
             {
                 result = prWrappedUnsecureConnection.Close();
+
                 Dispose();
             }
 
             return result;
         }
 
-    #endregion
+        #endregion
 
         private byte[] _ProceedReceivedMessage(ProtocolMessage message)
         {
@@ -480,6 +487,13 @@ namespace QuantoCrypt.Internal.Connection
             var body = message.GetBody();
 
             return UsedSymmetricAlgorithm.Decrypt(body);
+        }
+
+        private void _ThrowAndClose(Exception targetException)
+        {
+            Close();
+
+            throw targetException;
         }
 
         private static void _sValidateCipherSuites(ICipherSuiteProvider cipherSuiteProvider)

@@ -9,9 +9,6 @@ namespace QuantoCrypt.Internal.Signature.CRYSTALS.Dilithium
     /// </summary>
     public sealed class DilithiumAlgorithm : ISignatureAlgorithm
     {
-        private DilithiumSigner _dilithiumSigner;
-        private DilithiumKeyGenerationParameters _keyGenerationParameters;
-        private DilithiumKeyPairGenerator _keyPairGenerator;
         private DilithiumParameters _dilithiumParameters;
         private DilithiumPrivateKey _privateKey;
         private SecureRandom _secureRandom;
@@ -31,7 +28,9 @@ namespace QuantoCrypt.Internal.Signature.CRYSTALS.Dilithium
 
         public AsymmetricKeyPair KeyGen()
         {
-            DilithiumKeyPairGenerator keyPairGenerator = _GetKeyPairGenerator();
+            DilithiumKeyGenerationParameters keyGenerationParameters = new DilithiumKeyGenerationParameters(_GetRandom(), _dilithiumParameters);
+
+            DilithiumKeyPairGenerator keyPairGenerator = new DilithiumKeyPairGenerator(keyGenerationParameters);
 
             AsymmetricKeyPair keyPair = keyPairGenerator.GenerateKeyPair();
 
@@ -42,7 +41,7 @@ namespace QuantoCrypt.Internal.Signature.CRYSTALS.Dilithium
 
         public byte[] Sign(byte[] message)
         {
-            DilithiumSigner signer = _GetMessageSigner();
+            DilithiumSigner signer = new DilithiumSigner(_rIsForSigning, _privateKey);
 
             byte[] generatedSignature = signer.GenerateSignature(message);
 
@@ -53,7 +52,7 @@ namespace QuantoCrypt.Internal.Signature.CRYSTALS.Dilithium
         {
             DilithiumPublicKey dilithiumPublicKey = new DilithiumPublicKey(_dilithiumParameters, publicKey);
 
-            DilithiumSigner verifier = _GetMessageVerifier(dilithiumPublicKey);
+            DilithiumSigner verifier = new DilithiumSigner(_rIsForSigning, dilithiumPublicKey);
 
             return verifier.VerifySignature(message, signature);
         }
@@ -64,52 +63,10 @@ namespace QuantoCrypt.Internal.Signature.CRYSTALS.Dilithium
             {
                 _dilithiumParameters = null;
                 _secureRandom = null;
-                _keyGenerationParameters = null;
-                _keyPairGenerator = null;
                 _privateKey = null;
             }
 
             _isDisposed = true;
-        }
-
-        private SecureRandom _GetRandom()
-        {
-            if (_secureRandom == null && !_isDisposed)
-                _secureRandom = new SecureRandom();
-
-            return _secureRandom;
-        }
-
-        private DilithiumKeyGenerationParameters _GetKeyGenerationParameters()
-        {
-            if (_keyGenerationParameters == null && !_isDisposed)
-                _keyGenerationParameters = new DilithiumKeyGenerationParameters(_GetRandom(), _dilithiumParameters);
-
-            return _keyGenerationParameters;
-        }
-
-        private DilithiumKeyPairGenerator _GetKeyPairGenerator()
-        {
-            if (_keyPairGenerator == null && !_isDisposed)
-                _keyPairGenerator = new DilithiumKeyPairGenerator(_GetKeyGenerationParameters());
-
-            return _keyPairGenerator;
-        }
-
-        private DilithiumSigner _GetMessageSigner()
-        {
-            if (_dilithiumSigner == null && !_isDisposed)
-                _dilithiumSigner = new DilithiumSigner(_rIsForSigning, _privateKey);
-
-            return _dilithiumSigner;
-        }
-
-        private DilithiumSigner _GetMessageVerifier(DilithiumPublicKey dilithiumPublicKey)
-        {
-            if (_dilithiumSigner == null && !_isDisposed)
-                _dilithiumSigner = new DilithiumSigner(_rIsForSigning, dilithiumPublicKey);
-
-            return _dilithiumSigner;
         }
     }
 }

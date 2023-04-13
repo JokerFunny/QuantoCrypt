@@ -39,8 +39,7 @@ namespace QuantoCrypt.Internal.KEM.CRYSTALS.Kyber
             return new KyberSecretWithEncapsulation(sessionKey, cipherText);
         }
 
-        private sealed class KyberSecretWithEncapsulation
-            : ISecretWithEncapsulation
+        private sealed class KyberSecretWithEncapsulation : ISecretWithEncapsulation
         {
             private volatile bool _hasBeenDestroyed = false;
 
