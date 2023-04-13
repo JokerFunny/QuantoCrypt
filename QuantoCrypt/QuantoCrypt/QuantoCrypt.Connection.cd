@@ -6,11 +6,14 @@
   <Comment CommentText="Concrete Secure and Transport connections">
     <Position X="5.958" Y="4.198" Height="0.333" Width="2.662" />
   </Comment>
-  <Comment CommentText="Helper to trace sended/recieved data">
-    <Position X="12.76" Y="8.427" Height="0.333" Width="2.276" />
+  <Comment CommentText="Helper to trace sended/recieved data if needed">
+    <Position X="8.593" Y="11.042" Height="0.333" Width="2.859" />
   </Comment>
   <Comment CommentText="Factory to get a proper ISecureConnection (QuantoCryptConnection) using ITransportConnection">
-    <Position X="7.802" Y="10.833" Height="0.666" Width="2.609" />
+    <Position X="3.729" Y="11.625" Height="0.666" Width="2.609" />
+  </Comment>
+  <Comment CommentText="ProtocolMessage and helpers to create proper messages">
+    <Position X="13.802" Y="7.552" Height="0.531" Width="2.099" />
   </Comment>
   <Class Name="QuantoCrypt.Internal.Connection.QuantoCryptConnection">
     <Position X="2.5" Y="5" Width="4.5" />
@@ -25,13 +28,13 @@
       </Enum>
     </NestedTypes>
     <TypeIdentifier>
-      <HashCode>AABCAAABAKAAAAgAAEAAAACEAAAAAACQABAAAACAKAA=</HashCode>
+      <HashCode>AABCAAABAKAAAAgAEEAAAACEAAAAAACQABAAAACAKAA=</HashCode>
       <FileName>Connection\QuantoCryptConnection.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="QuantoCrypt.Connection.QuantoCryptConnectionFactory">
-    <Position X="6.25" Y="11.75" Width="5" />
+    <Position X="2.5" Y="12.5" Width="5" />
     <TypeIdentifier>
       <HashCode>AAAABAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAA=</HashCode>
       <FileName>Connection\QuantoCryptConnectionFactory.cs</FileName>
@@ -46,17 +49,17 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="QuantoCrypt.Internal.Connection.ConnectionTraceHelper">
-    <Position X="11.75" Y="9" Width="4" />
+    <Position X="8" Y="11.5" Width="4" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAABAAAAAAEBAAAAAAgAIAAAAAAACIIAAQA=</HashCode>
       <FileName>Connection\ConnectionTraceHelper.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="QuantoCrypt.Internal.Message.ProtocolMessage">
-    <Position X="13.25" Y="13.75" Width="1.5" />
+    <Position X="13" Y="8.25" Width="3.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Message\ProtocolMessage.cs</FileName>
+      <HashCode>AMIIQBAwAABGBBUAAAQAAAAAgAICgRCAgAAAIAMEAAI=</HashCode>
+      <FileName>Connection\Message\ProtocolMessage.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Interface Name="QuantoCrypt.Infrastructure.Connection.ITransportConnection">

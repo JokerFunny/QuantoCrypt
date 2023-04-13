@@ -510,6 +510,20 @@ namespace QuantoCrypt.Internal.Connection
             throw targetException;
         }
 
+        private static byte[] _sRecieveMessage(QuantoCryptConnection connection)
+        {
+            var data = connection.prWrappedUnsecureConnection.Receive();
+
+            if (data[1] == ProtocolMessage.CLOSE)
+            {
+                connection.prWrappedUnsecureConnection.Close();
+
+                throw new ObjectDisposedException("Connection closed!");
+            }
+
+            return data;
+        }
+
         private static void _sValidateCipherSuites(ICipherSuiteProvider cipherSuiteProvider)
         {
             if ((cipherSuiteProvider?.SupportedCipherSuites?.Count ?? 0) == 0)
