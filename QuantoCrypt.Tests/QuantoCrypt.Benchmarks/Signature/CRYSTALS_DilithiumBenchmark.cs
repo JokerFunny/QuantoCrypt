@@ -12,7 +12,8 @@ namespace QuantoCrypt.Benchmarks.Signature
     [MemoryDiagnoser]
     public class CRYSTALS_DilithiumBenchmark
     {
-        [Benchmark(Baseline = true)]
+        [Benchmark]
+        //[Benchmark(Baseline = true)]
         [ArgumentsSource(nameof(DilithiumInputParams))]
         public void DilithiumExecutor(string name, Internal.Signature.CRYSTALS.Dilithium.DilithiumParameters dilithiumParameters)
         {

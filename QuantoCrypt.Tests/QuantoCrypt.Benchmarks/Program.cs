@@ -11,8 +11,8 @@ class Program
     static void Main(string[] args)
     {
         //BenchmarkRunner.Run<CRYSTALS_KyberBenchmark>();
-        //BenchmarkRunner.Run<CRYSTALS_DilithiumBenchmark>();
-        BenchmarkRunner.Run<AesBenchmark>();
+        BenchmarkRunner.Run<CRYSTALS_DilithiumBenchmark>();
+        //BenchmarkRunner.Run<AesBenchmark>();
         //BenchmarkRunner.Run<SymmetricAlgorithmsBenchmark>();
 
         //SecureRandom random = new SecureRandom();

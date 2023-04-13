@@ -11,7 +11,8 @@ namespace QuantoCrypt.Benchmarks.KEM
     [MemoryDiagnoser]
     public class CRYSTALS_KyberBenchmark
     {
-        [Benchmark(Baseline = true)]
+        [Benchmark]
+        //[Benchmark(Baseline = true)]
         [ArgumentsSource(nameof(KYBERInputParams))]
         public void KYBERExecutor(string name, Internal.KEM.CRYSTALS.Kyber.KyberParameters kyberParameters)
         {

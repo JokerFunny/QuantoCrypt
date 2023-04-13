@@ -9,6 +9,7 @@ using QuantoCrypt.Internal.Symmetric;
 namespace QuantoCrypt.Benchmarks.Symmetric
 {
     [MemoryDiagnoser]
+    //[RPlotExporter]
     //[Config(typeof(FastAndDirtyConfig))]
     public class SymmetricAlgorithmsBenchmark
     {
@@ -22,6 +23,7 @@ namespace QuantoCrypt.Benchmarks.Symmetric
             _PerformTest(engine, keyParam, data);
         }
 
+        /*
         [Benchmark]
         [ArgumentsSource(nameof(SymmetricAlgorithmClassicalParams))]
         public void Aes_X86_Optimized_Executor(byte[] key, byte[] data)
@@ -73,7 +75,7 @@ namespace QuantoCrypt.Benchmarks.Symmetric
             var decrypted = service.Decrypt(encrypted);
 
             data.Should().BeEquivalentTo(decrypted);
-        }
+        }*/
 
         [Benchmark]
         [ArgumentsSource(nameof(Dstu7624_128Params))]

@@ -16,7 +16,13 @@
     <ProjectReference Include="..\..\QuantoCrypt\QuantoCrypt\QuantoCrypt.csproj" />
     <ProjectReference Include="..\External\BouncyCastle\BouncyCastle.Crypto.csproj" />
   </ItemGroup>
-
+	<!--
+  <ItemGroup>
+    <Reference Include="BouncyCastle.Cryptography">
+      <HintPath>..\External\BouncyCastle.Cryptography.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+-->
   <ItemGroup>
     <None Update="TestData\input.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

@@ -1,0 +1,1350 @@
+// Validating benchmarks:
+// ***** BenchmarkRunner: Start   *****
+// ***** Found 12 benchmark(s) in total *****
+// ***** Building 1 exe(s) in Parallel: Start   *****
+// start dotnet  restore /p:UseSharedCompilation=false /p:BuildInParallel=false /m:1 /p:Deterministic=true /p:Optimize=true in C:\Users\Danylo\Desktop\deeckLoooom\QuantoCrypt\QuantoCrypt.Tests\QuantoCrypt.Benchmarks\bin\Release\net7.0\bc77da8f-2f6a-4d19-99c4-9d6564bc5cea
+// command took 1.04s and exited with 0
+// start dotnet  build -c Release --no-restore /p:UseSharedCompilation=false /p:BuildInParallel=false /m:1 /p:Deterministic=true /p:Optimize=true in C:\Users\Danylo\Desktop\deeckLoooom\QuantoCrypt\QuantoCrypt.Tests\QuantoCrypt.Benchmarks\bin\Release\net7.0\bc77da8f-2f6a-4d19-99c4-9d6564bc5cea
+// command took 2.24s and exited with 0
+// ***** Done, took 00:00:03 (3.37 sec)   *****
+// Found 12 benchmarks:
+//   CRYSTALS_DilithiumBenchmark.BouncyCastleDilithiumExecutor: DefaultJob [name=dilithium2, dilithiumParameters=Org.B(...)eters [66]]
+//   CRYSTALS_DilithiumBenchmark.DilithiumExecutor: DefaultJob [name=dilithium2, dilithiumParameters=Quant(...)eters [69]]
+//   CRYSTALS_DilithiumBenchmark.BouncyCastleDilithiumExecutor: DefaultJob [name=dilithium2-aes, dilithiumParameters=Org.B(...)eters [66]]
+//   CRYSTALS_DilithiumBenchmark.DilithiumExecutor: DefaultJob [name=dilithium2-aes, dilithiumParameters=Quant(...)eters [69]]
+//   CRYSTALS_DilithiumBenchmark.BouncyCastleDilithiumExecutor: DefaultJob [name=dilithium3, dilithiumParameters=Org.B(...)eters [66]]
+//   CRYSTALS_DilithiumBenchmark.DilithiumExecutor: DefaultJob [name=dilithium3, dilithiumParameters=Quant(...)eters [69]]
+//   CRYSTALS_DilithiumBenchmark.BouncyCastleDilithiumExecutor: DefaultJob [name=dilithium3-aes, dilithiumParameters=Org.B(...)eters [66]]
+//   CRYSTALS_DilithiumBenchmark.DilithiumExecutor: DefaultJob [name=dilithium3-aes, dilithiumParameters=Quant(...)eters [69]]
+//   CRYSTALS_DilithiumBenchmark.BouncyCastleDilithiumExecutor: DefaultJob [name=dilithium5, dilithiumParameters=Org.B(...)eters [66]]
+//   CRYSTALS_DilithiumBenchmark.DilithiumExecutor: DefaultJob [name=dilithium5, dilithiumParameters=Quant(...)eters [69]]
+//   CRYSTALS_DilithiumBenchmark.BouncyCastleDilithiumExecutor: DefaultJob [name=dilithium5-aes, dilithiumParameters=Org.B(...)eters [66]]
+//   CRYSTALS_DilithiumBenchmark.DilithiumExecutor: DefaultJob [name=dilithium5-aes, dilithiumParameters=Quant(...)eters [69]]
+
+Setup power plan (GUID: 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c FriendlyName: High performance)
+// **************************
+// Benchmark: CRYSTALS_DilithiumBenchmark.BouncyCastleDilithiumExecutor: DefaultJob [name=dilithium2, dilithiumParameters=Org.B(...)eters [66]]
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet bc77da8f-2f6a-4d19-99c4-9d6564bc5cea.dll --anonymousPipes 1352 1688 --benchmarkName "QuantoCrypt.Benchmarks.Signature.CRYSTALS_DilithiumBenchmark.BouncyCastleDilithiumExecutor(name: \"dilithium2\", dilithiumParameters: Org.BouncyCastle.Pqc.Crypto.Crystals.Dilithium.DilithiumParameters)" --job Default --benchmarkId 0 in C:\Users\Danylo\Desktop\deeckLoooom\QuantoCrypt\QuantoCrypt.Tests\QuantoCrypt.Benchmarks\bin\Release\net7.0\bc77da8f-2f6a-4d19-99c4-9d6564bc5cea\bin\Release\net7.0
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// Runtime=.NET 7.0.1 (7.0.122.56804), X64 RyuJIT AVX2
+// GC=Concurrent Workstation
+// HardwareIntrinsics=AVX2,AES,BMI1,BMI2,FMA,LZCNT,PCLMUL,POPCNT VectorSize=256
+// Job: DefaultJob
+
+OverheadJitting  1: 1 op, 197900.00 ns, 197.9000 us/op
+WorkloadJitting  1: 1 op, 64390700.00 ns, 64.3907 ms/op
+
+WorkloadPilot    1: 2 op, 61639900.00 ns, 30.8199 ms/op
+WorkloadPilot    2: 3 op, 102422600.00 ns, 34.1409 ms/op
+WorkloadPilot    3: 4 op, 106205100.00 ns, 26.5513 ms/op
+WorkloadPilot    4: 5 op, 58992500.00 ns, 11.7985 ms/op
+WorkloadPilot    5: 6 op, 60427500.00 ns, 10.0712 ms/op
+WorkloadPilot    6: 7 op, 53006300.00 ns, 7.5723 ms/op
+WorkloadPilot    7: 8 op, 57234600.00 ns, 7.1543 ms/op
+WorkloadPilot    8: 9 op, 60767300.00 ns, 6.7519 ms/op
+WorkloadPilot    9: 10 op, 75431700.00 ns, 7.5432 ms/op
+WorkloadPilot   10: 11 op, 75533400.00 ns, 6.8667 ms/op
+WorkloadPilot   11: 12 op, 95901300.00 ns, 7.9918 ms/op
+WorkloadPilot   12: 13 op, 101271500.00 ns, 7.7901 ms/op
+WorkloadPilot   13: 14 op, 110609900.00 ns, 7.9007 ms/op
+WorkloadPilot   14: 15 op, 112630100.00 ns, 7.5087 ms/op
+WorkloadPilot   15: 16 op, 117010600.00 ns, 7.3132 ms/op
+WorkloadPilot   16: 32 op, 229450600.00 ns, 7.1703 ms/op
+WorkloadPilot   17: 64 op, 458877900.00 ns, 7.1700 ms/op
+WorkloadPilot   18: 128 op, 891716100.00 ns, 6.9665 ms/op
+
+WorkloadWarmup   1: 128 op, 908999800.00 ns, 7.1016 ms/op
+WorkloadWarmup   2: 128 op, 905030200.00 ns, 7.0705 ms/op
+WorkloadWarmup   3: 128 op, 894321900.00 ns, 6.9869 ms/op
+WorkloadWarmup   4: 128 op, 906487300.00 ns, 7.0819 ms/op
+WorkloadWarmup   5: 128 op, 894588000.00 ns, 6.9890 ms/op
+WorkloadWarmup   6: 128 op, 906041400.00 ns, 7.0784 ms/op
+WorkloadWarmup   7: 128 op, 927541700.00 ns, 7.2464 ms/op
+WorkloadWarmup   8: 128 op, 896775800.00 ns, 7.0061 ms/op
+
+// BeforeActualRun
+WorkloadActual   1: 128 op, 901186700.00 ns, 7.0405 ms/op
+WorkloadActual   2: 128 op, 919158100.00 ns, 7.1809 ms/op
+WorkloadActual   3: 128 op, 886112700.00 ns, 6.9228 ms/op
+WorkloadActual   4: 128 op, 902353500.00 ns, 7.0496 ms/op
+WorkloadActual   5: 128 op, 892572000.00 ns, 6.9732 ms/op
+WorkloadActual   6: 128 op, 897316200.00 ns, 7.0103 ms/op
+WorkloadActual   7: 128 op, 905304000.00 ns, 7.0727 ms/op
+WorkloadActual   8: 128 op, 894501100.00 ns, 6.9883 ms/op
+WorkloadActual   9: 128 op, 901618100.00 ns, 7.0439 ms/op
+WorkloadActual  10: 128 op, 898270400.00 ns, 7.0177 ms/op
+WorkloadActual  11: 128 op, 880944900.00 ns, 6.8824 ms/op
+WorkloadActual  12: 128 op, 916639300.00 ns, 7.1612 ms/op
+WorkloadActual  13: 128 op, 891283600.00 ns, 6.9632 ms/op
+WorkloadActual  14: 128 op, 890216700.00 ns, 6.9548 ms/op
+WorkloadActual  15: 128 op, 898610500.00 ns, 7.0204 ms/op
+
+// AfterActualRun
+WorkloadResult   1: 128 op, 901186700.00 ns, 7.0405 ms/op
+WorkloadResult   2: 128 op, 886112700.00 ns, 6.9228 ms/op
+WorkloadResult   3: 128 op, 902353500.00 ns, 7.0496 ms/op
+WorkloadResult   4: 128 op, 892572000.00 ns, 6.9732 ms/op
+WorkloadResult   5: 128 op, 897316200.00 ns, 7.0103 ms/op
+WorkloadResult   6: 128 op, 905304000.00 ns, 7.0727 ms/op
+WorkloadResult   7: 128 op, 894501100.00 ns, 6.9883 ms/op
+WorkloadResult   8: 128 op, 901618100.00 ns, 7.0439 ms/op
+WorkloadResult   9: 128 op, 898270400.00 ns, 7.0177 ms/op
+WorkloadResult  10: 128 op, 880944900.00 ns, 6.8824 ms/op
+WorkloadResult  11: 128 op, 916639300.00 ns, 7.1612 ms/op
+WorkloadResult  12: 128 op, 891283600.00 ns, 6.9632 ms/op
+WorkloadResult  13: 128 op, 890216700.00 ns, 6.9548 ms/op
+WorkloadResult  14: 128 op, 898610500.00 ns, 7.0204 ms/op
+// GC:  42 6 0 708044512 128
+// Threading:  0 0 128
+
+// AfterAll
+// Benchmark Process 28120 has exited with code 0.
+
+Mean = 7.007 ms, StdErr = 0.018 ms (0.26%), N = 14, StdDev = 0.069 ms
+Min = 6.882 ms, Q1 = 6.966 ms, Median = 7.014 ms, Q3 = 7.043 ms, Max = 7.161 ms
+IQR = 0.077 ms, LowerFence = 6.850 ms, UpperFence = 7.159 ms
+ConfidenceInterval = [6.930 ms; 7.085 ms] (CI 99.9%), Margin = 0.078 ms (1.11% of Mean)
+Skewness = 0.28, Kurtosis = 2.86, MValue = 2
+
+// ** Remained 11 (91.7%) benchmark(s) to run. Estimated finish 2023-04-13 22:37 (0h 4m from now) **
+Setup power plan (GUID: 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c FriendlyName: High performance)
+// **************************
+// Benchmark: CRYSTALS_DilithiumBenchmark.DilithiumExecutor: DefaultJob [name=dilithium2, dilithiumParameters=Quant(...)eters [69]]
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet bc77da8f-2f6a-4d19-99c4-9d6564bc5cea.dll --anonymousPipes 1544 1556 --benchmarkName "QuantoCrypt.Benchmarks.Signature.CRYSTALS_DilithiumBenchmark.DilithiumExecutor(name: \"dilithium2\", dilithiumParameters: QuantoCrypt.Internal.Signature.CRYSTALS.Dilithium.DilithiumParameters)" --job Default --benchmarkId 1 in C:\Users\Danylo\Desktop\deeckLoooom\QuantoCrypt\QuantoCrypt.Tests\QuantoCrypt.Benchmarks\bin\Release\net7.0\bc77da8f-2f6a-4d19-99c4-9d6564bc5cea\bin\Release\net7.0
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// Runtime=.NET 7.0.1 (7.0.122.56804), X64 RyuJIT AVX2
+// GC=Concurrent Workstation
+// HardwareIntrinsics=AVX2,AES,BMI1,BMI2,FMA,LZCNT,PCLMUL,POPCNT VectorSize=256
+// Job: DefaultJob
+
+OverheadJitting  1: 1 op, 174500.00 ns, 174.5000 us/op
+WorkloadJitting  1: 1 op, 48265400.00 ns, 48.2654 ms/op
+
+WorkloadPilot    1: 2 op, 54889900.00 ns, 27.4449 ms/op
+WorkloadPilot    2: 3 op, 89756800.00 ns, 29.9189 ms/op
+WorkloadPilot    3: 4 op, 114448000.00 ns, 28.6120 ms/op
+WorkloadPilot    4: 5 op, 88617800.00 ns, 17.7236 ms/op
+WorkloadPilot    5: 6 op, 66154200.00 ns, 11.0257 ms/op
+WorkloadPilot    6: 7 op, 53012500.00 ns, 7.5732 ms/op
+WorkloadPilot    7: 8 op, 56049900.00 ns, 7.0062 ms/op
+WorkloadPilot    8: 9 op, 63829900.00 ns, 7.0922 ms/op
+WorkloadPilot    9: 10 op, 68984600.00 ns, 6.8985 ms/op
+WorkloadPilot   10: 11 op, 78184800.00 ns, 7.1077 ms/op
+WorkloadPilot   11: 12 op, 82902700.00 ns, 6.9086 ms/op
+WorkloadPilot   12: 13 op, 89193900.00 ns, 6.8611 ms/op
+WorkloadPilot   13: 14 op, 96888800.00 ns, 6.9206 ms/op
+WorkloadPilot   14: 15 op, 99513600.00 ns, 6.6342 ms/op
+WorkloadPilot   15: 16 op, 111941800.00 ns, 6.9964 ms/op
+WorkloadPilot   16: 32 op, 214007100.00 ns, 6.6877 ms/op
+WorkloadPilot   17: 64 op, 440956000.00 ns, 6.8899 ms/op
+WorkloadPilot   18: 128 op, 868851700.00 ns, 6.7879 ms/op
+
+WorkloadWarmup   1: 128 op, 897780400.00 ns, 7.0139 ms/op
+WorkloadWarmup   2: 128 op, 858919800.00 ns, 6.7103 ms/op
+WorkloadWarmup   3: 128 op, 878925900.00 ns, 6.8666 ms/op
+WorkloadWarmup   4: 128 op, 871825000.00 ns, 6.8111 ms/op
+WorkloadWarmup   5: 128 op, 895146000.00 ns, 6.9933 ms/op
+WorkloadWarmup   6: 128 op, 871664800.00 ns, 6.8099 ms/op
+
+// BeforeActualRun
+WorkloadActual   1: 128 op, 882969600.00 ns, 6.8982 ms/op
+WorkloadActual   2: 128 op, 881389500.00 ns, 6.8859 ms/op
+WorkloadActual   3: 128 op, 878657100.00 ns, 6.8645 ms/op
+WorkloadActual   4: 128 op, 889485200.00 ns, 6.9491 ms/op
+WorkloadActual   5: 128 op, 883803300.00 ns, 6.9047 ms/op
+WorkloadActual   6: 128 op, 869113900.00 ns, 6.7900 ms/op
+WorkloadActual   7: 128 op, 876672700.00 ns, 6.8490 ms/op
+WorkloadActual   8: 128 op, 877333200.00 ns, 6.8542 ms/op
+WorkloadActual   9: 128 op, 881450800.00 ns, 6.8863 ms/op
+WorkloadActual  10: 128 op, 859047600.00 ns, 6.7113 ms/op
+WorkloadActual  11: 128 op, 863078800.00 ns, 6.7428 ms/op
+WorkloadActual  12: 128 op, 904790100.00 ns, 7.0687 ms/op
+WorkloadActual  13: 128 op, 848562900.00 ns, 6.6294 ms/op
+WorkloadActual  14: 128 op, 873125400.00 ns, 6.8213 ms/op
+WorkloadActual  15: 128 op, 879436000.00 ns, 6.8706 ms/op
+
+// AfterActualRun
+WorkloadResult   1: 128 op, 882969600.00 ns, 6.8982 ms/op
+WorkloadResult   2: 128 op, 881389500.00 ns, 6.8859 ms/op
+WorkloadResult   3: 128 op, 878657100.00 ns, 6.8645 ms/op
+WorkloadResult   4: 128 op, 889485200.00 ns, 6.9491 ms/op
+WorkloadResult   5: 128 op, 883803300.00 ns, 6.9047 ms/op
+WorkloadResult   6: 128 op, 869113900.00 ns, 6.7900 ms/op
+WorkloadResult   7: 128 op, 876672700.00 ns, 6.8490 ms/op
+WorkloadResult   8: 128 op, 877333200.00 ns, 6.8542 ms/op
+WorkloadResult   9: 128 op, 881450800.00 ns, 6.8863 ms/op
+WorkloadResult  10: 128 op, 859047600.00 ns, 6.7113 ms/op
+WorkloadResult  11: 128 op, 863078800.00 ns, 6.7428 ms/op
+WorkloadResult  12: 128 op, 848562900.00 ns, 6.6294 ms/op
+WorkloadResult  13: 128 op, 873125400.00 ns, 6.8213 ms/op
+WorkloadResult  14: 128 op, 879436000.00 ns, 6.8706 ms/op
+// GC:  42 6 0 712293224 128
+// Threading:  0 0 128
+
+// AfterAll
+// Benchmark Process 20256 has exited with code 0.
+
+Mean = 6.833 ms, StdErr = 0.023 ms (0.34%), N = 14, StdDev = 0.087 ms
+Min = 6.629 ms, Q1 = 6.798 ms, Median = 6.859 ms, Q3 = 6.886 ms, Max = 6.949 ms
+IQR = 0.088 ms, LowerFence = 6.665 ms, UpperFence = 7.019 ms
+ConfidenceInterval = [6.735 ms; 6.931 ms] (CI 99.9%), Margin = 0.098 ms (1.43% of Mean)
+Skewness = -0.91, Kurtosis = 2.82, MValue = 2
+
+// ** Remained 10 (83.3%) benchmark(s) to run. Estimated finish 2023-04-13 22:37 (0h 3m from now) **
+Setup power plan (GUID: 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c FriendlyName: High performance)
+// **************************
+// Benchmark: CRYSTALS_DilithiumBenchmark.BouncyCastleDilithiumExecutor: DefaultJob [name=dilithium2-aes, dilithiumParameters=Org.B(...)eters [66]]
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet bc77da8f-2f6a-4d19-99c4-9d6564bc5cea.dll --anonymousPipes 1284 1760 --benchmarkName "QuantoCrypt.Benchmarks.Signature.CRYSTALS_DilithiumBenchmark.BouncyCastleDilithiumExecutor(name: \"dilithium2-aes\", dilithiumParameters: Org.BouncyCastle.Pqc.Crypto.Crystals.Dilithium.DilithiumParameters)" --job Default --benchmarkId 2 in C:\Users\Danylo\Desktop\deeckLoooom\QuantoCrypt\QuantoCrypt.Tests\QuantoCrypt.Benchmarks\bin\Release\net7.0\bc77da8f-2f6a-4d19-99c4-9d6564bc5cea\bin\Release\net7.0
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// Runtime=.NET 7.0.1 (7.0.122.56804), X64 RyuJIT AVX2
+// GC=Concurrent Workstation
+// HardwareIntrinsics=AVX2,AES,BMI1,BMI2,FMA,LZCNT,PCLMUL,POPCNT VectorSize=256
+// Job: DefaultJob
+
+OverheadJitting  1: 1 op, 178600.00 ns, 178.6000 us/op
+WorkloadJitting  1: 1 op, 73871600.00 ns, 73.8716 ms/op
+
+WorkloadPilot    1: 2 op, 78150000.00 ns, 39.0750 ms/op
+WorkloadPilot    2: 3 op, 126802400.00 ns, 42.2675 ms/op
+WorkloadPilot    3: 4 op, 150441600.00 ns, 37.6104 ms/op
+WorkloadPilot    4: 5 op, 78488200.00 ns, 15.6976 ms/op
+WorkloadPilot    5: 6 op, 70936500.00 ns, 11.8227 ms/op
+WorkloadPilot    6: 7 op, 73141500.00 ns, 10.4488 ms/op
+WorkloadPilot    7: 8 op, 76484400.00 ns, 9.5605 ms/op
+WorkloadPilot    8: 9 op, 88441900.00 ns, 9.8269 ms/op
+WorkloadPilot    9: 10 op, 97561400.00 ns, 9.7561 ms/op
+WorkloadPilot   10: 11 op, 106845700.00 ns, 9.7132 ms/op
+WorkloadPilot   11: 12 op, 116560300.00 ns, 9.7134 ms/op
+WorkloadPilot   12: 13 op, 129164000.00 ns, 9.9357 ms/op
+WorkloadPilot   13: 14 op, 151462300.00 ns, 10.8187 ms/op
+WorkloadPilot   14: 15 op, 147715100.00 ns, 9.8477 ms/op
+WorkloadPilot   15: 16 op, 163202800.00 ns, 10.2002 ms/op
+WorkloadPilot   16: 32 op, 305846000.00 ns, 9.5577 ms/op
+WorkloadPilot   17: 64 op, 638674900.00 ns, 9.9793 ms/op
+
+WorkloadWarmup   1: 64 op, 620925000.00 ns, 9.7020 ms/op
+WorkloadWarmup   2: 64 op, 649733700.00 ns, 10.1521 ms/op
+WorkloadWarmup   3: 64 op, 622916800.00 ns, 9.7331 ms/op
+WorkloadWarmup   4: 64 op, 614703800.00 ns, 9.6047 ms/op
+WorkloadWarmup   5: 64 op, 619153200.00 ns, 9.6743 ms/op
+WorkloadWarmup   6: 64 op, 622389100.00 ns, 9.7248 ms/op
+WorkloadWarmup   7: 64 op, 612364300.00 ns, 9.5682 ms/op
+
+// BeforeActualRun
+WorkloadActual   1: 64 op, 624105700.00 ns, 9.7517 ms/op
+WorkloadActual   2: 64 op, 626396800.00 ns, 9.7874 ms/op
+WorkloadActual   3: 64 op, 625017000.00 ns, 9.7659 ms/op
+WorkloadActual   4: 64 op, 615217000.00 ns, 9.6128 ms/op
+WorkloadActual   5: 64 op, 620961300.00 ns, 9.7025 ms/op
+WorkloadActual   6: 64 op, 624448700.00 ns, 9.7570 ms/op
+WorkloadActual   7: 64 op, 611603100.00 ns, 9.5563 ms/op
+WorkloadActual   8: 64 op, 630750500.00 ns, 9.8555 ms/op
+WorkloadActual   9: 64 op, 630733200.00 ns, 9.8552 ms/op
+WorkloadActual  10: 64 op, 618013200.00 ns, 9.6565 ms/op
+WorkloadActual  11: 64 op, 619163500.00 ns, 9.6744 ms/op
+WorkloadActual  12: 64 op, 631185200.00 ns, 9.8623 ms/op
+WorkloadActual  13: 64 op, 635029800.00 ns, 9.9223 ms/op
+WorkloadActual  14: 64 op, 627427300.00 ns, 9.8036 ms/op
+WorkloadActual  15: 64 op, 620371600.00 ns, 9.6933 ms/op
+
+// AfterActualRun
+WorkloadResult   1: 64 op, 624105700.00 ns, 9.7517 ms/op
+WorkloadResult   2: 64 op, 626396800.00 ns, 9.7874 ms/op
+WorkloadResult   3: 64 op, 625017000.00 ns, 9.7659 ms/op
+WorkloadResult   4: 64 op, 615217000.00 ns, 9.6128 ms/op
+WorkloadResult   5: 64 op, 620961300.00 ns, 9.7025 ms/op
+WorkloadResult   6: 64 op, 624448700.00 ns, 9.7570 ms/op
+WorkloadResult   7: 64 op, 611603100.00 ns, 9.5563 ms/op
+WorkloadResult   8: 64 op, 630750500.00 ns, 9.8555 ms/op
+WorkloadResult   9: 64 op, 630733200.00 ns, 9.8552 ms/op
+WorkloadResult  10: 64 op, 618013200.00 ns, 9.6565 ms/op
+WorkloadResult  11: 64 op, 619163500.00 ns, 9.6744 ms/op
+WorkloadResult  12: 64 op, 631185200.00 ns, 9.8623 ms/op
+WorkloadResult  13: 64 op, 635029800.00 ns, 9.9223 ms/op
+WorkloadResult  14: 64 op, 627427300.00 ns, 9.8036 ms/op
+WorkloadResult  15: 64 op, 620371600.00 ns, 9.6933 ms/op
+// GC:  28 4 0 474654768 64
+// Threading:  0 0 64
+
+// AfterAll
+// Benchmark Process 31704 has exited with code 0.
+
+Mean = 9.750 ms, StdErr = 0.026 ms (0.27%), N = 15, StdDev = 0.102 ms
+Min = 9.556 ms, Q1 = 9.684 ms, Median = 9.757 ms, Q3 = 9.829 ms, Max = 9.922 ms
+IQR = 0.146 ms, LowerFence = 9.466 ms, UpperFence = 10.048 ms
+ConfidenceInterval = [9.642 ms; 9.859 ms] (CI 99.9%), Margin = 0.109 ms (1.12% of Mean)
+Skewness = -0.16, Kurtosis = 1.97, MValue = 2
+
+// ** Remained 9 (75.0%) benchmark(s) to run. Estimated finish 2023-04-13 22:37 (0h 3m from now) **
+Setup power plan (GUID: 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c FriendlyName: High performance)
+// **************************
+// Benchmark: CRYSTALS_DilithiumBenchmark.DilithiumExecutor: DefaultJob [name=dilithium2-aes, dilithiumParameters=Quant(...)eters [69]]
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet bc77da8f-2f6a-4d19-99c4-9d6564bc5cea.dll --anonymousPipes 1972 1356 --benchmarkName "QuantoCrypt.Benchmarks.Signature.CRYSTALS_DilithiumBenchmark.DilithiumExecutor(name: \"dilithium2-aes\", dilithiumParameters: QuantoCrypt.Internal.Signature.CRYSTALS.Dilithium.DilithiumParameters)" --job Default --benchmarkId 3 in C:\Users\Danylo\Desktop\deeckLoooom\QuantoCrypt\QuantoCrypt.Tests\QuantoCrypt.Benchmarks\bin\Release\net7.0\bc77da8f-2f6a-4d19-99c4-9d6564bc5cea\bin\Release\net7.0
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// Runtime=.NET 7.0.1 (7.0.122.56804), X64 RyuJIT AVX2
+// GC=Concurrent Workstation
+// HardwareIntrinsics=AVX2,AES,BMI1,BMI2,FMA,LZCNT,PCLMUL,POPCNT VectorSize=256
+// Job: DefaultJob
+
+OverheadJitting  1: 1 op, 169900.00 ns, 169.9000 us/op
+WorkloadJitting  1: 1 op, 54200200.00 ns, 54.2002 ms/op
+
+WorkloadPilot    1: 2 op, 52624300.00 ns, 26.3121 ms/op
+WorkloadPilot    2: 3 op, 65529200.00 ns, 21.8431 ms/op
+WorkloadPilot    3: 4 op, 87346900.00 ns, 21.8367 ms/op
+WorkloadPilot    4: 5 op, 38330100.00 ns, 7.6660 ms/op
+WorkloadPilot    5: 6 op, 46454300.00 ns, 7.7424 ms/op
+WorkloadPilot    6: 7 op, 48792600.00 ns, 6.9704 ms/op
+WorkloadPilot    7: 8 op, 51199800.00 ns, 6.4000 ms/op
+WorkloadPilot    8: 9 op, 57219100.00 ns, 6.3577 ms/op
+WorkloadPilot    9: 10 op, 62418200.00 ns, 6.2418 ms/op
+WorkloadPilot   10: 11 op, 74261500.00 ns, 6.7510 ms/op
+WorkloadPilot   11: 12 op, 73197300.00 ns, 6.0998 ms/op
+WorkloadPilot   12: 13 op, 79241000.00 ns, 6.0955 ms/op
+WorkloadPilot   13: 14 op, 87620700.00 ns, 6.2586 ms/op
+WorkloadPilot   14: 15 op, 93545600.00 ns, 6.2364 ms/op
+WorkloadPilot   15: 16 op, 98656800.00 ns, 6.1661 ms/op
+WorkloadPilot   16: 32 op, 207636400.00 ns, 6.4886 ms/op
+WorkloadPilot   17: 64 op, 402359600.00 ns, 6.2869 ms/op
+WorkloadPilot   18: 128 op, 799337900.00 ns, 6.2448 ms/op
+
+WorkloadWarmup   1: 128 op, 796951500.00 ns, 6.2262 ms/op
+WorkloadWarmup   2: 128 op, 798140400.00 ns, 6.2355 ms/op
+WorkloadWarmup   3: 128 op, 806557000.00 ns, 6.3012 ms/op
+WorkloadWarmup   4: 128 op, 798695100.00 ns, 6.2398 ms/op
+WorkloadWarmup   5: 128 op, 811427600.00 ns, 6.3393 ms/op
+WorkloadWarmup   6: 128 op, 792242200.00 ns, 6.1894 ms/op
+
+// BeforeActualRun
+WorkloadActual   1: 128 op, 798937200.00 ns, 6.2417 ms/op
+WorkloadActual   2: 128 op, 791155800.00 ns, 6.1809 ms/op
+WorkloadActual   3: 128 op, 821962000.00 ns, 6.4216 ms/op
+WorkloadActual   4: 128 op, 810809500.00 ns, 6.3344 ms/op
+WorkloadActual   5: 128 op, 833836300.00 ns, 6.5143 ms/op
+WorkloadActual   6: 128 op, 797823400.00 ns, 6.2330 ms/op
+WorkloadActual   7: 128 op, 835473500.00 ns, 6.5271 ms/op
+WorkloadActual   8: 128 op, 806941100.00 ns, 6.3042 ms/op
+WorkloadActual   9: 128 op, 807702400.00 ns, 6.3102 ms/op
+WorkloadActual  10: 128 op, 803885300.00 ns, 6.2804 ms/op
+WorkloadActual  11: 128 op, 803821100.00 ns, 6.2799 ms/op
+WorkloadActual  12: 128 op, 805235400.00 ns, 6.2909 ms/op
+WorkloadActual  13: 128 op, 813163900.00 ns, 6.3528 ms/op
+WorkloadActual  14: 128 op, 809453200.00 ns, 6.3239 ms/op
+WorkloadActual  15: 128 op, 793160400.00 ns, 6.1966 ms/op
+
+// AfterActualRun
+WorkloadResult   1: 128 op, 798937200.00 ns, 6.2417 ms/op
+WorkloadResult   2: 128 op, 791155800.00 ns, 6.1809 ms/op
+WorkloadResult   3: 128 op, 821962000.00 ns, 6.4216 ms/op
+WorkloadResult   4: 128 op, 810809500.00 ns, 6.3344 ms/op
+WorkloadResult   5: 128 op, 797823400.00 ns, 6.2330 ms/op
+WorkloadResult   6: 128 op, 806941100.00 ns, 6.3042 ms/op
+WorkloadResult   7: 128 op, 807702400.00 ns, 6.3102 ms/op
+WorkloadResult   8: 128 op, 803885300.00 ns, 6.2804 ms/op
+WorkloadResult   9: 128 op, 803821100.00 ns, 6.2799 ms/op
+WorkloadResult  10: 128 op, 805235400.00 ns, 6.2909 ms/op
+WorkloadResult  11: 128 op, 813163900.00 ns, 6.3528 ms/op
+WorkloadResult  12: 128 op, 809453200.00 ns, 6.3239 ms/op
+WorkloadResult  13: 128 op, 793160400.00 ns, 6.1966 ms/op
+// GC:  50 6 0 836677400 128
+// Threading:  0 0 128
+
+// AfterAll
+// Benchmark Process 26648 has exited with code 0.
+
+Mean = 6.288 ms, StdErr = 0.018 ms (0.29%), N = 13, StdDev = 0.065 ms
+Min = 6.181 ms, Q1 = 6.242 ms, Median = 6.291 ms, Q3 = 6.324 ms, Max = 6.422 ms
+IQR = 0.082 ms, LowerFence = 6.118 ms, UpperFence = 6.447 ms
+ConfidenceInterval = [6.210 ms; 6.367 ms] (CI 99.9%), Margin = 0.078 ms (1.25% of Mean)
+Skewness = 0.13, Kurtosis = 2.34, MValue = 2
+
+// ** Remained 8 (66.7%) benchmark(s) to run. Estimated finish 2023-04-13 22:37 (0h 2m from now) **
+Setup power plan (GUID: 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c FriendlyName: High performance)
+// **************************
+// Benchmark: CRYSTALS_DilithiumBenchmark.BouncyCastleDilithiumExecutor: DefaultJob [name=dilithium3, dilithiumParameters=Org.B(...)eters [66]]
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet bc77da8f-2f6a-4d19-99c4-9d6564bc5cea.dll --anonymousPipes 1980 1580 --benchmarkName "QuantoCrypt.Benchmarks.Signature.CRYSTALS_DilithiumBenchmark.BouncyCastleDilithiumExecutor(name: \"dilithium3\", dilithiumParameters: Org.BouncyCastle.Pqc.Crypto.Crystals.Dilithium.DilithiumParameters)" --job Default --benchmarkId 4 in C:\Users\Danylo\Desktop\deeckLoooom\QuantoCrypt\QuantoCrypt.Tests\QuantoCrypt.Benchmarks\bin\Release\net7.0\bc77da8f-2f6a-4d19-99c4-9d6564bc5cea\bin\Release\net7.0
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// Runtime=.NET 7.0.1 (7.0.122.56804), X64 RyuJIT AVX2
+// GC=Concurrent Workstation
+// HardwareIntrinsics=AVX2,AES,BMI1,BMI2,FMA,LZCNT,PCLMUL,POPCNT VectorSize=256
+// Job: DefaultJob
+
+OverheadJitting  1: 1 op, 177700.00 ns, 177.7000 us/op
+WorkloadJitting  1: 1 op, 73978900.00 ns, 73.9789 ms/op
+
+WorkloadPilot    1: 2 op, 106659700.00 ns, 53.3299 ms/op
+WorkloadPilot    2: 3 op, 141900300.00 ns, 47.3001 ms/op
+WorkloadPilot    3: 4 op, 106394900.00 ns, 26.5987 ms/op
+WorkloadPilot    4: 5 op, 116082100.00 ns, 23.2164 ms/op
+WorkloadPilot    5: 6 op, 76035900.00 ns, 12.6727 ms/op
+WorkloadPilot    6: 7 op, 88116800.00 ns, 12.5881 ms/op
+WorkloadPilot    7: 8 op, 92604200.00 ns, 11.5755 ms/op
+WorkloadPilot    8: 9 op, 101779500.00 ns, 11.3088 ms/op
+WorkloadPilot    9: 10 op, 118083600.00 ns, 11.8084 ms/op
+WorkloadPilot   10: 11 op, 124064200.00 ns, 11.2786 ms/op
+WorkloadPilot   11: 12 op, 144037000.00 ns, 12.0031 ms/op
+WorkloadPilot   12: 13 op, 139289100.00 ns, 10.7145 ms/op
+WorkloadPilot   13: 14 op, 167976000.00 ns, 11.9983 ms/op
+WorkloadPilot   14: 15 op, 167861000.00 ns, 11.1907 ms/op
+WorkloadPilot   15: 16 op, 179513800.00 ns, 11.2196 ms/op
+WorkloadPilot   16: 32 op, 375379000.00 ns, 11.7306 ms/op
+WorkloadPilot   17: 64 op, 736269300.00 ns, 11.5042 ms/op
+
+WorkloadWarmup   1: 64 op, 768686800.00 ns, 12.0107 ms/op
+WorkloadWarmup   2: 64 op, 777171600.00 ns, 12.1433 ms/op
+WorkloadWarmup   3: 64 op, 740031100.00 ns, 11.5630 ms/op
+WorkloadWarmup   4: 64 op, 748610400.00 ns, 11.6970 ms/op
+WorkloadWarmup   5: 64 op, 747005000.00 ns, 11.6720 ms/op
+WorkloadWarmup   6: 64 op, 745065600.00 ns, 11.6417 ms/op
+
+// BeforeActualRun
+WorkloadActual   1: 64 op, 742017100.00 ns, 11.5940 ms/op
+WorkloadActual   2: 64 op, 743794200.00 ns, 11.6218 ms/op
+WorkloadActual   3: 64 op, 727723000.00 ns, 11.3707 ms/op
+WorkloadActual   4: 64 op, 727612400.00 ns, 11.3689 ms/op
+WorkloadActual   5: 64 op, 746351300.00 ns, 11.6617 ms/op
+WorkloadActual   6: 64 op, 746754600.00 ns, 11.6680 ms/op
+WorkloadActual   7: 64 op, 743851900.00 ns, 11.6227 ms/op
+WorkloadActual   8: 64 op, 740397600.00 ns, 11.5687 ms/op
+WorkloadActual   9: 64 op, 743862000.00 ns, 11.6228 ms/op
+WorkloadActual  10: 64 op, 738610500.00 ns, 11.5408 ms/op
+WorkloadActual  11: 64 op, 744848500.00 ns, 11.6383 ms/op
+WorkloadActual  12: 64 op, 726824600.00 ns, 11.3566 ms/op
+WorkloadActual  13: 64 op, 745599500.00 ns, 11.6500 ms/op
+WorkloadActual  14: 64 op, 731462200.00 ns, 11.4291 ms/op
+WorkloadActual  15: 64 op, 751463200.00 ns, 11.7416 ms/op
+
+// AfterActualRun
+WorkloadResult   1: 64 op, 742017100.00 ns, 11.5940 ms/op
+WorkloadResult   2: 64 op, 743794200.00 ns, 11.6218 ms/op
+WorkloadResult   3: 64 op, 727723000.00 ns, 11.3707 ms/op
+WorkloadResult   4: 64 op, 727612400.00 ns, 11.3689 ms/op
+WorkloadResult   5: 64 op, 746351300.00 ns, 11.6617 ms/op
+WorkloadResult   6: 64 op, 746754600.00 ns, 11.6680 ms/op
+WorkloadResult   7: 64 op, 743851900.00 ns, 11.6227 ms/op
+WorkloadResult   8: 64 op, 740397600.00 ns, 11.5687 ms/op
+WorkloadResult   9: 64 op, 743862000.00 ns, 11.6228 ms/op
+WorkloadResult  10: 64 op, 738610500.00 ns, 11.5408 ms/op
+WorkloadResult  11: 64 op, 744848500.00 ns, 11.6383 ms/op
+WorkloadResult  12: 64 op, 726824600.00 ns, 11.3566 ms/op
+WorkloadResult  13: 64 op, 745599500.00 ns, 11.6500 ms/op
+WorkloadResult  14: 64 op, 731462200.00 ns, 11.4291 ms/op
+WorkloadResult  15: 64 op, 751463200.00 ns, 11.7416 ms/op
+// GC:  34 7 0 582947552 64
+// Threading:  0 0 64
+
+// AfterAll
+// Benchmark Process 34596 has exited with code 0.
+
+Mean = 11.564 ms, StdErr = 0.032 ms (0.28%), N = 15, StdDev = 0.123 ms
+Min = 11.357 ms, Q1 = 11.485 ms, Median = 11.622 ms, Q3 = 11.644 ms, Max = 11.742 ms
+IQR = 0.159 ms, LowerFence = 11.246 ms, UpperFence = 11.883 ms
+ConfidenceInterval = [11.432 ms; 11.696 ms] (CI 99.9%), Margin = 0.132 ms (1.14% of Mean)
+Skewness = -0.59, Kurtosis = 1.82, MValue = 2
+
+// ** Remained 7 (58.3%) benchmark(s) to run. Estimated finish 2023-04-13 22:37 (0h 2m from now) **
+Setup power plan (GUID: 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c FriendlyName: High performance)
+// **************************
+// Benchmark: CRYSTALS_DilithiumBenchmark.DilithiumExecutor: DefaultJob [name=dilithium3, dilithiumParameters=Quant(...)eters [69]]
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet bc77da8f-2f6a-4d19-99c4-9d6564bc5cea.dll --anonymousPipes 1908 1904 --benchmarkName "QuantoCrypt.Benchmarks.Signature.CRYSTALS_DilithiumBenchmark.DilithiumExecutor(name: \"dilithium3\", dilithiumParameters: QuantoCrypt.Internal.Signature.CRYSTALS.Dilithium.DilithiumParameters)" --job Default --benchmarkId 5 in C:\Users\Danylo\Desktop\deeckLoooom\QuantoCrypt\QuantoCrypt.Tests\QuantoCrypt.Benchmarks\bin\Release\net7.0\bc77da8f-2f6a-4d19-99c4-9d6564bc5cea\bin\Release\net7.0
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// Runtime=.NET 7.0.1 (7.0.122.56804), X64 RyuJIT AVX2
+// GC=Concurrent Workstation
+// HardwareIntrinsics=AVX2,AES,BMI1,BMI2,FMA,LZCNT,PCLMUL,POPCNT VectorSize=256
+// Job: DefaultJob
+
+OverheadJitting  1: 1 op, 204800.00 ns, 204.8000 us/op
+WorkloadJitting  1: 1 op, 65423600.00 ns, 65.4236 ms/op
+
+WorkloadPilot    1: 2 op, 87042600.00 ns, 43.5213 ms/op
+WorkloadPilot    2: 3 op, 118312800.00 ns, 39.4376 ms/op
+WorkloadPilot    3: 4 op, 152548600.00 ns, 38.1371 ms/op
+WorkloadPilot    4: 5 op, 130392400.00 ns, 26.0785 ms/op
+WorkloadPilot    5: 6 op, 67468100.00 ns, 11.2447 ms/op
+WorkloadPilot    6: 7 op, 74656600.00 ns, 10.6652 ms/op
+WorkloadPilot    7: 8 op, 87438500.00 ns, 10.9298 ms/op
+WorkloadPilot    8: 9 op, 99794500.00 ns, 11.0883 ms/op
+WorkloadPilot    9: 10 op, 113713800.00 ns, 11.3714 ms/op
+WorkloadPilot   10: 11 op, 122101900.00 ns, 11.1002 ms/op
+WorkloadPilot   11: 12 op, 128061600.00 ns, 10.6718 ms/op
+WorkloadPilot   12: 13 op, 148689900.00 ns, 11.4377 ms/op
+WorkloadPilot   13: 14 op, 157099400.00 ns, 11.2214 ms/op
+WorkloadPilot   14: 15 op, 164690800.00 ns, 10.9794 ms/op
+WorkloadPilot   15: 16 op, 188249800.00 ns, 11.7656 ms/op
+WorkloadPilot   16: 32 op, 359255300.00 ns, 11.2267 ms/op
+WorkloadPilot   17: 64 op, 694705600.00 ns, 10.8548 ms/op
+
+WorkloadWarmup   1: 64 op, 720939800.00 ns, 11.2647 ms/op
+WorkloadWarmup   2: 64 op, 710409700.00 ns, 11.1002 ms/op
+WorkloadWarmup   3: 64 op, 710812100.00 ns, 11.1064 ms/op
+WorkloadWarmup   4: 64 op, 719218900.00 ns, 11.2378 ms/op
+WorkloadWarmup   5: 64 op, 724581200.00 ns, 11.3216 ms/op
+WorkloadWarmup   6: 64 op, 741600100.00 ns, 11.5875 ms/op
+WorkloadWarmup   7: 64 op, 710392500.00 ns, 11.0999 ms/op
+WorkloadWarmup   8: 64 op, 709951200.00 ns, 11.0930 ms/op
+WorkloadWarmup   9: 64 op, 718122200.00 ns, 11.2207 ms/op
+WorkloadWarmup  10: 64 op, 731047000.00 ns, 11.4226 ms/op
+WorkloadWarmup  11: 64 op, 735281000.00 ns, 11.4888 ms/op
+WorkloadWarmup  12: 64 op, 715470000.00 ns, 11.1792 ms/op
+
+// BeforeActualRun
+WorkloadActual   1: 64 op, 733132000.00 ns, 11.4552 ms/op
+WorkloadActual   2: 64 op, 721197000.00 ns, 11.2687 ms/op
+WorkloadActual   3: 64 op, 705263600.00 ns, 11.0197 ms/op
+WorkloadActual   4: 64 op, 718644000.00 ns, 11.2288 ms/op
+WorkloadActual   5: 64 op, 707486200.00 ns, 11.0545 ms/op
+WorkloadActual   6: 64 op, 719823300.00 ns, 11.2472 ms/op
+WorkloadActual   7: 64 op, 698226300.00 ns, 10.9098 ms/op
+WorkloadActual   8: 64 op, 714397500.00 ns, 11.1625 ms/op
+WorkloadActual   9: 64 op, 726405300.00 ns, 11.3501 ms/op
+WorkloadActual  10: 64 op, 738681600.00 ns, 11.5419 ms/op
+WorkloadActual  11: 64 op, 714765200.00 ns, 11.1682 ms/op
+WorkloadActual  12: 64 op, 718295900.00 ns, 11.2234 ms/op
+WorkloadActual  13: 64 op, 745339300.00 ns, 11.6459 ms/op
+WorkloadActual  14: 64 op, 725195500.00 ns, 11.3312 ms/op
+WorkloadActual  15: 64 op, 721850800.00 ns, 11.2789 ms/op
+
+// AfterActualRun
+WorkloadResult   1: 64 op, 733132000.00 ns, 11.4552 ms/op
+WorkloadResult   2: 64 op, 721197000.00 ns, 11.2687 ms/op
+WorkloadResult   3: 64 op, 705263600.00 ns, 11.0197 ms/op
+WorkloadResult   4: 64 op, 718644000.00 ns, 11.2288 ms/op
+WorkloadResult   5: 64 op, 707486200.00 ns, 11.0545 ms/op
+WorkloadResult   6: 64 op, 719823300.00 ns, 11.2472 ms/op
+WorkloadResult   7: 64 op, 698226300.00 ns, 10.9098 ms/op
+WorkloadResult   8: 64 op, 714397500.00 ns, 11.1625 ms/op
+WorkloadResult   9: 64 op, 726405300.00 ns, 11.3501 ms/op
+WorkloadResult  10: 64 op, 738681600.00 ns, 11.5419 ms/op
+WorkloadResult  11: 64 op, 714765200.00 ns, 11.1682 ms/op
+WorkloadResult  12: 64 op, 718295900.00 ns, 11.2234 ms/op
+WorkloadResult  13: 64 op, 725195500.00 ns, 11.3312 ms/op
+WorkloadResult  14: 64 op, 721850800.00 ns, 11.2789 ms/op
+// GC:  34 7 0 584789528 64
+// Threading:  0 0 64
+
+// AfterAll
+// Benchmark Process 33084 has exited with code 0.
+
+Mean = 11.231 ms, StdErr = 0.045 ms (0.40%), N = 14, StdDev = 0.167 ms
+Min = 10.910 ms, Q1 = 11.164 ms, Median = 11.238 ms, Q3 = 11.318 ms, Max = 11.542 ms
+IQR = 0.154 ms, LowerFence = 10.933 ms, UpperFence = 11.549 ms
+ConfidenceInterval = [11.043 ms; 11.420 ms] (CI 99.9%), Margin = 0.188 ms (1.68% of Mean)
+Skewness = -0.08, Kurtosis = 2.37, MValue = 2
+
+// ** Remained 6 (50.0%) benchmark(s) to run. Estimated finish 2023-04-13 22:37 (0h 2m from now) **
+Setup power plan (GUID: 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c FriendlyName: High performance)
+// **************************
+// Benchmark: CRYSTALS_DilithiumBenchmark.BouncyCastleDilithiumExecutor: DefaultJob [name=dilithium3-aes, dilithiumParameters=Org.B(...)eters [66]]
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet bc77da8f-2f6a-4d19-99c4-9d6564bc5cea.dll --anonymousPipes 1360 1912 --benchmarkName "QuantoCrypt.Benchmarks.Signature.CRYSTALS_DilithiumBenchmark.BouncyCastleDilithiumExecutor(name: \"dilithium3-aes\", dilithiumParameters: Org.BouncyCastle.Pqc.Crypto.Crystals.Dilithium.DilithiumParameters)" --job Default --benchmarkId 6 in C:\Users\Danylo\Desktop\deeckLoooom\QuantoCrypt\QuantoCrypt.Tests\QuantoCrypt.Benchmarks\bin\Release\net7.0\bc77da8f-2f6a-4d19-99c4-9d6564bc5cea\bin\Release\net7.0
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// Runtime=.NET 7.0.1 (7.0.122.56804), X64 RyuJIT AVX2
+// GC=Concurrent Workstation
+// HardwareIntrinsics=AVX2,AES,BMI1,BMI2,FMA,LZCNT,PCLMUL,POPCNT VectorSize=256
+// Job: DefaultJob
+
+OverheadJitting  1: 1 op, 183000.00 ns, 183.0000 us/op
+WorkloadJitting  1: 1 op, 103097600.00 ns, 103.0976 ms/op
+
+WorkloadPilot    1: 2 op, 136239200.00 ns, 68.1196 ms/op
+WorkloadPilot    2: 3 op, 94283700.00 ns, 31.4279 ms/op
+WorkloadPilot    3: 4 op, 117779800.00 ns, 29.4449 ms/op
+WorkloadPilot    4: 5 op, 96600200.00 ns, 19.3200 ms/op
+WorkloadPilot    5: 6 op, 101006700.00 ns, 16.8345 ms/op
+WorkloadPilot    6: 7 op, 116503600.00 ns, 16.6434 ms/op
+WorkloadPilot    7: 8 op, 131542600.00 ns, 16.4428 ms/op
+WorkloadPilot    8: 9 op, 149631900.00 ns, 16.6258 ms/op
+WorkloadPilot    9: 10 op, 174452800.00 ns, 17.4453 ms/op
+WorkloadPilot   10: 11 op, 188413300.00 ns, 17.1285 ms/op
+WorkloadPilot   11: 12 op, 207716800.00 ns, 17.3097 ms/op
+WorkloadPilot   12: 13 op, 222411800.00 ns, 17.1086 ms/op
+WorkloadPilot   13: 14 op, 235578600.00 ns, 16.8270 ms/op
+WorkloadPilot   14: 15 op, 260135900.00 ns, 17.3424 ms/op
+WorkloadPilot   15: 16 op, 267713200.00 ns, 16.7321 ms/op
+WorkloadPilot   16: 32 op, 524389700.00 ns, 16.3872 ms/op
+
+WorkloadWarmup   1: 32 op, 546736000.00 ns, 17.0855 ms/op
+WorkloadWarmup   2: 32 op, 550210300.00 ns, 17.1941 ms/op
+WorkloadWarmup   3: 32 op, 528467500.00 ns, 16.5146 ms/op
+WorkloadWarmup   4: 32 op, 543802200.00 ns, 16.9938 ms/op
+WorkloadWarmup   5: 32 op, 538045200.00 ns, 16.8139 ms/op
+WorkloadWarmup   6: 32 op, 526341700.00 ns, 16.4482 ms/op
+
+// BeforeActualRun
+WorkloadActual   1: 32 op, 531781700.00 ns, 16.6182 ms/op
+WorkloadActual   2: 32 op, 531583000.00 ns, 16.6120 ms/op
+WorkloadActual   3: 32 op, 531415200.00 ns, 16.6067 ms/op
+WorkloadActual   4: 32 op, 525561600.00 ns, 16.4238 ms/op
+WorkloadActual   5: 32 op, 543507400.00 ns, 16.9846 ms/op
+WorkloadActual   6: 32 op, 537290600.00 ns, 16.7903 ms/op
+WorkloadActual   7: 32 op, 540244400.00 ns, 16.8826 ms/op
+WorkloadActual   8: 32 op, 542821100.00 ns, 16.9632 ms/op
+WorkloadActual   9: 32 op, 524665900.00 ns, 16.3958 ms/op
+WorkloadActual  10: 32 op, 551248600.00 ns, 17.2265 ms/op
+WorkloadActual  11: 32 op, 553959800.00 ns, 17.3112 ms/op
+WorkloadActual  12: 32 op, 552667000.00 ns, 17.2708 ms/op
+WorkloadActual  13: 32 op, 547433700.00 ns, 17.1073 ms/op
+WorkloadActual  14: 32 op, 531988400.00 ns, 16.6246 ms/op
+WorkloadActual  15: 32 op, 538729900.00 ns, 16.8353 ms/op
+
+// AfterActualRun
+WorkloadResult   1: 32 op, 531781700.00 ns, 16.6182 ms/op
+WorkloadResult   2: 32 op, 531583000.00 ns, 16.6120 ms/op
+WorkloadResult   3: 32 op, 531415200.00 ns, 16.6067 ms/op
+WorkloadResult   4: 32 op, 525561600.00 ns, 16.4238 ms/op
+WorkloadResult   5: 32 op, 543507400.00 ns, 16.9846 ms/op
+WorkloadResult   6: 32 op, 537290600.00 ns, 16.7903 ms/op
+WorkloadResult   7: 32 op, 540244400.00 ns, 16.8826 ms/op
+WorkloadResult   8: 32 op, 542821100.00 ns, 16.9632 ms/op
+WorkloadResult   9: 32 op, 524665900.00 ns, 16.3958 ms/op
+WorkloadResult  10: 32 op, 551248600.00 ns, 17.2265 ms/op
+WorkloadResult  11: 32 op, 553959800.00 ns, 17.3112 ms/op
+WorkloadResult  12: 32 op, 552667000.00 ns, 17.2708 ms/op
+WorkloadResult  13: 32 op, 547433700.00 ns, 17.1073 ms/op
+WorkloadResult  14: 32 op, 531988400.00 ns, 16.6246 ms/op
+WorkloadResult  15: 32 op, 538729900.00 ns, 16.8353 ms/op
+// GC:  23 4 0 384725640 32
+// Threading:  0 0 32
+
+// AfterAll
+// Benchmark Process 35736 has exited with code 0.
+
+Mean = 16.844 ms, StdErr = 0.077 ms (0.46%), N = 15, StdDev = 0.298 ms
+Min = 16.396 ms, Q1 = 16.615 ms, Median = 16.835 ms, Q3 = 17.046 ms, Max = 17.311 ms
+IQR = 0.431 ms, LowerFence = 15.969 ms, UpperFence = 17.692 ms
+ConfidenceInterval = [16.525 ms; 17.162 ms] (CI 99.9%), Margin = 0.318 ms (1.89% of Mean)
+Skewness = 0.12, Kurtosis = 1.61, MValue = 2
+
+// ** Remained 5 (41.7%) benchmark(s) to run. Estimated finish 2023-04-13 22:36 (0h 1m from now) **
+Setup power plan (GUID: 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c FriendlyName: High performance)
+// **************************
+// Benchmark: CRYSTALS_DilithiumBenchmark.DilithiumExecutor: DefaultJob [name=dilithium3-aes, dilithiumParameters=Quant(...)eters [69]]
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet bc77da8f-2f6a-4d19-99c4-9d6564bc5cea.dll --anonymousPipes 1812 1824 --benchmarkName "QuantoCrypt.Benchmarks.Signature.CRYSTALS_DilithiumBenchmark.DilithiumExecutor(name: \"dilithium3-aes\", dilithiumParameters: QuantoCrypt.Internal.Signature.CRYSTALS.Dilithium.DilithiumParameters)" --job Default --benchmarkId 7 in C:\Users\Danylo\Desktop\deeckLoooom\QuantoCrypt\QuantoCrypt.Tests\QuantoCrypt.Benchmarks\bin\Release\net7.0\bc77da8f-2f6a-4d19-99c4-9d6564bc5cea\bin\Release\net7.0
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// Runtime=.NET 7.0.1 (7.0.122.56804), X64 RyuJIT AVX2
+// GC=Concurrent Workstation
+// HardwareIntrinsics=AVX2,AES,BMI1,BMI2,FMA,LZCNT,PCLMUL,POPCNT VectorSize=256
+// Job: DefaultJob
+
+OverheadJitting  1: 1 op, 179900.00 ns, 179.9000 us/op
+WorkloadJitting  1: 1 op, 72903400.00 ns, 72.9034 ms/op
+
+WorkloadPilot    1: 2 op, 82747100.00 ns, 41.3736 ms/op
+WorkloadPilot    2: 3 op, 121217300.00 ns, 40.4058 ms/op
+WorkloadPilot    3: 4 op, 147143600.00 ns, 36.7859 ms/op
+WorkloadPilot    4: 5 op, 86421800.00 ns, 17.2844 ms/op
+WorkloadPilot    5: 6 op, 70332000.00 ns, 11.7220 ms/op
+WorkloadPilot    6: 7 op, 76423500.00 ns, 10.9176 ms/op
+WorkloadPilot    7: 8 op, 82057000.00 ns, 10.2571 ms/op
+WorkloadPilot    8: 9 op, 91377500.00 ns, 10.1531 ms/op
+WorkloadPilot    9: 10 op, 104751800.00 ns, 10.4752 ms/op
+WorkloadPilot   10: 11 op, 115375700.00 ns, 10.4887 ms/op
+WorkloadPilot   11: 12 op, 125333100.00 ns, 10.4444 ms/op
+WorkloadPilot   12: 13 op, 140881800.00 ns, 10.8371 ms/op
+WorkloadPilot   13: 14 op, 145114100.00 ns, 10.3653 ms/op
+WorkloadPilot   14: 15 op, 167025000.00 ns, 11.1350 ms/op
+WorkloadPilot   15: 16 op, 170292500.00 ns, 10.6433 ms/op
+WorkloadPilot   16: 32 op, 333444400.00 ns, 10.4201 ms/op
+WorkloadPilot   17: 64 op, 673266000.00 ns, 10.5198 ms/op
+
+WorkloadWarmup   1: 64 op, 669105600.00 ns, 10.4548 ms/op
+WorkloadWarmup   2: 64 op, 687610100.00 ns, 10.7439 ms/op
+WorkloadWarmup   3: 64 op, 674329200.00 ns, 10.5364 ms/op
+WorkloadWarmup   4: 64 op, 677279500.00 ns, 10.5825 ms/op
+WorkloadWarmup   5: 64 op, 697203400.00 ns, 10.8938 ms/op
+WorkloadWarmup   6: 64 op, 773114600.00 ns, 12.0799 ms/op
+WorkloadWarmup   7: 64 op, 767142900.00 ns, 11.9866 ms/op
+
+// BeforeActualRun
+WorkloadActual   1: 64 op, 675589300.00 ns, 10.5561 ms/op
+WorkloadActual   2: 64 op, 669750900.00 ns, 10.4649 ms/op
+WorkloadActual   3: 64 op, 689209200.00 ns, 10.7689 ms/op
+WorkloadActual   4: 64 op, 678129000.00 ns, 10.5958 ms/op
+WorkloadActual   5: 64 op, 682175500.00 ns, 10.6590 ms/op
+WorkloadActual   6: 64 op, 694717100.00 ns, 10.8550 ms/op
+WorkloadActual   7: 64 op, 677376200.00 ns, 10.5840 ms/op
+WorkloadActual   8: 64 op, 684196700.00 ns, 10.6906 ms/op
+WorkloadActual   9: 64 op, 683627900.00 ns, 10.6817 ms/op
+WorkloadActual  10: 64 op, 671954000.00 ns, 10.4993 ms/op
+WorkloadActual  11: 64 op, 694355600.00 ns, 10.8493 ms/op
+WorkloadActual  12: 64 op, 704654100.00 ns, 11.0102 ms/op
+WorkloadActual  13: 64 op, 699672700.00 ns, 10.9324 ms/op
+WorkloadActual  14: 64 op, 682582800.00 ns, 10.6654 ms/op
+WorkloadActual  15: 64 op, 665955900.00 ns, 10.4056 ms/op
+
+// AfterActualRun
+WorkloadResult   1: 64 op, 675589300.00 ns, 10.5561 ms/op
+WorkloadResult   2: 64 op, 669750900.00 ns, 10.4649 ms/op
+WorkloadResult   3: 64 op, 689209200.00 ns, 10.7689 ms/op
+WorkloadResult   4: 64 op, 678129000.00 ns, 10.5958 ms/op
+WorkloadResult   5: 64 op, 682175500.00 ns, 10.6590 ms/op
+WorkloadResult   6: 64 op, 694717100.00 ns, 10.8550 ms/op
+WorkloadResult   7: 64 op, 677376200.00 ns, 10.5840 ms/op
+WorkloadResult   8: 64 op, 684196700.00 ns, 10.6906 ms/op
+WorkloadResult   9: 64 op, 683627900.00 ns, 10.6817 ms/op
+WorkloadResult  10: 64 op, 671954000.00 ns, 10.4993 ms/op
+WorkloadResult  11: 64 op, 694355600.00 ns, 10.8493 ms/op
+WorkloadResult  12: 64 op, 704654100.00 ns, 11.0102 ms/op
+WorkloadResult  13: 64 op, 699672700.00 ns, 10.9324 ms/op
+WorkloadResult  14: 64 op, 682582800.00 ns, 10.6654 ms/op
+WorkloadResult  15: 64 op, 665955900.00 ns, 10.4056 ms/op
+// GC:  41 8 0 687399456 64
+// Threading:  0 0 64
+
+// AfterAll
+// Benchmark Process 13012 has exited with code 0.
+
+Mean = 10.681 ms, StdErr = 0.045 ms (0.42%), N = 15, StdDev = 0.175 ms
+Min = 10.406 ms, Q1 = 10.570 ms, Median = 10.665 ms, Q3 = 10.809 ms, Max = 11.010 ms
+IQR = 0.239 ms, LowerFence = 10.211 ms, UpperFence = 11.168 ms
+ConfidenceInterval = [10.495 ms; 10.868 ms] (CI 99.9%), Margin = 0.187 ms (1.75% of Mean)
+Skewness = 0.27, Kurtosis = 1.93, MValue = 2
+
+// ** Remained 4 (33.3%) benchmark(s) to run. Estimated finish 2023-04-13 22:36 (0h 1m from now) **
+Setup power plan (GUID: 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c FriendlyName: High performance)
+// **************************
+// Benchmark: CRYSTALS_DilithiumBenchmark.BouncyCastleDilithiumExecutor: DefaultJob [name=dilithium5, dilithiumParameters=Org.B(...)eters [66]]
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet bc77da8f-2f6a-4d19-99c4-9d6564bc5cea.dll --anonymousPipes 1572 1916 --benchmarkName "QuantoCrypt.Benchmarks.Signature.CRYSTALS_DilithiumBenchmark.BouncyCastleDilithiumExecutor(name: \"dilithium5\", dilithiumParameters: Org.BouncyCastle.Pqc.Crypto.Crystals.Dilithium.DilithiumParameters)" --job Default --benchmarkId 8 in C:\Users\Danylo\Desktop\deeckLoooom\QuantoCrypt\QuantoCrypt.Tests\QuantoCrypt.Benchmarks\bin\Release\net7.0\bc77da8f-2f6a-4d19-99c4-9d6564bc5cea\bin\Release\net7.0
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// Runtime=.NET 7.0.1 (7.0.122.56804), X64 RyuJIT AVX2
+// GC=Concurrent Workstation
+// HardwareIntrinsics=AVX2,AES,BMI1,BMI2,FMA,LZCNT,PCLMUL,POPCNT VectorSize=256
+// Job: DefaultJob
+
+OverheadJitting  1: 1 op, 183600.00 ns, 183.6000 us/op
+WorkloadJitting  1: 1 op, 108701100.00 ns, 108.7011 ms/op
+
+WorkloadPilot    1: 2 op, 133382200.00 ns, 66.6911 ms/op
+WorkloadPilot    2: 3 op, 146902100.00 ns, 48.9674 ms/op
+WorkloadPilot    3: 4 op, 93510200.00 ns, 23.3775 ms/op
+WorkloadPilot    4: 5 op, 85448100.00 ns, 17.0896 ms/op
+WorkloadPilot    5: 6 op, 100810800.00 ns, 16.8018 ms/op
+WorkloadPilot    6: 7 op, 109779900.00 ns, 15.6828 ms/op
+WorkloadPilot    7: 8 op, 127857600.00 ns, 15.9822 ms/op
+WorkloadPilot    8: 9 op, 150748400.00 ns, 16.7498 ms/op
+WorkloadPilot    9: 10 op, 166810800.00 ns, 16.6811 ms/op
+WorkloadPilot   10: 11 op, 195681400.00 ns, 17.7892 ms/op
+WorkloadPilot   11: 12 op, 281111700.00 ns, 23.4260 ms/op
+WorkloadPilot   12: 13 op, 255956700.00 ns, 19.6890 ms/op
+WorkloadPilot   13: 14 op, 275135400.00 ns, 19.6525 ms/op
+WorkloadPilot   14: 15 op, 266686100.00 ns, 17.7791 ms/op
+WorkloadPilot   15: 16 op, 259064400.00 ns, 16.1915 ms/op
+WorkloadPilot   16: 32 op, 511678000.00 ns, 15.9899 ms/op
+
+WorkloadWarmup   1: 32 op, 513701900.00 ns, 16.0532 ms/op
+WorkloadWarmup   2: 32 op, 516738700.00 ns, 16.1481 ms/op
+WorkloadWarmup   3: 32 op, 514621100.00 ns, 16.0819 ms/op
+WorkloadWarmup   4: 32 op, 520818900.00 ns, 16.2756 ms/op
+WorkloadWarmup   5: 32 op, 523294900.00 ns, 16.3530 ms/op
+WorkloadWarmup   6: 32 op, 520963300.00 ns, 16.2801 ms/op
+
+// BeforeActualRun
+WorkloadActual   1: 32 op, 507986400.00 ns, 15.8746 ms/op
+WorkloadActual   2: 32 op, 527347000.00 ns, 16.4796 ms/op
+WorkloadActual   3: 32 op, 518204200.00 ns, 16.1939 ms/op
+WorkloadActual   4: 32 op, 523098700.00 ns, 16.3468 ms/op
+WorkloadActual   5: 32 op, 553093500.00 ns, 17.2842 ms/op
+WorkloadActual   6: 32 op, 520102300.00 ns, 16.2532 ms/op
+WorkloadActual   7: 32 op, 564411300.00 ns, 17.6379 ms/op
+WorkloadActual   8: 32 op, 540505500.00 ns, 16.8908 ms/op
+WorkloadActual   9: 32 op, 555010600.00 ns, 17.3441 ms/op
+WorkloadActual  10: 32 op, 557149100.00 ns, 17.4109 ms/op
+WorkloadActual  11: 32 op, 527124600.00 ns, 16.4726 ms/op
+WorkloadActual  12: 32 op, 598141700.00 ns, 18.6919 ms/op
+WorkloadActual  13: 32 op, 538334400.00 ns, 16.8229 ms/op
+WorkloadActual  14: 32 op, 507958800.00 ns, 15.8737 ms/op
+WorkloadActual  15: 32 op, 515171500.00 ns, 16.0991 ms/op
+WorkloadActual  16: 32 op, 526216700.00 ns, 16.4443 ms/op
+WorkloadActual  17: 32 op, 504126900.00 ns, 15.7540 ms/op
+WorkloadActual  18: 32 op, 513083900.00 ns, 16.0339 ms/op
+WorkloadActual  19: 32 op, 517513700.00 ns, 16.1723 ms/op
+WorkloadActual  20: 32 op, 514949100.00 ns, 16.0922 ms/op
+WorkloadActual  21: 32 op, 522546800.00 ns, 16.3296 ms/op
+WorkloadActual  22: 32 op, 504489700.00 ns, 15.7653 ms/op
+WorkloadActual  23: 32 op, 516266300.00 ns, 16.1333 ms/op
+WorkloadActual  24: 32 op, 528747400.00 ns, 16.5234 ms/op
+WorkloadActual  25: 32 op, 515181500.00 ns, 16.0994 ms/op
+WorkloadActual  26: 32 op, 521681600.00 ns, 16.3025 ms/op
+WorkloadActual  27: 32 op, 522280100.00 ns, 16.3213 ms/op
+WorkloadActual  28: 32 op, 541263100.00 ns, 16.9145 ms/op
+WorkloadActual  29: 32 op, 522845300.00 ns, 16.3389 ms/op
+WorkloadActual  30: 32 op, 504582700.00 ns, 15.7682 ms/op
+WorkloadActual  31: 32 op, 516704000.00 ns, 16.1470 ms/op
+
+// AfterActualRun
+WorkloadResult   1: 32 op, 507986400.00 ns, 15.8746 ms/op
+WorkloadResult   2: 32 op, 527347000.00 ns, 16.4796 ms/op
+WorkloadResult   3: 32 op, 518204200.00 ns, 16.1939 ms/op
+WorkloadResult   4: 32 op, 523098700.00 ns, 16.3468 ms/op
+WorkloadResult   5: 32 op, 553093500.00 ns, 17.2842 ms/op
+WorkloadResult   6: 32 op, 520102300.00 ns, 16.2532 ms/op
+WorkloadResult   7: 32 op, 540505500.00 ns, 16.8908 ms/op
+WorkloadResult   8: 32 op, 555010600.00 ns, 17.3441 ms/op
+WorkloadResult   9: 32 op, 557149100.00 ns, 17.4109 ms/op
+WorkloadResult  10: 32 op, 527124600.00 ns, 16.4726 ms/op
+WorkloadResult  11: 32 op, 538334400.00 ns, 16.8229 ms/op
+WorkloadResult  12: 32 op, 507958800.00 ns, 15.8737 ms/op
+WorkloadResult  13: 32 op, 515171500.00 ns, 16.0991 ms/op
+WorkloadResult  14: 32 op, 526216700.00 ns, 16.4443 ms/op
+WorkloadResult  15: 32 op, 504126900.00 ns, 15.7540 ms/op
+WorkloadResult  16: 32 op, 513083900.00 ns, 16.0339 ms/op
+WorkloadResult  17: 32 op, 517513700.00 ns, 16.1723 ms/op
+WorkloadResult  18: 32 op, 514949100.00 ns, 16.0922 ms/op
+WorkloadResult  19: 32 op, 522546800.00 ns, 16.3296 ms/op
+WorkloadResult  20: 32 op, 504489700.00 ns, 15.7653 ms/op
+WorkloadResult  21: 32 op, 516266300.00 ns, 16.1333 ms/op
+WorkloadResult  22: 32 op, 528747400.00 ns, 16.5234 ms/op
+WorkloadResult  23: 32 op, 515181500.00 ns, 16.0994 ms/op
+WorkloadResult  24: 32 op, 521681600.00 ns, 16.3025 ms/op
+WorkloadResult  25: 32 op, 522280100.00 ns, 16.3213 ms/op
+WorkloadResult  26: 32 op, 541263100.00 ns, 16.9145 ms/op
+WorkloadResult  27: 32 op, 522845300.00 ns, 16.3389 ms/op
+WorkloadResult  28: 32 op, 504582700.00 ns, 15.7682 ms/op
+WorkloadResult  29: 32 op, 516704000.00 ns, 16.1470 ms/op
+// GC:  23 7 0 391932616 32
+// Threading:  0 0 32
+
+// AfterAll
+// Benchmark Process 19580 has exited with code 0.
+
+Mean = 16.362 ms, StdErr = 0.085 ms (0.52%), N = 29, StdDev = 0.456 ms
+Min = 15.754 ms, Q1 = 16.099 ms, Median = 16.303 ms, Q3 = 16.480 ms, Max = 17.411 ms
+IQR = 0.380 ms, LowerFence = 15.528 ms, UpperFence = 17.050 ms
+ConfidenceInterval = [16.050 ms; 16.673 ms] (CI 99.9%), Margin = 0.311 ms (1.90% of Mean)
+Skewness = 0.84, Kurtosis = 2.88, MValue = 2
+
+// ** Remained 3 (25.0%) benchmark(s) to run. Estimated finish 2023-04-13 22:36 (0h 1m from now) **
+Setup power plan (GUID: 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c FriendlyName: High performance)
+// **************************
+// Benchmark: CRYSTALS_DilithiumBenchmark.DilithiumExecutor: DefaultJob [name=dilithium5, dilithiumParameters=Quant(...)eters [69]]
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet bc77da8f-2f6a-4d19-99c4-9d6564bc5cea.dll --anonymousPipes 1820 1980 --benchmarkName "QuantoCrypt.Benchmarks.Signature.CRYSTALS_DilithiumBenchmark.DilithiumExecutor(name: \"dilithium5\", dilithiumParameters: QuantoCrypt.Internal.Signature.CRYSTALS.Dilithium.DilithiumParameters)" --job Default --benchmarkId 9 in C:\Users\Danylo\Desktop\deeckLoooom\QuantoCrypt\QuantoCrypt.Tests\QuantoCrypt.Benchmarks\bin\Release\net7.0\bc77da8f-2f6a-4d19-99c4-9d6564bc5cea\bin\Release\net7.0
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// Runtime=.NET 7.0.1 (7.0.122.56804), X64 RyuJIT AVX2
+// GC=Concurrent Workstation
+// HardwareIntrinsics=AVX2,AES,BMI1,BMI2,FMA,LZCNT,PCLMUL,POPCNT VectorSize=256
+// Job: DefaultJob
+
+OverheadJitting  1: 1 op, 181200.00 ns, 181.2000 us/op
+WorkloadJitting  1: 1 op, 89325500.00 ns, 89.3255 ms/op
+
+WorkloadPilot    1: 2 op, 130812900.00 ns, 65.4065 ms/op
+WorkloadPilot    2: 3 op, 159335900.00 ns, 53.1120 ms/op
+WorkloadPilot    3: 4 op, 109127000.00 ns, 27.2817 ms/op
+WorkloadPilot    4: 5 op, 77633100.00 ns, 15.5266 ms/op
+WorkloadPilot    5: 6 op, 94065100.00 ns, 15.6775 ms/op
+WorkloadPilot    6: 7 op, 110492700.00 ns, 15.7847 ms/op
+WorkloadPilot    7: 8 op, 132839400.00 ns, 16.6049 ms/op
+WorkloadPilot    8: 9 op, 137795800.00 ns, 15.3106 ms/op
+WorkloadPilot    9: 10 op, 152690200.00 ns, 15.2690 ms/op
+WorkloadPilot   10: 11 op, 170202900.00 ns, 15.4730 ms/op
+WorkloadPilot   11: 12 op, 192929000.00 ns, 16.0774 ms/op
+WorkloadPilot   12: 13 op, 204749800.00 ns, 15.7500 ms/op
+WorkloadPilot   13: 14 op, 220170100.00 ns, 15.7264 ms/op
+WorkloadPilot   14: 15 op, 234175400.00 ns, 15.6117 ms/op
+WorkloadPilot   15: 16 op, 256989200.00 ns, 16.0618 ms/op
+WorkloadPilot   16: 32 op, 498395300.00 ns, 15.5749 ms/op
+WorkloadPilot   17: 64 op, 1017214400.00 ns, 15.8940 ms/op
+
+WorkloadWarmup   1: 64 op, 1015933000.00 ns, 15.8740 ms/op
+WorkloadWarmup   2: 64 op, 1014904000.00 ns, 15.8579 ms/op
+WorkloadWarmup   3: 64 op, 992687400.00 ns, 15.5107 ms/op
+WorkloadWarmup   4: 64 op, 1005871500.00 ns, 15.7167 ms/op
+WorkloadWarmup   5: 64 op, 999928100.00 ns, 15.6239 ms/op
+WorkloadWarmup   6: 64 op, 1007321800.00 ns, 15.7394 ms/op
+WorkloadWarmup   7: 64 op, 995144800.00 ns, 15.5491 ms/op
+
+// BeforeActualRun
+WorkloadActual   1: 64 op, 1017796100.00 ns, 15.9031 ms/op
+WorkloadActual   2: 64 op, 1021332900.00 ns, 15.9583 ms/op
+WorkloadActual   3: 64 op, 1012931500.00 ns, 15.8271 ms/op
+WorkloadActual   4: 64 op, 1124779200.00 ns, 17.5747 ms/op
+WorkloadActual   5: 64 op, 1195668600.00 ns, 18.6823 ms/op
+WorkloadActual   6: 64 op, 1287618700.00 ns, 20.1190 ms/op
+WorkloadActual   7: 64 op, 1052868700.00 ns, 16.4511 ms/op
+WorkloadActual   8: 64 op, 1051060200.00 ns, 16.4228 ms/op
+WorkloadActual   9: 64 op, 1009371100.00 ns, 15.7714 ms/op
+WorkloadActual  10: 64 op, 1014036600.00 ns, 15.8443 ms/op
+WorkloadActual  11: 64 op, 1009673100.00 ns, 15.7761 ms/op
+WorkloadActual  12: 64 op, 1011563900.00 ns, 15.8057 ms/op
+WorkloadActual  13: 64 op, 1018289100.00 ns, 15.9108 ms/op
+WorkloadActual  14: 64 op, 1024629000.00 ns, 16.0098 ms/op
+WorkloadActual  15: 64 op, 1006995100.00 ns, 15.7343 ms/op
+
+// AfterActualRun
+WorkloadResult   1: 64 op, 1017796100.00 ns, 15.9031 ms/op
+WorkloadResult   2: 64 op, 1021332900.00 ns, 15.9583 ms/op
+WorkloadResult   3: 64 op, 1012931500.00 ns, 15.8271 ms/op
+WorkloadResult   4: 64 op, 1052868700.00 ns, 16.4511 ms/op
+WorkloadResult   5: 64 op, 1051060200.00 ns, 16.4228 ms/op
+WorkloadResult   6: 64 op, 1009371100.00 ns, 15.7714 ms/op
+WorkloadResult   7: 64 op, 1014036600.00 ns, 15.8443 ms/op
+WorkloadResult   8: 64 op, 1009673100.00 ns, 15.7761 ms/op
+WorkloadResult   9: 64 op, 1011563900.00 ns, 15.8057 ms/op
+WorkloadResult  10: 64 op, 1018289100.00 ns, 15.9108 ms/op
+WorkloadResult  11: 64 op, 1024629000.00 ns, 16.0098 ms/op
+WorkloadResult  12: 64 op, 1006995100.00 ns, 15.7343 ms/op
+// GC:  46 13 0 781502992 64
+// Threading:  0 0 64
+
+// AfterAll
+// Benchmark Process 34072 has exited with code 0.
+
+Mean = 15.951 ms, StdErr = 0.070 ms (0.44%), N = 12, StdDev = 0.241 ms
+Min = 15.734 ms, Q1 = 15.798 ms, Median = 15.874 ms, Q3 = 15.971 ms, Max = 16.451 ms
+IQR = 0.173 ms, LowerFence = 15.539 ms, UpperFence = 16.231 ms
+ConfidenceInterval = [15.643 ms; 16.260 ms] (CI 99.9%), Margin = 0.308 ms (1.93% of Mean)
+Skewness = 1.21, Kurtosis = 2.9, MValue = 2
+
+// ** Remained 2 (16.7%) benchmark(s) to run. Estimated finish 2023-04-13 22:37 (0h 0m from now) **
+Setup power plan (GUID: 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c FriendlyName: High performance)
+// **************************
+// Benchmark: CRYSTALS_DilithiumBenchmark.BouncyCastleDilithiumExecutor: DefaultJob [name=dilithium5-aes, dilithiumParameters=Org.B(...)eters [66]]
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet bc77da8f-2f6a-4d19-99c4-9d6564bc5cea.dll --anonymousPipes 1572 1916 --benchmarkName "QuantoCrypt.Benchmarks.Signature.CRYSTALS_DilithiumBenchmark.BouncyCastleDilithiumExecutor(name: \"dilithium5-aes\", dilithiumParameters: Org.BouncyCastle.Pqc.Crypto.Crystals.Dilithium.DilithiumParameters)" --job Default --benchmarkId 10 in C:\Users\Danylo\Desktop\deeckLoooom\QuantoCrypt\QuantoCrypt.Tests\QuantoCrypt.Benchmarks\bin\Release\net7.0\bc77da8f-2f6a-4d19-99c4-9d6564bc5cea\bin\Release\net7.0
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// Runtime=.NET 7.0.1 (7.0.122.56804), X64 RyuJIT AVX2
+// GC=Concurrent Workstation
+// HardwareIntrinsics=AVX2,AES,BMI1,BMI2,FMA,LZCNT,PCLMUL,POPCNT VectorSize=256
+// Job: DefaultJob
+
+OverheadJitting  1: 1 op, 182000.00 ns, 182.0000 us/op
+WorkloadJitting  1: 1 op, 131119000.00 ns, 131.1190 ms/op
+
+WorkloadPilot    1: 2 op, 195023800.00 ns, 97.5119 ms/op
+WorkloadPilot    2: 3 op, 179991100.00 ns, 59.9970 ms/op
+WorkloadPilot    3: 4 op, 108152100.00 ns, 27.0380 ms/op
+WorkloadPilot    4: 5 op, 123478900.00 ns, 24.6958 ms/op
+WorkloadPilot    5: 6 op, 145444900.00 ns, 24.2408 ms/op
+WorkloadPilot    6: 7 op, 175390400.00 ns, 25.0558 ms/op
+WorkloadPilot    7: 8 op, 195430300.00 ns, 24.4288 ms/op
+WorkloadPilot    8: 9 op, 234619100.00 ns, 26.0688 ms/op
+WorkloadPilot    9: 10 op, 252245300.00 ns, 25.2245 ms/op
+WorkloadPilot   10: 11 op, 277630600.00 ns, 25.2391 ms/op
+WorkloadPilot   11: 12 op, 293265900.00 ns, 24.4388 ms/op
+WorkloadPilot   12: 13 op, 330714200.00 ns, 25.4396 ms/op
+WorkloadPilot   13: 14 op, 353029800.00 ns, 25.2164 ms/op
+WorkloadPilot   14: 15 op, 378789300.00 ns, 25.2526 ms/op
+WorkloadPilot   15: 16 op, 400540600.00 ns, 25.0338 ms/op
+WorkloadPilot   16: 32 op, 797437600.00 ns, 24.9199 ms/op
+
+WorkloadWarmup   1: 32 op, 811281600.00 ns, 25.3526 ms/op
+WorkloadWarmup   2: 32 op, 805868300.00 ns, 25.1834 ms/op
+WorkloadWarmup   3: 32 op, 838811500.00 ns, 26.2129 ms/op
+WorkloadWarmup   4: 32 op, 805370900.00 ns, 25.1678 ms/op
+WorkloadWarmup   5: 32 op, 819495100.00 ns, 25.6092 ms/op
+WorkloadWarmup   6: 32 op, 844069000.00 ns, 26.3772 ms/op
+WorkloadWarmup   7: 32 op, 886847600.00 ns, 27.7140 ms/op
+WorkloadWarmup   8: 32 op, 806557100.00 ns, 25.2049 ms/op
+
+// BeforeActualRun
+WorkloadActual   1: 32 op, 811706600.00 ns, 25.3658 ms/op
+WorkloadActual   2: 32 op, 835156000.00 ns, 26.0986 ms/op
+WorkloadActual   3: 32 op, 898032800.00 ns, 28.0635 ms/op
+WorkloadActual   4: 32 op, 807183500.00 ns, 25.2245 ms/op
+WorkloadActual   5: 32 op, 800131400.00 ns, 25.0041 ms/op
+WorkloadActual   6: 32 op, 866639600.00 ns, 27.0825 ms/op
+WorkloadActual   7: 32 op, 827429700.00 ns, 25.8572 ms/op
+WorkloadActual   8: 32 op, 975722400.00 ns, 30.4913 ms/op
+WorkloadActual   9: 32 op, 1046159900.00 ns, 32.6925 ms/op
+WorkloadActual  10: 32 op, 850115500.00 ns, 26.5661 ms/op
+WorkloadActual  11: 32 op, 850254000.00 ns, 26.5704 ms/op
+WorkloadActual  12: 32 op, 879376900.00 ns, 27.4805 ms/op
+WorkloadActual  13: 32 op, 829224200.00 ns, 25.9133 ms/op
+WorkloadActual  14: 32 op, 797229800.00 ns, 24.9134 ms/op
+WorkloadActual  15: 32 op, 815237800.00 ns, 25.4762 ms/op
+WorkloadActual  16: 32 op, 817213700.00 ns, 25.5379 ms/op
+WorkloadActual  17: 32 op, 797811900.00 ns, 24.9316 ms/op
+WorkloadActual  18: 32 op, 801244400.00 ns, 25.0389 ms/op
+WorkloadActual  19: 32 op, 808695300.00 ns, 25.2717 ms/op
+WorkloadActual  20: 32 op, 826221400.00 ns, 25.8194 ms/op
+WorkloadActual  21: 32 op, 779147800.00 ns, 24.3484 ms/op
+WorkloadActual  22: 32 op, 800710700.00 ns, 25.0222 ms/op
+WorkloadActual  23: 32 op, 791057500.00 ns, 24.7205 ms/op
+WorkloadActual  24: 32 op, 786072700.00 ns, 24.5648 ms/op
+WorkloadActual  25: 32 op, 811562900.00 ns, 25.3613 ms/op
+WorkloadActual  26: 32 op, 816122800.00 ns, 25.5038 ms/op
+WorkloadActual  27: 32 op, 807459000.00 ns, 25.2331 ms/op
+WorkloadActual  28: 32 op, 825890200.00 ns, 25.8091 ms/op
+WorkloadActual  29: 32 op, 817187600.00 ns, 25.5371 ms/op
+WorkloadActual  30: 32 op, 795282800.00 ns, 24.8526 ms/op
+WorkloadActual  31: 32 op, 818699200.00 ns, 25.5844 ms/op
+
+// AfterActualRun
+WorkloadResult   1: 32 op, 811706600.00 ns, 25.3658 ms/op
+WorkloadResult   2: 32 op, 835156000.00 ns, 26.0986 ms/op
+WorkloadResult   3: 32 op, 807183500.00 ns, 25.2245 ms/op
+WorkloadResult   4: 32 op, 800131400.00 ns, 25.0041 ms/op
+WorkloadResult   5: 32 op, 866639600.00 ns, 27.0825 ms/op
+WorkloadResult   6: 32 op, 827429700.00 ns, 25.8572 ms/op
+WorkloadResult   7: 32 op, 850115500.00 ns, 26.5661 ms/op
+WorkloadResult   8: 32 op, 850254000.00 ns, 26.5704 ms/op
+WorkloadResult   9: 32 op, 829224200.00 ns, 25.9133 ms/op
+WorkloadResult  10: 32 op, 797229800.00 ns, 24.9134 ms/op
+WorkloadResult  11: 32 op, 815237800.00 ns, 25.4762 ms/op
+WorkloadResult  12: 32 op, 817213700.00 ns, 25.5379 ms/op
+WorkloadResult  13: 32 op, 797811900.00 ns, 24.9316 ms/op
+WorkloadResult  14: 32 op, 801244400.00 ns, 25.0389 ms/op
+WorkloadResult  15: 32 op, 808695300.00 ns, 25.2717 ms/op
+WorkloadResult  16: 32 op, 826221400.00 ns, 25.8194 ms/op
+WorkloadResult  17: 32 op, 779147800.00 ns, 24.3484 ms/op
+WorkloadResult  18: 32 op, 800710700.00 ns, 25.0222 ms/op
+WorkloadResult  19: 32 op, 791057500.00 ns, 24.7205 ms/op
+WorkloadResult  20: 32 op, 786072700.00 ns, 24.5648 ms/op
+WorkloadResult  21: 32 op, 811562900.00 ns, 25.3613 ms/op
+WorkloadResult  22: 32 op, 816122800.00 ns, 25.5038 ms/op
+WorkloadResult  23: 32 op, 807459000.00 ns, 25.2331 ms/op
+WorkloadResult  24: 32 op, 825890200.00 ns, 25.8091 ms/op
+WorkloadResult  25: 32 op, 817187600.00 ns, 25.5371 ms/op
+WorkloadResult  26: 32 op, 795282800.00 ns, 24.8526 ms/op
+WorkloadResult  27: 32 op, 818699200.00 ns, 25.5844 ms/op
+// GC:  34 9 0 570738304 32
+// Threading:  0 0 32
+
+// AfterAll
+// Benchmark Process 26704 has exited with code 0.
+
+Mean = 25.452 ms, StdErr = 0.122 ms (0.48%), N = 27, StdDev = 0.633 ms
+Min = 24.348 ms, Q1 = 25.013 ms, Median = 25.366 ms, Q3 = 25.814 ms, Max = 27.082 ms
+IQR = 0.801 ms, LowerFence = 23.812 ms, UpperFence = 27.016 ms
+ConfidenceInterval = [25.001 ms; 25.904 ms] (CI 99.9%), Margin = 0.451 ms (1.77% of Mean)
+Skewness = 0.65, Kurtosis = 3.06, MValue = 2
+
+// ** Remained 1 (8.3%) benchmark(s) to run. Estimated finish 2023-04-13 22:37 (0h 0m from now) **
+Setup power plan (GUID: 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c FriendlyName: High performance)
+// **************************
+// Benchmark: CRYSTALS_DilithiumBenchmark.DilithiumExecutor: DefaultJob [name=dilithium5-aes, dilithiumParameters=Quant(...)eters [69]]
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet bc77da8f-2f6a-4d19-99c4-9d6564bc5cea.dll --anonymousPipes 1980 1580 --benchmarkName "QuantoCrypt.Benchmarks.Signature.CRYSTALS_DilithiumBenchmark.DilithiumExecutor(name: \"dilithium5-aes\", dilithiumParameters: QuantoCrypt.Internal.Signature.CRYSTALS.Dilithium.DilithiumParameters)" --job Default --benchmarkId 11 in C:\Users\Danylo\Desktop\deeckLoooom\QuantoCrypt\QuantoCrypt.Tests\QuantoCrypt.Benchmarks\bin\Release\net7.0\bc77da8f-2f6a-4d19-99c4-9d6564bc5cea\bin\Release\net7.0
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// Runtime=.NET 7.0.1 (7.0.122.56804), X64 RyuJIT AVX2
+// GC=Concurrent Workstation
+// HardwareIntrinsics=AVX2,AES,BMI1,BMI2,FMA,LZCNT,PCLMUL,POPCNT VectorSize=256
+// Job: DefaultJob
+
+OverheadJitting  1: 1 op, 206700.00 ns, 206.7000 us/op
+WorkloadJitting  1: 1 op, 88376500.00 ns, 88.3765 ms/op
+
+WorkloadPilot    1: 2 op, 99138800.00 ns, 49.5694 ms/op
+WorkloadPilot    2: 3 op, 152507600.00 ns, 50.8359 ms/op
+WorkloadPilot    3: 4 op, 84808500.00 ns, 21.2021 ms/op
+WorkloadPilot    4: 5 op, 91639100.00 ns, 18.3278 ms/op
+WorkloadPilot    5: 6 op, 95190800.00 ns, 15.8651 ms/op
+WorkloadPilot    6: 7 op, 111805500.00 ns, 15.9722 ms/op
+WorkloadPilot    7: 8 op, 122749200.00 ns, 15.3437 ms/op
+WorkloadPilot    8: 9 op, 138061300.00 ns, 15.3401 ms/op
+WorkloadPilot    9: 10 op, 153304800.00 ns, 15.3305 ms/op
+WorkloadPilot   10: 11 op, 169593200.00 ns, 15.4176 ms/op
+WorkloadPilot   11: 12 op, 177049200.00 ns, 14.7541 ms/op
+WorkloadPilot   12: 13 op, 200380400.00 ns, 15.4139 ms/op
+WorkloadPilot   13: 14 op, 222097500.00 ns, 15.8641 ms/op
+WorkloadPilot   14: 15 op, 232777800.00 ns, 15.5185 ms/op
+WorkloadPilot   15: 16 op, 229174500.00 ns, 14.3234 ms/op
+WorkloadPilot   16: 32 op, 487234500.00 ns, 15.2261 ms/op
+WorkloadPilot   17: 64 op, 994381900.00 ns, 15.5372 ms/op
+
+WorkloadWarmup   1: 64 op, 956194600.00 ns, 14.9405 ms/op
+WorkloadWarmup   2: 64 op, 971849400.00 ns, 15.1851 ms/op
+WorkloadWarmup   3: 64 op, 990473100.00 ns, 15.4761 ms/op
+WorkloadWarmup   4: 64 op, 983933000.00 ns, 15.3740 ms/op
+WorkloadWarmup   5: 64 op, 1016534700.00 ns, 15.8834 ms/op
+WorkloadWarmup   6: 64 op, 987484100.00 ns, 15.4294 ms/op
+
+// BeforeActualRun
+WorkloadActual   1: 64 op, 959989200.00 ns, 14.9998 ms/op
+WorkloadActual   2: 64 op, 972936300.00 ns, 15.2021 ms/op
+WorkloadActual   3: 64 op, 961427800.00 ns, 15.0223 ms/op
+WorkloadActual   4: 64 op, 954692000.00 ns, 14.9171 ms/op
+WorkloadActual   5: 64 op, 992670100.00 ns, 15.5105 ms/op
+WorkloadActual   6: 64 op, 958593500.00 ns, 14.9780 ms/op
+WorkloadActual   7: 64 op, 985990100.00 ns, 15.4061 ms/op
+WorkloadActual   8: 64 op, 947993000.00 ns, 14.8124 ms/op
+WorkloadActual   9: 64 op, 968450700.00 ns, 15.1320 ms/op
+WorkloadActual  10: 64 op, 964818700.00 ns, 15.0753 ms/op
+WorkloadActual  11: 64 op, 1009558100.00 ns, 15.7743 ms/op
+WorkloadActual  12: 64 op, 981819200.00 ns, 15.3409 ms/op
+WorkloadActual  13: 64 op, 984925300.00 ns, 15.3895 ms/op
+WorkloadActual  14: 64 op, 1005014600.00 ns, 15.7034 ms/op
+WorkloadActual  15: 64 op, 973411200.00 ns, 15.2096 ms/op
+
+// AfterActualRun
+WorkloadResult   1: 64 op, 959989200.00 ns, 14.9998 ms/op
+WorkloadResult   2: 64 op, 972936300.00 ns, 15.2021 ms/op
+WorkloadResult   3: 64 op, 961427800.00 ns, 15.0223 ms/op
+WorkloadResult   4: 64 op, 954692000.00 ns, 14.9171 ms/op
+WorkloadResult   5: 64 op, 992670100.00 ns, 15.5105 ms/op
+WorkloadResult   6: 64 op, 958593500.00 ns, 14.9780 ms/op
+WorkloadResult   7: 64 op, 985990100.00 ns, 15.4061 ms/op
+WorkloadResult   8: 64 op, 947993000.00 ns, 14.8124 ms/op
+WorkloadResult   9: 64 op, 968450700.00 ns, 15.1320 ms/op
+WorkloadResult  10: 64 op, 964818700.00 ns, 15.0753 ms/op
+WorkloadResult  11: 64 op, 1009558100.00 ns, 15.7743 ms/op
+WorkloadResult  12: 64 op, 981819200.00 ns, 15.3409 ms/op
+WorkloadResult  13: 64 op, 984925300.00 ns, 15.3895 ms/op
+WorkloadResult  14: 64 op, 1005014600.00 ns, 15.7034 ms/op
+WorkloadResult  15: 64 op, 973411200.00 ns, 15.2096 ms/op
+// GC:  60 16 0 1003731800 64
+// Threading:  0 0 64
+
+// AfterAll
+// Benchmark Process 25004 has exited with code 0.
+
+Mean = 15.232 ms, StdErr = 0.073 ms (0.48%), N = 15, StdDev = 0.285 ms
+Min = 14.812 ms, Q1 = 15.011 ms, Median = 15.202 ms, Q3 = 15.398 ms, Max = 15.774 ms
+IQR = 0.387 ms, LowerFence = 14.431 ms, UpperFence = 15.978 ms
+ConfidenceInterval = [14.927 ms; 15.536 ms] (CI 99.9%), Margin = 0.304 ms (2.00% of Mean)
+Skewness = 0.43, Kurtosis = 1.97, MValue = 2
+
+// ** Remained 0 (0.0%) benchmark(s) to run. Estimated finish 2023-04-13 22:37 (0h 0m from now) **
+Successfully reverted power plan (GUID: 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c FriendlyName: High performance)
+// ***** BenchmarkRunner: Finish  *****
+
+// * Export *
+  BenchmarkDotNet.Artifacts\results\QuantoCrypt.Benchmarks.Signature.CRYSTALS_DilithiumBenchmark-report.csv
+  BenchmarkDotNet.Artifacts\results\QuantoCrypt.Benchmarks.Signature.CRYSTALS_DilithiumBenchmark-report-github.md
+  BenchmarkDotNet.Artifacts\results\QuantoCrypt.Benchmarks.Signature.CRYSTALS_DilithiumBenchmark-report.html
+
+// * Detailed results *
+CRYSTALS_DilithiumBenchmark.BouncyCastleDilithiumExecutor: DefaultJob [name=dilithium2, dilithiumParameters=Org.B(...)eters [66]]
+Runtime = .NET 7.0.1 (7.0.122.56804), X64 RyuJIT AVX2; GC = Concurrent Workstation
+Mean = 7.007 ms, StdErr = 0.018 ms (0.26%), N = 14, StdDev = 0.069 ms
+Min = 6.882 ms, Q1 = 6.966 ms, Median = 7.014 ms, Q3 = 7.043 ms, Max = 7.161 ms
+IQR = 0.077 ms, LowerFence = 6.850 ms, UpperFence = 7.159 ms
+ConfidenceInterval = [6.930 ms; 7.085 ms] (CI 99.9%), Margin = 0.078 ms (1.11% of Mean)
+Skewness = 0.28, Kurtosis = 2.86, MValue = 2
+-------------------- Histogram --------------------
+[6.845 ms ; 7.199 ms) | @@@@@@@@@@@@@@
+---------------------------------------------------
+
+CRYSTALS_DilithiumBenchmark.DilithiumExecutor: DefaultJob [name=dilithium2, dilithiumParameters=Quant(...)eters [69]]
+Runtime = .NET 7.0.1 (7.0.122.56804), X64 RyuJIT AVX2; GC = Concurrent Workstation
+Mean = 6.833 ms, StdErr = 0.023 ms (0.34%), N = 14, StdDev = 0.087 ms
+Min = 6.629 ms, Q1 = 6.798 ms, Median = 6.859 ms, Q3 = 6.886 ms, Max = 6.949 ms
+IQR = 0.088 ms, LowerFence = 6.665 ms, UpperFence = 7.019 ms
+ConfidenceInterval = [6.735 ms; 6.931 ms] (CI 99.9%), Margin = 0.098 ms (1.43% of Mean)
+Skewness = -0.91, Kurtosis = 2.82, MValue = 2
+-------------------- Histogram --------------------
+[6.582 ms ; 6.794 ms) | @@@@
+[6.794 ms ; 6.996 ms) | @@@@@@@@@@
+---------------------------------------------------
+
+CRYSTALS_DilithiumBenchmark.BouncyCastleDilithiumExecutor: DefaultJob [name=dilithium2-aes, dilithiumParameters=Org.B(...)eters [66]]
+Runtime = .NET 7.0.1 (7.0.122.56804), X64 RyuJIT AVX2; GC = Concurrent Workstation
+Mean = 9.750 ms, StdErr = 0.026 ms (0.27%), N = 15, StdDev = 0.102 ms
+Min = 9.556 ms, Q1 = 9.684 ms, Median = 9.757 ms, Q3 = 9.829 ms, Max = 9.922 ms
+IQR = 0.146 ms, LowerFence = 9.466 ms, UpperFence = 10.048 ms
+ConfidenceInterval = [9.642 ms; 9.859 ms] (CI 99.9%), Margin = 0.109 ms (1.12% of Mean)
+Skewness = -0.16, Kurtosis = 1.97, MValue = 2
+-------------------- Histogram --------------------
+[9.502 ms ; 9.706 ms) | @@@@@@
+[9.706 ms ; 9.977 ms) | @@@@@@@@@
+---------------------------------------------------
+
+CRYSTALS_DilithiumBenchmark.DilithiumExecutor: DefaultJob [name=dilithium2-aes, dilithiumParameters=Quant(...)eters [69]]
+Runtime = .NET 7.0.1 (7.0.122.56804), X64 RyuJIT AVX2; GC = Concurrent Workstation
+Mean = 6.288 ms, StdErr = 0.018 ms (0.29%), N = 13, StdDev = 0.065 ms
+Min = 6.181 ms, Q1 = 6.242 ms, Median = 6.291 ms, Q3 = 6.324 ms, Max = 6.422 ms
+IQR = 0.082 ms, LowerFence = 6.118 ms, UpperFence = 6.447 ms
+ConfidenceInterval = [6.210 ms; 6.367 ms] (CI 99.9%), Margin = 0.078 ms (1.25% of Mean)
+Skewness = 0.13, Kurtosis = 2.34, MValue = 2
+-------------------- Histogram --------------------
+[6.144 ms ; 6.458 ms) | @@@@@@@@@@@@@
+---------------------------------------------------
+
+CRYSTALS_DilithiumBenchmark.BouncyCastleDilithiumExecutor: DefaultJob [name=dilithium3, dilithiumParameters=Org.B(...)eters [66]]
+Runtime = .NET 7.0.1 (7.0.122.56804), X64 RyuJIT AVX2; GC = Concurrent Workstation
+Mean = 11.564 ms, StdErr = 0.032 ms (0.28%), N = 15, StdDev = 0.123 ms
+Min = 11.357 ms, Q1 = 11.485 ms, Median = 11.622 ms, Q3 = 11.644 ms, Max = 11.742 ms
+IQR = 0.159 ms, LowerFence = 11.246 ms, UpperFence = 11.883 ms
+ConfidenceInterval = [11.432 ms; 11.696 ms] (CI 99.9%), Margin = 0.132 ms (1.14% of Mean)
+Skewness = -0.59, Kurtosis = 1.82, MValue = 2
+-------------------- Histogram --------------------
+[11.291 ms ; 11.807 ms) | @@@@@@@@@@@@@@@
+---------------------------------------------------
+
+CRYSTALS_DilithiumBenchmark.DilithiumExecutor: DefaultJob [name=dilithium3, dilithiumParameters=Quant(...)eters [69]]
+Runtime = .NET 7.0.1 (7.0.122.56804), X64 RyuJIT AVX2; GC = Concurrent Workstation
+Mean = 11.231 ms, StdErr = 0.045 ms (0.40%), N = 14, StdDev = 0.167 ms
+Min = 10.910 ms, Q1 = 11.164 ms, Median = 11.238 ms, Q3 = 11.318 ms, Max = 11.542 ms
+IQR = 0.154 ms, LowerFence = 10.933 ms, UpperFence = 11.549 ms
+ConfidenceInterval = [11.043 ms; 11.420 ms] (CI 99.9%), Margin = 0.188 ms (1.68% of Mean)
+Skewness = -0.08, Kurtosis = 2.37, MValue = 2
+-------------------- Histogram --------------------
+[10.872 ms ; 11.134 ms) | @@@
+[11.134 ms ; 11.614 ms) | @@@@@@@@@@@
+---------------------------------------------------
+
+CRYSTALS_DilithiumBenchmark.BouncyCastleDilithiumExecutor: DefaultJob [name=dilithium3-aes, dilithiumParameters=Org.B(...)eters [66]]
+Runtime = .NET 7.0.1 (7.0.122.56804), X64 RyuJIT AVX2; GC = Concurrent Workstation
+Mean = 16.844 ms, StdErr = 0.077 ms (0.46%), N = 15, StdDev = 0.298 ms
+Min = 16.396 ms, Q1 = 16.615 ms, Median = 16.835 ms, Q3 = 17.046 ms, Max = 17.311 ms
+IQR = 0.431 ms, LowerFence = 15.969 ms, UpperFence = 17.692 ms
+ConfidenceInterval = [16.525 ms; 17.162 ms] (CI 99.9%), Margin = 0.318 ms (1.89% of Mean)
+Skewness = 0.12, Kurtosis = 1.61, MValue = 2
+-------------------- Histogram --------------------
+[16.237 ms ; 16.577 ms) | @@
+[16.577 ms ; 16.946 ms) | @@@@@@@
+[16.946 ms ; 17.470 ms) | @@@@@@
+---------------------------------------------------
+
+CRYSTALS_DilithiumBenchmark.DilithiumExecutor: DefaultJob [name=dilithium3-aes, dilithiumParameters=Quant(...)eters [69]]
+Runtime = .NET 7.0.1 (7.0.122.56804), X64 RyuJIT AVX2; GC = Concurrent Workstation
+Mean = 10.681 ms, StdErr = 0.045 ms (0.42%), N = 15, StdDev = 0.175 ms
+Min = 10.406 ms, Q1 = 10.570 ms, Median = 10.665 ms, Q3 = 10.809 ms, Max = 11.010 ms
+IQR = 0.239 ms, LowerFence = 10.211 ms, UpperFence = 11.168 ms
+ConfidenceInterval = [10.495 ms; 10.868 ms] (CI 99.9%), Margin = 0.187 ms (1.75% of Mean)
+Skewness = 0.27, Kurtosis = 1.93, MValue = 2
+-------------------- Histogram --------------------
+[10.313 ms ; 10.730 ms) | @@@@@@@@@@
+[10.730 ms ; 11.039 ms) | @@@@@
+---------------------------------------------------
+
+CRYSTALS_DilithiumBenchmark.BouncyCastleDilithiumExecutor: DefaultJob [name=dilithium5, dilithiumParameters=Org.B(...)eters [66]]
+Runtime = .NET 7.0.1 (7.0.122.56804), X64 RyuJIT AVX2; GC = Concurrent Workstation
+Mean = 16.362 ms, StdErr = 0.085 ms (0.52%), N = 29, StdDev = 0.456 ms
+Min = 15.754 ms, Q1 = 16.099 ms, Median = 16.303 ms, Q3 = 16.480 ms, Max = 17.411 ms
+IQR = 0.380 ms, LowerFence = 15.528 ms, UpperFence = 17.050 ms
+ConfidenceInterval = [16.050 ms; 16.673 ms] (CI 99.9%), Margin = 0.311 ms (1.90% of Mean)
+Skewness = 0.84, Kurtosis = 2.88, MValue = 2
+-------------------- Histogram --------------------
+[15.699 ms ; 16.091 ms) | @@@@@@
+[16.091 ms ; 16.481 ms) | @@@@@@@@@@@@@@@@
+[16.481 ms ; 17.064 ms) | @@@@
+[17.064 ms ; 17.606 ms) | @@@
+---------------------------------------------------
+
+CRYSTALS_DilithiumBenchmark.DilithiumExecutor: DefaultJob [name=dilithium5, dilithiumParameters=Quant(...)eters [69]]
+Runtime = .NET 7.0.1 (7.0.122.56804), X64 RyuJIT AVX2; GC = Concurrent Workstation
+Mean = 15.951 ms, StdErr = 0.070 ms (0.44%), N = 12, StdDev = 0.241 ms
+Min = 15.734 ms, Q1 = 15.798 ms, Median = 15.874 ms, Q3 = 15.971 ms, Max = 16.451 ms
+IQR = 0.173 ms, LowerFence = 15.539 ms, UpperFence = 16.231 ms
+ConfidenceInterval = [15.643 ms; 16.260 ms] (CI 99.9%), Margin = 0.308 ms (1.93% of Mean)
+Skewness = 1.21, Kurtosis = 2.9, MValue = 2
+-------------------- Histogram --------------------
+[15.713 ms ; 16.589 ms) | @@@@@@@@@@@@
+---------------------------------------------------
+
+CRYSTALS_DilithiumBenchmark.BouncyCastleDilithiumExecutor: DefaultJob [name=dilithium5-aes, dilithiumParameters=Org.B(...)eters [66]]
+Runtime = .NET 7.0.1 (7.0.122.56804), X64 RyuJIT AVX2; GC = Concurrent Workstation
+Mean = 25.452 ms, StdErr = 0.122 ms (0.48%), N = 27, StdDev = 0.633 ms
+Min = 24.348 ms, Q1 = 25.013 ms, Median = 25.366 ms, Q3 = 25.814 ms, Max = 27.082 ms
+IQR = 0.801 ms, LowerFence = 23.812 ms, UpperFence = 27.016 ms
+ConfidenceInterval = [25.001 ms; 25.904 ms] (CI 99.9%), Margin = 0.451 ms (1.77% of Mean)
+Skewness = 0.65, Kurtosis = 3.06, MValue = 2
+-------------------- Histogram --------------------
+[24.072 ms ; 24.994 ms) | @@@@@@
+[24.994 ms ; 25.548 ms) | @@@@@@@@@@@@
+[25.548 ms ; 26.118 ms) | @@@@@@
+[26.118 ms ; 27.101 ms) | @@@
+---------------------------------------------------
+
+CRYSTALS_DilithiumBenchmark.DilithiumExecutor: DefaultJob [name=dilithium5-aes, dilithiumParameters=Quant(...)eters [69]]
+Runtime = .NET 7.0.1 (7.0.122.56804), X64 RyuJIT AVX2; GC = Concurrent Workstation
+Mean = 15.232 ms, StdErr = 0.073 ms (0.48%), N = 15, StdDev = 0.285 ms
+Min = 14.812 ms, Q1 = 15.011 ms, Median = 15.202 ms, Q3 = 15.398 ms, Max = 15.774 ms
+IQR = 0.387 ms, LowerFence = 14.431 ms, UpperFence = 15.978 ms
+ConfidenceInterval = [14.927 ms; 15.536 ms] (CI 99.9%), Margin = 0.304 ms (2.00% of Mean)
+Skewness = 0.43, Kurtosis = 1.97, MValue = 2
+-------------------- Histogram --------------------
+[14.661 ms ; 15.215 ms) | @@@@@@@@@
+[15.215 ms ; 15.580 ms) | @@@@
+[15.580 ms ; 15.926 ms) | @@
+---------------------------------------------------
+
+// * Summary *
+
+BenchmarkDotNet=v0.13.5, OS=Windows 11 (10.0.22621.1555/22H2/2022Update/SunValley2)
+AMD Ryzen 7 5800X, 1 CPU, 16 logical and 8 physical cores
+.NET SDK=7.0.101
+  [Host]     : .NET 7.0.1 (7.0.122.56804), X64 RyuJIT AVX2
+  DefaultJob : .NET 7.0.1 (7.0.122.56804), X64 RyuJIT AVX2
+
+
+|                        Method |           name |  dilithiumParameters |      Mean |     Error |    StdDev |      Gen0 |     Gen1 | Allocated |
+|------------------------------ |--------------- |--------------------- |----------:|----------:|----------:|----------:|---------:|----------:|
+| BouncyCastleDilithiumExecutor |     dilithium2 | Org.B(...)eters [66] |  7.007 ms | 0.0776 ms | 0.0688 ms |  328.1250 |  46.8750 |   5.28 MB |
+|             DilithiumExecutor |     dilithium2 | Quant(...)eters [69] |  6.833 ms | 0.0979 ms | 0.0868 ms |  328.1250 |  46.8750 |   5.31 MB |
+| BouncyCastleDilithiumExecutor | dilithium2-aes | Org.B(...)eters [66] |  9.750 ms | 0.1089 ms | 0.1019 ms |  437.5000 |  62.5000 |   7.07 MB |
+|             DilithiumExecutor | dilithium2-aes | Quant(...)eters [69] |  6.288 ms | 0.0784 ms | 0.0654 ms |  390.6250 |  46.8750 |   6.23 MB |
+| BouncyCastleDilithiumExecutor |     dilithium3 | Org.B(...)eters [66] | 11.564 ms | 0.1319 ms | 0.1234 ms |  531.2500 | 109.3750 |   8.69 MB |
+|             DilithiumExecutor |     dilithium3 | Quant(...)eters [69] | 11.231 ms | 0.1884 ms | 0.1671 ms |  531.2500 | 109.3750 |   8.71 MB |
+| BouncyCastleDilithiumExecutor | dilithium3-aes | Org.B(...)eters [66] | 16.844 ms | 0.3183 ms | 0.2978 ms |  718.7500 | 125.0000 |  11.47 MB |
+|             DilithiumExecutor | dilithium3-aes | Quant(...)eters [69] | 10.681 ms | 0.1866 ms | 0.1746 ms |  640.6250 | 125.0000 |  10.24 MB |
+| BouncyCastleDilithiumExecutor |     dilithium5 | Org.B(...)eters [66] | 16.362 ms | 0.3112 ms | 0.4561 ms |  718.7500 | 218.7500 |  11.68 MB |
+|             DilithiumExecutor |     dilithium5 | Quant(...)eters [69] | 15.951 ms | 0.3084 ms | 0.2408 ms |  718.7500 | 203.1250 |  11.65 MB |
+| BouncyCastleDilithiumExecutor | dilithium5-aes | Org.B(...)eters [66] | 25.452 ms | 0.4513 ms | 0.6327 ms | 1062.5000 | 281.2500 |  17.01 MB |
+|             DilithiumExecutor | dilithium5-aes | Quant(...)eters [69] | 15.232 ms | 0.3043 ms | 0.2847 ms |  937.5000 | 250.0000 |  14.96 MB |
+
+// * Hints *
+Outliers
+  CRYSTALS_DilithiumBenchmark.BouncyCastleDilithiumExecutor: Default -> 1 outlier  was  removed (7.18 ms)
+  CRYSTALS_DilithiumBenchmark.DilithiumExecutor: Default             -> 1 outlier  was  removed, 2 outliers were detected (6.63 ms, 7.07 ms)
+  CRYSTALS_DilithiumBenchmark.DilithiumExecutor: Default             -> 2 outliers were removed (6.51 ms, 6.53 ms)
+  CRYSTALS_DilithiumBenchmark.DilithiumExecutor: Default             -> 1 outlier  was  removed (11.65 ms)
+  CRYSTALS_DilithiumBenchmark.BouncyCastleDilithiumExecutor: Default -> 2 outliers were removed (17.64 ms, 18.69 ms)
+  CRYSTALS_DilithiumBenchmark.DilithiumExecutor: Default             -> 3 outliers were removed (17.57 ms..20.12 ms)
+  CRYSTALS_DilithiumBenchmark.BouncyCastleDilithiumExecutor: Default -> 4 outliers were removed (27.48 ms..32.69 ms)
+
+// * Legends *
+  name                : Value of the 'name' parameter
+  dilithiumParameters : Value of the 'dilithiumParameters' parameter
+  Mean                : Arithmetic mean of all measurements
+  Error               : Half of 99.9% confidence interval
+  StdDev              : Standard deviation of all measurements
+  Gen0                : GC Generation 0 collects per 1000 operations
+  Gen1                : GC Generation 1 collects per 1000 operations
+  Allocated           : Allocated memory per single operation (managed only, inclusive, 1KB = 1024B)
+  1 ms                : 1 Millisecond (0.001 sec)
+
+// * Diagnostic Output - MemoryDiagnoser *
+
+
+// ***** BenchmarkRunner: End *****
+Run time: 00:04:36 (276.93 sec), executed benchmarks: 12
+
+Global total time: 00:04:40 (280.67 sec), executed benchmarks: 12
+// * Artifacts cleanup *
