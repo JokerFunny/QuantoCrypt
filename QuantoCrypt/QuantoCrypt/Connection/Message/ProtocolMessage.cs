@@ -99,7 +99,7 @@ namespace QuantoCrypt.Internal.Message
 
             byte[] allCiphersSuites = new byte[SUPPORTED_CIPHER_SUITES_OFFSET];
 
-            _CopyToByteArrayUlong(allCiphers, allCiphersSuites, 1);
+            _CopyToByteArrayUlong(allCiphers, allCiphersSuites, 0);
 
             return CreateMessage(1, UNSUPPORTED_CLIENT_PARAMS, allCiphersSuites);
         }
@@ -267,6 +267,7 @@ namespace QuantoCrypt.Internal.Message
         /// <param name="version">Target version.</param>
         /// <param name="type">Target type.</param>
         /// <param name="body">Target message body.</param>
+        /// <param name="bodyLength">Target lenght of decrypted body.</param>
         /// <remarks>
         /// MESSAGE
         /// 0 - [version]
@@ -278,7 +279,7 @@ namespace QuantoCrypt.Internal.Message
         /// <returns>
         ///     New message with properly generated header.
         /// </returns>
-        internal static byte[] CreateMessage(byte version, byte type, byte[] body)
+        internal static byte[] CreateMessage(byte version, byte type, byte[] body, int bodyLength = -1)
         {
             try
             {
@@ -288,7 +289,7 @@ namespace QuantoCrypt.Internal.Message
                 // fill headers
                 headerPart[0] = version;
                 headerPart[1] = type;
-                _CopyToByteArray(body.Length, headerPart, 2);
+                _CopyToByteArray(bodyLength < 0 ? body.Length : bodyLength, headerPart, 2);
 
                 var message = new byte[totalDataLength];
 
@@ -359,6 +360,15 @@ namespace QuantoCrypt.Internal.Message
         /// </returns>
         internal byte[] GetBody()
             => _rMessage[10..];
+
+        /// <summary>
+        /// Get the length of the decrypted body length.
+        /// </summary>
+        /// <returns>
+        ///     Length of the decrypted body length.
+        /// </returns>
+        internal int GetBodyLength()
+            => GetIntValue(_rMessage, 2, 4);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static ulong GetUlongValue(byte[] target, int start, int length)

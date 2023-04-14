@@ -10,7 +10,6 @@ namespace QuantoCrypt.Internal.KEM.CRYSTALS.Kyber
     public sealed class KyberAlgorithm : IKEMAlgorithm
     {
         private KyberParameters _kyberParameters;
-        private SecureRandom _secureRandom;
         private KyberPrivateKey _privateKey;
         private bool _isDisposed;
 
@@ -26,7 +25,7 @@ namespace QuantoCrypt.Internal.KEM.CRYSTALS.Kyber
 
         public AsymmetricKeyPair KeyGen()
         {
-            KyberKeyGenerationParameters keyGenerationParameters = new KyberKeyGenerationParameters(_GetRandom(), _kyberParameters);
+            KyberKeyGenerationParameters keyGenerationParameters = new KyberKeyGenerationParameters(new SecureRandom(), _kyberParameters);
 
             KyberKeyPairGenerator keyPairGenerator = new KyberKeyPairGenerator(keyGenerationParameters);
 
@@ -48,7 +47,7 @@ namespace QuantoCrypt.Internal.KEM.CRYSTALS.Kyber
         {
             KyberPublicKey kyberPublicKey = new KyberPublicKey(_kyberParameters, publicKey);
 
-            KyberKemGenerator kemGenerator = new KyberKemGenerator(_GetRandom());
+            KyberKemGenerator kemGenerator = new KyberKemGenerator(new SecureRandom());
 
             return kemGenerator.GenerateEncapsulated(kyberPublicKey);
         }
@@ -58,19 +57,10 @@ namespace QuantoCrypt.Internal.KEM.CRYSTALS.Kyber
             if (!_isDisposed)
             {
                 _kyberParameters = null;
-                _secureRandom = null;
                 _privateKey = null;
             }
 
             _isDisposed = true;
-        }
-
-        private SecureRandom _GetRandom()
-        {
-            if (_secureRandom == null && !_isDisposed)
-                _secureRandom = new SecureRandom();
-
-            return _secureRandom;
         }
     }
 }

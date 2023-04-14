@@ -241,7 +241,11 @@ namespace QuantoCrypt.Internal.Connection
                 // get preferred clients' CipherSuite.
                 byte prefferedCipherSuite = clientInitMessage[10];
 
-                return cipherSuiteProvider.SupportedCipherSuites.Keys.ToList().ElementAt(prefferedCipherSuite);
+                var availableCS = cipherSuiteProvider.SupportedCipherSuites.Keys.ToList();
+                if (availableCS.Count < prefferedCipherSuite)
+                    return null;
+
+                return availableCS.ElementAt(prefferedCipherSuite);
             }
 
             ConnectionMode __GetConnectionMode(byte[] clientInitMessage)
@@ -256,8 +260,8 @@ namespace QuantoCrypt.Internal.Connection
 
             byte[] __GetServerInitMessage(QuantoCryptConnection connection, byte[] clientInitMessage, ICipherSuite cipherSuiteToUse, ConnectionMode connectionMode)
             {
-                // header = 10 + prefferedCS = 1.
-                int publicKeyOffset = 11;
+                // header = 10 + prefferedCS = 1 + connectionMode = 1.
+                int publicKeyOffset = 12;
 
                 // get public key from client.
                 byte[] kemPublicKey = clientInitMessage[publicKeyOffset..];
@@ -271,6 +275,9 @@ namespace QuantoCrypt.Internal.Connection
                 byte[] sessionSecret = secretWithEncapsulatedData.GetSecret();
                 byte[] generatedCipherText = secretWithEncapsulatedData.GetEncapsulation();
 
+                // create a proper ISymmetricAlgorithm using genereted session secret.
+                connection.UsedSymmetricAlgorithm = cipherSuiteToUse.GetSymmetricAlgorithm(sessionSecret);
+
                 // generate message with DS in case if Default connetion mode selected.
                 if (connectionMode == ConnectionMode.Default)
                 {
@@ -283,9 +290,6 @@ namespace QuantoCrypt.Internal.Connection
                     // generate hash over clientInitMessage to be signed.
                     byte[] messageToBeSigned = ProtocolMessage.GetMessageHash(clientInitMessage);
                     byte[] signature = signatureAlgorithmForSigning.Sign(messageToBeSigned);
-
-                    // create a proper ISymmetricAlgorithm using genereted session secret.
-                    connection.UsedSymmetricAlgorithm = cipherSuiteToUse.GetSymmetricAlgorithm(sessionSecret);
 
                     // prepare params for client. We need to sent cipher text + [signature + signature public key](encrypted).
                     byte[] signaturePublicKey = signatureKeys.Public.GetEncoded();
@@ -408,9 +412,12 @@ namespace QuantoCrypt.Internal.Connection
 
         public int Send(byte[] data)
         {
+            if (_isDisposed)
+                throw new ObjectDisposedException(nameof(QuantoCryptConnection), "The connection has been successfully closed and can't be used!");
+
             var encryptedText = UsedSymmetricAlgorithm.Encrypt(data);
 
-            var protocolMessage = ProtocolMessage.CreateMessage(ProtocolMessage.PROTOCOL_VERSION, ProtocolMessage.DATA_TRANSFER, encryptedText);
+            var protocolMessage = ProtocolMessage.CreateMessage(ProtocolMessage.PROTOCOL_VERSION, ProtocolMessage.DATA_TRANSFER, encryptedText, data.Length);
 
             return prWrappedUnsecureConnection.Send(protocolMessage);
         }
@@ -419,6 +426,9 @@ namespace QuantoCrypt.Internal.Connection
         {
             try
             {
+                if (_isDisposed)
+                    throw new ObjectDisposedException(nameof(QuantoCryptConnection), "The connection has been successfully closed and can't be used!");
+
                 var message = new ProtocolMessage(prWrappedUnsecureConnection.Receive());
 
                 return _ProceedReceivedMessage(message);
@@ -430,7 +440,7 @@ namespace QuantoCrypt.Internal.Connection
         {
             var encryptedText = UsedSymmetricAlgorithm.Encrypt(data);
 
-            var targetMessage = ProtocolMessage.CreateMessage(ProtocolMessage.PROTOCOL_VERSION, ProtocolMessage.DATA_TRANSFER, encryptedText);
+            var targetMessage = ProtocolMessage.CreateMessage(ProtocolMessage.PROTOCOL_VERSION, ProtocolMessage.DATA_TRANSFER, encryptedText, data.Length);
 
             return await prWrappedUnsecureConnection.SendAsync(targetMessage).ConfigureAwait(false);
         }
@@ -452,9 +462,15 @@ namespace QuantoCrypt.Internal.Connection
         {
             if (!_isDisposed)
             {
-                prWrappedUnsecureConnection?.Dispose();
+                // we could already dispose it by calling prWrappedUnsecureConnection.Close().
+                try
+                {
+                    prWrappedUnsecureConnection?.Dispose();
+                }
+                catch { }
 
                 UsedSymmetricAlgorithm?.Dispose();
+                UsedSymmetricAlgorithm = null;
 
                 _isDisposed = true;
             }
@@ -498,9 +514,9 @@ namespace QuantoCrypt.Internal.Connection
             if (message.GetMessageType() != ProtocolMessage.DATA_TRANSFER)
                 throw new ArgumentException($"Invalid message code recieved! Expected to be a [DATA_TRANSFER], got [{message.GetMessageType()}].");
 
-            var body = message.GetBody();
+            var decryptedBody = UsedSymmetricAlgorithm.Decrypt(message.GetBody());
 
-            return UsedSymmetricAlgorithm.Decrypt(body);
+            return decryptedBody[..message.GetBodyLength()];
         }
 
         private void _ThrowAndClose(Exception targetException)

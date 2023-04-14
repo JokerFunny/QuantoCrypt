@@ -11,7 +11,6 @@ namespace QuantoCrypt.Internal.Signature.CRYSTALS.Dilithium
     {
         private DilithiumParameters _dilithiumParameters;
         private DilithiumPrivateKey _privateKey;
-        private SecureRandom _secureRandom;
         private bool _isDisposed;
         private readonly bool _rIsForSigning;
 
@@ -28,7 +27,7 @@ namespace QuantoCrypt.Internal.Signature.CRYSTALS.Dilithium
 
         public AsymmetricKeyPair KeyGen()
         {
-            DilithiumKeyGenerationParameters keyGenerationParameters = new DilithiumKeyGenerationParameters(_GetRandom(), _dilithiumParameters);
+            DilithiumKeyGenerationParameters keyGenerationParameters = new DilithiumKeyGenerationParameters(new SecureRandom(), _dilithiumParameters);
 
             DilithiumKeyPairGenerator keyPairGenerator = new DilithiumKeyPairGenerator(keyGenerationParameters);
 
@@ -62,19 +61,10 @@ namespace QuantoCrypt.Internal.Signature.CRYSTALS.Dilithium
             if (!_isDisposed)
             {
                 _dilithiumParameters = null;
-                _secureRandom = null;
                 _privateKey = null;
             }
 
             _isDisposed = true;
-        }
-
-        private SecureRandom _GetRandom()
-        {
-            if (_secureRandom == null && !_isDisposed)
-                _secureRandom = new SecureRandom();
-
-            return _secureRandom;
         }
     }
 }
