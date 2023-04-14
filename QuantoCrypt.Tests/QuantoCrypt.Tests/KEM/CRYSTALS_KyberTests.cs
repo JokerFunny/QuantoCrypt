@@ -84,9 +84,9 @@ namespace QuantoCrypt.Tests.KEM
             byte[] secret = secretWithIncapsulation.GetSecret();
 
             // KEM Dec
-            byte[] decriptedSecret = kyberAlgorithm.Decaps(generatedCipherText);
+            byte[] decryptedSecret = kyberAlgorithm.Decaps(generatedCipherText);
 
-            secret.Should().BeEquivalentTo(decriptedSecret);
+            secret.Should().BeEquivalentTo(decryptedSecret);
         }
 
         private void _ExecuteTest(TestDataInput testData, KyberParameters kyberParameters)

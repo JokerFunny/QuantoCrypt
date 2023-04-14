@@ -33,10 +33,9 @@ namespace QuantoCrypt.Tests.Symmetric
         public void AesGcmAlgorithm_Work_Over_500MB()
         {
             var random = new SecureRandom();
-
             byte[] textToProceed = random.GenerateSeed(524288000);
 
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 50; i++)
             {
                 AesGcmAlgorithm service = new AesGcmAlgorithm(random.GenerateSeed(32));
 
@@ -47,28 +46,45 @@ namespace QuantoCrypt.Tests.Symmetric
         }
 
         [Fact]
-        public async Task AesGcmAlgorithm_Work_Over_500MB_Parallel()
+        public void AesGcmAlgorithm_Encrypt_Work_Over_500MB()
         {
-            int threads = 128;
             var random = new SecureRandom();
+            byte[] textToProceed = random.GenerateSeed(524288000);
 
+            for (int i = 0; i < 50; i++)
+            {
+                AesGcmAlgorithm service = new AesGcmAlgorithm(random.GenerateSeed(32));
+
+                var encrypted = service.Encrypt(textToProceed);
+            }
+        }
+
+        [Theory]
+        [InlineData(8)]
+        [InlineData(16)]
+        [InlineData(32)]
+        [InlineData(64)]
+        [InlineData(128)]
+        public async Task AesGcmAlgorithm_Work_Over_500MB_Parallel(int workerThreadsCount)
+        {
+            var random = new SecureRandom();
             byte[] textToProceed = random.GenerateSeed(524288000);
 
             for (int i = 0; i < 10; i++)
             {
                 AesGcmAlgorithm service = new AesGcmAlgorithm(random.GenerateSeed(32));
 
-                ThreadPool.SetMinThreads(threads, threads);
-                ThreadPool.SetMaxThreads(threads, threads);
+                ThreadPool.SetMinThreads(workerThreadsCount, workerThreadsCount);
+                ThreadPool.SetMaxThreads(workerThreadsCount, workerThreadsCount);
 
                 List<byte[]> resultsOfAes = new();
 
-                int chunkSize = textToProceed.Length / threads;
+                int chunkSize = textToProceed.Length / workerThreadsCount;
 
-                var chunksToProceed = Enumerable.Range(0, threads).Select(el =>
-                    _GetChunkToProceed(el, chunkSize, textToProceed, threads)).ToList();
+                var chunksToProceed = Enumerable.Range(0, workerThreadsCount).Select(el =>
+                    _GetChunkToProceed(el, chunkSize, textToProceed, workerThreadsCount)).ToList();
 
-                Task<byte[]>[] tasksToProceed = new Task<byte[]>[threads];
+                Task<byte[]>[] tasksToProceed = new Task<byte[]>[workerThreadsCount];
 
                 for (int j = 0; j < chunksToProceed.Count; j++)
                 {
@@ -100,12 +116,6 @@ namespace QuantoCrypt.Tests.Symmetric
                     resultsOfAes.Add(results[j]);
 
                 byte[] decrypted = ArrayUtilities.Combine(resultsOfAes.ToArray());
-
-                /*for (int j = 0; j < decrypted.Length; j++)
-                {
-                    if (textToProceed[j] != decrypted[j])
-                        throw new Exception($"Difference on [{j}] index!");
-                }*/
             }
         }
 

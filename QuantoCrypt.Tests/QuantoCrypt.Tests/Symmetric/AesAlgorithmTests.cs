@@ -1,7 +1,10 @@
 ﻿using FluentAssertions;
 using QuantoCrypt.Common;
 using QuantoCrypt.Internal.Symmetric;
+using System.Diagnostics;
+using System.Net;
 using System.Security.Cryptography;
+using System.Text;
 
 namespace QuantoCrypt.Tests.Symmetric
 {
@@ -29,6 +32,36 @@ namespace QuantoCrypt.Tests.Symmetric
                 data.Should().BeEquivalentTo(decrypted[..data.Length]);
             else
                 data.Should().BeEquivalentTo(decrypted);
+        }
+
+        [Fact]
+        public void AesAlgorithm_Work_Over_500MB()
+        {
+            var random = new SecureRandom();
+            byte[] textToProceed = random.GenerateSeed(524288000);
+
+            for (int i = 0; i < 50; i++)
+            {
+                AesAlgorithm service = new AesAlgorithm(random.GenerateSeed(32));
+
+                var encrypted = service.Encrypt(textToProceed);
+
+                var decrypted = service.Decrypt(encrypted);
+            }
+        }
+
+        [Fact]
+        public void AesAlgorithm_Encrypt_Work_Over_500MB()
+        {
+            var random = new SecureRandom();
+            byte[] textToProceed = random.GenerateSeed(524288000);
+
+            for (int i = 0; i < 50; i++)
+            {
+                AesAlgorithm service = new AesAlgorithm(random.GenerateSeed(32));
+
+                var encrypted = service.Encrypt(textToProceed);
+            }
         }
 
         public static IEnumerable<object[]> InvalidKeysParams()
