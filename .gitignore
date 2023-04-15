@@ -401,6 +401,7 @@ FodyWeavers.xsd
 !QuantoCrypt.Tests/QuantoCrypt.Benchmarks/Results/
 !QuantoCrypt.Tests/QuantoCrypt.Benchmarks/Results/Connection/*
 !QuantoCrypt.Tests/QuantoCrypt.Benchmarks/Results/Connection/DataTransfer/*
+!QuantoCrypt.Tests/QuantoCrypt.Benchmarks/Results/Connection/TLSComparison/*
 !QuantoCrypt.Tests/QuantoCrypt.Benchmarks/Results/KEM/*
 !QuantoCrypt.Tests/QuantoCrypt.Benchmarks/Results/Signature/*
 !QuantoCrypt.Tests/QuantoCrypt.Benchmarks/Results/Symmetric/*
