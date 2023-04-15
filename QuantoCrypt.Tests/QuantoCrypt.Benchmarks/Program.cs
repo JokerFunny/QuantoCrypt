@@ -1,5 +1,6 @@
 ﻿using BenchmarkDotNet.Configs;
 using BenchmarkDotNet.Running;
+using QuantoCrypt.Benchmarks.Connection;
 using QuantoCrypt.Benchmarks.KEM;
 using QuantoCrypt.Benchmarks.Signature;
 using QuantoCrypt.Benchmarks.Symmetric;
@@ -10,9 +11,10 @@ class Program
 {
     static void Main(string[] args)
     {
+        BenchmarkRunner.Run<QuantoCryptConnectionBenchmark>();
         //BenchmarkRunner.Run<CRYSTALS_KyberBenchmark>();
         //BenchmarkRunner.Run<CRYSTALS_DilithiumBenchmark>();
-        BenchmarkRunner.Run<AesBenchmark>();
+        //BenchmarkRunner.Run<AesBenchmark>();
         //BenchmarkRunner.Run<SymmetricAlgorithmsBenchmark>();
 
         //SecureRandom random = new SecureRandom();

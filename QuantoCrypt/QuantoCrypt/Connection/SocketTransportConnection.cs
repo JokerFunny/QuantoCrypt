@@ -27,7 +27,7 @@ namespace QuantoCrypt.Internal.Connection
         /// <remarks>
         ///     1 Mb buffer.
         /// </remarks>
-        private readonly byte[] buffer = new byte[BufferSize];
+        private readonly byte[] _rReadBuffer = new byte[BufferSize];
 
         /// <summary>
         /// Default ctor.
@@ -76,10 +76,21 @@ namespace QuantoCrypt.Internal.Connection
         {
             try
             {
-                var read = _rSocket.Receive(buffer);
+                List<byte> bufferMessage = new List<byte>();
+                int read = -1;
+                do
+                {
+                    read = _rSocket.Receive(_rReadBuffer);
+                    bufferMessage.AddRange(_rReadBuffer[..read]);
+                }
+                while (read == BufferSize);
+
+                byte[] result = bufferMessage.ToArray();
+
+                /*var read = _rSocket.Receive(_rReadBuffer);
 
                 byte[] result = new byte[read];
-                Array.Copy(buffer, result, read);
+                Array.Copy(_rReadBuffer, result, read);*/
 
                 ConnectionTraceHelper.sTraceMessageIfNeeded(Id, result, "receive", _rTraceAction, _rExtendedLogs);
 
@@ -147,10 +158,21 @@ namespace QuantoCrypt.Internal.Connection
         {
             try
             {
-                var read = await _rSocket.ReceiveAsync(buffer);
+                List<byte> bufferMessage = new List<byte>();
+                int read = -1;
+                do
+                {
+                    read = await _rSocket.ReceiveAsync(_rReadBuffer);
+                    bufferMessage.AddRange(_rReadBuffer[..read]);
+                }
+                while (read == BufferSize);
+
+                byte[] result = bufferMessage.ToArray();
+
+                /*var read = await _rSocket.ReceiveAsync(_rReadBuffer);
 
                 byte[] result = new byte[read];
-                Array.Copy(buffer, result, read);
+                Array.Copy(_rReadBuffer, result, read);*/
 
                 ConnectionTraceHelper.sTraceMessageIfNeeded(Id, result, "receive", _rTraceAction, _rExtendedLogs);
 
