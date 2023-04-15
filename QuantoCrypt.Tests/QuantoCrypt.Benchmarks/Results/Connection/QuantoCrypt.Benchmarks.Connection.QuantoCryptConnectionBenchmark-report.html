@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='utf-8' />
+<title>QuantoCrypt.Benchmarks.Connection.QuantoCryptConnectionBenchmark-20230416-000224</title>
+
+<style type="text/css">
+	table { border-collapse: collapse; display: block; width: 100%; overflow: auto; }
+	td, th { padding: 6px 13px; border: 1px solid #ddd; text-align: right; }
+	tr { background-color: #fff; border-top: 1px solid #ccc; }
+	tr:nth-child(even) { background: #f8f8f8; }
+</style>
+</head>
+<body>
+<pre><code>
+BenchmarkDotNet=v0.13.5, OS=Windows 11 (10.0.22621.1555/22H2/2022Update/SunValley2)
+AMD Ryzen 7 5800X, 1 CPU, 16 logical and 8 physical cores
+.NET SDK=7.0.101
+  [Host]     : .NET 7.0.1 (7.0.122.56804), X64 RyuJIT AVX2
+  Job-EKEKGF : .NET 7.0.1 (7.0.122.56804), X64 RyuJIT AVX2
+</code></pre>
+<pre><code>IterationTime=100.0000 ms  LaunchCount=1  
+</code></pre>
+
+<table>
+<thead><tr><th>           Method</th><th>csIndex</th><th>prefferedCipherSuite</th><th>Mean</th><th>Error</th><th>StdDev</th><th>Median</th><th>Ratio</th><th>RatioSD</th><th>Gen0</th><th>Gen1</th><th>Gen2</th><th>Allocated</th><th>Alloc Ratio</th>
+</tr>
+</thead><tbody><tr><td>DefaulConnectionMode</td><td>1</td><td>Quant(...)5_Aes [73]</td><td>2,359.0 &mu;s</td><td>52.30 &mu;s</td><td>151.72 &mu;s</td><td>2,351.6 &mu;s</td><td>1.00</td><td>0.00</td><td>923.0769</td><td>923.0769</td><td>923.0769</td><td>4.35 MB</td><td>1.00</td>
+</tr><tr><td>FastConnectionMode</td><td>1</td><td>Quant(...)5_Aes [73]</td><td>838.8 &mu;s</td><td>10.72 &mu;s</td><td>8.95 &mu;s</td><td>836.6 &mu;s</td><td>0.35</td><td>0.02</td><td>991.5966</td><td>991.5966</td><td>991.5966</td><td>3.14 MB</td><td>0.72</td>
+</tr><tr><td>FastShortConnectionMode</td><td>1</td><td>Quant(...)5_Aes [73]</td><td>789.8 &mu;s</td><td>15.66 &mu;s</td><td>23.91 &mu;s</td><td>786.5 &mu;s</td><td>0.33</td><td>0.02</td><td>979.5918</td><td>979.5918</td><td>979.5918</td><td>3.14 MB</td><td>0.72</td>
+</tr><tr><td>DefaulConnectionMode</td><td>128</td><td>Quant(...)esGcm [82]</td><td>2,212.1 &mu;s</td><td>45.77 &mu;s</td><td>132.07 &mu;s</td><td>2,206.0 &mu;s</td><td>1.00</td><td>0.00</td><td>937.5000</td><td>937.5000</td><td>937.5000</td><td>4.47 MB</td><td>1.00</td>
+</tr><tr><td>FastConnectionMode</td><td>128</td><td>Quant(...)esGcm [82]</td><td>866.4 &mu;s</td><td>15.17 &mu;s</td><td>20.77 &mu;s</td><td>867.2 &mu;s</td><td>0.39</td><td>0.02</td><td>979.5918</td><td>979.5918</td><td>979.5918</td><td>3.2 MB</td><td>0.72</td>
+</tr><tr><td>FastShortConnectionMode</td><td>128</td><td>Quant(...)esGcm [82]</td><td>821.9 &mu;s</td><td>15.61 &mu;s</td><td>13.03 &mu;s</td><td>820.9 &mu;s</td><td>0.36</td><td>0.01</td><td>980.3922</td><td>980.3922</td><td>980.3922</td><td>3.19 MB</td><td>0.71</td>
+</tr><tr><td>DefaulConnectionMode</td><td>16</td><td>Quant(...)5_Aes [76]</td><td>2,281.4 &mu;s</td><td>46.30 &mu;s</td><td>133.59 &mu;s</td><td>2,278.9 &mu;s</td><td>1.00</td><td>0.00</td><td>928.5714</td><td>928.5714</td><td>928.5714</td><td>4.21 MB</td><td>1.00</td>
+</tr><tr><td>FastConnectionMode</td><td>16</td><td>Quant(...)5_Aes [76]</td><td>872.1 &mu;s</td><td>16.83 &mu;s</td><td>17.28 &mu;s</td><td>869.4 &mu;s</td><td>0.38</td><td>0.02</td><td>991.5966</td><td>991.5966</td><td>991.5966</td><td>3.2 MB</td><td>0.76</td>
+</tr><tr><td>FastShortConnectionMode</td><td>16</td><td>Quant(...)5_Aes [76]</td><td>811.6 &mu;s</td><td>16.10 &mu;s</td><td>26.46 &mu;s</td><td>799.9 &mu;s</td><td>0.35</td><td>0.03</td><td>991.7355</td><td>991.7355</td><td>991.7355</td><td>3.19 MB</td><td>0.76</td>
+</tr><tr><td>DefaulConnectionMode</td><td>2</td><td>Quant(...)esGcm [76]</td><td>2,284.6 &mu;s</td><td>48.18 &mu;s</td><td>138.23 &mu;s</td><td>2,260.3 &mu;s</td><td>1.00</td><td>0.00</td><td>909.0909</td><td>909.0909</td><td>909.0909</td><td>4.12 MB</td><td>1.00</td>
+</tr><tr><td>FastConnectionMode</td><td>2</td><td>Quant(...)esGcm [76]</td><td>824.7 &mu;s</td><td>12.00 &mu;s</td><td>10.63 &mu;s</td><td>823.7 &mu;s</td><td>0.34</td><td>0.02</td><td>979.5918</td><td>979.5918</td><td>979.5918</td><td>3.14 MB</td><td>0.76</td>
+</tr><tr><td>FastShortConnectionMode</td><td>2</td><td>Quant(...)esGcm [76]</td><td>780.2 &mu;s</td><td>12.27 &mu;s</td><td>11.48 &mu;s</td><td>778.2 &mu;s</td><td>0.33</td><td>0.02</td><td>992.1260</td><td>992.1260</td><td>992.1260</td><td>3.14 MB</td><td>0.76</td>
+</tr><tr><td>DefaulConnectionMode</td><td>32</td><td>Quant(...)esGcm [79]</td><td>2,332.2 &mu;s</td><td>46.57 &mu;s</td><td>105.12 &mu;s</td><td>2,307.7 &mu;s</td><td>1.00</td><td>0.00</td><td>976.1905</td><td>976.1905</td><td>976.1905</td><td>4.22 MB</td><td>1.00</td>
+</tr><tr><td>FastConnectionMode</td><td>32</td><td>Quant(...)esGcm [79]</td><td>884.4 &mu;s</td><td>17.57 &mu;s</td><td>17.26 &mu;s</td><td>891.5 &mu;s</td><td>0.38</td><td>0.02</td><td>980.0000</td><td>980.0000</td><td>980.0000</td><td>3.2 MB</td><td>0.76</td>
+</tr><tr><td>FastShortConnectionMode</td><td>32</td><td>Quant(...)esGcm [79]</td><td>811.4 &mu;s</td><td>7.18 &mu;s</td><td>5.99 &mu;s</td><td>812.4 &mu;s</td><td>0.35</td><td>0.02</td><td>980.0000</td><td>980.0000</td><td>980.0000</td><td>3.19 MB</td><td>0.76</td>
+</tr><tr><td>DefaulConnectionMode</td><td>4</td><td>Quant(...)s_Aes [76]</td><td>2,227.5 &mu;s</td><td>51.82 &mu;s</td><td>149.53 &mu;s</td><td>2,202.5 &mu;s</td><td>1.00</td><td>0.00</td><td>923.0769</td><td>923.0769</td><td>923.0769</td><td>4.4 MB</td><td>1.00</td>
+</tr><tr><td>FastConnectionMode</td><td>4</td><td>Quant(...)s_Aes [76]</td><td>849.8 &mu;s</td><td>16.81 &mu;s</td><td>24.64 &mu;s</td><td>848.8 &mu;s</td><td>0.38</td><td>0.03</td><td>977.2727</td><td>977.2727</td><td>977.2727</td><td>3.14 MB</td><td>0.71</td>
+</tr><tr><td>FastShortConnectionMode</td><td>4</td><td>Quant(...)s_Aes [76]</td><td>765.8 &mu;s</td><td>11.97 &mu;s</td><td>10.61 &mu;s</td><td>762.8 &mu;s</td><td>0.34</td><td>0.02</td><td>979.5918</td><td>979.5918</td><td>979.5918</td><td>3.14 MB</td><td>0.71</td>
+</tr><tr><td>DefaulConnectionMode</td><td>64</td><td>Quant(...)s_Aes [79]</td><td>2,222.7 &mu;s</td><td>51.58 &mu;s</td><td>148.83 &mu;s</td><td>2,215.2 &mu;s</td><td>1.00</td><td>0.00</td><td>928.5714</td><td>928.5714</td><td>928.5714</td><td>4.48 MB</td><td>1.00</td>
+</tr><tr><td>FastConnectionMode</td><td>64</td><td>Quant(...)s_Aes [79]</td><td>871.2 &mu;s</td><td>17.03 &mu;s</td><td>15.10 &mu;s</td><td>868.2 &mu;s</td><td>0.39</td><td>0.02</td><td>991.2281</td><td>991.2281</td><td>991.2281</td><td>3.2 MB</td><td>0.71</td>
+</tr><tr><td>FastShortConnectionMode</td><td>64</td><td>Quant(...)s_Aes [79]</td><td>822.0 &mu;s</td><td>15.87 &mu;s</td><td>14.07 &mu;s</td><td>823.6 &mu;s</td><td>0.36</td><td>0.02</td><td>980.0000</td><td>980.0000</td><td>980.0000</td><td>3.19 MB</td><td>0.71</td>
+</tr><tr><td>DefaulConnectionMode</td><td>8</td><td>Quant(...)esGcm [79]</td><td>2,206.9 &mu;s</td><td>52.35 &mu;s</td><td>150.20 &mu;s</td><td>2,201.7 &mu;s</td><td>1.00</td><td>0.00</td><td>923.0769</td><td>923.0769</td><td>923.0769</td><td>4.4 MB</td><td>1.00</td>
+</tr><tr><td>FastConnectionMode</td><td>8</td><td>Quant(...)esGcm [79]</td><td>831.3 &mu;s</td><td>16.60 &mu;s</td><td>29.93 &mu;s</td><td>815.7 &mu;s</td><td>0.38</td><td>0.03</td><td>978.7234</td><td>978.7234</td><td>978.7234</td><td>3.14 MB</td><td>0.71</td>
+</tr><tr><td>FastShortConnectionMode</td><td>8</td><td>Quant(...)esGcm [79]</td><td>780.5 &mu;s</td><td>13.34 &mu;s</td><td>20.77 &mu;s</td><td>773.5 &mu;s</td><td>0.35</td><td>0.03</td><td>992.3664</td><td>992.3664</td><td>992.3664</td><td>3.14 MB</td><td>0.71</td>
+</tr></tbody></table>
+</body>
+</html>

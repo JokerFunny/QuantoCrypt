@@ -11,7 +11,8 @@ class Program
 {
     static void Main(string[] args)
     {
-        BenchmarkRunner.Run<QuantoCryptConnectionBenchmark>();
+        BenchmarkRunner.Run<QuantoCryptConnectionDataTransferBenchmark>();
+        //BenchmarkRunner.Run<QuantoCryptConnectionBenchmark>();
         //BenchmarkRunner.Run<CRYSTALS_KyberBenchmark>();
         //BenchmarkRunner.Run<CRYSTALS_DilithiumBenchmark>();
         //BenchmarkRunner.Run<AesBenchmark>();

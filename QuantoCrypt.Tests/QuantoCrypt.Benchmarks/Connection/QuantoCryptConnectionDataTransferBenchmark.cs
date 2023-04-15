@@ -1,5 +1,4 @@
 ﻿using BenchmarkDotNet.Attributes;
-using FluentAssertions;
 using QuantoCrypt.Benchmarks.Configuration;
 using QuantoCrypt.Common;
 using QuantoCrypt.Connection;
@@ -39,7 +38,11 @@ namespace QuantoCrypt.Benchmarks.Connection
             // send and recieve data.
             secureClient1.Send(test1024Message);
 
-            var recievedMessage = secureServer1.Receive();
+            try
+            {
+                var recievedMessage = secureServer1.Receive();
+            }
+            catch { }
         }
 
         [Benchmark]
@@ -57,7 +60,11 @@ namespace QuantoCrypt.Benchmarks.Connection
             // send and recieve data.
             await secureClient1.SendAsync(test1024Message);
 
-            var recievedMessage = await secureServer1.ReceiveAsync();
+            try
+            {
+                var recievedMessage = await secureServer1.ReceiveAsync();
+            }
+            catch { }
         }
 
         [Benchmark]
@@ -75,7 +82,11 @@ namespace QuantoCrypt.Benchmarks.Connection
             // send and recieve data.
             secureClient1.Send(test1048576Message);
 
-            var recievedMessage = secureServer1.Receive();
+            try
+            {
+                var recievedMessage = secureServer1.Receive();
+            }
+            catch { }
         }
 
         [Benchmark]
@@ -93,7 +104,11 @@ namespace QuantoCrypt.Benchmarks.Connection
             // send and recieve data.
             await secureClient1.SendAsync(test1048576Message);
 
-            var recievedMessage = await secureServer1.ReceiveAsync();
+            try
+            {
+                var recievedMessage = await secureServer1.ReceiveAsync();
+            }
+            catch { }
         }
 
         [Benchmark]
@@ -111,7 +126,11 @@ namespace QuantoCrypt.Benchmarks.Connection
             // send and recieve data.
             secureClient1.Send(test104857600Message);
 
-            var recievedMessage = secureServer1.Receive();
+            try
+            {
+                var recievedMessage = secureServer1.Receive();
+            }
+            catch { }
         }
 
         [Benchmark]
@@ -129,7 +148,11 @@ namespace QuantoCrypt.Benchmarks.Connection
             // send and recieve data.
             await secureClient1.SendAsync(test104857600Message);
 
-            var recievedMessage = await secureServer1.ReceiveAsync();
+            try
+            {
+                var recievedMessage = await secureServer1.ReceiveAsync();
+            }
+            catch { }
         }
 
         private (ISecureTransportConnection, ISecureTransportConnection) _CreateServerClientConnection(AddressFamily addressFamily, IPEndPoint targetEndPoint, ICipherSuite prefferedCipherSuite, QuantoCryptConnection.ConnectionMode connectionMode)

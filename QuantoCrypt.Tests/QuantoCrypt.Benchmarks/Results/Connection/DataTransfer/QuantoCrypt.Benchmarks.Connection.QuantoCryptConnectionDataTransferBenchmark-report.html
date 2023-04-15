@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='utf-8' />
+<title>QuantoCrypt.Benchmarks.Connection.QuantoCryptConnectionDataTransferBenchmark-20230416-002809</title>
+
+<style type="text/css">
+	table { border-collapse: collapse; display: block; width: 100%; overflow: auto; }
+	td, th { padding: 6px 13px; border: 1px solid #ddd; text-align: right; }
+	tr { background-color: #fff; border-top: 1px solid #ccc; }
+	tr:nth-child(even) { background: #f8f8f8; }
+</style>
+</head>
+<body>
+<pre><code>
+BenchmarkDotNet=v0.13.5, OS=Windows 11 (10.0.22621.1555/22H2/2022Update/SunValley2)
+AMD Ryzen 7 5800X, 1 CPU, 16 logical and 8 physical cores
+.NET SDK=7.0.101
+  [Host]     : .NET 7.0.1 (7.0.122.56804), X64 RyuJIT AVX2
+  Job-ZSFQKN : .NET 7.0.1 (7.0.122.56804), X64 RyuJIT AVX2
+</code></pre>
+<pre><code>IterationTime=100.0000 ms  LaunchCount=1  
+</code></pre>
+
+<table>
+<thead><tr><th>                                      Method</th><th>targetAes</th><th>prefferedCipherSuite</th><th>Mean</th><th>Error</th><th>StdDev</th><th>Median</th><th>Ratio</th><th>RatioSD</th><th>Gen0</th><th>Gen1</th><th>Gen2</th><th>Allocated</th><th>Alloc Ratio</th>
+</tr>
+</thead><tbody><tr><td>DefaulConnectionModeWithDataTransfer1024</td><td>AES</td><td>Quant(...)s_Aes [76]</td><td>2.092 ms</td><td>0.0513 ms</td><td>0.1504 ms</td><td>2.093 ms</td><td>1.00</td><td>0.00</td><td>76.9231</td><td>-</td><td>-</td><td>4.35 MB</td><td>1.00</td>
+</tr><tr><td>DefaulConnectionModeWithDataTransferAsync1024</td><td>AES</td><td>Quant(...)s_Aes [76]</td><td>2.046 ms</td><td>0.0612 ms</td><td>0.1787 ms</td><td>2.009 ms</td><td>0.98</td><td>0.11</td><td>62.5000</td><td>-</td><td>-</td><td>4.47 MB</td><td>1.03</td>
+</tr><tr><td>DefaulConnectionModeWithDataTransfer1048576</td><td>AES</td><td>Quant(...)s_Aes [76]</td><td>10.386 ms</td><td>0.2060 ms</td><td>0.4650 ms</td><td>10.365 ms</td><td>5.06</td><td>0.43</td><td>-</td><td>-</td><td>-</td><td>18.44 MB</td><td>4.23</td>
+</tr><tr><td>DefaulConnectionModeWithDataTransferAsync1048576</td><td>AES</td><td>Quant(...)s_Aes [76]</td><td>10.373 ms</td><td>0.2052 ms</td><td>0.5405 ms</td><td>10.383 ms</td><td>4.96</td><td>0.47</td><td>-</td><td>-</td><td>-</td><td>17.49 MB</td><td>4.02</td>
+</tr><tr><td>DefaulConnectionModeWithDataTransfer104857600</td><td>AES</td><td>Quant(...)s_Aes [76]</td><td>617.358 ms</td><td>33.9465 ms</td><td>100.0921 ms</td><td>648.165 ms</td><td>296.42</td><td>53.02</td><td>2000.0000</td><td>2000.0000</td><td>2000.0000</td><td>1359.36 MB</td><td>312.19</td>
+</tr><tr><td>DefaulConnectionModeWithDataTransferAsync104857600</td><td>AES</td><td>Quant(...)s_Aes [76]</td><td>588.745 ms</td><td>26.9411 ms</td><td>76.8644 ms</td><td>602.852 ms</td><td>282.63</td><td>43.40</td><td>2000.0000</td><td>2000.0000</td><td>2000.0000</td><td>1359.29 MB</td><td>312.17</td>
+</tr><tr><td>DefaulConnectionModeWithDataTransfer1024</td><td>AESGCM</td><td>Quant(...)esGcm [79]</td><td>2.006 ms</td><td>0.0399 ms</td><td>0.0777 ms</td><td>2.002 ms</td><td>1.00</td><td>0.00</td><td>62.5000</td><td>-</td><td>-</td><td>4.46 MB</td><td>1.00</td>
+</tr><tr><td>DefaulConnectionModeWithDataTransferAsync1024</td><td>AESGCM</td><td>Quant(...)esGcm [79]</td><td>2.000 ms</td><td>0.0524 ms</td><td>0.1477 ms</td><td>1.971 ms</td><td>1.02</td><td>0.08</td><td>66.6667</td><td>-</td><td>-</td><td>4.38 MB</td><td>0.98</td>
+</tr><tr><td>DefaulConnectionModeWithDataTransfer1048576</td><td>AESGCM</td><td>Quant(...)esGcm [79]</td><td>9.020 ms</td><td>0.1790 ms</td><td>0.4869 ms</td><td>9.058 ms</td><td>4.48</td><td>0.29</td><td>-</td><td>-</td><td>-</td><td>18.39 MB</td><td>4.12</td>
+</tr><tr><td>DefaulConnectionModeWithDataTransferAsync1048576</td><td>AESGCM</td><td>Quant(...)esGcm [79]</td><td>9.317 ms</td><td>0.1811 ms</td><td>0.4477 ms</td><td>9.358 ms</td><td>4.65</td><td>0.29</td><td>-</td><td>-</td><td>-</td><td>18.31 MB</td><td>4.10</td>
+</tr><tr><td>DefaulConnectionModeWithDataTransfer104857600</td><td>AESGCM</td><td>Quant(...)esGcm [79]</td><td>549.353 ms</td><td>18.8982 ms</td><td>55.4251 ms</td><td>556.193 ms</td><td>268.26</td><td>29.23</td><td>4000.0000</td><td>4000.0000</td><td>4000.0000</td><td>1359.59 MB</td><td>304.51</td>
+</tr><tr><td>DefaulConnectionModeWithDataTransferAsync104857600</td><td>AESGCM</td><td>Quant(...)esGcm [79]</td><td>563.436 ms</td><td>10.8688 ms</td><td>9.0760 ms</td><td>562.236 ms</td><td>282.51</td><td>13.28</td><td>2000.0000</td><td>2000.0000</td><td>2000.0000</td><td>1359.35 MB</td><td>304.45</td>
+</tr></tbody></table>
+</body>
+</html>
