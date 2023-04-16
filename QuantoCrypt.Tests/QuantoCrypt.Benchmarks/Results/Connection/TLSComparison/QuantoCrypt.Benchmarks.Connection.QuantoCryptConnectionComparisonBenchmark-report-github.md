@@ -4,36 +4,19 @@ BenchmarkDotNet=v0.13.5, OS=Windows 11 (10.0.22621.1555/22H2/2022Update/SunValle
 AMD Ryzen 7 5800X, 1 CPU, 16 logical and 8 physical cores
 .NET SDK=7.0.101
   [Host]     : .NET 7.0.1 (7.0.122.56804), X64 RyuJIT AVX2
-  Job-ZFFFQO : .NET 7.0.1 (7.0.122.56804), X64 RyuJIT AVX2
+  DefaultJob : .NET 7.0.1 (7.0.122.56804), X64 RyuJIT AVX2
 
-IterationTime=100.0000 ms  LaunchCount=1  
 
 ```
-|                        Method | csIndex | prefferedCipherSuite |      Mean |     Error |    StdDev | Ratio | RatioSD |     Gen0 |     Gen1 |     Gen2 |  Allocated | Alloc Ratio |
+|                        Method |    name | prefferedCipherSuite |      Mean |     Error |    StdDev | Ratio | RatioSD |     Gen0 |     Gen1 |     Gen2 |  Allocated | Alloc Ratio |
 |------------------------------ |-------- |--------------------- |----------:|----------:|----------:|------:|--------:|---------:|---------:|---------:|-----------:|------------:|
-|         **TLSHandshakeDataAsync** |       **?** |                    **?** | **40.057 ms** | **0.7785 ms** | **1.0122 ms** |     **?** |       **?** |        **-** |        **-** |        **-** |   **56.09 KB** |           **?** |
-|              TLSHandshakeData |       ? |                    ? | 37.517 ms | 0.3296 ms | 0.2922 ms |     ? |       ? |        - |        - |        - |   31.43 KB |           ? |
+|       **TLS12HandshakeDataAsync** |       **?** |                    **?** | **24.772 ms** | **0.0977 ms** | **0.0816 ms** |     **?** |       **?** |        **-** |        **-** |        **-** |   **19.55 KB** |           **?** |
+|            TLS12HandshakeData |       ? |                    ? | 24.380 ms | 0.1008 ms | 0.0893 ms |     ? |       ? |        - |        - |        - |   19.44 KB |           ? |
+|       TLS13HandshakeDataAsync |       ? |                    ? | 23.779 ms | 0.1715 ms | 0.1432 ms |     ? |       ? |        - |        - |        - |   19.33 KB |           ? |
+|            TLS13HandshakeData |       ? |                    ? | 23.808 ms | 0.1177 ms | 0.0983 ms |     ? |       ? |        - |        - |        - |   19.22 KB |           ? |
 |                               |         |                      |           |           |           |       |         |          |          |          |            |             |
-|      **QuantoCryptHandshakeData** |       **1** | **Quant(...)5_Aes [73]** |  **2.680 ms** | **0.0559 ms** | **0.1647 ms** |  **1.00** |    **0.00** | **916.6667** | **916.6667** | **916.6667** | **4331.71 KB** |        **1.00** |
-| QuantoCryptHandshakeDataAsync |       1 | Quant(...)5_Aes [73] |  2.431 ms | 0.0567 ms | 0.1655 ms |  0.91 |    0.08 | 333.3333 | 333.3333 | 333.3333 | 4497.61 KB |        1.04 |
+|      **QuantoCryptHandshakeData** |  **KA_D_A** | **Quant(...)5_Aes [76]** |  **2.320 ms** | **0.0453 ms** | **0.0521 ms** |  **1.00** |    **0.00** | **574.2188** | **546.8750** | **496.0938** | **3352.56 KB** |        **1.00** |
+| QuantoCryptHandshakeDataAsync |  KA_D_A | Quant(...)5_Aes [76] |  2.341 ms | 0.0465 ms | 0.0588 ms |  1.01 |    0.04 | 417.9688 | 382.8125 | 339.8438 | 3360.68 KB |        1.00 |
 |                               |         |                      |           |           |           |       |         |          |          |          |            |             |
-|      **QuantoCryptHandshakeData** |     **128** | **Quant(...)esGcm [82]** |  **2.565 ms** | **0.0503 ms** | **0.0920 ms** |  **1.00** |    **0.00** | **968.7500** | **968.7500** | **968.7500** | **4714.23 KB** |        **1.00** |
-| QuantoCryptHandshakeDataAsync |     128 | Quant(...)esGcm [82] |  2.342 ms | 0.0466 ms | 0.1275 ms |  0.92 |    0.06 | 466.6667 | 400.0000 | 400.0000 | 4818.48 KB |        1.02 |
-|                               |         |                      |           |           |           |       |         |          |          |          |            |             |
-|      **QuantoCryptHandshakeData** |      **16** | **Quant(...)5_Aes [76]** |  **2.689 ms** | **0.0553 ms** | **0.1630 ms** |  **1.00** |    **0.00** | **928.5714** | **928.5714** | **928.5714** | **4423.98 KB** |        **1.00** |
-| QuantoCryptHandshakeDataAsync |      16 | Quant(...)5_Aes [76] |  2.430 ms | 0.0589 ms | 0.1671 ms |  0.91 |    0.09 | 428.5714 | 357.1429 | 357.1429 | 4555.45 KB |        1.03 |
-|                               |         |                      |           |           |           |       |         |          |          |          |            |             |
-|      **QuantoCryptHandshakeData** |       **2** | **Quant(...)esGcm [76]** |  **2.623 ms** | **0.0521 ms** | **0.1390 ms** |  **1.00** |    **0.00** | **923.0769** | **923.0769** | **923.0769** | **4386.98 KB** |        **1.00** |
-| QuantoCryptHandshakeDataAsync |       2 | Quant(...)esGcm [76] |  2.381 ms | 0.0471 ms | 0.1280 ms |  0.91 |    0.08 | 333.3333 | 333.3333 | 333.3333 | 4321.27 KB |        0.99 |
-|                               |         |                      |           |           |           |       |         |          |          |          |            |             |
-|      **QuantoCryptHandshakeData** |      **32** | **Quant(...)esGcm [79]** |  **2.672 ms** | **0.0533 ms** | **0.1459 ms** |  **1.00** |    **0.00** | **916.6667** | **916.6667** | **916.6667** | **4392.81 KB** |        **1.00** |
-| QuantoCryptHandshakeDataAsync |      32 | Quant(...)esGcm [79] |  2.396 ms | 0.0530 ms | 0.1563 ms |  0.90 |    0.07 | 461.5385 | 384.6154 | 384.6154 | 4466.81 KB |        1.02 |
-|                               |         |                      |           |           |           |       |         |          |          |          |            |             |
-|      **QuantoCryptHandshakeData** |       **4** | **Quant(...)s_Aes [76]** |  **2.724 ms** | **0.0556 ms** | **0.1641 ms** |  **1.00** |    **0.00** | **972.2222** | **972.2222** | **972.2222** | **4621.56 KB** |        **1.00** |
-| QuantoCryptHandshakeDataAsync |       4 | Quant(...)s_Aes [76] |  2.454 ms | 0.0831 ms | 0.2317 ms |  0.90 |    0.11 | 416.6667 | 333.3333 | 333.3333 | 4681.28 KB |        1.01 |
-|                               |         |                      |           |           |           |       |         |          |          |          |            |             |
-|      **QuantoCryptHandshakeData** |      **64** | **Quant(...)s_Aes [79]** |  **2.887 ms** | **0.1099 ms** | **0.3207 ms** |  **1.00** |    **0.00** | **900.0000** | **900.0000** | **900.0000** |  **4740.2 KB** |        **1.00** |
-| QuantoCryptHandshakeDataAsync |      64 | Quant(...)s_Aes [79] |  2.369 ms | 0.0573 ms | 0.1589 ms |  0.82 |    0.10 | 461.5385 | 384.6154 | 384.6154 | 4628.79 KB |        0.98 |
-|                               |         |                      |           |           |           |       |         |          |          |          |            |             |
-|      **QuantoCryptHandshakeData** |       **8** | **Quant(...)esGcm [79]** |  **2.588 ms** | **0.0517 ms** | **0.1405 ms** |  **1.00** |    **0.00** | **928.5714** | **928.5714** | **928.5714** | **4609.79 KB** |        **1.00** |
-| QuantoCryptHandshakeDataAsync |       8 | Quant(...)esGcm [79] |  2.444 ms | 0.0524 ms | 0.1452 ms |  0.95 |    0.07 | 500.0000 | 428.5714 | 428.5714 | 4568.89 KB |        0.99 |
+|      **QuantoCryptHandshakeData** | **K_DA_AG** | **Quant(...)esGcm [79]** |  **2.179 ms** | **0.0263 ms** | **0.0246 ms** |  **1.00** |    **0.00** | **585.9375** | **531.2500** | **496.0938** | **3530.13 KB** |        **1.00** |
+| QuantoCryptHandshakeDataAsync | K_DA_AG | Quant(...)esGcm [79] |  2.201 ms | 0.0407 ms | 0.0381 ms |  1.01 |    0.03 | 433.5938 | 375.0000 | 347.6563 | 3497.43 KB |        0.99 |

@@ -11,9 +11,11 @@ class Program
 {
     static void Main(string[] args)
     {
+        new QuantoCryptConnectionComparisonBenchmark().TLS13HandshakeData();
+
         //BenchmarkRunner.Run<QuantoCryptConnectionDataTransferBenchmark>();
-        BenchmarkRunner.Run<QuantoCryptConnectionComparisonBenchmark>();
-        //BenchmarkRunner.Run<QuantoCryptConnectionBenchmark>();
+        //BenchmarkRunner.Run<QuantoCryptConnectionComparisonBenchmark>();
+        //BenchmarkRunner.Run<QuantoCryptConnectionDataTransferBenchmark>();
         //BenchmarkRunner.Run<CRYSTALS_KyberBenchmark>();
         //BenchmarkRunner.Run<CRYSTALS_DilithiumBenchmark>();
         //BenchmarkRunner.Run<AesBenchmark>();
