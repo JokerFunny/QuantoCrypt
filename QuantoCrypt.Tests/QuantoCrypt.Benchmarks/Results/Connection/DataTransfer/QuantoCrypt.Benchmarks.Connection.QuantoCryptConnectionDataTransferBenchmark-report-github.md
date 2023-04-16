@@ -4,23 +4,23 @@ BenchmarkDotNet=v0.13.5, OS=Windows 11 (10.0.22621.1555/22H2/2022Update/SunValle
 AMD Ryzen 7 5800X, 1 CPU, 16 logical and 8 physical cores
 .NET SDK=7.0.101
   [Host]     : .NET 7.0.1 (7.0.122.56804), X64 RyuJIT AVX2
-  Job-LEBPYF : .NET 7.0.1 (7.0.122.56804), X64 RyuJIT AVX2
+  Job-OXJKBJ : .NET 7.0.1 (7.0.122.56804), X64 RyuJIT AVX2
 
 IterationTime=100.0000 ms  LaunchCount=1  
 
 ```
-|                                             Method | targetAes | prefferedCipherSuite |       Mean |      Error |     StdDev |  Ratio | RatioSD |      Gen0 |      Gen1 |      Gen2 |  Allocated | Alloc Ratio |
-|--------------------------------------------------- |---------- |--------------------- |-----------:|-----------:|-----------:|-------:|--------:|----------:|----------:|----------:|-----------:|------------:|
-|           **DefaulConnectionModeWithDataTransfer1024** |       **AES** | **Quant(...)s_Aes [76]** |   **1.995 ms** |  **0.0461 ms** |  **0.1358 ms** |   **1.00** |    **0.00** |   **62.5000** |         **-** |         **-** |    **4.46 MB** |        **1.00** |
-|      DefaulConnectionModeWithDataTransferAsync1024 |       AES | Quant(...)s_Aes [76] |   2.013 ms |  0.0399 ms |  0.1038 ms |   1.01 |    0.08 |   62.5000 |         - |         - |    4.52 MB |        1.01 |
-|        DefaulConnectionModeWithDataTransfer1048576 |       AES | Quant(...)s_Aes [76] |  10.041 ms |  0.1988 ms |  0.4951 ms |   5.06 |    0.39 |         - |         - |         - |   18.33 MB |        4.11 |
-|   DefaulConnectionModeWithDataTransferAsync1048576 |       AES | Quant(...)s_Aes [76] |   9.967 ms |  0.1988 ms |  0.4321 ms |   5.00 |    0.36 |         - |         - |         - |   18.37 MB |        4.12 |
-|      DefaulConnectionModeWithDataTransfer104857600 |       AES | Quant(...)s_Aes [76] | 568.945 ms |  4.6369 ms |  4.3373 ms | 282.24 |   20.97 | 2000.0000 | 2000.0000 | 2000.0000 | 1359.36 MB |      305.08 |
-| DefaulConnectionModeWithDataTransferAsync104857600 |       AES | Quant(...)s_Aes [76] | 576.961 ms | 17.6798 ms | 48.9907 ms | 290.99 |   32.40 | 2000.0000 | 2000.0000 | 2000.0000 | 1359.62 MB |      305.14 |
-|                                                    |           |                      |            |            |            |        |         |           |           |           |            |             |
-|           **DefaulConnectionModeWithDataTransfer1024** |    **AESGCM** | **Quant(...)esGcm [79]** |   **2.014 ms** |  **0.0425 ms** |  **0.1241 ms** |   **1.00** |    **0.00** |   **71.4286** |         **-** |         **-** |     **4.4 MB** |        **1.00** |
-|      DefaulConnectionModeWithDataTransferAsync1024 |    AESGCM | Quant(...)esGcm [79] |   2.029 ms |  0.0403 ms |  0.1170 ms |   1.01 |    0.08 |   66.6667 |         - |         - |    4.37 MB |        0.99 |
-|        DefaulConnectionModeWithDataTransfer1048576 |    AESGCM | Quant(...)esGcm [79] |   9.097 ms |  0.1804 ms |  0.4251 ms |   4.52 |    0.29 |         - |         - |         - |   18.21 MB |        4.14 |
-|   DefaulConnectionModeWithDataTransferAsync1048576 |    AESGCM | Quant(...)esGcm [79] |   9.247 ms |  0.1835 ms |  0.4361 ms |   4.60 |    0.39 |         - |         - |         - |   18.43 MB |        4.19 |
-|      DefaulConnectionModeWithDataTransfer104857600 |    AESGCM | Quant(...)esGcm [79] | 523.806 ms |  8.8137 ms |  7.8131 ms | 257.58 |   15.44 | 4000.0000 | 4000.0000 | 4000.0000 | 1359.26 MB |      309.06 |
-| DefaulConnectionModeWithDataTransferAsync104857600 |    AESGCM | Quant(...)esGcm [79] | 523.243 ms |  4.7821 ms |  4.4732 ms | 257.55 |   14.07 | 2000.0000 | 2000.0000 | 2000.0000 | 1359.19 MB |      309.04 |
+|                                                Method | targetAes | prefferedCipherSuite |       Mean |      Error |      StdDev |     Median |  Ratio | RatioSD |      Gen0 |      Gen1 |      Gen2 |  Allocated | Alloc Ratio |
+|------------------------------------------------------ |---------- |--------------------- |-----------:|-----------:|------------:|-----------:|-------:|--------:|----------:|----------:|----------:|-----------:|------------:|
+|         **FastShortConnectionModeWithDataTransfer102400** |       **AES** | **Quant(...)s_Aes [76]** |   **1.293 ms** |  **0.0258 ms** |   **0.0438 ms** |   **1.283 ms** |   **1.00** |    **0.00** |         **-** |         **-** |         **-** |    **4.31 MB** |        **1.00** |
+|    FastShortConnectionModeWithDataTransferAsync102400 |       AES | Quant(...)s_Aes [76] |   1.299 ms |  0.0225 ms |   0.0200 ms |   1.297 ms |   1.01 |    0.03 |         - |         - |         - |    4.31 MB |        1.00 |
+|        FastShortConnectionModeWithDataTransfer1048576 |       AES | Quant(...)s_Aes [76] |   8.564 ms |  0.1790 ms |   0.5277 ms |   8.649 ms |   6.59 |    0.45 |         - |         - |         - |   18.26 MB |        4.24 |
+|   FastShortConnectionModeWithDataTransferAsync1048576 |       AES | Quant(...)s_Aes [76] |   8.459 ms |  0.1679 ms |   0.3959 ms |   8.507 ms |   6.56 |    0.40 |         - |         - |         - |   18.35 MB |        4.26 |
+|      FastShortConnectionModeWithDataTransfer104857600 |       AES | Quant(...)s_Aes [76] | 549.854 ms | 38.1767 ms | 107.6780 ms | 587.349 ms | 433.69 |   73.98 | 2000.0000 | 2000.0000 | 2000.0000 | 1358.14 MB |      315.15 |
+| FastShortConnectionModeWithDataTransferAsync104857600 |       AES | Quant(...)s_Aes [76] | 581.918 ms | 11.9138 ms |  34.5641 ms | 583.902 ms | 446.76 |   44.86 | 2000.0000 | 2000.0000 | 2000.0000 | 1358.15 MB |      315.15 |
+|                                                       |           |                      |            |            |             |            |        |         |           |           |           |            |             |
+|         **FastShortConnectionModeWithDataTransfer102400** |    **AESGCM** | **Quant(...)esGcm [79]** |   **1.195 ms** |  **0.0206 ms** |   **0.0192 ms** |   **1.200 ms** |   **1.00** |    **0.00** |         **-** |         **-** |         **-** |    **4.31 MB** |        **1.00** |
+|    FastShortConnectionModeWithDataTransferAsync102400 |    AESGCM | Quant(...)esGcm [79] |   1.199 ms |  0.0185 ms |   0.0164 ms |   1.199 ms |   1.00 |    0.02 |         - |         - |         - |    4.31 MB |        1.00 |
+|        FastShortConnectionModeWithDataTransfer1048576 |    AESGCM | Quant(...)esGcm [79] |   6.713 ms |  0.1333 ms |   0.2569 ms |   6.752 ms |   5.63 |    0.21 |         - |         - |         - |   17.14 MB |        3.98 |
+|   FastShortConnectionModeWithDataTransferAsync1048576 |    AESGCM | Quant(...)esGcm [79] |   7.094 ms |  0.1416 ms |   0.3756 ms |   7.098 ms |   5.90 |    0.32 |         - |         - |         - |   17.14 MB |        3.98 |
+|      FastShortConnectionModeWithDataTransfer104857600 |    AESGCM | Quant(...)esGcm [79] | 514.893 ms |  6.3824 ms |   5.3296 ms | 515.344 ms | 431.30 |    7.05 | 4000.0000 | 4000.0000 | 4000.0000 | 1358.14 MB |      315.25 |
+| FastShortConnectionModeWithDataTransferAsync104857600 |    AESGCM | Quant(...)esGcm [79] | 506.208 ms |  2.8178 ms |   2.4979 ms | 506.338 ms | 423.58 |    7.11 | 2000.0000 | 2000.0000 | 2000.0000 | 1358.15 MB |      315.25 |
