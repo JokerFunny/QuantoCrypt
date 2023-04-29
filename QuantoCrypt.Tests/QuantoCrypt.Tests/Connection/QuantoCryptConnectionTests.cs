@@ -6,6 +6,7 @@ using QuantoCrypt.Internal.CipherSuite;
 using QuantoCrypt.Internal.Connection;
 using System.Diagnostics;
 using System.Net;
+using System.Net.Sockets;
 using Xunit.Abstractions;
 
 namespace QuantoCrypt.Tests.Connection
@@ -20,6 +21,10 @@ namespace QuantoCrypt.Tests.Connection
         private byte[] targetMessage500MB;
         private byte[] targetMessage1Gb;*/
         private readonly ITestOutputHelper _rOutput;
+        private readonly AddressFamily _rAddressFamily;
+        private readonly IPEndPoint _rIPEndPoint;
+
+        private static int _portPlaceHolder = 11000;
 
         public QuantoCryptConnectionTests(ITestOutputHelper output)
         {
@@ -35,6 +40,12 @@ namespace QuantoCrypt.Tests.Connection
             targetMessage1MB = random.GenerateSeed(1048506);
             targetMessage05MB = random.GenerateSeed(524288);
             targetMessage01MB = random.GenerateSeed(104858);
+
+            IPHostEntry host = Dns.GetHostEntry("localhost");
+            IPAddress ipAddress = host.AddressList[0];
+
+            _rIPEndPoint = new IPEndPoint(ipAddress, _portPlaceHolder++);
+            _rAddressFamily = _rIPEndPoint.AddressFamily;
         }
 
         public void Dispose()
@@ -43,18 +54,34 @@ namespace QuantoCrypt.Tests.Connection
             targetMessage1MB = null;
         }
 
+        [Theory]
+        [MemberData(nameof(SupportedConnectionModes))]
+        public void QuantoCryptConnection_Connection_Establishing_Works_Fine(QuantoCryptConnection.ConnectionMode connectionMode, ICipherSuite prefferedCipherSuite)
+        {
+            SocketTransportConnection serverCon = SocketTransportConnection.CreateDefaultServer(_rAddressFamily, _rIPEndPoint);
+            SocketTransportConnection clientCon1 = SocketTransportConnection.CreateDefaultClient(_rAddressFamily, _rIPEndPoint);
+
+            var activeServerConnection1 = serverCon.Connect();
+
+            ICipherSuiteProvider cipherSuiteProvider = new QuantoCryptCipherSuiteProvider();
+
+            QuantoCryptConnectionFactory factory = new QuantoCryptConnectionFactory(cipherSuiteProvider);
+
+            var serverStartTask = Task.Run(() => factory.CreateSecureServerConnection(activeServerConnection1));
+
+            ISecureTransportConnection secureClient1 = factory.CreateSecureClientConnection(clientCon1, prefferedCipherSuite, connectionMode);
+            ISecureTransportConnection secureServer1 = serverStartTask.Result;
+        }
+
+        #region DataTransfer
+
         [Fact]
         public void Test1Mb()
         {
             Stopwatch stopwatch = Stopwatch.StartNew();
 
-            IPHostEntry host = Dns.GetHostEntry("localhost");
-            IPAddress ipAddress = host.AddressList[0];
-            IPEndPoint targetEndPoint = new IPEndPoint(ipAddress, 11000);
-            var addressFamily = targetEndPoint.AddressFamily;
-
-            SocketTransportConnection serverCon = SocketTransportConnection.CreateDefaultServer(addressFamily, targetEndPoint);
-            SocketTransportConnection clientCon1 = SocketTransportConnection.CreateDefaultClient(addressFamily, targetEndPoint);
+            SocketTransportConnection serverCon = SocketTransportConnection.CreateDefaultServer(_rAddressFamily, _rIPEndPoint);
+            SocketTransportConnection clientCon1 = SocketTransportConnection.CreateDefaultClient(_rAddressFamily, _rIPEndPoint);
 
             var activeServerConnection1 = serverCon.Connect();
 
@@ -85,13 +112,8 @@ namespace QuantoCrypt.Tests.Connection
         {
             Stopwatch stopwatch = Stopwatch.StartNew();
 
-            IPHostEntry host = Dns.GetHostEntry("localhost");
-            IPAddress ipAddress = host.AddressList[0];
-            IPEndPoint targetEndPoint = new IPEndPoint(ipAddress, 11010);
-            var addressFamily = targetEndPoint.AddressFamily;
-
-            SocketTransportConnection serverCon = SocketTransportConnection.CreateDefaultServer(addressFamily, targetEndPoint);
-            SocketTransportConnection clientCon1 = SocketTransportConnection.CreateDefaultClient(addressFamily, targetEndPoint);
+            SocketTransportConnection serverCon = SocketTransportConnection.CreateDefaultServer(_rAddressFamily, _rIPEndPoint);
+            SocketTransportConnection clientCon1 = SocketTransportConnection.CreateDefaultClient(_rAddressFamily, _rIPEndPoint);
 
             var activeServerConnection1 = serverCon.Connect();
 
@@ -122,13 +144,8 @@ namespace QuantoCrypt.Tests.Connection
         {
             Stopwatch stopwatch = Stopwatch.StartNew();
 
-            IPHostEntry host = Dns.GetHostEntry("localhost");
-            IPAddress ipAddress = host.AddressList[0];
-            IPEndPoint targetEndPoint = new IPEndPoint(ipAddress, 11001);
-            var addressFamily = targetEndPoint.AddressFamily;
-
-            SocketTransportConnection serverCon = SocketTransportConnection.CreateDefaultServer(addressFamily, targetEndPoint);
-            SocketTransportConnection clientCon1 = SocketTransportConnection.CreateDefaultClient(addressFamily, targetEndPoint);
+            SocketTransportConnection serverCon = SocketTransportConnection.CreateDefaultServer(_rAddressFamily, _rIPEndPoint);
+            SocketTransportConnection clientCon1 = SocketTransportConnection.CreateDefaultClient(_rAddressFamily, _rIPEndPoint);
 
             var activeServerConnection1 = serverCon.Connect();
 
@@ -159,13 +176,8 @@ namespace QuantoCrypt.Tests.Connection
         {
             Stopwatch stopwatch = Stopwatch.StartNew();
 
-            IPHostEntry host = Dns.GetHostEntry("localhost");
-            IPAddress ipAddress = host.AddressList[0];
-            IPEndPoint targetEndPoint = new IPEndPoint(ipAddress, 11002);
-            var addressFamily = targetEndPoint.AddressFamily;
-
-            SocketTransportConnection serverCon = SocketTransportConnection.CreateDefaultServer(addressFamily, targetEndPoint);
-            SocketTransportConnection clientCon1 = SocketTransportConnection.CreateDefaultClient(addressFamily, targetEndPoint);
+            SocketTransportConnection serverCon = SocketTransportConnection.CreateDefaultServer(_rAddressFamily, _rIPEndPoint);
+            SocketTransportConnection clientCon1 = SocketTransportConnection.CreateDefaultClient(_rAddressFamily, _rIPEndPoint);
 
             var activeServerConnection1 = serverCon.Connect();
 
@@ -196,13 +208,8 @@ namespace QuantoCrypt.Tests.Connection
         {
             Stopwatch stopwatch = Stopwatch.StartNew();
 
-            IPHostEntry host = Dns.GetHostEntry("localhost");
-            IPAddress ipAddress = host.AddressList[0];
-            IPEndPoint targetEndPoint = new IPEndPoint(ipAddress, 11003);
-            var addressFamily = targetEndPoint.AddressFamily;
-
-            SocketTransportConnection serverCon = SocketTransportConnection.CreateDefaultServer(addressFamily, targetEndPoint);
-            SocketTransportConnection clientCon1 = SocketTransportConnection.CreateDefaultClient(addressFamily, targetEndPoint);
+            SocketTransportConnection serverCon = SocketTransportConnection.CreateDefaultServer(_rAddressFamily, _rIPEndPoint);
+            SocketTransportConnection clientCon1 = SocketTransportConnection.CreateDefaultClient(_rAddressFamily, _rIPEndPoint);
 
             var activeServerConnection1 = serverCon.Connect();
 
@@ -230,13 +237,8 @@ namespace QuantoCrypt.Tests.Connection
         {
             Stopwatch stopwatch = Stopwatch.StartNew();
 
-            IPHostEntry host = Dns.GetHostEntry("localhost");
-            IPAddress ipAddress = host.AddressList[0];
-            IPEndPoint targetEndPoint = new IPEndPoint(ipAddress, 11013);
-            var addressFamily = targetEndPoint.AddressFamily;
-
-            SocketTransportConnection serverCon = SocketTransportConnection.CreateDefaultServer(addressFamily, targetEndPoint);
-            SocketTransportConnection clientCon1 = SocketTransportConnection.CreateDefaultClient(addressFamily, targetEndPoint);
+            SocketTransportConnection serverCon = SocketTransportConnection.CreateDefaultServer(_rAddressFamily, _rIPEndPoint);
+            SocketTransportConnection clientCon1 = SocketTransportConnection.CreateDefaultClient(_rAddressFamily, _rIPEndPoint);
 
             var activeServerConnection1 = serverCon.Connect();
 
@@ -263,14 +265,9 @@ namespace QuantoCrypt.Tests.Connection
         public void Test200Mb()
         {
             Stopwatch stopwatch = Stopwatch.StartNew();
-
-            IPHostEntry host = Dns.GetHostEntry("localhost");
-            IPAddress ipAddress = host.AddressList[0];
-            IPEndPoint targetEndPoint = new IPEndPoint(ipAddress, 11003);
-            var addressFamily = targetEndPoint.AddressFamily;
-
-            SocketTransportConnection serverCon = SocketTransportConnection.CreateDefaultServer(addressFamily, targetEndPoint);
-            SocketTransportConnection clientCon1 = SocketTransportConnection.CreateDefaultClient(addressFamily, targetEndPoint);
+        
+            SocketTransportConnection serverCon = SocketTransportConnection.CreateDefaultServer(_rAddressFamily, _rIPEndPoint);
+            SocketTransportConnection clientCon1 = SocketTransportConnection.CreateDefaultClient(_rAddressFamily, _rIPEndPoint);
 
             var activeServerConnection1 = serverCon.Connect();
 
@@ -297,14 +294,9 @@ namespace QuantoCrypt.Tests.Connection
         public void Test500Mb()
         {
             Stopwatch stopwatch = Stopwatch.StartNew();
-
-            IPHostEntry host = Dns.GetHostEntry("localhost");
-            IPAddress ipAddress = host.AddressList[0];
-            IPEndPoint targetEndPoint = new IPEndPoint(ipAddress, 11003);
-            var addressFamily = targetEndPoint.AddressFamily;
-
-            SocketTransportConnection serverCon = SocketTransportConnection.CreateDefaultServer(addressFamily, targetEndPoint);
-            SocketTransportConnection clientCon1 = SocketTransportConnection.CreateDefaultClient(addressFamily, targetEndPoint);
+        
+            SocketTransportConnection serverCon = SocketTransportConnection.CreateDefaultServer(_rAddressFamily, _rIPEndPoint);
+            SocketTransportConnection clientCon1 = SocketTransportConnection.CreateDefaultClient(_rAddressFamily, _rIPEndPoint);
 
             var activeServerConnection1 = serverCon.Connect();
 
@@ -331,14 +323,9 @@ namespace QuantoCrypt.Tests.Connection
         public void Test1Gb()
         {
             Stopwatch stopwatch = Stopwatch.StartNew();
-
-            IPHostEntry host = Dns.GetHostEntry("localhost");
-            IPAddress ipAddress = host.AddressList[0];
-            IPEndPoint targetEndPoint = new IPEndPoint(ipAddress, 11003);
-            var addressFamily = targetEndPoint.AddressFamily;
-
-            SocketTransportConnection serverCon = SocketTransportConnection.CreateDefaultServer(addressFamily, targetEndPoint);
-            SocketTransportConnection clientCon1 = SocketTransportConnection.CreateDefaultClient(addressFamily, targetEndPoint);
+        
+            SocketTransportConnection serverCon = SocketTransportConnection.CreateDefaultServer(_rAddressFamily, _rIPEndPoint);
+            SocketTransportConnection clientCon1 = SocketTransportConnection.CreateDefaultClient(_rAddressFamily, _rIPEndPoint);
 
             var activeServerConnection1 = serverCon.Connect();
 
@@ -360,5 +347,21 @@ namespace QuantoCrypt.Tests.Connection
 
             var recievedMessage = secureServer1.Receive();
         }*/
+
+        #endregion
+
+        public static IEnumerable<object[]> SupportedConnectionModes()
+        {
+            Type targetEnumType = typeof(QuantoCryptConnection.ConnectionMode);
+            ICipherSuiteProvider cipherSuiteProvider = new QuantoCryptCipherSuiteProvider();
+
+            foreach (var mode in Enum.GetValues(targetEnumType).Cast<QuantoCryptConnection.ConnectionMode>())
+            {
+                foreach (var supportedCipherSuite in cipherSuiteProvider.SupportedCipherSuites.Keys)
+                {
+                    yield return new object[] { mode, supportedCipherSuite };
+                }
+            }
+        }
     }
 }
