@@ -34,6 +34,8 @@ namespace QuantoCryptDemo
             localEndPoint.Port += 1;
             _sUseFastShortConnectionModeWithFallbackDemo(ipAddress.AddressFamily, localEndPoint);
 
+            Console.WriteLine("Demo finished.");
+
             Console.ReadLine();
         }
 

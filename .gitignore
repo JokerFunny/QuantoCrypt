@@ -397,6 +397,7 @@ FodyWeavers.xsd
 # JetBrains Rider
 *.sln.iml
 
+QuantoCrypt.Tests/External/
 !QuantoCrypt.Tests/External/BouncyCastle/LICENSE
 !QuantoCrypt.Tests/External/BouncyCastle/README
 !QuantoCrypt.Tests/External/BouncyCastle/BouncyCastle.Cryptography.dll

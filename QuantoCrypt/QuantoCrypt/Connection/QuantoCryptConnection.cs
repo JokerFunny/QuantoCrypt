@@ -185,8 +185,20 @@ namespace QuantoCrypt.Internal.Connection
                 else if (serverResponseMessage[1] == ProtocolMessage.UNSUPPORTED_CLIENT_PARAMS)
                 {
                     // TODO: add fallback for the client.
+                    preferredCipher = null;
+                    ulong supporteCipherSuitesByServer = ProtocolMessage.GetUlongValue(serverResponseMessage, 10, ProtocolMessage.SUPPORTED_CIPHER_SUITES_OFFSET);
 
-                    //preferredCipher = ...;
+                    foreach (var supportedCipherSuite in cipherSuiteProvider.SupportedCipherSuites)
+                    {
+                        if ((supporteCipherSuitesByServer & supportedCipherSuite.Value) == supportedCipherSuite.Value)
+                        {
+                            preferredCipher = supportedCipherSuite.Key; 
+                            break;
+                        }
+                    }
+
+                    if (preferredCipher == null)
+                        throw new ArgumentException("Client doesn't support any of servers' cipher suites!");
 
                     // CLIENT_INIT - generate key pair + random message to be signed.
                     clientInitMessage = __GetClientInitMessage(preferredCipher, connectionMode, out kemAlgorithm);
@@ -206,6 +218,9 @@ namespace QuantoCrypt.Internal.Connection
 
                         if (!__ValidateServerInitMessage(connection, connectionMode, kemAlgorithm, serverResponseMessage, calculatedMessage))
                             throw new Exception("Can't validate the server's signature!");
+
+                        if (connectionMode == ConnectionMode.Fast)
+                            __SendClientFinishMessage(connection, serverResponseMessage);
                     }
                     else
                         throw new Exception($"Server sent unsupported message after fallback! Expected message [{ProtocolMessage.SERVER_INIT}], actual - [{serverResponseMessage[1]}].");
@@ -371,7 +386,6 @@ namespace QuantoCrypt.Internal.Connection
 
                     // get preffered client CipherSuite.
                     ICipherSuite cipherSuiteToUse = __GetCipherSuiteToUse(clientInitMessage);
-                    connectionMode = __GetConnectionMode(clientInitMessage);
 
                     if (cipherSuiteToUse == null)
                     {
