@@ -7,6 +7,7 @@ using QuantoCrypt.Tests.Common.Random;
 
 namespace QuantoCrypt.Tests.Signature
 {
+    [Collection("Serial")]
     public class CRYSTALS_DilithiumTests
     {
         private const int _testInputFileChuckSize = 6;

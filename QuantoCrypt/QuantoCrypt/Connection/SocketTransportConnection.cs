@@ -48,7 +48,7 @@ namespace QuantoCrypt.Internal.Connection
         /// <param name="socket">Target <see cref="Socket"/>, configured as a server or as a client.</param>
         /// <param name="isServer">Is this a server or client connection.</param>
         /// <param name="debugAction">Target trace action that could be used to trace data.</param>
-        SocketTransportConnection(Socket socket, bool isServer, Action<string> debugAction = null)
+        private SocketTransportConnection(Socket socket, bool isServer, Action<string> debugAction = null)
         {
             _rSocket = socket;
             _rIsServer = isServer;
@@ -77,7 +77,7 @@ namespace QuantoCrypt.Internal.Connection
             try
             {
                 List<byte> bufferMessage = new List<byte>();
-                int read = -1;
+                int read;
                 do
                 {
                     read = _rSocket.Receive(_rReadBuffer);
@@ -159,7 +159,7 @@ namespace QuantoCrypt.Internal.Connection
             try
             {
                 List<byte> bufferMessage = new List<byte>();
-                int read = -1;
+                int read;
                 do
                 {
                     read = await _rSocket.ReceiveAsync(_rReadBuffer);
@@ -209,8 +209,7 @@ namespace QuantoCrypt.Internal.Connection
             }
             catch (Exception e)
             {
-                if (_rTraceAction != null)
-                    _rTraceAction.Invoke($"Exception: [{e.Message}], stacktrace: [{e.StackTrace}].");
+                _rTraceAction?.Invoke($"Exception: [{e.Message}], stacktrace: [{e.StackTrace}].");
             }
 
             return false;

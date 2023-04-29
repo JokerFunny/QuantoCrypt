@@ -8,51 +8,52 @@ namespace QuantoCrypt.Internal.Connection
     /// </summary>
     internal static class ConnectionTraceHelper
     {
-        private static StringBuilder _sResultBuilder = new StringBuilder();
-        private static StringBuilder _sPartBuilder = new StringBuilder();
+        private static StringBuilder _sResultBuilder = new();
+        private static StringBuilder _sPartBuilder = new();
 
         /// <summary>
-        /// 
+        /// Trace message if needed.
         /// </summary>
-        /// <param name="targetData"></param>
-        /// <param name="dataType"></param>
-        /// <param name="traceAction"></param>
-        /// <param name="extendedLogs"></param>
+        /// <param name="connectionId">Target connection id.</param>
+        /// <param name="targetData">Target message data.</param>
+        /// <param name="dataType">Data type (receive, send, etc.).</param>
+        /// <param name="traceAction">Target trace action to be used.</param>
+        /// <param name="extendedLogs">Should full logs be written.</param>
         internal static void sTraceMessageIfNeeded(Guid connectionId, byte[] targetData, string dataType, Action<string> traceAction, bool extendedLogs = false)
         {
-            if (traceAction != null)
+            if (traceAction == null) 
+                return;
+
+            _sResultBuilder.Clear();
+
+            _sResultBuilder.AppendLine($"Id [{connectionId}] - [{dataType}] data:");
+            _sResultBuilder.AppendLine("Header:");
+            _sResultBuilder.AppendLine($"0 - version - [{targetData[0]}];");
+            _sResultBuilder.AppendLine($"1 - message type - [{targetData[1]}];");
+            _sResultBuilder.AppendLine($"2 - 5 - decrypted body length [{ProtocolMessage.GetIntValue(targetData, 2, 4)}] - [{_sGetArrayAsString(targetData[2..6])}];");
+            _sResultBuilder.AppendLine($"6 - 9 - message integrity - [{_sGetArrayAsString(targetData[6..10])}].");
+
+            if (extendedLogs)
             {
-                _sResultBuilder.Clear();
+                _sResultBuilder.AppendLine("Message body:");
 
-                _sResultBuilder.AppendLine($"Id [{connectionId}] - [{dataType}] data:");
-                _sResultBuilder.AppendLine("Header:");
-                _sResultBuilder.AppendLine($"0 - version - [{targetData[0]}];");
-                _sResultBuilder.AppendLine($"1 - message type - [{targetData[1]}];");
-                _sResultBuilder.AppendLine($"2 - 5 - decrypted body length [{ProtocolMessage.GetIntValue(targetData, 2, 4)}] - [{_sGetArrayAsString(targetData[2..6])}];");
-                _sResultBuilder.AppendLine($"6 - 9 - message integrity - [{_sGetArrayAsString(targetData[6..10])}].");
-
-                if (extendedLogs)
-                {
-                    _sResultBuilder.AppendLine("Message body:");
-
-                    if (targetData[1] == ProtocolMessage.CLIENT_INIT)
-                        sGetClientInitBodyTraceMessage(targetData, _sResultBuilder);
-                    else if (targetData[1] == ProtocolMessage.SERVER_INIT)
-                        sGetServerInitBodyTraceMessage(targetData, _sResultBuilder);
-                    else if (targetData[1] == ProtocolMessage.UNSUPPORTED_CLIENT_PARAMS)
-                        sGetUnsupportedClientParamsBodyTraceMessage(targetData, _sResultBuilder);
-                    else if (targetData[1] == ProtocolMessage.CLIENT_FINISH)
-                        sGetClientFinishBodyTraceMessage(targetData, _sResultBuilder);
-                    else if (targetData[1] == ProtocolMessage.DATA_TRANSFER)
-                        sGetDataTransferBodyTraceMessage(targetData, _sResultBuilder);
-                    else if (targetData[1] == ProtocolMessage.CLOSE)
-                        _sResultBuilder.AppendLine("CONNECTION CLOSED.");
-                }
-
-                _sResultBuilder.AppendLine();
-
-                traceAction.Invoke(_sResultBuilder.ToString());
+                if (targetData[1] == ProtocolMessage.CLIENT_INIT)
+                    sGetClientInitBodyTraceMessage(targetData, _sResultBuilder);
+                else if (targetData[1] == ProtocolMessage.SERVER_INIT)
+                    sGetServerInitBodyTraceMessage(targetData, _sResultBuilder);
+                else if (targetData[1] == ProtocolMessage.UNSUPPORTED_CLIENT_PARAMS)
+                    sGetUnsupportedClientParamsBodyTraceMessage(targetData, _sResultBuilder);
+                else if (targetData[1] == ProtocolMessage.CLIENT_FINISH)
+                    sGetClientFinishBodyTraceMessage(targetData, _sResultBuilder);
+                else if (targetData[1] == ProtocolMessage.DATA_TRANSFER)
+                    sGetDataTransferBodyTraceMessage(targetData, _sResultBuilder);
+                else if (targetData[1] == ProtocolMessage.CLOSE)
+                    _sResultBuilder.AppendLine("CONNECTION CLOSED.");
             }
+
+            _sResultBuilder.AppendLine();
+
+            traceAction.Invoke(_sResultBuilder.ToString());
         }
 
         internal static void sGetClientInitBodyTraceMessage(byte[] targetData, StringBuilder output)

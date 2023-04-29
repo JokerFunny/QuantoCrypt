@@ -10,7 +10,10 @@
         /// </summary>
         /// <typeparam name="T">Target type.</typeparam>
         /// <param name="this">Target <see cref="IReadOnlyList{T}"/>.</param>
-        /// <param name="predicate">Target <see cref="Func{T, bool}"/> to check for.</param>
+        /// <param name="predicate">Target <see>
+        ///         <cref>Func{T, bool}</cref>
+        ///     </see>
+        ///     to check for.</param>
         /// <returns>
         ///     Index of the target element in <paramref name="this"/> if matchs, otherwise - [-1].
         /// </returns>

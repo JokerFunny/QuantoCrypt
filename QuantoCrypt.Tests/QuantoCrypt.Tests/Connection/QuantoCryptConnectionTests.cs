@@ -11,6 +11,7 @@ using Xunit.Abstractions;
 
 namespace QuantoCrypt.Tests.Connection
 {
+    [Collection("Serial")]
     public class QuantoCryptConnectionTests : IDisposable
     {
         private byte[] targetMessage1MB;

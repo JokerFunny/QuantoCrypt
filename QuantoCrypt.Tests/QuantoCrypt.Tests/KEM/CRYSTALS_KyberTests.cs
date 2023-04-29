@@ -7,6 +7,7 @@ using QuantoCrypt.Tests.Common.Random;
 
 namespace QuantoCrypt.Tests.KEM
 {
+    [Collection("Serial")]
     public class CRYSTALS_KyberTests
     {
         private const int _testInputFileChuckSize = 6;

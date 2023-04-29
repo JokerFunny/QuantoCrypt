@@ -1,5 +1,4 @@
 ﻿using QuantoCrypt.Infrastructure.CipherSuite;
-using QuantoCrypt.Internal.CipherSuite;
 
 namespace QuantoCrypt.Internal.CipherSuite
 {
@@ -8,7 +7,7 @@ namespace QuantoCrypt.Internal.CipherSuite
     /// </summary>
     public sealed class QuantoCryptCipherSuiteProvider : ICipherSuiteProvider
     {
-        private static readonly Dictionary<ICipherSuite, ulong> _srSupportedCipherSuites = new Dictionary<ICipherSuite, ulong>()
+        private static readonly Dictionary<ICipherSuite, ulong> _srSupportedCipherSuites = new()
             {
                 { new CrystalsKyber1024_CrystalsDilithium5_Aes(), 1 << 0 },
                 { new CrystalsKyber1024_CrystalsDilithium5_AesGcm(), 1 << 1 },

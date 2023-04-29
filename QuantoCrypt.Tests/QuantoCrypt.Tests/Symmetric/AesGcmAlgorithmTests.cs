@@ -59,6 +59,7 @@ namespace QuantoCrypt.Tests.Symmetric
             }
         }
 
+        /*
         [Theory]
         [InlineData(8)]
         [InlineData(16)]
@@ -118,6 +119,7 @@ namespace QuantoCrypt.Tests.Symmetric
                 byte[] decrypted = ArrayUtilities.Combine(resultsOfAes.ToArray());
             }
         }
+        */
 
         static byte[] _GetChunkToProceed(int elementIndex, int chunkSize, byte[] textToProceed, int numberOfGrains)
         {

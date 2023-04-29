@@ -74,7 +74,7 @@ namespace QuantoCrypt.Internal.Connection
         /// <param name="baseConnection">Target <see cref="ITransportConnection"/> to be wrapped.</param>
         /// <param name="connectionMode">Target <see cref="ConnectionMode"/>.</param>
         /// <returns>
-        ///     Wrapped secure connection over <paramref name="baseConnection"/> with the support of <see cref="CipherSuiteProvider"/>.
+        ///     Wrapped secure connection over <paramref name="baseConnection"/>.
         /// </returns>
         public static ISecureTransportConnection InitializeSecureClient(ICipherSuiteProvider cipherSuiteProvider, ITransportConnection baseConnection, ConnectionMode connectionMode)
             => InitializeSecureClient(cipherSuiteProvider, cipherSuiteProvider.SupportedCipherSuites.Keys.First(), baseConnection, connectionMode);
@@ -87,7 +87,7 @@ namespace QuantoCrypt.Internal.Connection
         /// <param name="baseConnection">Target <see cref="ITransportConnection"/> to be wrapped.</param>
         /// <param name="connectionMode">Target <see cref="ConnectionMode"/>.</param>
         /// <returns>
-        ///     Wrapped secure connection over <paramref name="baseConnection"/> with the support of <see cref="CipherSuiteProvider"/>.
+        ///     Wrapped secure connection over <paramref name="baseConnection"/>.
         /// </returns>
         public static ISecureTransportConnection InitializeSecureClient(ICipherSuiteProvider cipherSuiteProvider, ICipherSuite preferredCipher, ITransportConnection baseConnection, ConnectionMode connectionMode)
         {
@@ -100,7 +100,7 @@ namespace QuantoCrypt.Internal.Connection
                 byte[] publicKey = keys.Public.GetEncoded();
 
                 return ProtocolMessage.CreateClientInitMessage(cipherSuiteProvider, preferredCipher, (byte)connectionMode, publicKey);
-            };
+            }
 
             bool __ValidateServerInitMessage(QuantoCryptConnection connection, ConnectionMode connectionMode, IKEMAlgorithm kemAlgorithm, byte[] serverInitMessage, byte[] clientInitMessageHash)
             {
@@ -247,7 +247,7 @@ namespace QuantoCrypt.Internal.Connection
         /// <param name="cipherSuiteProvider">Target <see cref="ICipherSuiteProvider"/> to be supported.</param>
         /// <param name="baseConnection">Target <see cref="ITransportConnection"/> to be wrapped.</param>
         /// <returns>
-        ///     Wrapped secure connection over <paramref name="baseConnection"/> with the support of <see cref="CipherSuiteProvider"/>.
+        ///     Wrapped secure connection over <paramref name="baseConnection"/>.
         /// </returns>
         public static ISecureTransportConnection InitializeSecureServer(ICipherSuiteProvider cipherSuiteProvider, ITransportConnection baseConnection)
         {
@@ -476,11 +476,11 @@ namespace QuantoCrypt.Internal.Connection
         {
             if (!_isDisposed)
             {
-                // we could already dispose it by calling prWrappedUnsecureConnection.Close().
                 try
                 {
                     prWrappedUnsecureConnection?.Dispose();
                 }
+                // we could already dispose it by calling prWrappedUnsecureConnection.Close().
                 catch { }
 
                 UsedSymmetricAlgorithm?.Dispose();
