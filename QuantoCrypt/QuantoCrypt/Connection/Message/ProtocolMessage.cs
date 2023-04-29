@@ -253,7 +253,7 @@ namespace QuantoCrypt.Internal.Message
         /// </returns>
         internal static byte[] CreateCloseMessage()
         {
-            Span<byte> headerPart = stackalloc byte[_rHeaderOffset];
+            Span<byte> headerPart = stackalloc byte[_rProtocolHeaderOffset];
 
             headerPart[0] = PROTOCOL_VERSION;
             headerPart[1] = CLOSE;
