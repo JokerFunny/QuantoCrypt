@@ -77,7 +77,7 @@ namespace QuantoCrypt.Internal.Connection
         ///     Wrapped secure connection over <paramref name="baseConnection"/>.
         /// </returns>
         public static ISecureTransportConnection InitializeSecureClient(ICipherSuiteProvider cipherSuiteProvider, ITransportConnection baseConnection, ConnectionMode connectionMode)
-            => InitializeSecureClient(cipherSuiteProvider, cipherSuiteProvider.SupportedCipherSuites.Keys.First(), baseConnection, connectionMode);
+            => InitializeSecureClient(cipherSuiteProvider, cipherSuiteProvider?.SupportedCipherSuites?.Keys?.First(), baseConnection, connectionMode);
 
         /// <summary>
         /// Create a secure client using <paramref name="baseConnection"/>.
@@ -563,6 +563,9 @@ namespace QuantoCrypt.Internal.Connection
         private static void _sValidateCipherSuites(ICipherSuiteProvider cipherSuiteProvider, ICipherSuite preferredCipher)
         {
             _sValidateCipherSuites(cipherSuiteProvider);
+
+            if (preferredCipher == null)
+                throw new ArgumentException($"[{nameof(preferredCipher)}] shouldn't be null or empty.");
 
             // in case if try to use the CS that is not supported - throw.
             if (cipherSuiteProvider.SupportedCipherSuites.Keys.FirstOrDefault(x => x.Name == preferredCipher.Name) == null)
