@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Comment CommentText="Interfaces to discribe Connections">
+    <Position X="12.027" Y="4.367" Height="0.333" Width="2.099" />
+  </Comment>
+  <Comment CommentText="Concrete Secure and Transport connections">
+    <Position X="5.875" Y="4.292" Height="0.333" Width="2.662" />
+  </Comment>
+  <Comment CommentText="Helper to trace sended/recieved data if needed">
+    <Position X="8.322" Y="9.959" Height="0.333" Width="2.859" />
+  </Comment>
+  <Comment CommentText="Factory to get a proper ISecureConnection (QuantoCryptConnection) using ITransportConnection">
+    <Position X="4.656" Y="11.635" Height="0.666" Width="2.609" />
+  </Comment>
+  <Comment CommentText="ProtocolMessage and helpers to create proper messages">
+    <Position X="11.771" Y="7.604" Height="0.531" Width="3.391" />
+  </Comment>
+  <Class Name="QuantoCrypt.Internal.Connection.QuantoCryptConnection">
+    <Position X="4.25" Y="5" Width="2.75" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="QuantoCrypt.Internal.Connection.QuantoCryptConnection.ConnectionMode">
+        <TypeIdentifier>
+          <NewMemberFileName>Connection\QuantoCryptConnection.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AABCAAABAKAAAAgAEEAAAACEAAAAAACQABAAAACAKAA=</HashCode>
+      <FileName>Connection\QuantoCryptConnection.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="QuantoCrypt.Connection.QuantoCryptConnectionFactory">
+    <Position X="4.25" Y="12.5" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>Connection\QuantoCryptConnectionFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QuantoCrypt.Internal.Connection.SocketTransportConnection">
+    <Position X="7.25" Y="5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>gABCAAAAACAAAAAACEAAAIAAEBAAAAgQABABIACAAAA=</HashCode>
+      <FileName>Connection\SocketTransportConnection.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="QuantoCrypt.Internal.Connection.ConnectionTraceHelper">
+    <Position X="8" Y="10.5" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAAAAAAEBAAAAAAgAIAAAAAAACIIAAQA=</HashCode>
+      <FileName>Connection\ConnectionTraceHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QuantoCrypt.Internal.Message.ProtocolMessage">
+    <Position X="12" Y="8.25" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AMIIQBAwAABGBAUAAAQAAAAAgAICgRCAgCAAIAMEAAI=</HashCode>
+      <FileName>Connection\Message\ProtocolMessage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="QuantoCrypt.Infrastructure.Connection.ITransportConnection">
+    <Position X="13.5" Y="5" Width="1.75" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="QuantoCrypt.Infrastructure.Connection.ISecureTransportConnection">
+    <Position X="11" Y="5" Width="2.25" />
+    <TypeIdentifier />
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

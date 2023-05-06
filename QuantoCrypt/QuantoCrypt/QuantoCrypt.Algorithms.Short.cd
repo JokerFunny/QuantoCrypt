@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Comment CommentText="CRYSTALS-Kyber and supported params used &#xD;&#xA;to create a KyberAlgorithm instance">
+    <Position X="5.781" Y="4.5" Height="0.428" Width="2.703" />
+  </Comment>
+  <Comment CommentText="Interfaces to work with algorithms">
+    <Position X="9.833" Y="9.26" Height="0.333" Width="2.13" />
+  </Comment>
+  <Comment CommentText="CRYSTALS-Dilithium and supported params used &#xD;&#xA;to create a DilithiumAlgorithm instance">
+    <Position X="9.656" Y="4.5" Height="0.428" Width="3.026" />
+  </Comment>
+  <Comment CommentText="Symmetric algorithms">
+    <Position X="6.344" Y="9.646" Height="0.333" Width="1.484" />
+  </Comment>
+  <Class Name="QuantoCrypt.Internal.KEM.CRYSTALS.Kyber.KyberAlgorithm">
+    <Position X="5.25" Y="5.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>BAAAIAAAACEAAAAAAAEAAACAAAAAAAAAAAABAAAAAAA=</HashCode>
+      <FileName>KEM\CRYSTALS\Kyber\KyberAlgorithm.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="QuantoCrypt.Internal.KEM.CRYSTALS.Kyber.KyberParameters">
+    <Position X="7.25" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAAAAAIAAAAARAAAAIAAAGBAEAIYAIAAA=</HashCode>
+      <FileName>KEM\CRYSTALS\Kyber\KyberParameters.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QuantoCrypt.Internal.Signature.CRYSTALS.Dilithium.DilithiumAlgorithm">
+    <Position X="9.25" Y="5.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>BAAAIAAAACAAAxAAAAAAAACAAAAAAAAAAAAAAAAAgAA=</HashCode>
+      <FileName>Signature\CRYSTALS\Dilithium\DilithiumAlgorithm.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="QuantoCrypt.Internal.Signature.CRYSTALS.Dilithium.DilithiumParameters">
+    <Position X="11.25" Y="5.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>QAQ4AAAAAAAAAAAAAAAAAAQAAAAoAAABEAAEAAAAAAA=</HashCode>
+      <FileName>Signature\CRYSTALS\Dilithium\DilithiumParameters.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QuantoCrypt.Internal.Symmetric.AesAlgorithm">
+    <Position X="5.25" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAACAAAAAQAAAAAAAAAAAgAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Symmetric\AesAlgorithm.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="QuantoCrypt.Internal.Symmetric.AesGcmAlgorithm">
+    <Position X="7" Y="10.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAACAAAAAQAAAAAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Symmetric\AesGcmAlgorithm.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="QuantoCrypt.Infrastructure.KEM.IKEMAlgorithm">
+    <Position X="9.25" Y="9.75" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="QuantoCrypt.Infrastructure.Signature.ISignatureAlgorithm">
+    <Position X="11" Y="9.75" Width="1.75" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="QuantoCrypt.Infrastructure.Symmetric.ISymmetricAlgorithm">
+    <Position X="10" Y="11.5" Width="1.75" />
+    <TypeIdentifier />
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

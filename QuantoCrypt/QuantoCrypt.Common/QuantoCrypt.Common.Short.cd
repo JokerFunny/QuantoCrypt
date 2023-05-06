@@ -1,336 +1,269 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
   <Comment CommentText="BlockCiphers">
-    <Position X="6.222" Y="0.5" Height="0.333" Width="0.953" />
+    <Position X="4.552" Y="1.958" Height="0.333" Width="0.953" />
   </Comment>
   <Comment CommentText="Digests">
-    <Position X="17.705" Y="0.5" Height="0.333" Width="0.7" />
+    <Position X="10.261" Y="2" Height="0.333" Width="0.7" />
   </Comment>
   <Comment CommentText="KeyParameters">
-    <Position X="4.136" Y="15.604" Height="0.333" Width="1.013" />
+    <Position X="3.635" Y="6.282" Height="0.333" Width="1.013" />
   </Comment>
   <Comment CommentText="Utilities">
-    <Position X="16.855" Y="9.447" Height="0.333" Width="0.7" />
+    <Position X="11.75" Y="6.305" Height="0.333" Width="0.7" />
   </Comment>
   <Comment CommentText="Random">
-    <Position X="5.99" Y="10.989" Height="0.333" Width="0.7" />
+    <Position X="8.198" Y="6.281" Height="0.333" Width="0.7" />
   </Comment>
-  <Class Name="QuantoCrypt.Common.BlockCipher.BufferedBlockCipher">
-    <Position X="1" Y="4.25" Width="2.75" />
-    <Compartments>
-      <Compartment Name="Fields" Collapsed="true" />
-    </Compartments>
+  <Class Name="QuantoCrypt.Common.BlockCipher.BufferedBlockCipher" Collapsed="true">
+    <Position X="2.5" Y="3.5" Width="1.75" />
     <TypeIdentifier>
       <HashCode>QAAAAAACAAAARAQAAQAABQAAAAAAAEAIAAECAAAAAAA=</HashCode>
       <FileName>BlockCipher\BufferedCipher\BufferedBlockCipher.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="QuantoCrypt.Common.BlockCipher.BufferedCipherBase">
-    <Position X="4" Y="3.25" Width="2.5" />
-    <Compartments>
-      <Compartment Name="Fields" Collapsed="true" />
-    </Compartments>
+  <Class Name="QuantoCrypt.Common.BlockCipher.BufferedCipherBase" Collapsed="true">
+    <Position X="4.5" Y="3.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>QAQAAAAAAAAARAAAAQAAAQAAAAAAAAAIAAECAAAAAAA=</HashCode>
       <FileName>BlockCipher\BufferedCipher\BufferedCipherBase.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="QuantoCrypt.Common.BlockCipher.EcbBlockCipher" BaseTypeListCollapsed="true">
-    <Position X="4" Y="7.5" Width="3" />
-    <Compartments>
-      <Compartment Name="Fields" Collapsed="true" />
-    </Compartments>
+  <Class Name="QuantoCrypt.Common.BlockCipher.EcbBlockCipher" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="6" Y="4.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAABAAICAAAgRAAAAAAAIAAAAAAAAAAIAAACAAAAAAA=</HashCode>
       <FileName>BlockCipher\BufferedCipher\EcbBlockCipher.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="QuantoCrypt.Common.BlockCipher.AesEngine" BaseTypeListCollapsed="true">
-    <Position X="6.75" Y="3.25" Width="2.5" />
-    <Compartments>
-      <Compartment Name="Fields" Collapsed="true" />
-    </Compartments>
+  <Class Name="QuantoCrypt.Common.BlockCipher.AesEngine" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="2.5" Y="4.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>GAAYAAACAAAAwAohAAAABAACAAEgAAAIAgASACEAQIQ=</HashCode>
       <FileName>BlockCipher\AesEngine.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="QuantoCrypt.Common.BlockCipher.AesUtilities">
-    <Position X="7.25" Y="8.25" Width="2.25" />
+  <Class Name="QuantoCrypt.Common.BlockCipher.AesUtilities" Collapsed="true">
+    <Position X="4.25" Y="5.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAw=</HashCode>
       <FileName>BlockCipher\AesUtilities.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="QuantoCrypt.Common.BlockCipher.SicBlockCipher" BaseTypeListCollapsed="true">
-    <Position X="1" Y="8" Width="2.5" />
-    <Compartments>
-      <Compartment Name="Fields" Collapsed="true" />
-    </Compartments>
+  <Class Name="QuantoCrypt.Common.BlockCipher.SicBlockCipher" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="6" Y="5.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAABAAICAAAARAABAAAAIAAACAAAAAAIAAACEAAEAAA=</HashCode>
       <FileName>BlockCipher\SicBlockCipher.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="QuantoCrypt.Common.Digest.DigestUtilities">
-    <Position X="21.5" Y="6.75" Width="1.75" />
-    <Compartments>
-      <Compartment Name="Fields" Collapsed="true" />
-      <Compartment Name="Nested Types" Collapsed="false" />
-    </Compartments>
-    <NestedTypes>
-      <Enum Name="QuantoCrypt.Common.Digest.DigestUtilities.DigestAlgorithm" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>Digest\DigestUtilities.cs</NewMemberFileName>
-        </TypeIdentifier>
-      </Enum>
-    </NestedTypes>
+  <Class Name="QuantoCrypt.Common.Digest.DigestUtilities" Collapsed="true">
+    <Position X="8" Y="5.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAEAAAgAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Digest\DigestUtilities.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="QuantoCrypt.Common.Digest.GeneralDigest">
-    <Position X="12.75" Y="1" Width="2.5" />
-    <Compartments>
-      <Compartment Name="Fields" Collapsed="true" />
-    </Compartments>
+  <Class Name="QuantoCrypt.Common.Digest.GeneralDigest" Collapsed="true">
+    <Position X="8" Y="3.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>EAQAAAACAgBBRAAAABAAAQAAACAAAAAAABAAAAABAEg=</HashCode>
       <FileName>Digest\GeneralDigest.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="QuantoCrypt.Common.Digest.KeccakDigest">
-    <Position X="18.25" Y="1" Width="3" />
-    <Compartments>
-      <Compartment Name="Fields" Collapsed="true" />
-    </Compartments>
+  <Class Name="QuantoCrypt.Common.Digest.KeccakDigest" Collapsed="true">
+    <Position X="11.5" Y="3.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQQAEEQAgIARAAIABAABQAAACEACSAEAAACAgAIACA=</HashCode>
       <FileName>Digest\KeccakDigest.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="QuantoCrypt.Common.Digest.LongDigest">
-    <Position X="15.5" Y="1" Width="2.5" />
-    <Compartments>
-      <Compartment Name="Fields" Collapsed="true" />
-    </Compartments>
+  <Class Name="QuantoCrypt.Common.Digest.LongDigest" Collapsed="true">
+    <Position X="9.75" Y="3.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>EAQACAQCOggBRYAAQBAAAwEAACwAgAAgRAAAQYAYAAg=</HashCode>
       <FileName>Digest\LongDigest.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="QuantoCrypt.Common.Digest.Sha256Digest">
-    <Position X="12.75" Y="5.25" Width="2.5" />
-    <Compartments>
-      <Compartment Name="Fields" Collapsed="true" />
-    </Compartments>
+  <Class Name="QuantoCrypt.Common.Digest.Sha256Digest" Collapsed="true">
+    <Position X="8" Y="4.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>EAAACAQCAAEBRABAADAAAwEAAAAAgAQgAAAAQIAZQAA=</HashCode>
       <FileName>Digest\Sha256Digest.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="QuantoCrypt.Common.Digest.Sha3Digest">
-    <Position X="18.25" Y="6.25" Width="2.75" />
+  <Class Name="QuantoCrypt.Common.Digest.Sha3Digest" Collapsed="true">
+    <Position X="9.75" Y="5.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAEAAAAAQAAAAAAAAQAAAAIAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Digest\Sha3Digest.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="QuantoCrypt.Common.Digest.Sha512Digest">
-    <Position X="15.5" Y="6.5" Width="2.25" />
+  <Class Name="QuantoCrypt.Common.Digest.Sha512Digest" Collapsed="true">
+    <Position X="9.75" Y="4.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAARAAAABAAAQAAAAAAAAAAAAAAAAAIAAA=</HashCode>
       <FileName>Digest\Sha512Digest.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="QuantoCrypt.Common.Digest.ShakeDigest">
-    <Position X="21.5" Y="3.75" Width="2.5" />
+  <Class Name="QuantoCrypt.Common.Digest.ShakeDigest" Collapsed="true">
+    <Position X="11.5" Y="5.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>CAAAAAAAAAAAQAAAABAIAQAAAAAAAACAAAAAAAAAAAA=</HashCode>
       <FileName>Digest\ShakeDigest.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="QuantoCrypt.Common.Parameters.KeyParameter" BaseTypeListCollapsed="true">
-    <Position X="3.5" Y="16.25" Width="2.25" />
-    <Compartments>
-      <Compartment Name="Fields" Collapsed="true" />
-    </Compartments>
+  <Class Name="QuantoCrypt.Common.Parameters.KeyParameter" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="2.5" Y="7.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAQAQAAAAAQAAAAgAAAAAAAAAAAAAAA=</HashCode>
       <FileName>KeyParameters\KeyParameter.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="QuantoCrypt.Common.Parameters.ParametersWithIV" BaseTypeListCollapsed="true">
-    <Position X="6" Y="16.25" Width="2.5" />
-    <Compartments>
-      <Compartment Name="Fields" Collapsed="true" />
-    </Compartments>
+  <Class Name="QuantoCrypt.Common.Parameters.ParametersWithIV" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="4.25" Y="7.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAIAAAAAIQAAAAAAAAAAAAAAAAAAAAAAIgAAAAAAAA=</HashCode>
       <FileName>KeyParameters\ParametersWithIV.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="QuantoCrypt.Common.Random.CryptoApiRandomGenerator" BaseTypeListCollapsed="true">
-    <Position X="1" Y="11.5" Width="3.25" />
-    <Compartments>
-      <Compartment Name="Fields" Collapsed="true" />
-    </Compartments>
+  <Class Name="QuantoCrypt.Common.Random.CryptoApiRandomGenerator" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="6" Y="7.75" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAACAAAAAAAAAAAAAEAgAAAAQAAAAAAAAAAAA=</HashCode>
       <FileName>Random\CryptoApiRandomGenerator.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="QuantoCrypt.Common.Random.DigestRandomGenerator" BaseTypeListCollapsed="true">
-    <Position X="7.75" Y="11.5" Width="2.75" />
-    <Compartments>
-      <Compartment Name="Fields" Collapsed="true" />
-    </Compartments>
+  <Class Name="QuantoCrypt.Common.Random.DigestRandomGenerator" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="8.5" Y="7.75" Width="2" />
     <TypeIdentifier>
       <HashCode>AAACAIAAABAAAAAAAAAQAQIAAgAAAAQAgAAEAgAAAAA=</HashCode>
       <FileName>Random\DigestRandomGenerator.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="QuantoCrypt.Common.Random.VmpcRandomGenerator" BaseTypeListCollapsed="true">
-    <Position X="1.25" Y="13.75" Width="3" />
-    <Compartments>
-      <Compartment Name="Fields" Collapsed="true" />
-    </Compartments>
+  <Class Name="QuantoCrypt.Common.Random.VmpcRandomGenerator" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="8.5" Y="8.75" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAgEAAAQAACAAAACAAAA=</HashCode>
       <FileName>Random\VmpcRandomGenerator.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="QuantoCrypt.Common.SecureRandom">
-    <Position X="4.5" Y="11.5" Width="3" />
-    <Compartments>
-      <Compartment Name="Fields" Collapsed="true" />
-    </Compartments>
+  <Class Name="QuantoCrypt.Common.SecureRandom" Collapsed="true">
+    <Position X="6.75" Y="8.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AoAAAAAAAUAAAAABEAAAAQIABAAAAAQAAAQAgACACSQ=</HashCode>
       <FileName>Random\SecureRandom.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="QuantoCrypt.Common.Utilities.ArrayUtilities">
-    <Position X="14" Y="10" Width="3" />
+  <Class Name="QuantoCrypt.Common.Utilities.ArrayUtilities" Collapsed="true">
+    <Position X="10.75" Y="6.75" Width="1.25" />
     <TypeIdentifier>
       <HashCode>AAAAAQAAAAAAAAAACgAAAAAAAAAAEAAAAAAjAAAAAAA=</HashCode>
       <FileName>Utilities\ArrayUtilities.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="QuantoCrypt.Common.Utilities.BitUtilities">
-    <Position X="17.25" Y="10" Width="4" />
+  <Class Name="QuantoCrypt.Common.Utilities.BitUtilities" Collapsed="true">
+    <Position X="12.25" Y="6.75" Width="1.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAIAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Utilities\BitUtilities.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="QuantoCrypt.Common.Utilities.LongUtilities">
-    <Position X="21.5" Y="10" Width="2.75" />
-    <Compartments>
-      <Compartment Name="Fields" Collapsed="true" />
-    </Compartments>
+  <Class Name="QuantoCrypt.Common.Utilities.LongUtilities" Collapsed="true">
+    <Position X="10.75" Y="8.25" Width="1.25" />
     <TypeIdentifier>
       <HashCode>ABAAAAAggAgAgIAAABAAAAAAAAAAQAAAAAACAAAAIAA=</HashCode>
       <FileName>Utilities\LongUtilities.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="QuantoCrypt.Common.Utilities.NatUtilities">
-    <Position X="17.25" Y="11.75" Width="2.25" />
+  <Class Name="QuantoCrypt.Common.Utilities.NatUtilities" Collapsed="true">
+    <Position X="12.25" Y="7.5" Width="1.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Utilities\NatUtilities.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="QuantoCrypt.Common.Utilities.Nat512">
-    <Position X="19.75" Y="11.75" Width="1.5" />
+  <Class Name="QuantoCrypt.Common.Utilities.Nat512" Collapsed="true">
+    <Position X="10.75" Y="7.5" Width="1.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Utilities\NatUtilities.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="QuantoCrypt.Common.Utilities.PackUtilities">
-    <Position X="11" Y="10" Width="2.75" />
+  <Class Name="QuantoCrypt.Common.Utilities.PackUtilities" Collapsed="true">
+    <Position X="12.25" Y="8.25" Width="1.25" />
     <TypeIdentifier>
       <HashCode>AAAACAQAAAAAAAAAAEAAAAAAAAABAAAAAAAAAiAAAgA=</HashCode>
       <FileName>Utilities\PackUtilities.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Struct Name="QuantoCrypt.Common.BlockCipher.AesEngine_X86" BaseTypeListCollapsed="true">
-    <Position X="9.5" Y="1" Width="3" />
+  <Struct Name="QuantoCrypt.Common.BlockCipher.AesEngine_X86" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="4.25" Y="4.5" Width="1.5" />
     <Compartments>
-      <Compartment Name="Fields" Collapsed="true" />
       <Compartment Name="Nested Types" Collapsed="false" />
     </Compartments>
-    <NestedTypes>
-      <Enum Name="QuantoCrypt.Common.BlockCipher.AesEngine_X86.Mode" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>BlockCipher\AesEngine_X86.cs</NewMemberFileName>
-        </TypeIdentifier>
-      </Enum>
-    </NestedTypes>
     <TypeIdentifier>
       <HashCode>AIIIgBhCgAAAQAAAAgIEAgBEASAAUAAIAJACAIAAAAA=</HashCode>
       <FileName>BlockCipher\AesEngine_X86.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Struct>
-  <Interface Name="QuantoCrypt.Common.BlockCipher.IBufferedCipher">
-    <Position X="1" Y="1" Width="2.75" />
+  <Interface Name="QuantoCrypt.Common.BlockCipher.IBufferedCipher" Collapsed="true">
+    <Position X="2.5" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>QAAAAAAAAAAARAAAAQAAAQAAAAAAAAAIAAECAAAAAAA=</HashCode>
       <FileName>BlockCipher\BufferedCipher\IBufferedCipher.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="QuantoCrypt.Common.BlockCipher.IBlockCipher">
-    <Position X="4" Y="1" Width="2.5" />
+  <Interface Name="QuantoCrypt.Common.BlockCipher.IBlockCipher" Collapsed="true">
+    <Position X="4.25" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAACAAAAQAAAAAAAAAAAAAAAAAAIAAACAAAAAAA=</HashCode>
       <FileName>BlockCipher\IBlockCipher.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="QuantoCrypt.Common.BlockCipher.IBlockCipherMode">
-    <Position X="6.75" Y="1" Width="2.5" />
+  <Interface Name="QuantoCrypt.Common.BlockCipher.IBlockCipherMode" Collapsed="true">
+    <Position X="6" Y="2.5" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAABAAAAAAAABAAAAAAAIAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>BlockCipher\IBlockCipherMode.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="QuantoCrypt.Common.Digest.IDigest">
-    <Position X="21.5" Y="1" Width="2.5" />
+  <Interface Name="QuantoCrypt.Common.Digest.IDigest" Collapsed="true">
+    <Position X="10" Y="2.5" Width="1.25" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAAgAARAAAABAAAQAAACAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Digest\IDigest.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="QuantoCrypt.Common.Parameters.ICipherParameter" Collapsed="true">
-    <Position X="1.75" Y="16.25" Width="1.5" />
+    <Position X="2.5" Y="6.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>KeyParameters\ICipherParameter.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="QuantoCrypt.Common.Parameters.IKeyGenerationParameters">
-    <Position X="1.5" Y="17" Width="1.75" />
+  <Interface Name="QuantoCrypt.Common.Parameters.IKeyGenerationParameters" Collapsed="true">
+    <Position X="4.25" Y="6.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>QAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAA=</HashCode>
       <FileName>KeyParameters\IKeyGenerationParameters.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="QuantoCrypt.Common.Random.IRandomGenerator">
-    <Position X="7.75" Y="14.5" Width="2.5" />
+  <Interface Name="QuantoCrypt.Common.Random.IRandomGenerator" Collapsed="true">
+    <Position X="7.75" Y="6.75" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAgAAAAQAAAAAAAAAAAA=</HashCode>
       <FileName>Random\IRandomGenerator.cs</FileName>
